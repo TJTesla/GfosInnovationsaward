@@ -1,0 +1,24 @@
+/*li {
+    display: inline;
+}*/
+li {
+    float:left;
+}
+a {
+    display: block;
+    padding: 8px;
+    background-color: #dddddd;
+}
+ul {
+    position: fixed; /* sticky für mitgehend*/
+    top: 0; /* bottom für nav bar unten*/
+    width: 100%;
+    border: 1px solid;
+    list-style-type: none;
+}
+li a:hover{
+    background-color: darkgray;
+}
+.active {
+    background-color: aquamarine;
+}

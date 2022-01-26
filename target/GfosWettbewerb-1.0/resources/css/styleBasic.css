@@ -1,0 +1,31 @@
+body {
+    width: auto;
+    font-family: Arial, sans-serif;
+    margin: 0px auto;
+    border-width: 3px;
+    border-color: aqua;
+    child-align: middle;
+}
+h1 {
+    font-size: 50px;
+    font-weight: bold;
+    line-height: normal;
+}
+
+legend {
+    font-family: "Arial Black", sans-serif;
+    font-size:20px;
+}
+fieldset {
+    width: auto;
+    margin: auto;
+    border-width: 3px;
+    border-color: darkblue;
+    background-color: aliceblue;
+}
+.loginLink {
+    margin-top: 10px;
+}
+.errorMessage {
+    color: red;
+}
