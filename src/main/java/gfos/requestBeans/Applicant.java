@@ -1,11 +1,11 @@
-package gfos.RequestBeans;
+package gfos.requestBeans;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 @Named
 @RequestScoped
-public class User {
+public class Applicant {
     private int id;
     private String username;
     private String password;
@@ -13,7 +13,7 @@ public class User {
     private String lastname;
     private int gender;
 
-    public User(int id, String username, String password, String firstname, String lastname, int gender) {
+    public Applicant(int id, String username, String password, String firstname, String lastname, int gender) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -22,7 +22,7 @@ public class User {
         this.gender = gender;
     }
 
-    public User() {
+    public Applicant() {
         this.username = "";
         this.password = "";
         this.firstname = "";
