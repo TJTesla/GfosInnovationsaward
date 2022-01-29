@@ -1,21 +1,29 @@
 package gfos.controller;
 
+import gfos.database.MiscellaneousDatabaseService;
 import gfos.database.UserDatabaseService;
-import gfos.beans.Applicant;
+import gfos.beans.User;
+import gfos.sessionBeans.CurrentUser;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 @Named
 @ViewScoped
-public class registrationController implements Serializable {
+public class RegistrationController implements Serializable {
     @Inject
     UserDatabaseService udbs;
+    @Inject
+    MiscellaneousDatabaseService mdbs;
+    @Inject
+    CurrentUser cu;
 
     private String salutation;
     private String[] titles = new String[3];
+    private String username;
     private String firstname;
     private String lastname;
     private String email;
@@ -34,12 +42,47 @@ public class registrationController implements Serializable {
             loginErrorMsg = "Nicht übereinstimmende E-Mails";
             return "";
         }
-        Applicant applicant = new Applicant(
+        if (!password.equals(passwordRepeat)) {
+            loginError = true;
+            loginErrorMsg = "Nicht übereinstimmende Passwörter";
+            return "";
+        }
+        if (salutation.equals("")) {
+            loginError = true;
+            loginErrorMsg = "Bestimmen Sie eine Anrede";
+            return "";
+        }
 
-        );
+        User user = new User(0, username, password, firstname, lastname, Integer.parseInt(salutation));
+        if (udbs.exists(user)) {
+            loginError = true;
+            loginErrorMsg = "Der Nutzer existiert bereits.";
+            return "";
+        }
 
-        return null;
+        if (userType.equals("private")) {
+            udbs.createOne(user);
+
+            cu.setCurrentUser(user);
+        } else {
+            // TODO: Register as comapny
+        }
+
+        return "index.xhtml?faces-redirect=true";
     }
+
+    public String[] getAllTitles() {
+        ArrayList<String> arr = mdbs.getAllTitles();
+        String[] res = new String[arr.size()];
+
+        for (int i = 0; i < arr.size(); i++) {
+            res[i] = arr.get(i);
+        }
+
+        return res;
+    }
+
+
 
     public boolean isLoginError() {
         return loginError;
@@ -79,6 +122,14 @@ public class registrationController implements Serializable {
 
     public void setTitles(String[] titles) {
         this.titles = titles;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFirstname() {

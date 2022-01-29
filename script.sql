@@ -1,4 +1,4 @@
-create table if not exists applicant
+create table if not exists user
 (
     id        int auto_increment
         primary key,
@@ -43,7 +43,7 @@ create table if not exists favorites
     constraint favorites_offer_fk
         foreign key (offerId) references offer (id),
     constraint favorites_user_fk
-        foreign key (applicantId) references applicant (id)
+        foreign key (applicantId) references user (id)
 );
 
 create table if not exists status
@@ -72,7 +72,7 @@ create table if not exists application
     constraint application_status_id_fk
         foreign key (status) references status (id),
     constraint application_user_fk
-        foreign key (userId) references applicant (id)
+        foreign key (userId) references user (id)
 );
 
 

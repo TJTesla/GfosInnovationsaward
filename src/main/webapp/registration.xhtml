@@ -57,19 +57,23 @@
         <br/>
         <label for="title">Titel:</label>
         <h:selectManyCheckbox id="title" name="title" value="#{registrationController.titles}" >
-            <f:selectItem itemValue="Dr." itemLabel="Dr." />
-            <f:selectItem itemValue="" itemLabel="Prof." />
-            <f:selectItem itemValue="" itemLabel="Dipl.-Ing." />
+            <f:selectItems value="#{registrationController.allTitles}" var="t" itemValue="#{t}" itemLabel="#{t}" />
         </h:selectManyCheckbox>
         <br />
+        <label for="uname">Nutzername:</label>
+        <h:inputText value="#{registrationController.username}" id="uname" name="nutzername" type="text" required="true">
+            <f:validateLength for="uname" minimum="2" maximum="28" />
+        </h:inputText>
+        <h:message for="uname" class="errorMessage" />
+        <br/>
         <label for="fname">Vorname:</label>
-        <h:inputText value="#{registrationController.firstname}" id="fname" name="vorname" type="text" required="true">
+        <h:inputText value="#{registrationController.firstname}" id="fname" name="vorname" type="text" required="false">
             <f:validateLength for="fname" minimum="2" maximum="28" />
         </h:inputText>
         <h:message for="fname" class="errorMessage" />
         <br/>
         <label for="lname">Nachname:</label>
-        <h:inputText value="#{registrationController.lastname}" id="lname" name="nachname" type="text" required="true">
+        <h:inputText value="#{registrationController.lastname}" id="lname" name="nachname" type="text" required="false">
             <f:validateLength for="lname" minimum="2" maximum="28" />
         </h:inputText>
         <h:message for="lname" class="errorMessage" />
@@ -104,7 +108,7 @@
             <f:selectItem itemValue="company" itemLabel="Firma" />
         </h:selectOneRadio>
     </fieldset>
-    <h:commandButton action="#{registrationController.register()}" type="submit" />
+    <h:commandButton action="#{registrationController.register()}" type="submit" value="Registrieren"/>
 </h:form>
 <h:link value="Schon ein Profil? Hier anmelden." outcome="login.xhtml" />
 </body>

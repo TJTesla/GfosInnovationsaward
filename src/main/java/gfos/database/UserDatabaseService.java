@@ -1,7 +1,6 @@
 package gfos.database;
 
-import gfos.Env;
-import gfos.beans.Applicant;
+import gfos.beans.User;
 
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
@@ -11,19 +10,14 @@ import java.util.ArrayList;
 
 @Named
 @ApplicationScoped
-public class UserDatabaseService {
-    private Connection con;
-    private PreparedStatement stmt;
-    private ResultSet rs;
+public class UserDatabaseService extends DatabaseService {
 
     public UserDatabaseService() throws SQLException {
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ApplicationManagement?useSSL=false", Env.user, Env.password);
-        stmt = null;
-        rs = null;
+        super();
     }
 
 
-    public boolean createOne(Applicant a) {
+    public boolean createOne(User a) {
         try {
             stmt = con.prepareStatement("" +
                     "INSERT INTO applicant(id, username, password, firstname, lastname, gender) VALUES " +
@@ -44,7 +38,7 @@ public class UserDatabaseService {
         }
     }
 
-    public boolean exists(Applicant a) {
+    public boolean exists(User a) {
         try {
             stmt = con.prepareStatement("SELECT username FROM applicant WHERE username=?");
             stmt.setString(1, a.getUsername());
@@ -57,17 +51,17 @@ public class UserDatabaseService {
         }
     }
 
-    public ArrayList<Applicant> fetchAll() {
-        ArrayList<Applicant> list = new ArrayList<>();
+    public ArrayList<User> fetchAll() {
+        ArrayList<User> list = new ArrayList<>();
         try {
             stmt = con.prepareStatement("SELECT * FROM applicant");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Applicant temp = new Applicant(
+                User temp = new User(
                         rs.getInt("id"),
-                        rs.getString("password"),
                         rs.getString("username"),
+                        rs.getString("password"),
                         rs.getString("firstname"),
                         rs.getString("lastname"),
                         rs.getInt("gender")
@@ -80,6 +74,32 @@ public class UserDatabaseService {
         }
 
         return list;
+    }
+
+    public User loginAttempt(String user, String password) {
+        try {
+            stmt = con.prepareStatement("SELECT * FROM applicant WHERE username=? AND password=SHA2(?, 256)");
+            stmt.setString(1, user);
+            stmt.setString(2, password);
+
+            rs = stmt.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
+
+            return new User(
+                    rs.getInt("id"),
+                    rs.getString("username"),
+                    rs.getString("password"),
+                    rs.getString("firstname"),
+                    rs.getString("lastname"),
+                    rs.getInt("gender")
+            );
+
+        } catch (SQLException sqlException) {
+            System.out.println("Could not check login: " + sqlException.getMessage());
+            return null;
+        }
     }
 
 
