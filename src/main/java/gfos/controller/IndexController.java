@@ -1,6 +1,6 @@
 package gfos.controller;
 
-import gfos.requestBeans.Applicant;
+import gfos.beans.Applicant;
 import gfos.database.UserDatabaseService;
 
 import javax.inject.Inject;
@@ -13,6 +13,7 @@ public class IndexController {
     UserDatabaseService udbs;
 
     public ArrayList<Applicant> getAllApplicants() {
-        return udbs.fetchAll();
+        return null;
+        //return udbs.fetchAll();
     }
 }

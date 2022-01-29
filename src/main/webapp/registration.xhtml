@@ -40,6 +40,9 @@
     <h1>Neues Profil erstellen</h1>
     <hr />
 </div>
+
+<h:outputText value="#{registrationController.loginErrorMsg}" rendered="#{registrationController.loginError}" />
+
 <h:form>
     <fieldset class="user" style="height: 200px; margin: 0px auto">
         <legend>Nutzer Informationen</legend>

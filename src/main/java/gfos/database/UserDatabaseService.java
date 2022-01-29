@@ -1,7 +1,7 @@
 package gfos.database;
 
 import gfos.Env;
-import gfos.requestBeans.Applicant;
+import gfos.beans.Applicant;
 
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
@@ -21,6 +21,7 @@ public class UserDatabaseService {
         stmt = null;
         rs = null;
     }
+
 
     public boolean createOne(Applicant a) {
         try {
@@ -80,6 +81,7 @@ public class UserDatabaseService {
 
         return list;
     }
+
 
     @PreDestroy
     private void deconstruct() {

@@ -1,15 +1,16 @@
 package gfos.controller;
 
 import gfos.database.UserDatabaseService;
-import gfos.requestBeans.Applicant;
+import gfos.beans.Applicant;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 
 @Named
 @ViewScoped
-public class registrationController {
+public class registrationController implements Serializable {
     @Inject
     UserDatabaseService udbs;
 
@@ -23,9 +24,14 @@ public class registrationController {
     private String passwordRepeat;
     private String userType = "private";
 
+    private boolean loginError = false;
+    private String loginErrorMsg;
+
 
     public String register() {
-        if (!(email.equals(emailRepeat) && password.equals(passwordRepeat))) {
+        if (!email.equals(emailRepeat)) {
+            loginError = true;
+            loginErrorMsg = "Nicht übereinstimmende E-Mails";
             return "";
         }
         Applicant applicant = new Applicant(
@@ -33,6 +39,22 @@ public class registrationController {
         );
 
         return null;
+    }
+
+    public boolean isLoginError() {
+        return loginError;
+    }
+
+    public void setLoginError(boolean loginError) {
+        this.loginError = loginError;
+    }
+
+    public String getLoginErrorMsg() {
+        return loginErrorMsg;
+    }
+
+    public void setLoginErrorMsg(String loginErrorMsg) {
+        this.loginErrorMsg = loginErrorMsg;
     }
 
     public String getSalutation() {
