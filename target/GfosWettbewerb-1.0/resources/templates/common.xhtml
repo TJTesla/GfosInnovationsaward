@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xml:lang="en" lang="en">
+<h:head>
+    <title></title>
+    <h:outputScript library="javascript" name="jquery-3.6.0.js" />
+    <h:outputScript library="javascript" name="basics.js" />
+    <h:outputStylesheet library="css" name="CSSResetStyleSheet.css" />
+    <h:outputStylesheet library="css" name="styleBasic.css" />
+    <h:outputStylesheet library="css" name="sideNavbar.css" />
+</h:head>
+<h:body style="height: 100%;">
+    <div style="height: 100px; float: top" class="head">
+        <ui:insert name="header">
+            <ui:include src="common/header.xhtml" />
+        </ui:insert>
+    </div>
+    <div class="content" >
+        <ui:insert name="content">
+            <ui:include src="common/content.xhtml" />
+        </ui:insert>
+    </div>
+    <div style="height: 100px; overflow: hidden; float: bottom" class="foot">
+        <ui:insert name="footer">
+            <ui:include src="common/footer.xhtml" />
+        </ui:insert>
+    </div>
+</h:body>
+</html>
