@@ -10,6 +10,8 @@
       xml:lang="en" lang="en">
 <h:head>
     <title>Registrieren</title>
+    <h:outputScript library="javascript" name="jquery-3.6.0.js" />
+    <h:outputScript library="javascript" name="formValidation.js" />
     <h:outputStylesheet library="css" name="styleBasic.css" />
     <h:outputStylesheet library="css" name="CSSResetStyleSheet.css" />
     <!--link href="resources/css/CSSResetStyleSheet.css" rel="stylesheet" /-->
@@ -80,10 +82,8 @@
                     <h:message for="email" class="errorMessage" />
                     <br />
                     <label for="emailRepeat">E-Mail wiederholen:</label>
-                    <h:inputText id="emailRepeat" name="emailWiederholen" type="text" required="true" class="input">
-                        <f:validateRequired for="emailRepeat" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                    </h:inputText>
-                    <h:message for="emailRepeat" class="errorMessage" />
+                    <h:inputText id="emailRepeat" name="emailWiederholen" type="text" required="true" class="input" />
+                    <span id="checkMail">...</span>
                     <br />
                     <label for="password">Passwort:</label>
                     <h:inputSecret id="password" name="passwort" type="password" required="true" class="input">
@@ -93,6 +93,7 @@
                     <br />
                     <label for="passwordRepeat">Passwort wiederholen:</label>
                     <h:inputSecret id="passwordRepeat" name="passwortWiederholen" type="password" required="true" class="input"/>
+                    <span id="checkPswd">...</span>
                     <br />
                     <p>Sind Sie Privatnutzer oder Firmennutzer?</p>
                     <h:selectOneRadio required="true">

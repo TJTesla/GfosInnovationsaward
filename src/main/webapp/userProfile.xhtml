@@ -12,6 +12,8 @@
     <title>Profil</title>
 </head>
 <h:body>
+    <!-- All rendered attributes still need to be made dependant on a boolean -->
+    <!-- whether br should be rendered: c:if and an attribute -->
     <ui:composition template="resources/templates/common.xhtml">
         <ui:define name="content">
             <label for="username">Benutzername:</label>
@@ -19,36 +21,39 @@
             <h:inputText id="usernameChange" value="#{user.username}" rendered="false">
                 <f:validateLength minimum="2" maximum="10" />
             </h:inputText>
-            <h:message for="usernameChange" class="errorClass" />
+            <h:message for="usernameChange" class="errorClass" rendered="false"/>
             <br />
             <label for="fname">Vorname:</label>
             <h:outputText id="fname" value="#{user.firstname}" rendered="true"/>
             <h:inputText id="fnameChange" value="#{user.firstname}" rendered="false">
                 <f:validateLength minimum="2" maximum="20" />
             </h:inputText>
-            <h:message for="fnameChange" class="errorClass" />
+            <h:message for="fnameChange" class="errorClass" rendered="false"/>
             <br />
             <label for="lname">Nachname:</label>
             <h:outputText id="lname" value="#{user.lastname}" rendered="true"/>
-            <h:inputText value="#{user.lastname}" rendered="false">
+            <h:inputText id="lnameChange" value="#{user.lastname}" rendered="false">
                 <f:validateLength minimum="2" maximum="10" />
             </h:inputText>
+            <h:message for="lnameChange" class="errorClass" rendered="false"/>
             <br />
-            <label for="mail">E-mail:</label>
-            <h:outputText id="mail" value="" rendered="true"/>
-            <h:inputText value="" rendered="false">
+            <label for="email">E-mail:</label>
+            <h:outputText id="email" value="" rendered="true"/>
+            <h:inputText id="mailChange" value="" rendered="false">
                 <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
             </h:inputText>
+            <h:message for="mailChange" class="errorClass" rendered="false" />
             <br />
             <h:outputText for="pswdOld" value="Altes Passwort" rendered="false"/>
             <h:inputSecret id="pswdOld" rendered="false" />
-            <h:outputText for="pswd" value="Neues Passwort:" rendered="false"/>
-            <h:inputSecret id="pswd" rendered="false">
-                <f:validateRegex pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=>]).{8,20}$" />
+            <h:outputText for="password" value="Neues Passwort:" rendered="false"/>
+            <h:inputSecret id="password" rendered="false">
+                <f:validateRegex pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=&lt;>]).{8,20}$" />
             </h:inputSecret>
+            <h:message for="password" class="errorClass" rendered="false" />
             <br />
-            <h:outputText for="pswdRepeat" value="Passwort wiederholen:" rendered="false" />
-            <h:inputSecret id="pswdRepeat" rendered="false" />
+            <h:outputText for="passwordRepeat" value="Passwort wiederholen:" rendered="false" />
+            <h:inputSecret id="passwordRepeat" rendered="false" />
 
             <h:commandButton action="" value="Profil bearbeiten" rendered="true"/>
             <h:commandButton action="" value="Änderungen speichern" rendered="false"/>
