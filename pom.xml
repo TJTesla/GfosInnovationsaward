@@ -51,6 +51,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces-selenium-runtime</artifactId>
+            <version>11.0.0-RC1</version>
+        </dependency>
     </dependencies>
 
     <build>

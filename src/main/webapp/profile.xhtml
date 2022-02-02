@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xml:lang="en" lang="en">
+<head>
+    <title>Profil</title>
+</head>
+<h:body>
+    <ui:composition template="resources/templates/common.xhtml">
+        <ui:define name="content">
+            <label for="username">Benutzername:</label>
+            <h:outputText id="username" value="#{user.username}" rendered="true"/>
+            <h:inputText id="usernameChange" value="#{user.username}" rendered="false">
+                <f:validateLength minimum="2" maximum="10" />
+            </h:inputText>
+            <h:message for="usernameChange" class="errorClass" />
+            <br />
+            <label for="fname">Vorname:</label>
+            <h:outputText id="fname" value="#{user.firstname}" rendered="true"/>
+            <h:inputText id="fnameChange" value="#{user.firstname}" rendered="false">
+                <f:validateLength minimum="2" maximum="20" />
+            </h:inputText>
+            <h:message for="fnameChange" class="errorClass" />
+            <br />
+            <label for="lname">Nachname:</label>
+            <h:outputText id="lname" value="#{user.lastname}" rendered="true"/>
+            <h:inputText value="#{user.lastname}" rendered="false">
+                <f:validateLength minimum="2" maximum="10" />
+            </h:inputText>
+            <br />
+            <label for="mail">E-mail:</label>
+            <h:outputText id="mail" value="" rendered="true"/>
+            <h:inputText value="" rendered="false">
+                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+            </h:inputText>
+            <br />
+            <h:outputText for="pswdOld" value="Altes Passwort" rendered="false"/>
+            <h:inputSecret id="pswdOld" rendered="false" />
+            <h:outputText for="pswd" value="Neues Passwort:" rendered="false"/>
+            <h:inputSecret id="pswd" rendered="false">
+                <f:validateRegex pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=>]).{8,20}$" />
+            </h:inputSecret>
+            <br />
+            <h:outputText for="pswdRepeat" value="Passwort wiederholen:" rendered="false" />
+            <h:inputSecret id="pswdRepeat" rendered="false" />
+
+            <h:commandButton action="" value="Profil bearbeiten" rendered="true"/>
+            <h:commandButton action="" value="Änderungen speichern" rendered="false"/>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

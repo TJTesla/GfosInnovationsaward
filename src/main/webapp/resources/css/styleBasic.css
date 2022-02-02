@@ -1,14 +1,15 @@
 @font-face {
     font-family: Rubik;
-    src: url("../fonts/Rubik-Regular.ttf");
+    src: url("../fonts/Rubik-Regular.ttf") format("truetype"),
+         url("../fonts/Rubik-Regular.woff2") format("woff2");
 }
+
 body {
     width: auto;
     font-family: "Rubik", sans-serif;
     margin: 0 auto;
-    border-width: 3px;
-    border-color: aqua;
     child-align: middle;
+    background-color: #13274F;
 }
 
 /*
@@ -33,6 +34,9 @@ Dark:  color: #002147; color: #13274F; color:#007FFF; color: #6495ED; color: #72
     /*:hover {
         background-color: #89a1b0;
     }*/
+    .input {
+        color: black;
+    }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -40,14 +44,18 @@ Dark:  color: #002147; color: #13274F; color:#007FFF; color: #6495ED; color: #72
         color: whitesmoke;
     }
     .head, .foot {
-        background-color: #002147;
-    }
-    .content {
         background-color: #13274F;
     }
-    fieldset {
+    .content {
         background-color: #002147;
+    }
+    fieldset {
+        background-color: #13274F;
         border-color: #001b3b;
+    }
+    .input {
+        color: whitesmoke;
+        background-color: #13274F;
     }
     /*:hover {
         background-color: #384e7b;
@@ -61,14 +69,24 @@ h1 {
 }
 
 legend {
-    font-family: "Arial Black", sans-serif;
+    font-family: "Rubik", sans-serif;
     font-size:20px;
+    padding: 20px;
 }
 fieldset {
     height: auto;
-    width: 1000px;
+    width: 500px;
+    padding-left: 30px;
     margin: auto;
     border-width: 3px;
+}
+.user label{
+    display: inline-block;
+    width: 140px;
+}
+.data label{
+    display: inline-block;
+    width: 200px;
 }
 .loginLink {
     margin-top: 10px;
