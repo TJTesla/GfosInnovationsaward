@@ -53,7 +53,7 @@ public class RegistrationController implements Serializable {
             return "";
         }
 
-        User user = new User(0, username, password, firstname, lastname, Integer.parseInt(salutation));
+        User user = new User(0, username, password, firstname, lastname, Integer.parseInt(salutation), titles);
         if (udbs.exists(user)) {
             loginError = true;
             loginErrorMsg = "Der Nutzer existiert bereits.";

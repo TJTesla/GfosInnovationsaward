@@ -2,6 +2,7 @@ package gfos.beans;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import java.util.ArrayList;
 
 @Named
 @RequestScoped
@@ -12,14 +13,16 @@ public class User {
     private String firstname;
     private String lastname;
     private int gender;
+    private ArrayList<String> titles;
 
-    public User(int id, String username, String password, String firstname, String lastname, int gender) {
+    public User(int id, String username, String password, String firstname, String lastname, int gender, ArrayList<String> titles) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
         this.gender = gender;
+        this.titles = titles;
     }
 
     public User() {
@@ -28,6 +31,7 @@ public class User {
         this.firstname = "";
         this.lastname = "";
         this.gender = 0;
+        this.titles = new ArrayList<>();
     }
 
     public int getId() {
@@ -76,6 +80,14 @@ public class User {
 
     public void setGender(int gender) {
         this.gender = gender;
+    }
+
+    public ArrayList<String> getTitles() {
+        return titles;
+    }
+
+    public void setTitles(ArrayList<String> titles) {
+        this.titles = titles;
     }
 }
 

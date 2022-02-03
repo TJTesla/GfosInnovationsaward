@@ -17,7 +17,7 @@ public class MiscellaneousDatabaseService extends DatabaseService {
         ArrayList<String> arr = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT term FROM title");
+            stmt = con.prepareStatement("SELECT term FROM title ORDER BY id ASC");
             rs = stmt.executeQuery();
 
             while (rs.next()) {

@@ -7,6 +7,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @Named
 @ApplicationScoped
@@ -31,11 +33,33 @@ public class UserDatabaseService extends DatabaseService {
 
             int affectedRows = stmt.executeUpdate();
 
+
             return affectedRows != 0;
         } catch (SQLException sqlException) {
             System.out.println("There was an error while creating an applicant: " + sqlException.getMessage());
             return false;
         }
+    }
+
+    private int insertTitles(User user) throws SQLException {
+        stmt = con.prepareStatement("SELECT * FROM title");
+        rs = stmt.executeQuery();
+
+        HashMap<String, Integer> possibleTitles = new HashMap<>();
+        while (rs.next()) {
+            possibleTitles.put(rs.getString("term"), rs.getInt("id"));
+        }
+
+        StringBuilder sqlBuilder = new StringBuilder("INSERT INTO titleRelation(applicantId, titleId) VALUES ");
+        for (String title : user.getTitles()) {
+            sqlBuilder.append("(").append(user.getId()).append(", ").append(possibleTitles.get(title)).append("),");
+        }
+        String sql = sqlBuilder.toString();
+        sql = sql.substring(0, sql.length()-1);
+
+        stmt = con.prepareStatement(sql);
+
+        return stmt.executeUpdate();
     }
 
     public boolean exists(User a) {
@@ -47,7 +71,7 @@ public class UserDatabaseService extends DatabaseService {
             return rs.next();
         } catch (SQLException sqlException) {
             System.out.println("Error while finding already existing user: " + sqlException.getMessage());
-            return false;
+            return true;
         }
     }
 
@@ -64,7 +88,8 @@ public class UserDatabaseService extends DatabaseService {
                         rs.getString("password"),
                         rs.getString("firstname"),
                         rs.getString("lastname"),
-                        rs.getInt("gender")
+                        rs.getInt("gender"),
+                        getTitles(rs.getInt("id"))
                 );
 
                 list.add(temp);
@@ -74,6 +99,26 @@ public class UserDatabaseService extends DatabaseService {
         }
 
         return list;
+    }
+
+    private ArrayList<String> getTitles(int userId) {
+        ArrayList<String> titles = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement("" +
+                    "SELECT term " +
+                    "FROM title JOIN titleRelation ON title.id = titleRelation.titleId " +
+                    "WHERE titleRelation.applicantId=?;"
+            );
+            stmt.setInt(1, userId);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                titles.add(rs.getString("term"));
+            }
+        } catch (SQLException sqlException) {
+            System.out.println("Could not fetch the titles for user with ID " + userId + ": " + sqlException.getMessage());
+        }
+        return titles;
     }
 
     public User loginAttempt(String user, String password) {
@@ -93,7 +138,8 @@ public class UserDatabaseService extends DatabaseService {
                     rs.getString("password"),
                     rs.getString("firstname"),
                     rs.getString("lastname"),
-                    rs.getInt("gender")
+                    rs.getInt("gender"),
+                    getTitles(rs.getInt("id"))
             );
 
         } catch (SQLException sqlException) {
