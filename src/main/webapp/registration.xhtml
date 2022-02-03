@@ -11,28 +11,11 @@
 <h:head>
     <title>Registrieren</title>
     <h:outputScript library="javascript" name="jquery-3.6.0.js" />
-    <h:outputScript library="javascript" name="formValidation.js" />
+    <h:outputStylesheet library="css" name="registration.css" />
     <h:outputStylesheet library="css" name="styleBasic.css" />
     <h:outputStylesheet library="css" name="CSSResetStyleSheet.css" />
     <!--link href="resources/css/CSSResetStyleSheet.css" rel="stylesheet" /-->
     <!--link href="resources/css/styleBasic.css" rel="stylesheet" /-->
-    <style type="text/css">
-        body {
-            line-height: 125%;
-        }
-        .user label {
-            display: inline-block;
-            width: 140px;
-            margin-top: 4px;
-            margin-bottom: 4px;
-        }
-        .data label {
-            display: inline-block;
-            width: 200px;
-            margin-top: 4px;
-            margin-bottom: 4px;
-        }
-    </style>
 </h:head>
 <h:body>
     <ui:composition template="resources/templates/common.xhtml">
@@ -42,7 +25,8 @@
                 <hr />
             </div>
             <h:form>
-                <fieldset class="user" style="height: 200px; margin: 0px auto">
+                <!-- TODO: Change validation message -->
+                <fieldset class="user" style="height: 200px; margin: 0 auto">
                     <legend>Nutzer Informationen</legend>
                     <label for="salutation">Anrede:</label>
                     <h:selectOneMenu id="salutation" name="salutation" class="input">
@@ -64,36 +48,41 @@
                     <h:inputText id="fname" name="vorname" type="text" required="true" class="input">
                         <f:validateLength for="fname" minimum="2" maximum="28" />
                     </h:inputText>
-                    <h:message for="fname" class="errorMessage" />
+                    <h:message for="fname" infoClass="infoMessage" errorClass="errorMessage" />
                     <br/>
                     <label for="lname">Nachname:</label>
                     <h:inputText id="lname" name="nachname" type="text" required="true" class="input">
                         <f:validateLength for="lname" minimum="2" maximum="28" />
                     </h:inputText>
-                    <h:message for="lname" class="errorMessage" />
+                    <h:message for="lname" infoClass="infoMessage" errorClass="errorMessage" />
                     <br/>
                 </fieldset>
                 <fieldset class="data">
                     <legend>Anmeldedaten</legend>
+                    <label for="username">Benutzername:</label>
+                    <h:inputText id="username">
+                        <f:validateLength minimum="3" maximum="10" />
+                    </h:inputText>
+                    <br />
                     <label for="email">E-Mail:</label>
                     <h:inputText id="email" name="email" type="text" p:placeholder="example@email.com" required="true" class="input">
                         <f:validateRequired for="email" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                     </h:inputText>
-                    <h:message for="email" class="errorMessage" />
+                    <h:message for="email" infoClass="infoMessage" errorClass="errorMessage" />
                     <br />
                     <label for="emailRepeat">E-Mail wiederholen:</label>
                     <h:inputText id="emailRepeat" name="emailWiederholen" type="text" required="true" class="input" />
-                    <span id="checkMail">...</span>
+                    <h:outputText id="checkMail" value="" />
                     <br />
                     <label for="password">Passwort:</label>
                     <h:inputSecret id="password" name="passwort" type="password" required="true" class="input">
-                        <f:validateRegex for="password" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=>]).{8,20}$" />
+                        <f:validateRegex for="password" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=&lt;>]).{8,20}$" />
                     </h:inputSecret>
-                    <h:message for="password" class="errorMessage" />
+                    <h:message for="password" infoClass="infoMessage" errorClass="errorMessage" />
                     <br />
                     <label for="passwordRepeat">Passwort wiederholen:</label>
                     <h:inputSecret id="passwordRepeat" name="passwortWiederholen" type="password" required="true" class="input"/>
-                    <span id="checkPswd">...</span>
+                    <h:outputText id="checkPswd" value="" />
                     <br />
                     <p>Sind Sie Privatnutzer oder Firmennutzer?</p>
                     <h:selectOneRadio required="true">
@@ -106,5 +95,6 @@
             <h:link value="Schon ein Profil? Hier anmelden." outcome="login.xhtml" />
         </ui:define>
     </ui:composition>
+    <h:outputScript library="javascript" name="formValidation.js" />
 </h:body>
 </html>
