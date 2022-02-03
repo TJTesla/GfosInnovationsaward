@@ -1,5 +1,6 @@
 package gfos.sessionBeans;
 
+import gfos.beans.Applicant;
 import gfos.beans.Company;
 import gfos.beans.User;
 
@@ -12,24 +13,21 @@ import java.io.Serializable;
 @SessionScoped
 public class CurrentUser implements Serializable {
     private User currentUser;
-    private Company currentCompany;
 
     @PostConstruct
     public void init() {
-        currentUser = new User();
+        currentUser = null;
     }
 
-    public T getCurrentUser() {
-        if (currentUser == null) {
-            return this.currentCompany;
-        } else if (currentCompany == null) {
-            return this.currentUser;
-        }
-
-        return null;
+    public User getCurrentUser() {
+        return currentUser;
     }
 
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+    }
+
+    public void logout() {
+        this.currentUser = null;
     }
 }

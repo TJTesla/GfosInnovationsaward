@@ -1,7 +1,7 @@
 package gfos.controller;
 
-import gfos.beans.User;
-import gfos.database.UserDatabaseService;
+import gfos.beans.Applicant;
+import gfos.database.ApplicantDatabaseService;
 import gfos.sessionBeans.CurrentUser;
 
 import javax.faces.view.ViewScoped;
@@ -15,15 +15,15 @@ public class LoginController implements Serializable {
     @Inject
     CurrentUser cu;
     @Inject
-    UserDatabaseService udbs;
+    ApplicantDatabaseService udbs;
 
     private String username;
     private String password;
 
     public String login() {
-        User user = udbs.loginAttempt(username, password);
-        if (user != null) {
-            cu.setCurrentUser(user);
+        Applicant applicant = udbs.loginAttempt(username, password);
+        if (applicant != null) {
+            cu.setCurrentUser(applicant);
             return "index.xhtml?faces-redirect=true";
         } else {
             return "";

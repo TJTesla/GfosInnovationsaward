@@ -1,8 +1,8 @@
 package gfos.controller;
 
 import gfos.database.MiscellaneousDatabaseService;
-import gfos.database.UserDatabaseService;
-import gfos.beans.User;
+import gfos.database.ApplicantDatabaseService;
+import gfos.beans.Applicant;
 import gfos.sessionBeans.CurrentUser;
 
 import javax.faces.view.ViewScoped;
@@ -10,14 +10,13 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 @Named
 @ViewScoped
 public class RegistrationController implements Serializable {
     @Inject
-    UserDatabaseService udbs;
+    ApplicantDatabaseService udbs;
     @Inject
     MiscellaneousDatabaseService mdbs;
     @Inject
@@ -55,17 +54,17 @@ public class RegistrationController implements Serializable {
             return "";
         }
 
-        User user = new User(0, username, password, firstname, lastname, Integer.parseInt(salutation), this.toArrayList(titles));
-        if (udbs.exists(user)) {
+        Applicant applicant = new Applicant(0, username, password, firstname, lastname, Integer.parseInt(salutation), this.toArrayList(titles));
+        if (udbs.exists(applicant)) {
             loginError = true;
             loginErrorMsg = "Der Nutzer existiert bereits.";
             return "";
         }
 
         if (userType.equals("private")) {
-            udbs.createOne(user);
+            udbs.createOne(applicant);
 
-            cu.setCurrentUser(user);
+            cu.setCurrentUser(applicant);
         } else {
             // TODO: Register as comapny
         }

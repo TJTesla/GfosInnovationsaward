@@ -21,7 +21,7 @@
             font-family: Arial, sans-serif;
             line-height: 125%;
         }
-        .user label {
+        .applicant label {
             display: inline-block;
             width: 140px;
             margin-top: 4px;
@@ -44,7 +44,7 @@
 <h:outputText value="#{registrationController.loginErrorMsg}" rendered="#{registrationController.loginError}" />
 
 <h:form>
-    <fieldset class="user" style="height: 200px; margin: 0px auto">
+    <fieldset class="applicant" style="height: 200px; margin: 0px auto">
         <legend>Nutzer Informationen</legend>
         <label for="salutation">Anrede:</label>
         <h:selectOneMenu id="salutation" name="salutation" value="#{registrationController.salutation}">

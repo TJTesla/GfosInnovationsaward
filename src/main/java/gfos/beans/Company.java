@@ -5,8 +5,7 @@ import javax.inject.Named;
 
 @Named
 @RequestScoped
-public class Company {
-    private int id;
+public class Company extends User {
     private String name;
     private String password;
     private String email;
@@ -15,7 +14,7 @@ public class Company {
     private String description;
 
     public Company(int id, String name, String password, String email, String phoneno, String website, String description) {
-        this.id = id;
+        super(id);
         this.name = name;
         this.password = password;
         this.email = email;
@@ -25,7 +24,7 @@ public class Company {
     }
 
     public Company() {
-        this.id = 0;
+        super(0);
         this.name = "";
         this.password = "";
         this.email = "";

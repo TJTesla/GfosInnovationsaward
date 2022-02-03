@@ -1,13 +1,11 @@
 package gfos.database;
 
 import gfos.beans.Company;
-import gfos.beans.User;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 @Named

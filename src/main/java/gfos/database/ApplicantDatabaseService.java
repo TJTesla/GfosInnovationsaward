@@ -1,6 +1,6 @@
 package gfos.database;
 
-import gfos.beans.User;
+import gfos.beans.Applicant;
 
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
@@ -8,18 +8,17 @@ import javax.inject.Named;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 @Named
 @ApplicationScoped
-public class UserDatabaseService extends DatabaseService {
+public class ApplicantDatabaseService extends DatabaseService {
 
-    public UserDatabaseService() throws SQLException {
+    public ApplicantDatabaseService() throws SQLException {
         super();
     }
 
 
-    public boolean createOne(User a) {
+    public boolean createOne(Applicant a) {
         try {
             stmt = con.prepareStatement("" +
                     "INSERT INTO applicant(id, username, password, firstname, lastname, gender) VALUES " +
@@ -42,7 +41,7 @@ public class UserDatabaseService extends DatabaseService {
         }
     }
 
-    private int insertTitles(User user) throws SQLException {
+    private int insertTitles(Applicant applicant) throws SQLException {
         stmt = con.prepareStatement("SELECT * FROM title");
         rs = stmt.executeQuery();
 
@@ -52,8 +51,8 @@ public class UserDatabaseService extends DatabaseService {
         }
 
         StringBuilder sqlBuilder = new StringBuilder("INSERT INTO titleRelation(applicantId, titleId) VALUES ");
-        for (String title : user.getTitles()) {
-            sqlBuilder.append("(").append(user.getId()).append(", ").append(possibleTitles.get(title)).append("),");
+        for (String title : applicant.getTitles()) {
+            sqlBuilder.append("(").append(applicant.getId()).append(", ").append(possibleTitles.get(title)).append("),");
         }
         String sql = sqlBuilder.toString();
         sql = sql.substring(0, sql.length()-1);
@@ -63,7 +62,7 @@ public class UserDatabaseService extends DatabaseService {
         return stmt.executeUpdate();
     }
 
-    public boolean exists(User a) {
+    public boolean exists(Applicant a) {
         try {
             stmt = con.prepareStatement("SELECT username FROM applicant WHERE username=?");
             stmt.setString(1, a.getUsername());
@@ -76,14 +75,14 @@ public class UserDatabaseService extends DatabaseService {
         }
     }
 
-    public ArrayList<User> fetchAll() {
-        ArrayList<User> list = new ArrayList<>();
+    public ArrayList<Applicant> fetchAll() {
+        ArrayList<Applicant> list = new ArrayList<>();
         try {
             stmt = con.prepareStatement("SELECT * FROM applicant");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                User temp = new User(
+                Applicant temp = new Applicant(
                         rs.getInt("id"),
                         rs.getString("username"),
                         rs.getString("password"),
@@ -123,7 +122,7 @@ public class UserDatabaseService extends DatabaseService {
         return titles;
     }
 
-    public User loginAttempt(String user, String password) {
+    public Applicant loginAttempt(String user, String password) {
         try {
             stmt = con.prepareStatement("SELECT * FROM applicant WHERE username=? AND password=SHA2(?, 256)");
             stmt.setString(1, user);
@@ -134,7 +133,7 @@ public class UserDatabaseService extends DatabaseService {
                 return null;
             }
 
-            return new User(
+            return new Applicant(
                     rs.getInt("id"),
                     rs.getString("username"),
                     rs.getString("password"),
