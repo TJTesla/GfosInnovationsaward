@@ -102,6 +102,7 @@ public class UserDatabaseService extends DatabaseService {
     }
 
     private ArrayList<String> getTitles(int userId) {
+        ResultSet secondRs;
         ArrayList<String> titles = new ArrayList<>();
         try {
             stmt = con.prepareStatement("" +
@@ -110,10 +111,10 @@ public class UserDatabaseService extends DatabaseService {
                     "WHERE titleRelation.applicantId=?;"
             );
             stmt.setInt(1, userId);
-            rs = stmt.executeQuery();
+            secondRs = stmt.executeQuery();
 
-            while (rs.next()) {
-                titles.add(rs.getString("term"));
+            while (secondRs.next()) {
+                titles.add(secondRs.getString("term"));
             }
         } catch (SQLException sqlException) {
             System.out.println("Could not fetch the titles for user with ID " + userId + ": " + sqlException.getMessage());

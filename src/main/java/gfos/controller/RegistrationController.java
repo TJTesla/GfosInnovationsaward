@@ -10,6 +10,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 @Named
 @ViewScoped
@@ -53,7 +55,7 @@ public class RegistrationController implements Serializable {
             return "";
         }
 
-        User user = new User(0, username, password, firstname, lastname, Integer.parseInt(salutation), titles);
+        User user = new User(0, username, password, firstname, lastname, Integer.parseInt(salutation), this.toArrayList(titles));
         if (udbs.exists(user)) {
             loginError = true;
             loginErrorMsg = "Der Nutzer existiert bereits.";
@@ -69,6 +71,14 @@ public class RegistrationController implements Serializable {
         }
 
         return "index.xhtml?faces-redirect=true";
+    }
+
+    private ArrayList<String> toArrayList(String[] arr) {
+        ArrayList<String> res = new ArrayList<>();
+
+        Collections.addAll(res, arr);
+
+        return res;
     }
 
     public String[] getAllTitles() {
