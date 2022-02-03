@@ -33,6 +33,7 @@ public class UserDatabaseService extends DatabaseService {
 
             int affectedRows = stmt.executeUpdate();
 
+            affectedRows += insertTitles(a);
 
             return affectedRows != 0;
         } catch (SQLException sqlException) {
