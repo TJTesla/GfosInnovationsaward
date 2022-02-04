@@ -10,23 +10,29 @@
       xml:lang="en" lang="en">
 <head>
     <title>Profil</title>
+    <h:outputStylesheet library="css" name="profile.css" />
 </head>
 <h:body>
     <ui:composition template="resources/templates/common.xhtml">
         <ui:define name="content">
-            <label for="username">Benutzername:</label>
-            <h:outputText id="username" value="#{user.username}" rendered="true"/>
-            <br />
-            <label for="fname">Vorname:</label>
-            <h:outputText id="fname" value="#{user.firstname}" rendered="true"/>
-            <br />
-            <label for="lname">Nachname:</label>
-            <h:outputText id="lname" value="#{user.lastname}" rendered="true"/>
-            <br />
-            <label for="email">E-mail:</label>
-            <h:outputText id="email" value="" rendered="true"/>
-            <br />
-            <h:commandButton action="" value="Profil bearbeiten" rendered="true"/>
+            <div class="data">
+                <label for="username">Benutzername:</label>
+                <h:outputText id="username" value="#{user.username}" rendered="true"/>
+                <br />
+                <label for="salutation">Anrede</label>
+                <h:outputText id="salutation" value="" rendered="true" />
+                <br />
+                <label for="fname">Vorname</label>
+                <h:outputText id="fname" value="#{user.firstname}" rendered="true"/>
+                <br />
+                <label for="lname">Nachname</label>
+                <h:outputText id="lname" value="#{user.lastname}" rendered="true"/>
+                <br />
+                <label for="email">E-mail</label>
+                <h:outputText id="email" value="" rendered="true"/>
+                <br />
+                <h:button outcome="updateProfile.xhtml" value="Profil bearbeiten" rendered="true"/>
+            </div>
 
         </ui:define>
     </ui:composition>

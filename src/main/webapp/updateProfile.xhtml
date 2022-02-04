@@ -15,47 +15,49 @@
     <!-- TODO: Change validation message -->
     <ui:composition template="resources/templates/common.xhtml">
         <ui:define name="content" class="update">
-            <label for="username">Benutzername:</label>
-            <h:inputText id="username" value="#{user.username}">
-                <f:validateLength minimum="2" maximum="10" />
-            </h:inputText>
-            <h:message for="username" infoClass="infoMessage" errorClass="errorMessage" />
-            <br />
-            <label for="fname">Vorname:</label>
-            <h:inputText id="fname" value="#{user.firstname}">
-                <f:validateLength minimum="2" maximum="20" />
-            </h:inputText>
-            <h:message for="fname" infoClass="infoMessage" errorClass="errorMessage" />
-            <br />
-            <label for="lname">Nachname:</label>
-            <h:inputText id="lname" value="#{user.lastname}" rendered="true">
-                <f:validateLength minimum="2" maximum="10" />
-            </h:inputText>
-            <h:message for="lname" infoClass="infoMessage" errorClass="errorMessage" rendered="true"/>
-            <br />
-            <label for="email">E-Mail:</label>
-            <h:inputText id="email" value="" rendered="true">
-                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-            </h:inputText>
-            <h:message for="email" infoClass="infoMessage" errorClass="errorMessage" rendered="true" />
-            <br />
-            <label for="emailRepeat">E-Mail wiederholen:</label>
-            <h:inputText id="emailRepeat" name="emailWiederholen" type="text" required="true" class="input" />
-            <h:outputText id="checkMail" value="" />
-            <br />
-            <label for="pswdOld">Altes Passwort:</label>
-            <h:inputSecret id="pswdOld" rendered="true" />
-            <label for="password">Neues Passwort:</label>
-            <h:inputSecret id="password" rendered="true">
-                <f:validateRegex pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=&lt;>]).{8,20}$" />
-            </h:inputSecret>
-            <h:message for="password" infoClass="infoMessage" errorClass="errorMessage" rendered="true" />
-            <br />
-            <label for="passwordRepeat">Passwort wiederholen:</label>
-            <h:inputSecret id="passwordRepeat" rendered="true" />
-            <h:outputText id="checkPswd" value="" />
-            <br />
-            <h:commandButton action="" value="Änderungen speichern" rendered="true"/>
+            <h:form onsubmit="checkValidation()">
+                <label for="username">Benutzername:</label>
+                <h:inputText id="username" value="#{user.username}">
+                    <f:validateLength minimum="2" maximum="10" />
+                </h:inputText>
+                <h:message for="username" infoClass="infoMessage" errorClass="errorMessage" />
+                <br />
+                <label for="fname">Vorname:</label>
+                <h:inputText id="fname" value="#{user.firstname}">
+                    <f:validateLength minimum="2" maximum="20" />
+                </h:inputText>
+                <h:message for="fname" infoClass="infoMessage" errorClass="errorMessage" />
+                <br />
+                <label for="lname">Nachname:</label>
+                <h:inputText id="lname" value="#{user.lastname}" rendered="true">
+                    <f:validateLength minimum="2" maximum="10" />
+                </h:inputText>
+                <h:message for="lname" infoClass="infoMessage" errorClass="errorMessage" rendered="true"/>
+                <br />
+                <label for="email">E-Mail:</label>
+                <h:inputText id="email" value="" rendered="true">
+                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                </h:inputText>
+                <h:message for="email" infoClass="infoMessage" errorClass="errorMessage" rendered="true" />
+                <br />
+                <label for="emailRepeat">E-Mail wiederholen:</label>
+                <h:inputText id="emailRepeat" name="emailWiederholen" type="text" required="true" class="input" />
+                <h:outputText for="emailRepeat" id="checkMail" value="" />
+                <br />
+                <label for="pswdOld">Altes Passwort:</label>
+                <h:inputSecret id="pswdOld" rendered="true" />
+                <label for="password">Neues Passwort:</label>
+                <h:inputSecret id="password" rendered="true">
+                    <f:validateRegex pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=&lt;>]).{8,20}$" />
+                </h:inputSecret>
+                <h:message for="password" infoClass="infoMessage" errorClass="errorMessage" rendered="true" />
+                <br />
+                <label for="passwordRepeat">Passwort wiederholen:</label>
+                <h:inputSecret id="passwordRepeat" rendered="true" />
+                <h:outputText for="passwordRepeat" id="checkPswd" value="" />
+                <br />
+                <h:commandButton action="" value="Änderungen speichern" rendered="true"/>
+            </h:form>
         </ui:define>
     </ui:composition>
 <h:outputScript library="javascript" name="formValidation.js" />
