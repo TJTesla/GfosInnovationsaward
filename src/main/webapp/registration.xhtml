@@ -20,11 +20,13 @@
 <h:body>
     <ui:composition template="resources/templates/common.xhtml">
         <ui:define name="content">
-            <div align="center">
-                <h1>Neues Profil erstellen</h1>
-                <hr />
-            </div>
-            <h:form onsubmit="checkValidation()">
+            <!-- TODO: How to change rendered so that is works? -->
+
+            <h:form onsubmit="checkValidation()" id="registration" rendered="#{not testController.login}">
+                <div align="center">
+                    <h1>Neues Profil erstellen</h1>
+                    <hr />
+                </div>
                 <!-- TODO: Change validation message -->
                 <fieldset class="user" style="height: 200px; margin: 0 auto">
                     <legend>Nutzer Informationen</legend>
@@ -102,7 +104,29 @@
                 </fieldset>
                 <!--h:commandButton action="#" type="submit"/-->
             </h:form>
-            <h:link value="Schon ein Profil? Hier anmelden." outcome="login.xhtml" />
+            <h:commandLink value="Schon ein Profil? Hier anmelden."
+                           id="loginLink"
+                           action="#{testController.changeToLogin()}"
+                           rendered="#{not testController.login}" />
+
+            <h:form id="login" rendered="#{testController.login}">
+                <fieldset class="user">
+                    <legend>Anmelden</legend>
+                    <label for="user">Benutzername:</label>
+                    <h:inputText id="user" type="text" name="user" />
+                    <br />
+                    <label for="passwordL">Passwort:</label>
+                    <h:inputSecret id="passwordL" type="password" name="password"/>
+                    <br />
+                    <!--h:button outcome="" id="bestaetigen" value="Login" /-->
+                    <input id="bestaetigen" type="submit" name="submitButton" value="Login"/>
+                </fieldset>
+            </h:form>
+            <h:commandLink value="Schon ein Profil? Hier anmelden."
+                           id="registrationLink"
+                           action="#{testController.changeToRegistration()}"
+                           rendered="#{testController.login}"
+                           style="align-self: center" />
         </ui:define>
     </ui:composition>
     <h:outputScript library="javascript" name="formValidation.js" />

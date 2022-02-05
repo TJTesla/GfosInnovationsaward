@@ -27,3 +27,12 @@ function checkValidation() {
     }
 }
 
+function toRegistration() {
+    $("#login").hide();
+    $("#registration").show();
+}
+
+function toLogin() {
+    $("#registration").show();
+    $("#login").hide()
+}

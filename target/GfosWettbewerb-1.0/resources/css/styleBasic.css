@@ -1,7 +1,7 @@
 @font-face {
     font-family: Rubik;
     src: url("../fonts/Rubik-Regular.ttf") format("truetype"),
-        url("../fonts/Rubik-Regular.woff2") format("woff2");
+         url("../fonts/Rubik-Regular.woff2") format("woff2");
 }
 
 body {
@@ -10,6 +10,7 @@ body {
     margin: 0 auto;
     child-align: middle;
     background-color: #13274F;
+    font-size: 12px;
 }
 
 /*
@@ -80,16 +81,15 @@ fieldset {
     margin: auto;
     border-width: 3px;
 }
-.user label{
-    display: inline-block;
-    width: 140px;
-}
-.data label{
-    display: inline-block;
-    width: 200px;
-}
 .loginLink {
     margin-top: 10px;
+}
+.infoMessage {
+    display: none;
+}
+.outLabel {
+    display: inline-block;
+    width: 200px;
 }
 .errorMessage {
     color: red;

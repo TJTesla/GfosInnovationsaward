@@ -1,0 +1,18 @@
+body {
+    line-height: 125%;
+}
+.user label {
+    display: inline-block;
+    width: 140px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+.data label {
+    display: inline-block;
+    width: 200px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+.link {
+    alignment: center;
+}

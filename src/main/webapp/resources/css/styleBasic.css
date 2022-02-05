@@ -87,6 +87,10 @@ fieldset {
 .infoMessage {
     display: none;
 }
+.outLabel {
+    display: inline-block;
+    width: 200px;
+}
 .errorMessage {
     color: red;
 }

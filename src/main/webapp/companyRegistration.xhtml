@@ -6,7 +6,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:k="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
 <head>
     <title>Unternehmen Registrieren</title>
@@ -14,44 +15,62 @@
     <h:outputStylesheet library="css" name="CSSResetStyleSheet.css" />
     <h:outputScript library="javascript" name="formValidation.js" />
 </head>
-<h:body>
+<h:body style="height:100%">
     <ui:composition template="resources/templates/common.xhtml">
         <ui:define name="content">
             <h1>Registrierung eines neuen Unternehmen:</h1>
             <hr />
-            <h:form>
-                <h:outputLabel for="name" value="Name:" />
+            <h:form enctype="multipart/form-data">
+            <fieldset>
+                <legend>Daten zum Unternehmen:</legend>
+                <h:outputLabel for="name" value="Name:" styleClass="outLabel"/>
                 <h:inputText id="name" >
                     <f:validateLength maximum="20" />
                 </h:inputText>
                 <h:message for="name" infoClass="infoMessage" errorClass="errorMessage" />
                 <br />
 
-                <h:outputLabel for="url" value="Verlinkung zur Website:" />
+                <h:outputLabel for="url" value="Verlinkung zur Website:" styleClass="outLabel" />
                 <h:inputText id="url">
                     <f:validateRegex pattern="[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&amp;//=]*)" />
                 </h:inputText>
                 <h:message for="url" infoClass="infoMessage" errorClass="errorMessage" />
                 <br />
 
-                <h:outputLabel for="description" value="Beschreibung:" />
+                <h:outputLabel for="description" value="Beschreibung:" styleClass="outLabel" />
+                <br />
                 <h:inputTextarea id="description">
                     <f:validateLength maximum="500" />
                 </h:inputTextarea>
                 <h:message for="description" infoClass="infoMessage" errorClass="errorMessage" />
 
+                <p:fileUpload  mode="advanced"
+                               value=""
+                               listener=""
+                               sizeLimit="500000"
+                               allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                               invalidSizeMessage="File is too big."
+                               invalidFileMessage="Invalid file type."
+                               dragDropSupport="true"
+                               update="msg"/>
+                <p:growl id="msg" />
+            </fieldset>
+
+            <fieldset>
                 <legend>Kontaktdaten:</legend>
+                <h:outputLabel for="email" value="E-Mail Adresse:" styleClass="outLabel" />
                 <h:inputText id="email">
                     <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                 </h:inputText>
                 <h:message for="email" infoClass="infoMessage" errorClass="errorMessage" />
                 <br />
 
-                <h:outputLabel for="telephone" value="Telefonnummer:" />
-                <h:inputText id="telephone" p:placeholder="+49 123 45678910">
+                <h:outputLabel for="telephone" value="Telefonnummer:" styleClass="outLabel" />
+                <h:inputText id="telephone" k:placeholder="+49 123 45678910">
                     <f:validateRegex pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" />
                 </h:inputText>
                 <h:message for="telephone" infoClass="infoMessage" errorClass="errorMessage" />
+            </fieldset>
             </h:form>
         </ui:define>
     </ui:composition>
