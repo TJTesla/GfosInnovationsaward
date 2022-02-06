@@ -15,7 +15,7 @@
     <h:outputStylesheet library="css" name="CSSResetStyleSheet.css" />
     <h:outputScript library="javascript" name="formValidation.js" />
 </head>
-<h:body style="heigh:100%">
+<h:body style="height:100%; alignment: center">
     <ui:composition template="resources/templates/common.xhtml">
         <ui:define name="content">
             <h1>Registrierung eines neuen Unternehmen:</h1>
@@ -39,7 +39,7 @@
 
                 <h:outputLabel for="description" value="Beschreibung:" styleClass="outLabel" />
                 <br />
-                <h:inputTextarea id="description">
+                <h:inputTextarea id="description" styleClass="description">
                     <f:validateLength maximum="500" />
                 </h:inputTextarea>
                 <h:message for="description" infoClass="infoMessage" errorClass="errorMessage" />

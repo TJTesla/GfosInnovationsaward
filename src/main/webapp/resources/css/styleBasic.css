@@ -94,3 +94,6 @@ fieldset {
 .errorMessage {
     color: red;
 }
+.obligatory {
+    color: red;
+}
