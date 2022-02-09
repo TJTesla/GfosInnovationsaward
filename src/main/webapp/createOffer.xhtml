@@ -25,11 +25,31 @@
                 <h:message for="title" infoClass="infoMessage" errorClass="errorMessage" />
                 <br />
 
+                <h:outputLabel for="address" value="Adresse:" />
+                <div id="address">
+                    <h:outputLabel for="street" value="Straße:" />
+                    <h:inputText id="street" />
+
+                    <h:outputLabel for="hNo" value="Hausnummer" />
+                    <h:inputText id="hNo">
+                        <f:validateRegex pattern="^[1-9]\d*(?:[ -]?(?:[a-zA-Z]+|[1-9]\d*))?$" />
+                    </h:inputText>
+
+                    <h:outputLabel for="postCode" value="Postleitzahl:" />
+                    <h:inputText id="postCode">
+                        <f:validateRegex pattern="[0-9]{5}" />
+                    </h:inputText>
+
+                    <h:outputLabel for="location" value="Ort:" />
+                    <h:inputText id="location" />
+                </div>
+
                 <h:outputLabel for="description"> Beschreibung<div class="obligatory">*</div>: </h:outputLabel>
                 <h:inputTextarea id="description">
                     <f:validateLength maximum="500" />
                 </h:inputTextarea>
                 <h:message for="description" infoClass="infoMessage" errorClass="errorMessage" />
+                <br />
 
                 <h:outputLabel for="level" value="Einstiegslevel" />
                 <h:selectOneMenu id="level">
@@ -41,6 +61,7 @@
                     <f:selectItem itemValue="6" itemLabel="Absolventen" />
                     <f:selectItem itemValue="7" itemLabel="Berufserfahrene" />
                 </h:selectOneMenu>
+                <br />
 
                 <h:outputLabel for="field" value="Berufsfeld" />
                 <h:selectOneMenu id="field">
@@ -60,6 +81,15 @@
                     <f:selectItem itemValue="14" itemLabel="Verkehr, Logistik" />
                     <f:selectItem itemValue="15" itemLabel="Wirtschaft, Verwaltung" />
                 </h:selectOneMenu>
+                <br />
+
+                <h:outputLabel for="time" value="Praktikum:" />
+                <h:selectManyCheckbox id="time">
+                    <f:selectItems itemValue="full" itemLabel="Vollzeit" />
+                    <f:selectItems itemValue="part" itemLabel="Teilzeit" />
+                    <f:selectItems itemValue="mini" itemLabel="Minijob" />
+                </h:selectManyCheckbox>
+                <br />
 
                 <!-- optional fields -->
                 <h:selectManyCheckbox>

@@ -20,7 +20,7 @@
         <ui:define name="content">
             <h1>Registrierung eines neuen Unternehmen:</h1>
             <hr />
-            <h:form enctype="multipart/form-data">
+            <h:form enctype="multipart/form-data" onsubmit="checkValidation()">
             <fieldset>
                 <legend>Daten zum Unternehmen:</legend>
                 <h:outputLabel for="name" value="Name:" styleClass="outLabel"/>
@@ -52,7 +52,8 @@
                                invalidSizeMessage="File is too big."
                                invalidFileMessage="Invalid file type."
                                dragDropSupport="true"
-                               update="msg"/>
+                               update="msg"
+                               auto="true" />
                 <p:growl id="msg" />
             </fieldset>
 
@@ -65,14 +66,22 @@
                 <h:message for="email" infoClass="infoMessage" errorClass="errorMessage" />
                 <br />
 
-                <h:outputLabel for="telephone" value="Telefonnummer:" styleClass="outLabel" />
-                <h:inputText id="telephone" k:placeholder="+49 123 45678910">
+                <h:outputLabel for="emailRepeat" value="E-Mail wiederholen:" styleClass="outLabel" />
+                <h:inputText id="emailRepeat" />
+                <h:outputText id="checkMail" for="emailRepeat" value="" />
+
+                <h:outputLabel for="phoneNo" value="Telefonnummer:" styleClass="outLabel" />
+                <h:inputText id="phoneNo" k:placeholder="+49 123 45678910">
                     <f:validateRegex pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" />
                 </h:inputText>
-                <h:message for="telephone" infoClass="infoMessage" errorClass="errorMessage" />
+                <h:message for="phoneNo" infoClass="infoMessage" errorClass="errorMessage" />
             </fieldset>
             </h:form>
         </ui:define>
     </ui:composition>
+    <script type="text/javascript">
+            var pageUrl = $(location).attr("href");
+            alert(pageURL);
+    </script>
 </h:body>
 </html>
