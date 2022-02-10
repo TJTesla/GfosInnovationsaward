@@ -5,6 +5,7 @@ import gfos.database.ApplicantDatabaseService;
 import gfos.beans.Applicant;
 import gfos.sessionBeans.CurrentUser;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -23,7 +24,7 @@ public class RegistrationController implements Serializable {
     CurrentUser cu;
 
     private String salutation;
-    private String[] titles = new String[3];
+    private String[] titles;
     private String username;
     private String firstname;
     private String lastname;
@@ -31,13 +32,22 @@ public class RegistrationController implements Serializable {
     private String emailRepeat;
     private String password;
     private String passwordRepeat;
-    private String userType = "private";
+    private String userType;
 
     private boolean loginError = false;
     private String loginErrorMsg;
 
+    private boolean showRegistration;
+
+    @PostConstruct
+    public void init() {
+        showRegistration = false;
+        userType = "private";
+        titles = new String[3];
+    }
 
     public String register() {
+        // TODO: Complete checking for errors in input
         if (!email.equals(emailRepeat)) {
             loginError = true;
             loginErrorMsg = "Nicht übereinstimmende E-Mails";
@@ -187,5 +197,18 @@ public class RegistrationController implements Serializable {
 
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    public boolean isShowRegistration() {
+        return showRegistration;
+    }
+
+    public void setShowRegistration(boolean showRegistration) {
+        this.showRegistration = showRegistration;
+    }
+
+    public void switchView() {
+        this.showRegistration = !this.showRegistration;
+        System.out.println("Switch to: " + showRegistration);
     }
 }

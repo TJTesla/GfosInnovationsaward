@@ -17,22 +17,14 @@
 <body>
 <h1>Hallo <h:outputText value="#{indexController.currentUsername}" /> </h1>
 
-<h:dataTable value="#{indexController.allApplicants}" var="i">
+<h:dataTable value="#{indexController.allOffers}" var="i">
     <h:column>
-        <f:facet name="header">Firstname </f:facet>
-        <h:outputText value="#{i.firstname}" />
+        <f:facet name="header">Titel </f:facet>
+        <h:outputText value="#{i.title}" />
     </h:column>
     <h:column>
-        <f:facet name="header">Lastname</f:facet>
-        <h:outputText value="#{i.lastname}" />
-    </h:column>
-    <h:column>
-        <f:facet name="header">Username</f:facet>
-        <h:outputText value="#{i.username}" />
-    </h:column>
-
-    <h:column>
-        <h:outputText value="#{i.titles}" />
+        <f:facet name="header">description</f:facet>
+        <h:outputText value="#{i.description}" />
     </h:column>
 
 </h:dataTable>
