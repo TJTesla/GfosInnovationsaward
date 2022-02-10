@@ -6,11 +6,16 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+<f:metadata>
+    <f:viewAction action="#{indexController.checkLogIn()}" />
+</f:metadata>
+
 <head>
     <title>JEE Test</title>
 </head>
 
 <body>
+<h1>Hallo <h:outputText value="#{indexController.currentUsername}" /> </h1>
 
 <h:dataTable value="#{indexController.allApplicants}" var="i">
     <h:column>
@@ -21,6 +26,15 @@
         <f:facet name="header">Lastname</f:facet>
         <h:outputText value="#{i.lastname}" />
     </h:column>
+    <h:column>
+        <f:facet name="header">Username</f:facet>
+        <h:outputText value="#{i.username}" />
+    </h:column>
+
+    <h:column>
+        <h:outputText value="#{i.titles}" />
+    </h:column>
+
 </h:dataTable>
 </body>
 
