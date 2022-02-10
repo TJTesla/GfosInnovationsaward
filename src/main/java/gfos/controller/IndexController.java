@@ -9,6 +9,7 @@ import gfos.database.DatabaseService;
 import gfos.database.OfferDatabaseService;
 import gfos.sessionBeans.CurrentUser;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
@@ -21,6 +22,16 @@ public class IndexController {
     OfferDatabaseService odbs;
     @Inject
     CurrentUser cu;
+
+    boolean isCompany;  // Maybe useful for rendering company specific ui elements
+
+    @PostConstruct
+    private void init() {
+        if (cu == null) {
+            return;
+        }
+        isCompany = cu.getCurrentUser().getClass() == Company.class;
+    }
 
     public ArrayList<Offer> getAllOffers() {
         return odbs.fetchAll();
@@ -42,5 +53,13 @@ public class IndexController {
         } else {
             return "";
         }
+    }
+
+    public boolean isCompany() {
+        return isCompany;
+    }
+
+    public void setCompany(boolean company) {
+        isCompany = company;
     }
 }

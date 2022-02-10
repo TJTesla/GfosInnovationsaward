@@ -1,4 +1,4 @@
-create table if not exists applicant
+create table applicant
 (
     id        int auto_increment
         primary key,
@@ -11,54 +11,45 @@ create table if not exists applicant
         unique (username)
 );
 
-create table if not exists company
+create table category
 (
-    id       int auto_increment
+    id   int auto_increment
         primary key,
-    name     varchar(40)  not null,
-    password varchar(100) not null,
-    email    varchar(40)  null
+    term varchar(20) not null,
+    constraint category_id_uindex
+        unique (id),
+    constraint category_term_uindex
+        unique (term)
 );
 
-create table if not exists offer
+create table company
 (
     id          int auto_increment
         primary key,
-    title       varchar(50) not null,
-    description text        null,
-    provider    int         null,
-    constraint providerFk
-        foreign key (provider) references company (id)
+    name        varchar(40)  not null,
+    password    varchar(100) not null,
+    email       varchar(40)  not null,
+    phoneno     varchar(20)  null,
+    website     varchar(40)  null,
+    description text         null
 );
 
-create table if not exists favorites
-(
-    applicantId int not null
-        primary key,
-    offerId     int not null,
-    constraint favorites_applicantId_uindex
-        unique (applicantId),
-    constraint favorites_offerId_uindex
-        unique (offerId),
-    constraint favorites_offer_fk
-        foreign key (offerId) references offer (id),
-    constraint favorites_user_fk
-        foreign key (applicantId) references applicant (id)
-);
-
-create table if not exists resumes
+create table resumes
 (
     id   int auto_increment
         primary key,
     path varchar(100) not null,
     name varchar(40)  not null,
+    user int          not null,
     constraint resume_id_uindex
         unique (id),
     constraint resume_path_uindex
-        unique (path)
+        unique (path),
+    constraint resumes_user_fk
+        foreign key (user) references applicant (id)
 );
 
-create table if not exists status
+create table status
 (
     id          int         not null
         primary key,
@@ -67,7 +58,35 @@ create table if not exists status
         unique (description)
 );
 
-create table if not exists application
+create table tags
+(
+    id  int auto_increment
+        primary key,
+    tag varchar(40) not null,
+    constraint tags_id_uindex
+        unique (id),
+    constraint tags_tag_uindex
+        unique (tag)
+);
+
+create table offer
+(
+    id          int auto_increment
+        primary key,
+    title       varchar(50) not null,
+    description text        null,
+    provider    int         null,
+    tag         int         null,
+    category    int         null,
+    constraint offer_cat_fk
+        foreign key (category) references category (id),
+    constraint offer_tag_fk
+        foreign key (tag) references tags (id),
+    constraint providerFk
+        foreign key (provider) references company (id)
+);
+
+create table application
 (
     userId   int           not null,
     offerId  int           not null,
@@ -89,7 +108,22 @@ create table if not exists application
         foreign key (userId) references applicant (id)
 );
 
-create table if not exists title
+create table favorites
+(
+    applicantId int not null
+        primary key,
+    offerId     int not null,
+    constraint favorites_applicantId_uindex
+        unique (applicantId),
+    constraint favorites_offerId_uindex
+        unique (offerId),
+    constraint favorites_offer_fk
+        foreign key (offerId) references offer (id),
+    constraint favorites_user_fk
+        foreign key (applicantId) references applicant (id)
+);
+
+create table title
 (
     id   int auto_increment
         primary key,
@@ -100,19 +134,15 @@ create table if not exists title
         unique (term)
 );
 
-create table if not exists titleRelation
+create table titleRelation
 (
-    applicantId int not null
-        primary key,
+    applicantId int not null,
     titleId     int not null,
-    constraint titles_applicantId_uindex
-        unique (applicantId),
-    constraint titles_titleId_uindex
-        unique (titleId),
+    primary key (applicantId, titleId),
+    constraint titleRelation_applicant_fk
+        foreign key (applicantId) references applicant (id),
     constraint titleRelation_title_fk
-        foreign key (titleId) references title (id),
-    constraint titles_applicant_fk
-        foreign key (applicantId) references applicant (id)
+        foreign key (titleId) references title (id)
 );
 
 

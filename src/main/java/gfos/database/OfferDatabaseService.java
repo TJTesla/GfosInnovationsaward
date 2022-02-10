@@ -14,8 +14,8 @@ public class OfferDatabaseService extends DatabaseService {
     public boolean createOne(Offer o) {
         try {
             stmt = con.prepareStatement("" +
-                    "INSERT INTO offer(id, title, description, provider, tag) VALUES " +
-                    "(null, ?, ?, ?, ?);"
+                    "INSERT INTO offer(id, title, description, provider, tag, category) VALUES " +
+                    "(null, ?, ?, ?, ?, ?);"
             );
             setStmtParameters(stmt, o);
 
@@ -34,6 +34,7 @@ public class OfferDatabaseService extends DatabaseService {
             statement.setString(2, o.getDescription());
             statement.setInt(3, o.getProvider());
             statement.setInt(4, o.getTag());
+            statement.setInt(5, o.getCategory());
         } catch (SQLException sqlException) {
             System.out.println("Couldn't set parameters for insertion or update of company: " + sqlException.getMessage());
         }
@@ -51,7 +52,8 @@ public class OfferDatabaseService extends DatabaseService {
                         rs.getString("title"),
                         rs.getString("description"),
                         rs.getInt("provider"),
-                        rs.getInt("tag")
+                        rs.getInt("tag"),
+                        rs.getInt("category")
                 ));
             }
         } catch (SQLException sqlException) {

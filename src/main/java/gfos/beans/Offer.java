@@ -11,13 +11,15 @@ public class Offer {
     private String description;
     private int provider;
     private int tag;
+    private int category;
 
-    public Offer(int id, String title, String description, int provider, int tag) {
+    public Offer(int id, String title, String description, int provider, int tag, int category) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.provider = provider;
         this.tag = tag;
+        this.category = category;
     }
 
     public Offer() {
@@ -26,6 +28,7 @@ public class Offer {
         this.description = "";
         this.provider = 0;
         this.tag = 0;
+        this.category = 0;
     }
 
     public int getId() {
@@ -66,5 +69,13 @@ public class Offer {
 
     public void setTag(int tag) {
         this.tag = tag;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
     }
 }
