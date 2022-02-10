@@ -20,7 +20,7 @@
 <h:body>
     <ui:composition template="resources/templates/common.xhtml">
         <ui:define name="content">
-            <!-- TODO: How to change rendered so that is works? -->
+            <!-- TODO: How to change rendered so that it works? -->
 
             <h:form onsubmit="checkValidation()" id="registration" rendered="#{not testController.login}">
                 <div align="center">
@@ -42,9 +42,7 @@
 
                     <label for="title">Titel:</label>
                     <h:selectManyCheckbox id="title" name="title">
-                        <f:selectItem itemValue="Dr." itemLabel="Dr." />
-                        <f:selectItem itemValue="" itemLabel="Prof." />
-                        <f:selectItem itemValue="" itemLabel="Dipl.-Ing." />
+                        <f:selectItems value="#{registrationController.allTitles}" var="t" itemValue="#{t}" itemLabel="#{t}" />
                     </h:selectManyCheckbox>
                     <br />
 
