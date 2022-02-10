@@ -1,25 +1,38 @@
+function checkValidation() {
 //check consensus of emails
-var mail = $("#email").value();
-var mailR = $("#emailRepeat").value();
+    var mail = $("#email").value();
+    var mailR = $("#emailRepeat").value();
 
-var checkMail = $("#checkMail");
-if(mail === mailR) {
-    checkMail.style.color = "green";
-    checkMail.innerHTML = "";
-} else {
-    checkMail.style.color = "red";
-    checkMail.innerHTML = "Die Eingaben stimmen nicht überein.";
+    var checkMail = $("#checkMail");
+    if (mail !== mailR) {
+        checkMail.style.color = "red";
+        checkMail.innerHTML = "Die Eingaben stimmen nicht überein.";
+    }
+    else {
+        checkMail.style.color = "green";
+        checkMail.innerHTML = "";
+    }
+//Check consensus of passwords
+    var pswd = $("#password").value();
+    var pswdR = $("#passwordRepeat").value();
+
+    var checkPswd = $("#checkPswd");
+    if (pswd !== pswdR) {
+        checkPswd.style.color = "red";
+        checkPswd.innerHTML = "Die Eingaben stimmen nicht überein.";
+    }
+    else {
+        checkPswd.style.color = "green";
+        checkPswd.innerHTML = "";
+    }
 }
 
-//Check consensus of passwords
-var pswd = $("#password").value();
-var pswdR = $("#passwordRepeat").value();
+function toRegistration() {
+    $("#login").hide();
+    $("#registration").show();
+}
 
-var checkPswd = $("#checkPswd");
-if(pswd===pswdR) {
-    checkPswd.style.color = "green";
-    checkPswd.innerHTML = "";
-} else {
-    checkPswd.style.color = "red";
-    checkPswd.innerHTML = "Die Eingaben stimmen nicht überein.";
+function toLogin() {
+    $("#registration").show();
+    $("#login").hide()
 }

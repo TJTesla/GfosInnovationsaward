@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xml:lang="en" lang="en">
+<head>
+    <title>Angebot</title>
+    <h:outputStylesheet library="css" name="styleBasic.css" />
+    <h:outputStylesheet library="css" name="CSSResetStyleSheet.css" />
+</head>
+<h:body>
+    <ui:composition template="resources/templates/common.xhtml" >
+        <ui:define name="content">
+            <h1>Angebot erstellen</h1>
+            <hr />
+            <h:form>
+                <h:outputLabel for="title"> Titel<div class="obligatory">*</div>: </h:outputLabel>
+                <h:inputText id="title">
+                    <f:validateLength minimum="5" />
+                </h:inputText>
+                <h:message for="title" infoClass="infoMessage" errorClass="errorMessage" />
+                <br />
+
+                <h:outputLabel for="address" value="Adresse:" />
+                <div id="address">
+                    <h:outputLabel for="street" value="Straße:" />
+                    <h:inputText id="street" />
+
+                    <h:outputLabel for="hNo" value="Hausnummer" />
+                    <h:inputText id="hNo">
+                        <f:validateRegex pattern="^[1-9]\d*(?:[ -]?(?:[a-zA-Z]+|[1-9]\d*))?$" />
+                    </h:inputText>
+
+                    <h:outputLabel for="postCode" value="Postleitzahl:" />
+                    <h:inputText id="postCode">
+                        <f:validateRegex pattern="[0-9]{5}" />
+                    </h:inputText>
+
+                    <h:outputLabel for="location" value="Ort:" />
+                    <h:inputText id="location" />
+                </div>
+
+                <h:outputLabel for="description"> Beschreibung<div class="obligatory">*</div>: </h:outputLabel>
+                <h:inputTextarea id="description">
+                    <f:validateLength maximum="500" />
+                </h:inputTextarea>
+                <h:message for="description" infoClass="infoMessage" errorClass="errorMessage" />
+                <br />
+
+                <h:outputLabel for="level" value="Einstiegslevel" />
+                <h:selectOneMenu id="level">
+                    <f:selectItem itemValue="1" itemLabel="Praktikanten" />
+                    <f:selectItem itemValue="2" itemLabel="Abschlussarbeiten" />
+                    <f:selectItem itemValue="3" itemLabel="Doktoranden" />
+                    <f:selectItem itemValue="4" itemLabel="Auszubildende" />
+                    <f:selectItem itemValue="5" itemLabel="Duales Studium" />
+                    <f:selectItem itemValue="6" itemLabel="Absolventen" />
+                    <f:selectItem itemValue="7" itemLabel="Berufserfahrene" />
+                </h:selectOneMenu>
+                <br />
+
+                <h:outputLabel for="field" value="Berufsfeld" />
+                <h:selectOneMenu id="field">
+                    <f:selectItem itemValue="01" itemLabel="Bau, Architektur, Vermessung" />
+                    <f:selectItem itemValue="02" itemLabel="Dienstleistung" />
+                    <f:selectItem itemValue="03" itemLabel="Elektro" />
+                    <f:selectItem itemValue="04" itemLabel="Gesundheit" />
+                    <f:selectItem itemValue="05" itemLabel="IT, Computer" />
+                    <f:selectItem itemValue="06" itemLabel="Kunst, Kultur, Gestaltung" />
+                    <f:selectItem itemValue="07" itemLabel="Landwirtschaft, Natur, Umwelt" />
+                    <f:selectItem itemValue="08" itemLabel="Medien" />
+                    <f:selectItem itemValue="09" itemLabel="Metall, Maschinenbau" />
+                    <f:selectItem itemValue="10" itemLabel="Naturwissenschaften" />
+                    <f:selectItem itemValue="11" itemLabel="Produktion, Fertigung" />
+                    <f:selectItem itemValue="12" itemLabel="Soziales, P&auml;dagogik" />
+                    <f:selectItem itemValue="13" itemLabel="Technik, Technologiefelder" />
+                    <f:selectItem itemValue="14" itemLabel="Verkehr, Logistik" />
+                    <f:selectItem itemValue="15" itemLabel="Wirtschaft, Verwaltung" />
+                </h:selectOneMenu>
+                <br />
+
+                <h:outputLabel for="time" value="Praktikum:" />
+                <h:selectManyCheckbox id="time">
+                    <f:selectItems itemValue="full" itemLabel="Vollzeit" />
+                    <f:selectItems itemValue="part" itemLabel="Teilzeit" />
+                    <f:selectItems itemValue="mini" itemLabel="Minijob" />
+                </h:selectManyCheckbox>
+                <br />
+
+                <!-- optional fields -->
+                <h:selectManyCheckbox>
+
+                    <f:selectItems itemValue="1" itemLabel="Datum:">
+                        <h:inputText id="date">
+                            <f:convertDateTime pattern="dd.mm.yyyy" />
+                        </h:inputText>
+                    </f:selectItems>
+
+                    <f:selectItems itemValue="2" itemLabel="Kontaktdaten">
+                        <h:outputLabel for="pInCharge" value="Verantwortliche Person:" />
+                        <h:inputText id="pInCharge" />
+                        <br />
+                        <h:outputLabel for="email" value="E-Mail" />
+                        <h:inputText id="email">
+                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                        </h:inputText>
+                        <h:message for="email" infoClass="infoMessage" errorClass="errorMessage" />
+                        <br />
+                        <h:outputLabel for="phoneNo" value="Telefonnummer:" />
+                        <h:inputText id="phoneNo">
+                            <f:validateRegex pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" />
+                        </h:inputText>
+                        <h:message for="phoneNo" infoClass="infoMessage" errorClass="errorMessage" />
+                    </f:selectItems>
+
+                </h:selectManyCheckbox>
+
+                <h:commandButton value="Speichern" action="" />
+                <h:commandButton value="Veröffentlichen" action="" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

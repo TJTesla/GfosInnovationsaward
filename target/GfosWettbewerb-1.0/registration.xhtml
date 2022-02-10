@@ -10,106 +10,125 @@
       xml:lang="en" lang="en">
 <h:head>
     <title>Registrieren</title>
-    <!--h:outputStylesheet library="css" name="CSSResetStyleSheet.css" /-->
-    <!--h:outputStylesheet library="css" name="styleBasic.css" /-->
-    <link href="resources/css/CSSResetStyleSheet.css" rel="stylesheet" />
-    <link href="resources/css/styleBasic.css" rel="stylesheet" />
-    <style type="text/css">
-        body {
-            width: 540px;
-            alignment: center;
-            font-family: Arial, sans-serif;
-            line-height: 125%;
-        }
-        .user label {
-            display: inline-block;
-            width: 140px;
-            margin-top: 4px;
-            margin-bottom: 4px;
-        }
-        .data label {
-            display: inline-block;
-            width: 200px;
-            margin-top: 4px;
-            margin-bottom: 4px;
-        }
-    </style>
+    <h:outputScript library="javascript" name="jquery-3.6.0.js" />
+    <h:outputStylesheet library="css" name="registration.css" />
+    <h:outputStylesheet library="css" name="styleBasic.css" />
+    <h:outputStylesheet library="css" name="CSSResetStyleSheet.css" />
+    <!--link href="resources/css/CSSResetStyleSheet.css" rel="stylesheet" /-->
+    <!--link href="resources/css/styleBasic.css" rel="stylesheet" /-->
 </h:head>
-<body>
-<div align="center">
-    <h1>Neues Profil erstellen</h1>
-    <hr />
-</div>
+<h:body>
+    <ui:composition template="resources/templates/common.xhtml">
+        <ui:define name="content">
+            <!-- TODO: How to change rendered so that is works? -->
 
-<h:outputText value="#{registrationController.loginErrorMsg}" rendered="#{registrationController.loginError}" />
+            <h:form onsubmit="checkValidation()" id="registration" rendered="#{not testController.login}">
+                <div align="center">
+                    <h1>Neues Profil erstellen</h1>
+                    <hr />
+                </div>
+                <!-- TODO: Change validation message -->
+                <fieldset class="user" style="height: 200px; margin: 0 auto">
+                    <legend>Nutzer Informationen</legend>
+                    <label for="salutation">Anrede:</label>
+                    <h:selectOneMenu id="salutation" name="salutation" class="input">
+                        <f:selectItem itemValue="" itemLabel="Bitte auswählen" p:selected="selected" />
+                        <f:selectItem itemValue="1" itemLabel="Herr" />
+                        <f:selectItem itemValue="2" itemLabel="Frau" />
+                        <f:selectItem itemValue="9" itemLabel="Divers" />
+                        <f:selectItem itemValue="0" itemLabel="keine Angabe" />
+                    </h:selectOneMenu>
+                    <br/>
 
-<h:form>
-    <fieldset class="user" style="height: 200px; margin: 0px auto">
-        <legend>Nutzer Informationen</legend>
-        <label for="salutation">Anrede:</label>
-        <h:selectOneMenu id="salutation" name="salutation" value="#{registrationController.salutation}">
-            <f:selectItem itemValue="" itemLabel="Bitte auswählen" p:selected="selected" />
-            <f:selectItem itemValue="1" itemLabel="Herr" />
-            <f:selectItem itemValue="2" itemLabel="Frau" />
-            <f:selectItem itemValue="9" itemLabel="Divers" />
-            <f:selectItem itemValue="0" itemLabel="keine Angabe" />
-        </h:selectOneMenu>
-        <br/>
-        <label for="title">Titel:</label>
-        <h:selectManyCheckbox id="title" name="title" value="#{registrationController.titles}" >
-            <f:selectItems value="#{registrationController.allTitles}" var="t" itemValue="#{t}" itemLabel="#{t}" />
-        </h:selectManyCheckbox>
-        <br />
-        <label for="uname">Nutzername:</label>
-        <h:inputText value="#{registrationController.username}" id="uname" name="nutzername" type="text" required="true">
-            <f:validateLength for="uname" minimum="2" maximum="28" />
-        </h:inputText>
-        <h:message for="uname" class="errorMessage" />
-        <br/>
-        <label for="fname">Vorname:</label>
-        <h:inputText value="#{registrationController.firstname}" id="fname" name="vorname" type="text" required="false">
-            <f:validateLength for="fname" minimum="2" maximum="28" />
-        </h:inputText>
-        <h:message for="fname" class="errorMessage" />
-        <br/>
-        <label for="lname">Nachname:</label>
-        <h:inputText value="#{registrationController.lastname}" id="lname" name="nachname" type="text" required="false">
-            <f:validateLength for="lname" minimum="2" maximum="28" />
-        </h:inputText>
-        <h:message for="lname" class="errorMessage" />
-        <br/>
-    </fieldset>
-    <fieldset class="data">
-        <legend>Anmeldedaten</legend>
-        <label for="email">E-Mail:</label>
-        <h:inputText value="#{registrationController.email}" id="email" name="email" type="text" p:placeholder="example@email.com" required="true">
-            <f:validateRequired for="email" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-        </h:inputText>
-        <h:message for="email" class="errorMessage" />
-        <br />
-        <label for="emailRepeat">E-Mail wiederholen:</label>
-        <h:inputText value="#{registrationController.emailRepeat}" id="emailRepeat" name="emailWiederholen" type="text" required="true">
-            <f:validateRequired for="emailRepeat" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-        </h:inputText>
-        <h:message for="emailRepeat" class="errorMessage" />
-        <br />
-        <label for="password">Passwort:</label>
-        <h:inputSecret value="#{registrationController.password}" id="password" name="passwort" type="password" required="true">
-            <f:validateRegex for="password" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=>]).{8,20}$" />
-        </h:inputSecret>
-        <h:message for="password" class="errorMessage" />
-        <br />
-        <label for="passwordRepeat">Passwort wiederholen:</label>
-        <h:inputSecret value="#{registrationController.passwordRepeat}" id="passwordRepeat" name="passwortWiederholen" type="password" required="true"/>
-        <br />
-        <p>Sind Sie Privatnutzer oder Firmennutzer?</p>
-        <h:selectOneRadio value="#{registrationController.userType}" required="true">
-            <f:selectItem itemValue="private" itemLabel="Privat" />
-            <f:selectItem itemValue="company" itemLabel="Firma" />
-        </h:selectOneRadio>
-    </fieldset>
-    <h:commandButton action="#{registrationController.register()}" type="submit" value="Registrieren"/>
-</h:form>
-<h:link value="Schon ein Profil? Hier anmelden." outcome="login.xhtml" />
-</body>
+                    <label for="title">Titel:</label>
+                    <h:selectManyCheckbox id="title" name="title">
+                        <f:selectItem itemValue="Dr." itemLabel="Dr." />
+                        <f:selectItem itemValue="" itemLabel="Prof." />
+                        <f:selectItem itemValue="" itemLabel="Dipl.-Ing." />
+                    </h:selectManyCheckbox>
+                    <br />
+
+                    <label for="fname">Vorname:</label>
+                    <h:inputText id="fname" name="vorname" type="text" required="true" class="input">
+                        <f:validateLength for="fname" minimum="2" maximum="28" />
+                    </h:inputText>
+                    <h:message for="fname" infoClass="infoMessage" errorClass="errorMessage" />
+                    <br/>
+
+                    <label for="lname">Nachname:</label>
+                    <h:inputText id="lname" name="nachname" type="text" required="true" class="input">
+                        <f:validateLength for="lname" minimum="2" maximum="28" />
+                    </h:inputText>
+                    <h:message for="lname" infoClass="infoMessage" errorClass="errorMessage" />
+                    <br/>
+                </fieldset>
+
+                <fieldset class="data">
+                    <legend>Anmeldedaten</legend>
+                    <label for="username">Benutzername:</label>
+                    <h:inputText id="username">
+                        <f:validateLength minimum="3" maximum="10" />
+                    </h:inputText>
+                    <h:message for="username" infoClass="infoMessage" errorClass="errorMessage" />
+                    <br />
+
+                    <label for="email">E-Mail:</label>
+                    <h:inputText id="email" name="email" type="text" p:placeholder="example@email.com" required="true" class="input">
+                        <f:validateRegex for="email" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                    </h:inputText>
+                    <h:message for="email" infoClass="infoMessage" errorClass="errorMessage" />
+                    <br />
+
+                    <label for="emailRepeat">E-Mail wiederholen:</label>
+                    <h:inputText id="emailRepeat" name="emailWiederholen" type="text" required="true" class="input" />
+                    <h:outputText for="emailRepeat" id="checkMail" value="" />
+                    <br />
+
+                    <label for="password">Passwort:</label>
+                    <h:inputSecret id="password" name="passwort" type="password" required="true" class="input">
+                        <f:validateRegex for="password" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=&lt;>]).{8,20}$" />
+                    </h:inputSecret>
+                    <h:message for="password" infoClass="infoMessage" errorClass="errorMessage" />
+                    <br />
+
+                    <label for="passwordRepeat">Passwort wiederholen:</label>
+                    <h:inputSecret id="passwordRepeat" name="passwortWiederholen" type="password" required="true" class="input"/>
+                    <h:outputText for="passwordRepeat" id="checkPswd" value="" />
+                    <br />
+
+                    <p>Sind Sie Privatnutzer oder Firmennutzer?</p>
+                    <h:selectOneRadio required="true">
+                        <f:selectItem itemValue="private" itemLabel="Privat" />
+                        <f:selectItem itemValue="company" itemLabel="Firma" />
+                    </h:selectOneRadio>
+                </fieldset>
+                <!--h:commandButton action="#" type="submit"/-->
+            </h:form>
+            <h:commandLink value="Schon ein Profil? Hier anmelden."
+                           id="loginLink"
+                           action="#{testController.changeToLogin()}"
+                           rendered="#{not testController.login}" />
+
+            <h:form id="login" rendered="#{testController.login}">
+                <fieldset class="user">
+                    <legend>Anmelden</legend>
+                    <label for="user">Benutzername:</label>
+                    <h:inputText id="user" type="text" name="user" />
+                    <br />
+                    <label for="passwordL">Passwort:</label>
+                    <h:inputSecret id="passwordL" type="password" name="password"/>
+                    <br />
+                    <!--h:button outcome="" id="bestaetigen" value="Login" /-->
+                    <input id="bestaetigen" type="submit" name="submitButton" value="Login"/>
+                </fieldset>
+            </h:form>
+            <h:commandLink value="Schon ein Profil? Hier anmelden."
+                           id="registrationLink"
+                           action="#{testController.changeToRegistration()}"
+                           rendered="#{testController.login}"
+                           style="align-self: center" />
+        </ui:define>
+    </ui:composition>
+    <h:outputScript library="javascript" name="formValidation.js" />
+</h:body>
 </html>

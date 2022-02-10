@@ -6,14 +6,75 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:k="http://xmlns.jcp.org/jsf/passthrough"
       xml:lang="en" lang="en">
-<head>
+<!-- Will be the index file for the user in the end -->
+<h:head>
     <title>Job Angebote</title>
     <link href="resources/css/CSSResetStyleSheet.css" rel="stylesheet" />
     <link href="resources/css/styleBasic.css" rel="stylesheet" />
-</head>
-<body>
+</h:head>
+<h:body>
+    <ui:composition template="resources/templates/common.xhtml">
+        <!--ui:define name="header">
 
-</body>
+        </ui:define-->
+        <ui:define name="content">
+            <div class="filter">
+                <ul class="navbar">
+                    <li>
+                        <h:inputText id="place" k:placeholder="Standort...&#61984;" />
+                    </li>
+                    <li>
+                        <h6>Berufsfeld</h6>
+                        <h:selectManyCheckbox id="field">
+                            <f:selectItems itemValue="01" itemLabel="Bau, Architektur, Vermessung" />   <br />
+                            <f:selectItems itemValue="02" itemLabel="Dienstleistung" />                 <br />
+                            <f:selectItems itemValue="03" itemLabel="Elektro" />                        <br />
+                            <f:selectItems itemValue="04" itemLabel="Gesundheit" />                     <br />
+                            <f:selectItems itemValue="05" itemLabel="IT, Computer" />                   <br />
+                            <f:selectItems itemValue="06" itemLabel="Kunst, Kultur, Gestaltung" />      <br />
+                            <f:selectItems itemValue="07" itemLabel="Landwirtschaft, Natur, Umwelt" />  <br />
+                            <f:selectItems itemValue="08" itemLabel="Medien" />                         <br />
+                            <f:selectItems itemValue="09" itemLabel="Metall, Maschinenbau" />           <br />
+                            <f:selectItems itemValue="10" itemLabel="Naturwissenschaften" />            <br />
+                            <f:selectItems itemValue="11" itemLabel="Produktion, Fertigung" />          <br />
+                            <f:selectItems itemValue="12" itemLabel="Soziales, P&auml;dagogik" />       <br />
+                            <f:selectItems itemValue="13" itemLabel="Technik, Technologiefelder" />     <br />
+                            <f:selectItems itemValue="14" itemLabel="Verkehr, Logistik" />              <br />
+                            <f:selectItems itemValue="15" itemLabel="Wirtschaft, Verwaltung" />         <br />
+                        </h:selectManyCheckbox>
+                    </li>
+                    <li>
+                        <h6>Einstiegslevel:</h6>
+                        <h:selectManyCheckbox id="level">
+                            <f:selectItems itemValue="1" itemLabel="Praktikanten" />        <br />
+                            <f:selectItems itemValue="2" itemLabel="Abschlussarbeiten" />   <br />
+                            <f:selectItems itemValue="3" itemLabel="Doktoranden" />         <br />
+                            <f:selectItems itemValue="4" itemLabel="Auszubildende" />       <br />
+                            <f:selectItems itemValue="5" itemLabel="Duales Studium" />      <br />
+                            <f:selectItems itemValue="6" itemLabel="Absolventen" />         <br />
+                            <f:selectItems itemValue="7" itemLabel="Berufserfahrene" />     <br />
+                        </h:selectManyCheckbox>
+                    </li>
+                    <li>
+                        <h6>Praktikum:</h6>
+                        <h:selectManyCheckbox id="time">
+                            <f:selectItems itemValue="full" itemLabel="Vollzeit" />     <br />
+                            <f:selectItems itemValue="part" itemLabel="Teilzeit" />     <br />
+                            <f:selectItems itemValue="mini" itemLabel="Minijob" />      <br />
+                        </h:selectManyCheckbox>
+                    </li>
+                </ul>
+            </div>
+            <div class="offers" onclick="redirect('offer.xhtml')">
+                <ui:repeat id="offers" var="" value="" varStatus="">
+                    <h:graphicImage value="" />
+                    <h6> <!-- Titel des Angebots --> </h6>
+                    <p> <!-- Beschreibung des Angebots --> </p>
+                </ui:repeat>
+            </div>
+        </ui:define>
+    </ui:composition>
+</h:body>
 </html>

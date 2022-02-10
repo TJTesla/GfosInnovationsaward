@@ -1,11 +1,68 @@
+@font-face {
+    font-family: Rubik;
+    src: url("../fonts/Rubik-Regular.ttf") format("truetype"),
+         url("../fonts/Rubik-Regular.woff2") format("woff2");
+}
+
 body {
     width: auto;
-    font-family: Arial, sans-serif;
-    margin: 0px auto;
-    border-width: 3px;
-    border-color: aqua;
+    font-family: "Rubik", sans-serif;
+    margin: 0 auto;
     child-align: middle;
+    background-color: #13274F;
+    font-size: 12px;
 }
+
+/*
+Light: color: #F0F8FF; color: #D5E9F5; color:#A2D7F7; color: #4B9CD3; color: #073980; Border color: #c2d4df, Hover color: #89a1b0, .sidenav hover color: #83949e
+Dark:  color: #002147; color: #13274F; color:#007FFF; color: #6495ED; color: #7285A5; Border color: #001b3b, hover color: #384e7b, .sidenav hover color: #123d6d
+*/
+
+@media (prefers-color-scheme: light) {
+    body {
+        color: black;
+    }
+    .head, .foot{
+        background-color: #073980;
+    }
+    .content {
+        background-color: #F0F8FF;
+    }
+    fieldset {
+        background-color:#D5E9F5;
+        border-color: #c2d4df;
+    }
+    /*:hover {
+        background-color: #89a1b0;
+    }*/
+    .input {
+        color: black;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        color: whitesmoke;
+    }
+    .head, .foot {
+        background-color: #13274F;
+    }
+    .content {
+        background-color: #002147;
+    }
+    fieldset {
+        background-color: #13274F;
+        border-color: #001b3b;
+    }
+    .input {
+        color: whitesmoke;
+        background-color: #13274F;
+    }
+    /*:hover {
+        background-color: #384e7b;
+    }*/
+}
+
 h1 {
     font-size: 50px;
     font-weight: bold;
@@ -13,19 +70,30 @@ h1 {
 }
 
 legend {
-    font-family: "Arial Black", sans-serif;
+    font-family: "Rubik", sans-serif;
     font-size:20px;
+    padding: 20px;
 }
 fieldset {
-    width: auto;
+    height: auto;
+    width: 500px;
+    padding-left: 30px;
     margin: auto;
     border-width: 3px;
-    border-color: darkblue;
-    background-color: aliceblue;
 }
 .loginLink {
     margin-top: 10px;
 }
+.infoMessage {
+    display: none;
+}
+.outLabel {
+    display: inline-block;
+    width: 200px;
+}
 .errorMessage {
+    color: red;
+}
+.obligatory {
     color: red;
 }

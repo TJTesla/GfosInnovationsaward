@@ -35,25 +35,28 @@
         }
     </style>
 </head>
-<body>
-<div align="center">
-    <h1>Anmelden</h1>
-    <hr />
-</div>
-<h:form>
-    <fieldset>
-        <legend>Anmelden</legend>
-        <label for="user">Benutzername:</label>
-        <h:inputText value="#{loginController.username}" id="user" type="text" name="user" />
-        <br />
-        <label for="password">Passwort:</label>
-        <h:inputSecret value="#{loginController.password}" id="password" type="password" name="password"/>
-        <br />
-        <!--h:button outcome="" id="bestaetigen" value="Login" /-->
-        <input id="bestaetigen" type="submit" name="submitButton" value="Login"/>
-        <h:commandButton action="#{loginController.login()}" value="Einloggen" type="submit" />
-    </fieldset>
-</h:form>
-<h:link value="Neuer Benutzer? Hier registrieren." outcome="registration.xhtml" />
-</body>
+<h:body>
+    <ui:composition template="resources/templates/common.xhtml">
+        <ui:define name="content">
+            <div align="center">
+                <h1>Anmelden</h1>
+                <hr />
+            </div>
+            <h:form>
+                <fieldset>
+                    <legend>Anmelden</legend>
+                    <label for="user">Benutzername:</label>
+                    <h:inputText id="user" type="text" name="user" />
+                    <br />
+                    <label for="password">Passwort:</label>
+                    <h:inputSecret id="password" type="password" name="password"/>
+                    <br />
+                    <!--h:button outcome="" id="bestaetigen" value="Login" /-->
+                    <input id="bestaetigen" type="submit" name="submitButton" value="Login"/>
+                </fieldset>
+            </h:form>
+            <h:link value="Neuer Benutzer? Hier registrieren." outcome="registration.xhtml" />
+        </ui:define>
+    </ui:composition>
+</h:body>
 </html>
