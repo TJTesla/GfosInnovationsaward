@@ -5,10 +5,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:k="http://xmlns.jcp.org/jsf/passthrough"
       xml:lang="en" lang="en">
+<!-- Will be the index file for the user in the end -->
 <h:head>
     <title>Job Angebote</title>
     <link href="resources/css/CSSResetStyleSheet.css" rel="stylesheet" />
@@ -67,7 +67,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="offers" onclick="redirect(offer.xhtml)">
+            <div class="offers" onclick="redirect('offer.xhtml')">
                 <ui:repeat id="offers" var="" value="" varStatus="">
                     <h:graphicImage value="" />
                     <h6> <!-- Titel des Angebots --> </h6>
