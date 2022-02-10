@@ -20,13 +20,10 @@
         fieldset{
             height: 150px;
         }
-        legend {
-            font-family: "Arial Black", sans-serif;
-        }
         h1 {
             alignment: center;
         }
-        #bestaetigen {
+        #login {
             margin-top: 10px;
         }
         label {
@@ -46,13 +43,16 @@
                 <fieldset>
                     <legend>Anmelden</legend>
                     <label for="user">Benutzername:</label>
-                    <h:inputText id="user" type="text" name="user" />
+                    <h:inputText id="user" type="text" name="user"
+                                 value="#{loginController.username}"
+                                 required="true"/>
                     <br />
                     <label for="password">Passwort:</label>
-                    <h:inputSecret id="password" type="password" name="password"/>
+                    <h:inputSecret id="password" type="password" name="password"
+                                   value="#{loginController.password}"
+                                   required="true"/>
                     <br />
-                    <!--h:button outcome="" id="bestaetigen" value="Login" /-->
-                    <input id="bestaetigen" type="submit" name="submitButton" value="Login"/>
+                    <h:commandButton id="login" action="#{loginController.login()}" value="Einloggen" />
                 </fieldset>
             </h:form>
             <h:link value="Neuer Benutzer? Hier registrieren." outcome="registration.xhtml" />

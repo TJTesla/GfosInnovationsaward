@@ -7,12 +7,26 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xml:lang="en" lang="en">
 <head>
-    <title>Title</title>
+    <title>#{company.name}</title>
 </head>
 <h:body>
     <ui:composition template="resources/templates/common.xhtml">
         <ui:define name="content">
-            
+            <h1>#{company.name}</h1>
+            <h:graphicImage value="" />
+            <h:link value="#{company.website}" />
+            <div>
+                #{company.description}
+            </div>
+            <div>
+                <h6>Kontakt:</h6>
+                <h:outputLabel for="email" value="E-Mail:" />
+                <h:outputText id="email" value="#{company.email}" />
+                <br />
+
+                <h:outputLabel for="phoneno" value="Telefonnummer:" />
+                <h:outputText id="phoneno" value="#{company.phoneno}" />
+            </div>
         </ui:define>
     </ui:composition>
 </h:body>

@@ -28,7 +28,7 @@
                 <h:outputLabel for="address" value="Adresse:" />
                 <div id="address">
                     <h:outputLabel for="street" value="Straße:" />
-                    <h:inputText id="street" />
+                    <h:inputText id="street" required="true"/>
 
                     <h:outputLabel for="hNo" value="Hausnummer" />
                     <h:inputText id="hNo">
@@ -36,16 +36,16 @@
                     </h:inputText>
 
                     <h:outputLabel for="postCode" value="Postleitzahl:" />
-                    <h:inputText id="postCode">
+                    <h:inputText id="postCode" required="true">
                         <f:validateRegex pattern="[0-9]{5}" />
                     </h:inputText>
 
                     <h:outputLabel for="location" value="Ort:" />
-                    <h:inputText id="location" />
+                    <h:inputText id="location" required="true"/>
                 </div>
 
                 <h:outputLabel for="description"> Beschreibung<div class="obligatory">*</div>: </h:outputLabel>
-                <h:inputTextarea id="description">
+                <h:inputTextarea id="description" required="true">
                     <f:validateLength maximum="500" />
                 </h:inputTextarea>
                 <h:message for="description" infoClass="infoMessage" errorClass="errorMessage" />
@@ -95,23 +95,23 @@
                 <h:selectManyCheckbox>
 
                     <f:selectItems itemValue="1" itemLabel="Datum:">
-                        <h:inputText id="date">
+                        <h:inputText id="date" required="false">
                             <f:convertDateTime pattern="dd.mm.yyyy" />
                         </h:inputText>
                     </f:selectItems>
 
                     <f:selectItems itemValue="2" itemLabel="Kontaktdaten">
                         <h:outputLabel for="pInCharge" value="Verantwortliche Person:" />
-                        <h:inputText id="pInCharge" />
+                        <h:inputText id="pInCharge" required="false"/>
                         <br />
                         <h:outputLabel for="email" value="E-Mail" />
-                        <h:inputText id="email">
+                        <h:inputText id="email" required="false">
                             <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                         </h:inputText>
                         <h:message for="email" infoClass="infoMessage" errorClass="errorMessage" />
                         <br />
                         <h:outputLabel for="phoneNo" value="Telefonnummer:" />
-                        <h:inputText id="phoneNo">
+                        <h:inputText id="phoneNo" required="false">
                             <f:validateRegex pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" />
                         </h:inputText>
                         <h:message for="phoneNo" infoClass="infoMessage" errorClass="errorMessage" />

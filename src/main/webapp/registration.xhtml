@@ -42,21 +42,19 @@
 
                     <label for="title">Titel:</label>
                     <h:selectManyCheckbox id="title" name="title">
-                        <f:selectItem itemValue="Dr." itemLabel="Dr." />
-                        <f:selectItem itemValue="" itemLabel="Prof." />
-                        <f:selectItem itemValue="" itemLabel="Dipl.-Ing." />
+                        <f:selectItems value="#{registrationController.allTitles}" var="t" itemValue="#{t}" itemLabel="#{t}" />
                     </h:selectManyCheckbox>
                     <br />
 
                     <label for="fname">Vorname:</label>
-                    <h:inputText id="fname" name="vorname" type="text" required="true" class="input">
+                    <h:inputText id="fname" name="vorname" type="text" required="true" class="input" value="#{registrationController.firstname}">
                         <f:validateLength for="fname" minimum="2" maximum="28" />
                     </h:inputText>
                     <h:message for="fname" infoClass="infoMessage" errorClass="errorMessage" />
                     <br/>
 
                     <label for="lname">Nachname:</label>
-                    <h:inputText id="lname" name="nachname" type="text" required="true" class="input">
+                    <h:inputText id="lname" name="nachname" type="text" required="true" class="input" value="#{registrationController.lastname}">
                         <f:validateLength for="lname" minimum="2" maximum="28" />
                     </h:inputText>
                     <h:message for="lname" infoClass="infoMessage" errorClass="errorMessage" />
@@ -66,33 +64,40 @@
                 <fieldset class="data">
                     <legend>Anmeldedaten</legend>
                     <label for="username">Benutzername:</label>
-                    <h:inputText id="username">
+                    <h:inputText id="username" value="#{registrationController.username}">
                         <f:validateLength minimum="3" maximum="10" />
                     </h:inputText>
                     <h:message for="username" infoClass="infoMessage" errorClass="errorMessage" />
                     <br />
 
                     <label for="email">E-Mail:</label>
-                    <h:inputText id="email" name="email" type="text" p:placeholder="example@email.com" required="true" class="input">
+                    <h:inputText id="email" name="email" type="text"
+                                 value="#{registrationController.email}"
+                                 p:placeholder="example@email.com"
+                                 required="true" class="input" >
                         <f:validateRegex for="email" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                     </h:inputText>
                     <h:message for="email" infoClass="infoMessage" errorClass="errorMessage" />
                     <br />
 
                     <label for="emailRepeat">E-Mail wiederholen:</label>
-                    <h:inputText id="emailRepeat" name="emailWiederholen" type="text" required="true" class="input" />
+                    <h:inputText id="emailRepeat" name="emailWiederholen"
+                                 type="text" required="true"
+                                 class="input" value="#{registrationController.emailRepeat}" />
                     <h:outputText for="emailRepeat" id="checkMail" value="" />
                     <br />
 
                     <label for="password">Passwort:</label>
-                    <h:inputSecret id="password" name="passwort" type="password" required="true" class="input">
+                    <h:inputSecret id="password" name="passwort" value="#{registrationController.password}"
+                                   type="password" required="true" class="input">
                         <f:validateRegex for="password" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=&lt;>]).{8,20}$" />
                     </h:inputSecret>
                     <h:message for="password" infoClass="infoMessage" errorClass="errorMessage" />
                     <br />
 
                     <label for="passwordRepeat">Passwort wiederholen:</label>
-                    <h:inputSecret id="passwordRepeat" name="passwortWiederholen" type="password" required="true" class="input"/>
+                    <h:inputSecret id="passwordRepeat" name="passwortWiederholen" value="#{registrationController.passwordRepeat}"
+                                   type="password" required="true" class="input"/>
                     <h:outputText for="passwordRepeat" id="checkPswd" value="" />
                     <br />
 
@@ -102,7 +107,8 @@
                         <f:selectItem itemValue="company" itemLabel="Firma" />
                     </h:selectOneRadio>
                 </fieldset>
-                <!--h:commandButton action="#" type="submit"/-->
+                <h:commandButton action="#{registrationController.register()}" id="registrate"
+                                 value="Registrieren" />
             </h:form>
             <h:commandLink value="Schon ein Profil? Hier anmelden."
                            id="loginLink"
