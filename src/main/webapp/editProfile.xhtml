@@ -17,19 +17,19 @@
         <ui:define name="content" class="update">
             <h:form onsubmit="checkValidation()">
                 <label for="username">Benutzername:</label>
-                <h:inputText id="username" value="#{user.username}">
+                <h:inputText id="username" value="#{applicant.username}">
                     <f:validateLength minimum="2" maximum="10" />
                 </h:inputText>
                 <h:message for="username" infoClass="infoMessage" errorClass="errorMessage" />
                 <br />
                 <label for="fname">Vorname:</label>
-                <h:inputText id="fname" value="#{user.firstname}">
+                <h:inputText id="fname" value="#{applicant.firstname}">
                     <f:validateLength minimum="2" maximum="20" />
                 </h:inputText>
                 <h:message for="fname" infoClass="infoMessage" errorClass="errorMessage" />
                 <br />
                 <label for="lname">Nachname:</label>
-                <h:inputText id="lname" value="#{user.lastname}" rendered="true">
+                <h:inputText id="lname" value="#{applicant.lastname}" rendered="true">
                     <f:validateLength minimum="2" maximum="10" />
                 </h:inputText>
                 <h:message for="lname" infoClass="infoMessage" errorClass="errorMessage" rendered="true"/>

@@ -5,14 +5,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
 <head>
-    <title>Title</title>
+    <title>#{offer.title} - Bewerben</title>
 </head>
 <h:body>
     <ui:composition template="resources/templates/common.xhtml">
         <ui:define name="content">
+            <h1>Bewerbungsformular: #{offer.title}</h1>
+            <h:form>
+                <h:outputLabel value="Lebenslauf hochladen" />
+                <!-- TODO: Upload CV -->
+                <br />
 
+                <h:outputLabel for="perStmt" value="Motivationsschreiben:" />
+                <h:inputTextarea id="perStmt" required="true" style="height: 1000px; width:500px;" />
+                <br />
+
+                <h:commandButton value="Speichern" action="" />
+                <h:commandButton value="Abschicken" action="" />
+            </h:form>
         </ui:define>
     </ui:composition>
 </h:body>
