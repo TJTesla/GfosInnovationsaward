@@ -4,6 +4,7 @@ import gfos.UserException;
 import gfos.beans.Applicant;
 import gfos.beans.Company;
 import gfos.beans.Offer;
+import gfos.beans.User;
 import gfos.database.ApplicantDatabaseService;
 import gfos.database.DatabaseService;
 import gfos.database.OfferDatabaseService;
@@ -26,8 +27,8 @@ public class IndexController {
     boolean isCompany;  // Maybe useful for rendering company specific ui elements
 
     @PostConstruct
-    private void init() {
-        if (cu == null) {
+    public void init() {
+        if (cu == null || cu.getCurrentUser() == null) {
             return;
         }
         isCompany = cu.getCurrentUser().getClass() == Company.class;
@@ -49,7 +50,7 @@ public class IndexController {
 
     public String checkLogIn() {
         if (cu.getCurrentUser() == null) {
-            return "login.xhtml";
+            return "login1.xhtml";
         } else {
             return "";
         }

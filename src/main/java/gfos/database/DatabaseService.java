@@ -10,8 +10,13 @@ public abstract class DatabaseService {
     protected ResultSet rs;
 
     public DatabaseService() throws SQLException {
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ApplicationManagement?useSSL=false", Env.user, Env.password);
-        stmt = null;
-        rs = null;
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ApplicationManagement?useSSL=false", Env.user, Env.password);
+            stmt = null;
+            rs = null;
+        } catch (SQLException sqlException) {
+            System.out.println("SQL Error:" + sqlException.getMessage());
+            throw sqlException;
+        }
     }
 }

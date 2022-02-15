@@ -1,10 +1,12 @@
 package gfos.controller;
 
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.file.UploadedFile;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -69,5 +71,18 @@ public class uploadtestController implements Serializable {
 
     public void setDownloadFile(StreamedContent downloadFile) {
         this.downloadFile = downloadFile;
+    }
+
+    public String dummyAction() {
+        System.out.println("Uploaded File Name Is :: " + file.getFileName() + " :: Uploaded File Size :: " + file.getSize());
+        return "";
+    }
+
+    public void fileUploadListener(FileUploadEvent e) {
+        // Get uploaded file from the FileUploadEvent
+        this.file = e.getFile();
+        // Print out the information of the file
+        System.out.println("Uploaded File Name Is :: " + file.getFileName() + " :: Uploaded File Size :: " + file.getSize());
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("File uploaded successfully."));
     }
 }

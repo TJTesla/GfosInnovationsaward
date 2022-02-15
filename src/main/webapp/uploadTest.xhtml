@@ -24,6 +24,23 @@
          </p:commandButton>
       </h:form>
    </p>
+   <p>
+      <h:form enctype="multipart/form-data">
+         <p:fileUpload value="#{uploadtestController.file}" mode="simple" />
+
+         <p:separator/>
+         <h:commandButton value="Dummy Action" action="#{uploadtestController.dummyAction}" />
+      </h:form>
+   </p>
+   <p>
+      <h:form enctype="multipart/form-data" style="width:500px">
+         <p:fileUpload value="#{uploadtestController.file}" mode="advanced" multiple="true"
+                        allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                       fileUploadListener="#{uploadtestController.fileUploadListener}"
+                       update="msg" />
+         <p:growl id="msg" />
+      </h:form>
+   </p>
 </h:body>
 
 </html>

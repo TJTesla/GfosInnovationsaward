@@ -65,10 +65,13 @@
                 </ul>
             </div>
             <div class="offers" onclick="redirect('offer.xhtml')">
-                <ui:repeat id="offers" var="" value="" varStatus="">
-                    <h:graphicImage value="" />
-                    <h6> <!-- Titel des Angebots --> </h6>
-                    <p> <!-- Beschreibung des Angebots --> </p>
+                <ui:repeat id="offers" var="o" value="" varStatus="">
+                    <div class="">
+                        <h:graphicImage value="" />
+                        <h6> <!-- Titel des Angebots --> </h6>
+                        <h:outputText id="location" value="" styleClass=""/> <!-- Place of the offer -->
+                        <h:outputText id="fieldOffer" value="" styleClass=""/> <!-- Field of the offer -->
+                    </div>
                 </ui:repeat>
             </div>
         </ui:define>

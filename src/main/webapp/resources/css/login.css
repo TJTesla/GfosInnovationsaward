@@ -1,0 +1,29 @@
+body {
+    line-height: 125%;
+}
+.regLabel1{
+    display: inline-block;
+    width: 140px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+.regLabel2 {
+    display: inline-block;
+    width: 200px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+.loginLabel {
+    display: inline-block;
+    width: 140px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+.link {
+    alignment: center;
+}
+
+.description {
+    width: 500px;
+    height: 300px;
+}

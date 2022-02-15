@@ -46,7 +46,6 @@
 
                 <p:fileUpload  mode="advanced"
                                value=""
-                               listener=""
                                sizeLimit="500000"
                                allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
                                invalidSizeMessage="File is too big."
@@ -55,7 +54,8 @@
                                update="msg"
                                auto="true" />
                 <p:growl id="msg" />
-                <p:commandButton value="Submit" action="" ajax="false" />
+                <!-- TODO: change action to the correct one -->
+                <p:commandButton value="Submit" action="#{uploadtestController.upload()}" ajax="false" />
             </fieldset>
 
             <fieldset>
