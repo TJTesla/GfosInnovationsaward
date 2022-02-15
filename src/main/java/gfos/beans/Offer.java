@@ -12,14 +12,18 @@ public class Offer {
     private int provider;
     private int tag;
     private int category;
+    private double lat;
+    private double lon;
 
-    public Offer(int id, String title, String description, int provider, int tag, int category) {
+    public Offer(int id, String title, String description, int provider, int tag, int category, double lat, double lon) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.provider = provider;
         this.tag = tag;
         this.category = category;
+        this.lat = lat;
+        this.lon = lon;
     }
 
     public Offer() {
@@ -29,6 +33,8 @@ public class Offer {
         this.provider = 0;
         this.tag = 0;
         this.category = 0;
+        this.lat = 0.0;
+        this.lon = 0.0;
     }
 
     public int getId() {
@@ -77,5 +83,21 @@ public class Offer {
 
     public void setCategory(int category) {
         this.category = category;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
     }
 }

@@ -11,7 +11,7 @@ public abstract class DatabaseService {
 
     public DatabaseService() throws SQLException {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ApplicationManagement?useSSL=false", Env.user, Env.password);
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ApplicationManagement?useSSL=false&allowPublicKeyRetrieval=true", Env.user, Env.password);
             stmt = null;
             rs = null;
         } catch (SQLException sqlException) {

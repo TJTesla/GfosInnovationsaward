@@ -1,5 +1,6 @@
 package gfos.database;
 
+import gfos.beans.Company;
 import gfos.beans.Offer;
 
 import java.sql.PreparedStatement;
@@ -14,8 +15,8 @@ public class OfferDatabaseService extends DatabaseService {
     public boolean createOne(Offer o) {
         try {
             stmt = con.prepareStatement("" +
-                    "INSERT INTO offer(id, title, description, provider, tag, category) VALUES " +
-                    "(null, ?, ?, ?, ?, ?);"
+                    "INSERT INTO offer(id, title, description, provider, tag, category, lat, lon) VALUES " +
+                    "(null, ?, ?, ?, ?, ?, ?, ?);"
             );
             setStmtParameters(stmt, o);
 
@@ -35,6 +36,8 @@ public class OfferDatabaseService extends DatabaseService {
             statement.setInt(3, o.getProvider());
             statement.setInt(4, o.getTag());
             statement.setInt(5, o.getCategory());
+            statement.setDouble(6, o.getLat());
+            statement.setDouble(7, o.getLon());
         } catch (SQLException sqlException) {
             System.out.println("Couldn't set parameters for insertion or update of company: " + sqlException.getMessage());
         }
@@ -53,13 +56,41 @@ public class OfferDatabaseService extends DatabaseService {
                         rs.getString("description"),
                         rs.getInt("provider"),
                         rs.getInt("tag"),
-                        rs.getInt("category")
+                        rs.getInt("category"),
+                        rs.getDouble("lat"),
+                        rs.getDouble("lon")
                 ));
             }
         } catch (SQLException sqlException) {
             System.out.println("There was an error while fetching all companies: " + sqlException.getMessage());
         }
         return result;
+    }
+
+    public Offer getById(int id) {
+        try {
+            stmt = con.prepareStatement("SELECT * FROM offer WHERE id=?");
+            stmt.setInt(1, id);
+
+            rs = stmt.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
+
+            return new Offer(
+                    rs.getInt("id"),
+                    rs.getString("title"),
+                    rs.getString("description"),
+                    rs.getInt("provider"),
+                    rs.getInt("tag"),
+                    rs.getInt("category"),
+                    rs.getDouble("lat"),
+                    rs.getDouble("lon")
+            );
+        } catch (SQLException sqlException) {
+            System.out.println("There was an error fetching offer for id " + id + ": " + sqlException.getMessage());
+            return null;
+        }
     }
 
     public String getTag(int id) {
