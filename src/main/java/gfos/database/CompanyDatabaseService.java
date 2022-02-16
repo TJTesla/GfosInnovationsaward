@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @Named
 @ApplicationScoped
-public class CompanyDatabaseService extends DatabaseService {
+public class CompanyDatabaseService extends DatabaseService implements UserDatabaseInterface {
     public CompanyDatabaseService() throws SQLException {
         super();
     }

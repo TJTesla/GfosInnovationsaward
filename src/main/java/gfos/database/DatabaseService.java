@@ -2,9 +2,11 @@ package gfos.database;
 
 import gfos.Env;
 
+import javax.inject.Named;
 import java.sql.*;
 
-public abstract class DatabaseService {
+@Named
+public class DatabaseService {
     protected Connection con;
     protected PreparedStatement stmt;
     protected ResultSet rs;
@@ -18,5 +20,9 @@ public abstract class DatabaseService {
             System.out.println("SQL Error:" + sqlException.getMessage());
             throw sqlException;
         }
+    }
+
+    public Object getById(int id) {
+        return null;
     }
 }

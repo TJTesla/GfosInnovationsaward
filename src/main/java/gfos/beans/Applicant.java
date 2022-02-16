@@ -12,15 +12,17 @@ public class Applicant extends User {
     private String password;
     private String firstname;
     private String lastname;
+    private String email;
     private int gender;
     private ArrayList<String> titles;
 
-    public Applicant(int id, String username, String password, String firstname, String lastname, int gender, ArrayList<String> titles) {
+    public Applicant(int id, String username, String password, String firstname, String lastname, String email, int gender, ArrayList<String> titles) {
         super(id);
         this.username = username;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.email = email;
         this.gender = gender;
         this.titles = titles;
     }
@@ -31,6 +33,7 @@ public class Applicant extends User {
         this.password = "";
         this.firstname = "";
         this.lastname = "";
+        this.email = "";
         this.gender = 0;
         this.titles = new ArrayList<>();
     }
@@ -73,6 +76,14 @@ public class Applicant extends User {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getGender() {

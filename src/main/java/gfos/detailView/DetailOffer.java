@@ -1,13 +1,14 @@
-package gfos.controller;
+package gfos.detailView;
 
 import gfos.beans.Offer;
-import gfos.database.OfferDatabaseService;
 
-import javax.inject.Inject;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import java.io.Serializable;
 
 @Named
-public class OfferController {
+@ViewScoped
+public class DetailOffer implements Serializable {
     private Offer detailOffer = new Offer();
 
     public Offer getDetailOffer() {

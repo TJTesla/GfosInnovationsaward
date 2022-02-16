@@ -9,7 +9,7 @@
       xml:lang="en" lang="en">
 
 <f:metadata>
-    <f:viewParam name="id" value="#{offerController.detailOffer}" converter="#{offerConverter}" />
+    <f:viewParam name="id" value="#{detailOffer.detailOffer}" converter="#{offerConverter}" />
 </f:metadata>
 
 
@@ -20,7 +20,7 @@
     <ui:composition template="resources/templates/common.xhtml">
         <ui:define name="content">
             <h2>
-                <h:outputText value="#{offerController.detailOffer.title}" />
+                <h:outputText value="#{detailOffer.detailOffer.title}" />
             </h2>
             <div>
                 <!-- Daten des Angebots -->

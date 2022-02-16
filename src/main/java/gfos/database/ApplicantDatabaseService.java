@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 @Named
 @ApplicationScoped
-public class ApplicantDatabaseService extends DatabaseService {
+public class ApplicantDatabaseService extends DatabaseService implements UserDatabaseInterface {
 
     public ApplicantDatabaseService() throws SQLException {
         super();
@@ -21,14 +21,15 @@ public class ApplicantDatabaseService extends DatabaseService {
     public boolean createOne(Applicant a) {
         try {
             stmt = con.prepareStatement("" +
-                    "INSERT INTO applicant(id, username, password, firstname, lastname, gender) VALUES " +
-                    "(null, ?, SHA2(?, 256), ?, ?, ?);"
+                    "INSERT INTO applicant(id, username, password, firstname, email, lastname, gender) VALUES " +
+                    "(null, ?, SHA2(?, 256), ?, ?, ?, ?);"
             );
             stmt.setString(1, a.getUsername());
             stmt.setString(2, a.getPassword());
             stmt.setString(3, a.getFirstname());
             stmt.setString(4, a.getLastname());
-            stmt.setInt(5, a.getGender());
+            stmt.setString(5, a.getEmail());
+            stmt.setInt(6, a.getGender());
 
             int affectedRows = stmt.executeUpdate();
 
@@ -88,6 +89,7 @@ public class ApplicantDatabaseService extends DatabaseService {
                         rs.getString("password"),
                         rs.getString("firstname"),
                         rs.getString("lastname"),
+                        rs.getString("email"),
                         rs.getInt("gender"),
                         getTitles(rs.getInt("id"))
                 );
@@ -99,6 +101,19 @@ public class ApplicantDatabaseService extends DatabaseService {
         }
 
         return list;
+    }
+
+    public Applicant getById(int id) {
+        try {
+            stmt = con.prepareStatement("SELECT * FROM applicant WHERE id=?;");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            return parseApplicant();
+        } catch (SQLException sqlException) {
+            System.out.println("Could not get applicant with id " + id + ": " + sqlException.getMessage());
+            return null;
+        }
     }
 
     private ArrayList<String> getTitles(int userId) {
@@ -129,24 +144,29 @@ public class ApplicantDatabaseService extends DatabaseService {
             stmt.setString(2, password);
 
             rs = stmt.executeQuery();
-            if (!rs.next()) {
-                return null;
-            }
-
-            return new Applicant(
-                    rs.getInt("id"),
-                    rs.getString("username"),
-                    rs.getString("password"),
-                    rs.getString("firstname"),
-                    rs.getString("lastname"),
-                    rs.getInt("gender"),
-                    getTitles(rs.getInt("id"))
-            );
+            return parseApplicant();
 
         } catch (SQLException sqlException) {
             System.out.println("Could not check login: " + sqlException.getMessage());
             return null;
         }
+    }
+
+    private Applicant parseApplicant() throws SQLException {
+        if (!rs.next()) {
+            return null;
+        }
+
+        return new Applicant(
+                rs.getInt("id"),
+                rs.getString("username"),
+                rs.getString("password"),
+                rs.getString("firstname"),
+                rs.getString("lastname"),
+                rs.getString("email"),
+                rs.getInt("gender"),
+                getTitles(rs.getInt("id"))
+        );
     }
 
 
