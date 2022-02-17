@@ -10,10 +10,10 @@
     <title>#{company.name}</title>
 </head>
 <h:body>
-    <ui:composition template="resources/templates/common.xhtml">
+    <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
             <h1>#{company.name}</h1>
-            <h:graphicImage value="" />
+            <h:graphicImage value="" /> <!-- TODO: Insert Company Logo -->
             <h:link value="#{company.website}" />
             <div>
                 #{company.description}
@@ -27,6 +27,7 @@
                 <h:outputLabel for="phoneno" value="Telefonnummer:" />
                 <h:outputText id="phoneno" value="#{company.phoneno}" />
             </div>
+            <h:button value="&Auml;ndern" outcome="companyEditProfile.xhtml" />
         </ui:define>
     </ui:composition>
 </h:body>

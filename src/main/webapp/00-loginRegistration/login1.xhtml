@@ -10,8 +10,8 @@
       xml:lang="en" lang="en">
 <head>
     <title>Login</title>
-    <link href="resources/css/CSSResetStyleSheet.css" rel="stylesheet" />
-    <link href="resources/css/styleBasic.css" rel="stylesheet" />
+    <link href="../resources/css/CSSResetStyleSheet.css" rel="stylesheet" />
+    <link href="../resources/css/styleBasic.css" rel="stylesheet" />
     <style type="text/css">
         body {
             width: 540px;
@@ -23,7 +23,7 @@
         h1 {
             alignment: center;
         }
-        #login {
+        .login {
             margin-top: 10px;
         }
         label {
@@ -33,7 +33,7 @@
     </style>
 </head>
 <h:body>
-    <ui:composition template="resources/templates/common.xhtml">
+    <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
             <div align="center">
                 <h1>Anmelden</h1>
@@ -52,7 +52,7 @@
                                    value="#{loginController.password}"
                                    required="true"/>
                     <br />
-                    <h:commandButton id="login" action="#{loginController.login()}" value="Einloggen" />
+                    <h:commandButton id="login" action="#{loginController.login()}" value="Einloggen" styleClass="login"/>
                 </fieldset>
             </h:form>
             <h:link value="Neuer Benutzer? Hier registrieren." outcome="registration.xhtml" />

@@ -27,3 +27,10 @@ body {
     width: 500px;
     height: 300px;
 }
+#footnote {
+    font-size: 9px;
+    color: #83949e;
+}
+.loginButton {
+    alignment: center;
+}

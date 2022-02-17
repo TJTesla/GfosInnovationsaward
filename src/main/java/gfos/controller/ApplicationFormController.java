@@ -5,8 +5,10 @@ import gfos.sessionBeans.CurrentUser;
 import org.primefaces.model.file.UploadedFile;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.*;
 
+@Named
 public class ApplicationFormController {
     @Inject
     CurrentUser cu;

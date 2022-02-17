@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:k="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en" lang="en">
+<h:head>
+    <title>#{company.name} - Profil bearbeiten</title>
+</h:head>
+<h:body>
+    <ui:composition template="../resources/templates/common.xhtml">
+        <ui:define name="content">
+            <!-- Until now only the same as in registration
+            TODO: Check necessities and link to an controller -->
+            <h:form enctype="multipart/form-data">
+                <h1 align="center">Daten &Auml;ndern</h1>
+
+                <fieldset>
+                    <h:outputLabel for="name" value="Name:" styleClass="outLabel"/>
+                    <h:inputText id="name" value="#{company.name}" styleClass="input"/>
+                    <br />
+
+                    <h:outputLabel for="url" value="Verlinkung zur Website:" styleClass="outLabel" />
+                    <h:inputText id="url" styleClass="input">
+                        <f:validateRegex pattern="[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&amp;//=]*)" />
+                    </h:inputText>
+                    <h:message for="url" infoClass="infoMessage" errorClass="errorMessage" />
+                    <br />
+
+                    <h:outputLabel for="description" value="Beschreibung:" styleClass="outLabel" />
+                    <br />
+                    <h:inputTextarea id="description" styleClass="description" required="true">
+                        <f:validateLength maximum="500" />
+                    </h:inputTextarea>
+                    <h:message for="description" infoClass="infoMessage" errorClass="errorMessage" />
+                </fieldset>
+
+                <fieldset>
+                    <legend>Kontakt:</legend>
+                    <h:outputLabel for="email" value="E-Mail Adresse:" styleClass="outLabel" />
+                    <h:inputText id="email" required="true" styleClass="input">
+                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                    </h:inputText>
+                    <h:message for="email" infoClass="infoMessage" errorClass="errorMessage" />
+                    <br />
+
+                    <h:outputLabel for="emailRepeat" value="E-Mail wiederholen:" styleClass="outLabel" />
+                    <h:inputText id="emailRepeat" styleClass="input" />
+                    <h:outputText id="checkMail" for="emailRepeat" value="" />
+                    <br />
+
+                    <h:outputLabel for="phoneNo" value="Telefonnummer:" styleClass="outLabel" />
+                    <h:inputText id="phoneNo" required="true" styleClass="input">
+                        <f:validateRegex pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" />
+                    </h:inputText>
+                    <h:message for="phoneNo" infoClass="infoMessage" errorClass="errorMessage" />
+                </fieldset>
+                <h:commandButton value="Änderungen speichern" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

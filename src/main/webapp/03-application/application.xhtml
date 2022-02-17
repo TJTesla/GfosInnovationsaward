@@ -11,20 +11,20 @@
     <title>#{offer.title} - Bewerben</title>
 </head>
 <h:body>
-    <ui:composition template="resources/templates/common.xhtml">
+    <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
             <h1>Bewerbungsformular: #{offer.title}</h1>
-            <h:form>
+            <h:form enctype="multipart/form-data">
                 <h:outputLabel value="Lebenslauf hochladen" />
-                <!-- TODO: Upload CV -->
+                <p:fileUpload value="" mode="simple" />
                 <br />
 
-                <h:outputLabel for="perStmt" value="Motivationsschreiben:" />
-                <h:inputTextarea id="perStmt" required="true" style="height: 1000px; width:500px;" />
+                <h:outputLabel for="lom" value="Motivationsschreiben:" /> <br />
+                <h:inputTextarea id="lom" required="true" style="height: 500px; width:500px;" />
                 <br />
-
-                <h:commandButton value="Speichern" action="" />
-                <h:commandButton value="Abschicken" action="" />
+                <!-- update="@form" can be used for invalid parts -->
+                <p:commandButton value="Speichern" action="#{applicationFormController.apply()}" upadte="@form" />
+                <p:commandButton value="Abschicken" action="#{applicationFormController.apply()}" />
             </h:form>
         </ui:define>
     </ui:composition>

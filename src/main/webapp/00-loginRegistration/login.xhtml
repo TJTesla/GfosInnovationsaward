@@ -6,23 +6,25 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:k="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
 <h:head>
     <title>Registrieren</title>
-    <h:outputScript library="javascript" name="jquery-3.6.0.js" />
     <h:outputStylesheet library="css" name="login.css" />
     <h:outputStylesheet library="css" name="styleBasic.css" />
     <h:outputStylesheet library="css" name="CSSResetStyleSheet.css" />
+    <h:outputScript library="javascript" name="jquery-3.6.0.js" />
     <!--link href="resources/css/CSSResetStyleSheet.css" rel="stylesheet" /-->
     <!--link href="resources/css/styleBasic.css" rel="stylesheet" /-->
 </h:head>
 <h:body>
-    <ui:composition template="resources/templates/common.xhtml">
+    <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
-            <!-- TODO: How to change rendered so that it works? -->
 
-            <h:form onsubmit="checkValidation()" id="registrationForm" rendered="#{registrationController.showRegistration}">
+            <h:form onsubmit="checkValidation()" id="registrationForm"
+                    rendered="#{registrationController.showRegistration}"
+                    enctype="multipart/form-data">
                 <div align="center">
                     <h1>Neues Profil erstellen</h1>
                     <hr />
@@ -30,8 +32,8 @@
                 <!-- TODO: Change validation message -->
                 <fieldset class="user" style="height: 200px; margin: 0 auto">
                     <legend>Nutzer Informationen</legend>
-                    <h:outputLabel for="salutation" styleClass="regLabel1" value="Anrede:" />
-                    <h:selectOneMenu id="salutation" name="salutation" class="input" value="#{registrationController.salutation}">
+                    <h:outputLabel for="salutation" styleClass="regLabel1" value="Anrede:"><span class="obligatory">*</span> </h:outputLabel>
+                    <h:selectOneMenu id="salutation" name="salutation" styleClass="input" value="#{registrationController.salutation}">
                         <f:selectItem itemValue="" itemLabel="Bitte auswählen" p:selected="selected" />
                         <f:selectItem itemValue="1" itemLabel="Herr" />
                         <f:selectItem itemValue="2" itemLabel="Frau" />
@@ -46,46 +48,52 @@
                     </h:selectManyCheckbox>
                     <br />
 
-                    <h:outputLabel for="fname" styleClass="regLabel1" value="Vorname:" />
-                    <h:inputText id="fname" name="vorname" type="text" class="input" value="#{registrationController.firstname}" />
+                    <h:outputLabel for="fname" styleClass="regLabel1" value="Vorname:"><span class="obligatory">*</span></h:outputLabel>
+                    <h:inputText id="fname" name="vorname" type="text" styleClass="input" value="#{registrationController.firstname}" />
                     <br/>
 
-                    <h:outputLabel for="lname" styleClass="regLabel1" value="Nachname:" />
-                    <h:inputText id="lname" name="nachname" type="text" class="input" value="#{registrationController.lastname}" />
+                    <h:outputLabel for="lname" styleClass="regLabel1" value="Nachname:"><span class="obligatory">*</span></h:outputLabel>
+                    <h:inputText id="lname" name="nachname" type="text" styleClass="input" value="#{registrationController.lastname}" />
                     <br/>
                 </fieldset>
 
                 <fieldset class="data">
                     <legend>Anmeldedaten</legend>
-                    <h:outputLabel for="username" styleClass="regLabel2" value="Benutzername:" />
-                    <h:inputText id="username" value="#{registrationController.username}" />
+                    <h:outputLabel for="username" styleClass="regLabel2" value="Benutzername:"><span class="obligatory">*</span></h:outputLabel>
+                    <h:inputText id="username" value="#{registrationController.username}" styleClass="input"/>
                     <br />
 
                     <!-- Email regex: ^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$ -->
-                    <h:outputLabel for="email" styleClass="regLabel2" value="E-Mail:" />
-                    <h:inputText id="email" name="email" type="text" p:placeholder="example@email.com" class="input" value="#{registrationController.email}" />
+                    <h:outputLabel for="email" styleClass="regLabel2" value="E-Mail:"><span class="obligatory">*</span></h:outputLabel>
+                    <h:inputText id="email" name="email" type="text" k:placeholder="example@email.com" styleClass="input" value="#{registrationController.email}" />
                     <br />
 
-                    <h:outputLabel for="emailRepeat" styleClass="regLabel2" value="E-Mail wiederholen:" />
-                    <h:inputText id="emailRepeat" name="emailWiederholen" type="text" class="input" value="#{registrationController.emailRepeat}" />
+                    <h:outputLabel for="emailRepeat" styleClass="regLabel2" value="E-Mail wiederholen:"><span class="obligatory">*</span></h:outputLabel>
+                    <h:inputText id="emailRepeat" name="emailWiederholen" type="text" styleClass="input" value="#{registrationController.emailRepeat}" />
                     <br />
 
                     <!-- Password regex: ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=&lt;>]).{8,20}$ -->
-                    <h:outputLabel for="password" styleClass="regLabel2" value="Passwort:" />
-                    <h:inputSecret id="password" name="passwort" type="password" class="input" value="#{registrationController.password}" />
+                    <h:outputLabel for="password" styleClass="regLabel2" value="Passwort:"><span class="obligatory">*</span></h:outputLabel>
+                    <h:inputSecret id="password" name="passwort" type="password" styleClass="input" value="#{registrationController.password}" />
                     <br />
 
-                    <h:outputLabel for="passwordRepeat" styleClass="regLabel2" value="Passwort wiederholen:" />
-                    <h:inputSecret id="passwordRepeat" name="passwortWiederholen" type="password" class="input" value="#{registrationController.passwordRepeat}" />
+                    <h:outputLabel for="passwordRepeat" styleClass="regLabel2" value="Passwort wiederholen:"><span class="obligatory">*</span></h:outputLabel>
+                    <h:inputSecret id="passwordRepeat" name="passwortWiederholen" type="password" styleClass="input" value="#{registrationController.passwordRepeat}" />
                     <br />
 
-                    <p>Sind Sie Privatnutzer oder Firmennutzer?</p>
+                    <h:outputLabel for="photo" styleClass="regLabel2" value="Profilbild hochladen:" /> <br />
+                    <p:fileUpload id="photo" mode="simple" update="@form" />
+                    <br />
+
+                    <p>Sind Sie Privatnutzer oder Firmennutzer?<span class="obligatory">*</span></p>
                     <h:selectOneRadio required="true" value="#{registrationController.userType}">
                         <f:selectItem itemValue="private" itemLabel="Privat" />
                         <f:selectItem itemValue="company" itemLabel="Firma" />
                     </h:selectOneRadio>
                 </fieldset>
-                <!--h:commandButton id="register" action="#" type="submit"/-->
+                <h:commandButton id="register" action="#{registrationController.register}" type="submit" value="Registrieren" styleClass="loginButton"/>
+                <br />
+                <p id="footnote"><span class="obligatory">*</span> Angabepflichtig</p>
 
                 <h:commandLink value="Schon ein Profil? Hier anmelden."
                                id="loginLink"
@@ -94,6 +102,7 @@
                                styleClass="link" />
             </h:form>
 
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
             <h:form id="loginForm" rendered="#{not registrationController.showRegistration}">
                 <fieldset class="user">
                     <legend>Anmelden</legend>
@@ -103,9 +112,10 @@
                     <h:outputLabel for="passwordL" styleClass="loginLabel" value="Passwort:" />
                     <h:inputSecret id="passwordL" type="password" name="password" value="#{loginController.password}" />
                     <br />
-                    <h:commandButton id="login" action="#{loginController.login()}" value="Einloggen" />
-                </fieldset>
 
+                </fieldset>
+                <h:commandButton id="login" action="#{loginController.login()}" value="Einloggen" styleClass="loginButton"/>
+                <br />
                 <h:commandLink value="Noch kein Profil? Hier eins erstellen."
                                id="registrationLink"
                                action="#{registrationController.switchView()}"

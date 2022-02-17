@@ -38,6 +38,9 @@ Dark:  color: #002147; color: #13274F; color:#007FFF; color: #6495ED; color: #72
     .input {
         color: black;
     }
+    .description {
+        color: black;
+    }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -55,6 +58,10 @@ Dark:  color: #002147; color: #13274F; color:#007FFF; color: #6495ED; color: #72
         border-color: #001b3b;
     }
     .input {
+        color: whitesmoke;
+        background-color: #13274F;
+    }
+    .description {
         color: whitesmoke;
         background-color: #13274F;
     }

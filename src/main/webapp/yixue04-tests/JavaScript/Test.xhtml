@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xml:lang="en" lang="en">
+<head>
+    <title>Tests</title>
+    <style type="text/css">
+        p {
+            font-family: sans-serif;
+            font-size: 11px;
+        }
+        p:hover {
+            font-size: 30px; 
+            background-color: aqua;
+        }
+    </style>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    $('document').ready(function(){
+        //Code --> waits until the whole document is loaded
+    })
+    $(function(){
+        //has the same effect as the one above
+    })
+</script>
+<h1 onclick="ChangeCss()">Let's change the font</h1>
+<p>Hello there. Nice to see you!</p>
+<code>
+    public String CaesarChiffre(String pWort, String pKey) {
+        //I actually don' know what I am doing
+    }
+</code>
+<br />
+<h:button id="clickMe" labeL="Click Me!" value="B" />
+<p id="result"></p>
+<h2>Click and double click the buttons</h2>
+<button class='myclass'>Button 1</button>
+<button class='myclass'>Button 2</button>
+<button class='myclass'>Button 3</button>
+<button class='myclass'>Button 4</button>
+<button class='myclass'>Button 5</button>
+<script type="text/javascript" src="jqueryChangeCss.js" />
+<script type="text/javascript" src="jQHandlingEvents.js" />
+<script type="text/javascript" >
+    $('.myclass').click( function() { $(this).slideUp() })
+    $('.myclass').dblclick( function() { $(this).hide() })
+</script>
+</body>
+</html>
