@@ -9,15 +9,19 @@
       xmlns:k="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
+<f:metadata>
+    <f:viewParam name="applicantId" value="#{detailApplicant.detailApplicant}" converter="#{applicantConverter}" />
+    <f:viewParam name="offerId" value="#{detailOffer.detailOffer}" converter="#{offerConverter}" />
+</f:metadata>
 <h:head>
-    <title>Bewerbung - #{offer.title} - #{applicant.firstname} #{applicant.lastname}</title>
+    <title>Bewerbung - #{detailOffer.detailOffer.title} - #{detailApplicant.detailApplicant.firstname} #{detailApplicant.detailApplicant.lastname}</title>
 </h:head>
 <h:body>
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
             <h1>Bewerbungsformular:</h1>
             <h:outputLabel for="offer" value="Jobangebot:" />
-            <h:outputText id="offer" value="#{offer.title}" />
+            <h:outputText id="offer" value="#{detailOffer.detailOffer.title}" />
             <br />
             <div>
                 <h:outputLabel for="salutation" value="Anrede:" rendered="false" />
@@ -31,11 +35,11 @@
                 <br />
 
                 <h:outputLabel for="name" styleClass="outLabel" value="Name:" />
-                <h:outputText id="name" value="#{applicant.lastname}, #{applicant.firstname}" />
+                <h:outputText id="name" value="#{detailApplicant.detailApplicant.lastname}, #{detailApplicant.detailApplicant.firstname}" />
                 <br />
 
                 <h:outputLabel for="email" styleClass="outLabel" value="E-Mail:" />
-                <h:outputText id="email" value="#{applicant.email}" />
+                <h:outputText id="email" value="#{detailApplicant.detailApplicant.email}" />
                 <br />
 
             </div>

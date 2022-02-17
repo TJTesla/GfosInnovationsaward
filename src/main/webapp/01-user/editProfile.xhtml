@@ -9,6 +9,9 @@
       xmlns:k="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
+<f:metadata>
+    <f:viewParam name="id" value="#{detailApplicant.detailApplicant}" converter="#{applicantConverter}" />
+</f:metadata>
 <head>
     <title>Profil Bearbeiten</title>
 </head>
@@ -21,25 +24,25 @@
                 <h1 align="center">Profil &Auml;ndern</h1>
                 <fieldset>
                     <h:outputLabel for="username" value="Benutzername:" styleClass="outLabel"/>
-                    <h:inputText id="username" value="#{applicant.username}" styleClass="input">
+                    <h:inputText id="username" value="#{detailApplicant.detailApplicant.username}" styleClass="input">
                         <f:validateLength minimum="2" maximum="10" />
                     </h:inputText>
                     <h:message for="username" infoClass="infoMessage" errorClass="errorMessage" />
                     <br />
                     <h:outputLabel for="fname" value="Vorname:" styleClass="outLabel"/>
-                    <h:inputText id="fname" value="#{applicant.firstname}" styleClass="input">
+                    <h:inputText id="fname" value="#{detailApplicant.detailApplicant.firstname}" styleClass="input">
                         <f:validateLength minimum="2" maximum="20" />
                     </h:inputText>
                     <h:message for="fname" infoClass="infoMessage" errorClass="errorMessage" />
                     <br />
                     <h:outputLabel for="lname" value="Nachname:" styleClass="outLabel" />
-                    <h:inputText id="lname" value="#{applicant.lastname}" rendered="true" styleClass="input">
+                    <h:inputText id="lname" value="#{detailApplicant.detailApplicant.lastname}" rendered="true" styleClass="input">
                         <f:validateLength minimum="2" maximum="10" />
                     </h:inputText>
                     <h:message for="lname" infoClass="infoMessage" errorClass="errorMessage" rendered="true"/>
                     <br />
                     <h:outputLabel for="email" value="E-Mail:" styleClass="outLabel" />
-                    <h:inputText id="email" value="#{applicant.email}" rendered="true" styleClass="input" >
+                    <h:inputText id="email" value="#{detailApplicant.detailApplicant.email}" rendered="true" styleClass="input" >
                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                     </h:inputText>
                     <h:message for="email" infoClass="infoMessage" errorClass="errorMessage" rendered="true" />
