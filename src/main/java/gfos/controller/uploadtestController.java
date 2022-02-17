@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.io.*;
+import java.nio.file.Paths;
 
 @Named
 @RequestScoped
@@ -84,5 +85,48 @@ public class uploadtestController implements Serializable {
         // Print out the information of the file
         System.out.println("Uploaded File Name Is :: " + file.getFileName() + " :: Uploaded File Size :: " + file.getSize());
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("File uploaded successfully."));
+    }
+
+    public StreamedContent getDisplayImage() throws NullPointerException, FileNotFoundException {
+        BufferedInputStream bis = new BufferedInputStream(new FileInputStream("uploads/picture.jpg"));
+
+        downloadFile = DefaultStreamedContent.builder()
+                .name("picture_DL.jpg")
+                .contentType("image/jpg")
+                .stream(() -> bis)
+                .build();
+
+        return downloadFile;
+    }
+
+    public void resourceUpload() {
+        if (file == null) {
+            return;
+        }
+
+        String name = file.getFileName();
+        System.out.println("Uploaded file: " + name);
+
+        String path = "uploads/" + name;
+        // Create empty file with current working directory
+        File tempFile = new File(System.getProperty("user.dir"));
+
+        // Create file with parent directory of current working directory
+        File newFile = new File(path);
+        try {
+            InputStream in = file.getInputStream();
+            OutputStream out = new FileOutputStream(newFile);
+
+            int read = 0;
+            byte[] bytes = new byte[1024];
+
+            while ((read = in.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+        } catch (IOException ioException) {
+            System.out.println("Error while uploading file: " + ioException.getMessage());
+        }
+
+        System.out.println(newFile.getAbsolutePath());
     }
 }

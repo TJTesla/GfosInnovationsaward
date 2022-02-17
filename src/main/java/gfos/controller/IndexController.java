@@ -1,14 +1,12 @@
 package gfos.controller;
 
-import gfos.UserException;
+import gfos.exceptions.UserException;
 import gfos.beans.Applicant;
 import gfos.beans.Company;
 import gfos.beans.Offer;
-import gfos.beans.User;
 import gfos.database.ApplicantDatabaseService;
-import gfos.database.DatabaseService;
 import gfos.database.OfferDatabaseService;
-import gfos.sessionBeans.CurrentUser;
+import gfos.longerBeans.CurrentUser;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -31,7 +29,7 @@ public class IndexController {
         if (cu == null || cu.getCurrentUser() == null) {
             return;
         }
-        isCompany = cu.getCurrentUser().getClass() == Company.class;
+        isCompany = cu.getCurrentUser() instanceof Company;
     }
 
     public ArrayList<Offer> getAllOffers() {
@@ -39,13 +37,7 @@ public class IndexController {
     }
 
     public String getCurrentUsername() throws UserException {
-        if (cu.getCurrentUser().getClass() == Applicant.class) {
-            return ((Applicant)cu.getCurrentUser()).getUsername();
-        } else if (cu.getCurrentUser().getClass() == Company.class) {
-            return ((Company)cu.getCurrentUser()).getName();
-        }
-
-        throw new UserException("Current user has an undefined behaviour for its current user class");
+        return cu.getCurrentUser().getName();
     }
 
     public String checkLogIn() {

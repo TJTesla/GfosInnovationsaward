@@ -1,12 +1,12 @@
 package gfos.database;
 
 import gfos.Env;
+import gfos.beans.User;
 
 import javax.inject.Named;
 import java.sql.*;
 
-@Named
-public class DatabaseService {
+public abstract class DatabaseService {
     protected Connection con;
     protected PreparedStatement stmt;
     protected ResultSet rs;

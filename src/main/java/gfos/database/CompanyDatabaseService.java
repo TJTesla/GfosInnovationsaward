@@ -18,8 +18,8 @@ public class CompanyDatabaseService extends DatabaseService implements UserDatab
     public boolean createOne(Company a) {
         try {
             stmt = con.prepareStatement("" +
-                    "INSERT INTO company(id, name, password, email, phoneno, website, description) VALUES " +
-                    "(null, ?, SHA2(?, 256), ?, ?, ?, ?);"
+                    "INSERT INTO company(id, name, password, email, phoneno, website, description, pb) VALUES " +
+                    "(null, ?, SHA2(?, 256), ?, ?, ?, ?, ?);"
             );
             setStmtParameters(stmt, a);
 
@@ -46,7 +46,8 @@ public class CompanyDatabaseService extends DatabaseService implements UserDatab
                         rs.getString("email"),
                         rs.getString("phoneno"),
                         rs.getString("website"),
-                        rs.getString("description")
+                        rs.getString("description"),
+                        rs.getString("pb")
                 ));
             }
         } catch (SQLException sqlException) {
@@ -68,7 +69,8 @@ public class CompanyDatabaseService extends DatabaseService implements UserDatab
                     rs.getString("email"),
                     rs.getString("phoneno"),
                     rs.getString("website"),
-                    rs.getString("description")
+                    rs.getString("description"),
+                    rs.getString("pb")
             );
         } catch (SQLException sqlException) {
             System.out.println("Couldn't get a company by ID: " + sqlException.getMessage());
@@ -99,6 +101,7 @@ public class CompanyDatabaseService extends DatabaseService implements UserDatab
             statement.setString(4, c.getPhoneno());
             statement.setString(5, c.getWebsite());
             statement.setString(6, c.getDescription());
+            statement.setString(7, c.getPb());
         } catch (SQLException sqlException) {
             System.out.println("Couldn't set parameters for insertion or update of company: " + sqlException.getMessage());
         }

@@ -1,7 +1,7 @@
 package gfos.controller;
 
 import gfos.beans.Company;
-import gfos.sessionBeans.CurrentUser;
+import gfos.longerBeans.CurrentUser;
 
 import javax.inject.Inject;
 

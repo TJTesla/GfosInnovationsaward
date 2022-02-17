@@ -1,4 +1,4 @@
-package gfos.sessionBeans;
+package gfos.longerBeans;
 
 import com.google.gson.*;
 import gfos.Env;

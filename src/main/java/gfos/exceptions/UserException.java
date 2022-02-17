@@ -1,4 +1,4 @@
-package gfos;
+package gfos.exceptions;
 
 public class UserException extends Exception {
     private final String message;

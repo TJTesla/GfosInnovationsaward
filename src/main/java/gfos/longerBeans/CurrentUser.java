@@ -1,4 +1,4 @@
-package gfos.sessionBeans;
+package gfos.longerBeans;
 
 import gfos.beans.Applicant;
 import gfos.beans.Company;

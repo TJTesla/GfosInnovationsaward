@@ -21,15 +21,16 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
     public boolean createOne(Applicant a) {
         try {
             stmt = con.prepareStatement("" +
-                    "INSERT INTO applicant(id, username, password, firstname, email, lastname, gender) VALUES " +
-                    "(null, ?, SHA2(?, 256), ?, ?, ?, ?);"
+                    "INSERT INTO applicant(id, username, password, firstname, email, lastname, gender, pb) VALUES " +
+                    "(null, ?, SHA2(?, 256), ?, ?, ?, ?, ?);"
             );
-            stmt.setString(1, a.getUsername());
+            stmt.setString(1, a.getName());
             stmt.setString(2, a.getPassword());
             stmt.setString(3, a.getFirstname());
             stmt.setString(4, a.getLastname());
             stmt.setString(5, a.getEmail());
             stmt.setInt(6, a.getGender());
+            stmt.setString(7, a.getPb());
 
             int affectedRows = stmt.executeUpdate();
 
@@ -66,7 +67,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
     public boolean exists(Applicant a) {
         try {
             stmt = con.prepareStatement("SELECT username FROM applicant WHERE username=?");
-            stmt.setString(1, a.getUsername());
+            stmt.setString(1, a.getName());
             rs = stmt.executeQuery();
 
             return rs.next();
@@ -91,7 +92,8 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
                         rs.getString("lastname"),
                         rs.getString("email"),
                         rs.getInt("gender"),
-                        getTitles(rs.getInt("id"))
+                        getTitles(rs.getInt("id")),
+                        rs.getString("pb")
                 );
 
                 list.add(temp);
@@ -165,7 +167,8 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
                 rs.getString("lastname"),
                 rs.getString("email"),
                 rs.getInt("gender"),
-                getTitles(rs.getInt("id"))
+                getTitles(rs.getInt("id")),
+                rs.getString("pb")
         );
     }
 

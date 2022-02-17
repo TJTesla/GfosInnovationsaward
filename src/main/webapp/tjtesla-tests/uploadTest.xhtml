@@ -8,6 +8,12 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:body>
+   <h2>Theos part</h2>
+   <div class="card">
+      <p:graphicImage value="#{uploadtestController.displayImage}" />
+   </div>
+
+
    <p>
       <h:form enctype="multipart/form-data">
          <p:fileUpload value="#{uploadtestController.file}" mode="simple" />

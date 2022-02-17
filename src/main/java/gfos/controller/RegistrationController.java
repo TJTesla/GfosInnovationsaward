@@ -3,7 +3,7 @@ package gfos.controller;
 import gfos.database.MiscellaneousDatabaseService;
 import gfos.database.ApplicantDatabaseService;
 import gfos.beans.Applicant;
-import gfos.sessionBeans.CurrentUser;
+import gfos.longerBeans.CurrentUser;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -64,7 +64,7 @@ public class RegistrationController implements Serializable {
             return "";
         }
 
-        Applicant applicant = new Applicant(0, username, password, firstname, lastname, email, Integer.parseInt(salutation), this.toArrayList(titles));
+        Applicant applicant = new Applicant(0, username, password, firstname, lastname, email, Integer.parseInt(salutation), this.toArrayList(titles), "");
         if (udbs.exists(applicant)) {
             loginError = true;
             loginErrorMsg = "Der Nutzer existiert bereits.";

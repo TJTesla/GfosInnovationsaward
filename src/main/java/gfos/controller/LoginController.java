@@ -2,7 +2,7 @@ package gfos.controller;
 
 import gfos.beans.Applicant;
 import gfos.database.ApplicantDatabaseService;
-import gfos.sessionBeans.CurrentUser;
+import gfos.longerBeans.CurrentUser;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
