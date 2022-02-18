@@ -1,6 +1,7 @@
 package gfos.converter;
 
 import gfos.beans.Applicant;
+import gfos.database.ApplicantDatabaseService;
 import gfos.database.ApplicationDatabaseService;
 import gfos.database.CompanyDatabaseService;
 import gfos.database.DatabaseService;
@@ -21,7 +22,7 @@ public abstract class UserConverter implements Converter {
             int id = Integer.parseInt(s);
 
             DatabaseService dbs = getDbs();
-            assert dbs instanceof ApplicationDatabaseService || dbs instanceof CompanyDatabaseService;
+            assert dbs instanceof ApplicantDatabaseService || dbs instanceof CompanyDatabaseService;
             return dbs.getById(id);
         } catch (Exception e) {
             System.out.println("Could not convert '" + s + "' into Applicant");
