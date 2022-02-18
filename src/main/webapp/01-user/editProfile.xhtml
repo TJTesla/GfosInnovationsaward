@@ -24,7 +24,7 @@
                 <h1 align="center">Profil &Auml;ndern</h1>
                 <fieldset>
                     <h:outputLabel for="username" value="Benutzername:" styleClass="outLabel"/>
-                    <h:inputText id="username" value="#{detailApplicant.detailApplicant.username}" styleClass="input">
+                    <h:inputText id="username" value="#{detailApplicant.detailApplicant.name}" styleClass="input">
                         <f:validateLength minimum="2" maximum="10" />
                     </h:inputText>
                     <h:message for="username" infoClass="infoMessage" errorClass="errorMessage" />

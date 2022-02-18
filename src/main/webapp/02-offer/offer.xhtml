@@ -23,6 +23,10 @@
                 <h:outputText value="#{detailOffer.detailOffer.title}" />
             </h2>
             <div>
+                <!-- TODO: Add action (connection to the providers site) -->
+                <h:commandLink value="#{detailOffer.detailOffer.provider}" styleClass="provider" action="" />
+            </div>
+            <div>
                 <!-- Daten des Angebots -->
                 <h:outputLabel for="field" value="Berufsfeld" />
                 <h:outputText id="field" value="" />
@@ -37,7 +41,7 @@
             </div>
 
             <div>
-                <!-- Kontaktaufnahme TODO: render? -->
+                <!-- Kontaktaufnahme render? -->
                 <h:outputLabel for="pInCharge" value="Ansprechpartner: " />
                 <h:outputText id="pInCharge" value="" />
                 <h:outputLabel for="email" value="E-Mail" />
