@@ -20,7 +20,7 @@
     <!-- TODO: Add correct controller methods -->
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content" class="update">
-            <h:form onsubmit="checkValidation()">
+            <h:form>
                 <h1 align="center">Profil &Auml;ndern</h1>
                 <fieldset>
                     <h:outputLabel for="username" value="Benutzername:" styleClass="outLabel"/>
@@ -69,6 +69,5 @@
             </h:form>
         </ui:define>
     </ui:composition>
-<h:outputScript library="javascript" name="formValidation.js" />
 </h:body>
 </html>

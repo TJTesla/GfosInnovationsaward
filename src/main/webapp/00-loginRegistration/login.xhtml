@@ -11,25 +11,22 @@
       xml:lang="en" lang="en">
 <h:head>
     <title>Registrieren</title>
-    <h:outputStylesheet library="css" name="login.css" />
-    <h:outputStylesheet library="css" name="styleBasic.css" />
-    <h:outputStylesheet library="css" name="CSSResetStyleSheet.css" />
-    <h:outputScript library="javascript" name="jquery-3.6.0.js" />
     <!--link href="resources/css/CSSResetStyleSheet.css" rel="stylesheet" /-->
     <!--link href="resources/css/styleBasic.css" rel="stylesheet" /-->
 </h:head>
 <h:body>
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
-
-            <h:form onsubmit="checkValidation()" id="registrationForm"
+            <h:outputStylesheet library="css" name="login.css" />
+            <h:outputScript library="javascript" name="jquery-3.6.0.js" />
+            <h:form id="registrationForm"
                     rendered="#{registrationController.showRegistration}"
                     enctype="multipart/form-data">
                 <div align="center">
                     <h1>Neues Profil erstellen</h1>
                     <hr />
                 </div>
-                <fieldset class="user" style="height: 200px; margin: 0 auto">
+                <fieldset class="user">
                     <legend>Nutzer Informationen</legend>
                     <h:outputLabel for="salutation" styleClass="regLabel1" value="Anrede:"><span class="obligatory">*</span> </h:outputLabel>
                     <h:selectOneMenu id="salutation" name="salutation" styleClass="input" value="#{registrationController.salutation}">
@@ -42,7 +39,7 @@
                     <br/>
 
                     <h:outputLabel for="title" styleClass="regLabel1" value="Titel:" />
-                    <h:selectManyCheckbox id="title" name="title">
+                    <h:selectManyCheckbox id="title" name="title" styleClass="checkTitel">
                         <f:selectItems value="#{registrationController.allTitles}" var="t" itemValue="#{t}" itemLabel="#{t}" />
                     </h:selectManyCheckbox>
                     <br />
@@ -80,8 +77,8 @@
                     <h:inputSecret id="passwordRepeat" name="passwortWiederholen" type="password" styleClass="input" value="#{registrationController.passwordRepeat}" />
                     <br />
 
-                    <h:outputLabel for="photo" styleClass="regLabel2" value="Profilbild hochladen:" /> <br />
-                    <p:fileUpload id="photo" mode="simple" update="@form" />
+                    <h:outputLabel for="photo" styleClass="regLabel2" value="Profilbild hochladen:" />
+                    <p:fileUpload id="photo" mode="simple" update="@form" styleClass="upload"/>
                     <br />
 
                     <p>Sind Sie Privatnutzer oder Firmennutzer?<span class="obligatory">*</span></p>
@@ -90,40 +87,48 @@
                         <f:selectItem itemValue="company" itemLabel="Firma" />
                     </h:selectOneRadio>
                 </fieldset>
-                <h:commandButton id="register" action="#{registrationController.register}" type="submit" value="Registrieren" styleClass="loginButton"/>
-                <br />
-                <p id="footnote"><span class="obligatory">*</span> Angabepflichtig</p>
 
-                <h:commandLink value="Schon ein Profil? Hier anmelden."
-                               id="loginLink"
-                               action="#{registrationController.switchView()}"
-                               rendered="#{registrationController.showRegistration}"
-                               styleClass="link" />
+                <fieldset class="buttons">
+                    <p id="footnote"><span class="obligatory">*</span> Angabepflichtig</p>      <br />
+                    <h:commandButton id="register" action="#{registrationController.register}" type="submit" value="Registrieren" styleClass="loginButton"/>
+                    <br />
+
+                    <h:commandLink value="Schon ein Profil? Hier anmelden."
+                                   id="loginLink"
+                                   action="#{registrationController.switchView()}"
+                                   rendered="#{registrationController.showRegistration}"
+                                   styleClass="link" />
+                </fieldset>
+
             </h:form>
 
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
             <h:form id="loginForm" rendered="#{not registrationController.showRegistration}">
-                <fieldset class="user">
+                <fieldset class="login">
                     <legend>Anmelden</legend>
                     <h:outputLabel for="user" styleClass="loginLabel" value="Benutzername:" />
-                    <h:inputText id="user" type="text" name="user" value="#{loginController.username}" />
+                    <h:inputText id="user" type="text" name="user" value="#{loginController.username}"
+                                 styleClass="input" />
                     <br />
                     <h:outputLabel for="passwordL" styleClass="loginLabel" value="Passwort:" />
-                    <h:inputSecret id="passwordL" type="password" name="password" value="#{loginController.password}" />
+                    <h:inputSecret id="passwordL" type="password" name="password" value="#{loginController.password}"
+                                   styleClass="input" />
                     <br />
 
                 </fieldset>
-                <h:commandButton id="login" action="#{loginController.login()}" value="Einloggen" styleClass="loginButton"/>
-                <br />
-                <h:commandLink value="Noch kein Profil? Hier eins erstellen."
-                               id="registrationLink"
-                               action="#{registrationController.switchView()}"
-                               rendered="#{not registrationController.showRegistration}"
-                               styleClass="link" />
+                <fieldset class="buttons1">
+                    <br />
+                    <h:commandButton id="login" action="#{loginController.login()}" value="Einloggen" styleClass="loginButton"/>
+                    <br />
+                    <h:commandLink value="Noch kein Profil? Hier erstellen."
+                                   id="registrationLink"
+                                   action="#{registrationController.switchView()}"
+                                   rendered="#{not registrationController.showRegistration}"
+                                   styleClass="link" />
+                </fieldset>
             </h:form>
 
         </ui:define>
     </ui:composition>
-    <h:outputScript library="javascript" name="formValidation.js" />
 </h:body>
 </html>

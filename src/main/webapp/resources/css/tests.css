@@ -1,0 +1,10 @@
+.body {
+    text-align: center;
+}
+.rubik {
+    background-color: darkblue;
+}
+.labelT {
+    display: inline-block;
+    width: 400px;
+}

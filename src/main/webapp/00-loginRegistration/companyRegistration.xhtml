@@ -11,16 +11,13 @@
       xml:lang="en" lang="en">
 <head>
     <title>Unternehmen Registrieren</title>
-    <h:outputStylesheet library="css" name="styleBasic.css" />
-    <h:outputStylesheet library="css" name="CSSResetStyleSheet.css" />
-    <h:outputScript library="javascript" name="formValidation.js" />
 </head>
 <h:body style="height:100%; alignment: center">
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
             <h1>Registrierung eines neuen Unternehmen:</h1>
             <hr />
-            <h:form enctype="multipart/form-data" onsubmit="checkValidation()">
+            <h:form enctype="multipart/form-data">
             <fieldset>
                 <legend>Daten zum Unternehmen:</legend>
                 <h:outputLabel for="name" value="Name:" styleClass="outLabel"/>

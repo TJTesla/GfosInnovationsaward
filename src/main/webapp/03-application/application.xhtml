@@ -6,14 +6,18 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xml:lang="en" lang="en">
+<f:metadata>
+    <f:viewParam name="offerId" value="#{detailOffer.detailOffer}" converter="#{offerConverter}" />
+</f:metadata>
 <head>
-    <title>#{offer.title} - Bewerben</title>
+    <title>#{detailOffer.detailOffer.title} - Bewerben</title>
 </head>
 <h:body>
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
-            <h1>Bewerbungsformular: #{offer.title}</h1>
+            <h1>Bewerbungsformular: #{detailOffer.detailOffer.title}</h1>
             <h:form enctype="multipart/form-data">
                 <h:outputLabel value="Lebenslauf hochladen" />
                 <p:fileUpload value="" mode="simple" />

@@ -7,6 +7,20 @@
     overflow: hidden;
     display: inline-block;
 }
+.navContent .a {
+    float: none;
+    position: absolute;
+    min-width: 160px;
+    z-index: 1;
+}
+
+.checkBox {
+    padding: 3px;
+}
+
+.checkLabel {
+    padding: 8px;
+}
 
 .dropdown .dropbtn {
     cursor: pointer;
@@ -27,4 +41,8 @@
 
 .show {
     display: block;
+}
+
+.allOffers {
+
 }

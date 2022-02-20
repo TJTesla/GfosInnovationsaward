@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xml:lang="en" lang="en">
+<h:head>
+    <title>Title</title>
+    <h:outputStylesheet library="css" name="tests.css" />
+</h:head>
+<ui:composition template="../resources/templates/common.xhtml">
+    <ui:define name="content">
+        <h:outputStylesheet library="css" name="tests.css" />
+        <h:body styleClass="body">
+            <h1 class="rubik">This should be Roboto, is it?</h1>
+            <h2>H2 header</h2>
+            <h3>H3 header</h3>
+            <h4>H4 header</h4>
+            <h5>H5 header</h5>
+            <h6>H6 is the smallest I think</h6>
+            <div>
+                I am just writing anything here to check how the font looks like.
+            </div>
+            <h:outputLabel for="test" value="Just some testing" styleClass="labelT" />
+            <h:inputText id="test" />
+        </h:body>
+    </ui:define>
+</ui:composition>
+
+</html>

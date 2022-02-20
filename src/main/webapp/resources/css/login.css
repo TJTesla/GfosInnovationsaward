@@ -1,17 +1,61 @@
 body {
-    line-height: 125%;
+    line-height: 150%;
 }
+legend {
+    font-weight: bold;
+    font-size:25px;
+    padding: 20px;
+}
+
 .regLabel1{
     display: inline-block;
     width: 140px;
     margin-top: 4px;
     margin-bottom: 4px;
 }
+.checkTitel {
+    display: inline;
+    line-height: 150%;
+}
+
+.checkTitel label {
+    margin-left: 5px;
+    margin-right: 20px;
+}
+fieldset {
+    padding-left: 30px;
+    margin: auto;
+    border-width: 3px;
+    overflow: hidden;
+}
+
+.user {
+    height: 200px;
+    width: 500px;
+}
+
+.data {
+    height: 310px;
+    width: 500px;
+}
+
+.buttons {
+    width: 500px;
+    background-color: inherit;
+}
 .regLabel2 {
     display: inline-block;
     width: 200px;
     margin-top: 4px;
     margin-bottom: 4px;
+}
+.login {
+    height: 150px;
+    width: 400px;
+}
+.buttons1 {
+    width: 400px;
+    background-color: inherit;
 }
 .loginLabel {
     display: inline-block;
@@ -20,7 +64,7 @@ body {
     margin-bottom: 4px;
 }
 .link {
-    alignment: center;
+    text-align: center;
 }
 
 .description {
@@ -32,5 +76,12 @@ body {
     color: #83949e;
 }
 .loginButton {
-    alignment: center;
+    width: 135px;
+    height: 35px;
+    color: inherit;
+    font-size: 18px;
+    font-weight: bolder;
+    background-color: #001d3b;
+    border-color: #001b3b;
+    border-radius: 10px;
 }

@@ -1,7 +1,7 @@
 @font-face {
     font-family: Rubik;
-    src: url("../fonts/Rubik-Regular.ttf") format("truetype"),
-         url("../fonts/Rubik-Regular.woff2") format("woff2");
+    src: url("#{resource['fonts/Rubik-Regular.ttf']}") format("truetype"),
+         url("#{resource['fonts/Rubik-Regular.woff2']}") format("woff2");
 }
 
 body {
@@ -10,13 +10,25 @@ body {
     margin: 0 auto;
     child-align: middle;
     background-color: #13274F;
-    font-size: 12px;
+    font-size: 15px;
 }
 
-/*
-Light: color: #F0F8FF; color: #D5E9F5; color:#A2D7F7; color: #4B9CD3; color: #073980; Border color: #c2d4df, Hover color: #89a1b0, .sidenav hover color: #83949e
-Dark:  color: #002147; color: #13274F; color:#007FFF; color: #6495ED; color: #7285A5; Border color: #001b3b, hover color: #384e7b, .sidenav hover color: #123d6d
-*/
+.something {
+    /*Light: */
+    color: #F0F8FF; color: #D5E9F5; color:#A2D7F7; color: #4B9CD3;
+    color: #073980;
+    /*Border*/
+    color: #c2d4df; /*Hover*/ color: #89a1b0; .sidenav hover color: #83949e
+
+    /*Dark: */
+    color: #002147; color: #13274F; color:#007FFF; color: #6495ED;
+    color: #7285A5;
+    /*Border*/
+    color: #001b3b;/*hover*/ color: #384e7b; .sidenav hover color: #123d6d; .button color: #001d3b;
+}
+
+
+
 
 @media (prefers-color-scheme: light) {
     body {
@@ -71,23 +83,13 @@ Dark:  color: #002147; color: #13274F; color:#007FFF; color: #6495ED; color: #72
 }
 
 h1 {
-    font-size: 50px;
+    font-size: 35px;
     font-weight: bold;
     line-height: normal;
 }
 
-legend {
-    font-family: "Rubik", sans-serif;
-    font-size:20px;
-    padding: 20px;
-}
-fieldset {
-    height: auto;
-    width: 500px;
-    padding-left: 30px;
-    margin: auto;
-    border-width: 3px;
-}
+
+
 .loginLink {
     margin-top: 10px;
 }
