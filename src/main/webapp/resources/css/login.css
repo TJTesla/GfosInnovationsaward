@@ -1,12 +1,54 @@
+:root {
+    --reg-width: 500px;
+    --log-width: 300px;
+}
 body {
     line-height: 150%;
 }
 legend {
-    font-weight: bold;
-    font-size:25px;
-    padding: 20px;
+    font-weight: bolder;
+    font-size:23px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+fieldset {
+    padding-left: 30px;
+    margin: auto;
+    border-width: 3px;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
+/* Registration*/
+/* Fieldsets */
+.user {
+    margin-top: 30px;
+    height: 200px;
+    width: var(--reg-width);
+}
+.data {
+    height: 300px;
+    width: var(--reg-width);
+}
+.headingF {
+    margin: auto;
+    width: var(--reg-width);
+    padding: 0;
+    background-color: var(--dark-body-bg-color);
+}
+.buttons {
+    width: var(--reg-width);
+    background-color: var(--dark-body-bg-color);
+    padding: 0;
+}
+/**/
+.heading {
+    font-weight: bold;
+    font-size: 28px;
+    margin-top: 20px;
+}
+/* Persönliche Daten */
 .regLabel1{
     display: inline-block;
     width: 140px;
@@ -22,66 +64,106 @@ legend {
     margin-left: 5px;
     margin-right: 20px;
 }
-fieldset {
-    padding-left: 30px;
-    margin: auto;
-    border-width: 3px;
-    overflow: hidden;
-}
 
-.user {
-    height: 200px;
-    width: 500px;
-}
-
-.data {
-    height: 310px;
-    width: 500px;
-}
-
-.buttons {
-    width: 500px;
-    background-color: inherit;
-}
+/* Profil-Daten */
 .regLabel2 {
     display: inline-block;
     width: 200px;
     margin-top: 4px;
     margin-bottom: 4px;
 }
+.upload {
+    font-family: inherit;
+    color: inherit;
+}
+.radioUser label {
+    margin-left: 5px;
+    margin-right: 20px;
+}
+/**/
+#footnote {
+    display: inline;
+    font-size: 11px;
+    color: #83949e;
+}
+
+
+/* Login */
+/* Fieldsets */
 .login {
-    height: 150px;
-    width: 400px;
+    height: 180px;
+    width: var(--log-width);
+}
+.headingF1 {
+    width: var(--log-width);
+    padding: 0;
+    background-color: inherit;
 }
 .buttons1 {
-    width: 400px;
+    width: var(--log-width);
     background-color: inherit;
+    padding: 0;
+}
+
+.login legend {
+    text-align: center;
 }
 .loginLabel {
     display: inline-block;
-    width: 140px;
+    font-size: 12px;
+    color: #7285A5;
     margin-top: 4px;
     margin-bottom: 4px;
 }
-.link {
-    text-align: center;
+.login .input {
+    width: calc(var(--log-width) * 0.8);
+    line-height: 20px;
 }
+
 
 .description {
     width: 500px;
     height: 300px;
 }
-#footnote {
-    font-size: 9px;
-    color: #83949e;
-}
+
+
+/**/
+/* Buttons */
 .loginButton {
-    width: 135px;
+    float: right;
+    top: 0; right: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    width: 120px;
     height: 35px;
     color: inherit;
     font-size: 18px;
-    font-weight: bolder;
-    background-color: #001d3b;
-    border-color: #001b3b;
-    border-radius: 10px;
+    background-color: #007FFF;
+    /*background-color: #ff1493;*/
+    border-width: 0;
+    border-radius: 5px;
 }
+
+.loginButton:hover {
+    background-color: #6495ED;
+    /*background-color: #fc95e6;*/
+}
+.linkAlign {
+    text-align: center;
+}
+.link {
+    padding-top: 50px;
+    float: bottom;
+    color: #007FFF;
+    /*color: #ff1493;*/
+}
+.link:hover {
+    color: #6495ED;
+    /*color: #fc95e6;*/
+}
+.link:visited {
+    color: #14ff80;
+    text-shadow: #ff1493;
+}
+

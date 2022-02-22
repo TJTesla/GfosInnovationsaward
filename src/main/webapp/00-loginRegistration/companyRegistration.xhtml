@@ -21,25 +21,23 @@
             <fieldset>
                 <legend>Daten zum Unternehmen:</legend>
                 <h:outputLabel for="name" value="Name:" styleClass="outLabel"/>
-                <h:inputText id="name" required="true" styleClass="input">
-                    <f:validateLength maximum="20" />
-                </h:inputText>
-                <h:message for="name" infoClass="infoMessage" errorClass="errorMessage" />
+                <h:inputText id="name" required="true" styleClass="input" />
+                    <!--f:validateLength maximum="20" /-->
+                <h:outputText for="name" styleClass="errorMessage" rendered="false" />
                 <br />
 
+                <!--Regex: [(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&amp;//=]*) -->
+                <!--https://regexr.com/3e4a2: (https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*) -->
                 <h:outputLabel for="url" value="Verlinkung zur Website:" styleClass="outLabel" />
-                <h:inputText id="url" styleClass="input">
-                    <f:validateRegex pattern="[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&amp;//=]*)" />
-                </h:inputText>
-                <h:message for="url" infoClass="infoMessage" errorClass="errorMessage" />
+                <h:inputText id="url" styleClass="input" />
+                <h:outputText for="url" styleClass="errorMessage" rendered="false" />
                 <br />
 
                 <h:outputLabel for="description" value="Beschreibung:" styleClass="outLabel" />
                 <br />
-                <h:inputTextarea id="description" styleClass="description" required="true" >
-                    <f:validateLength maximum="500" />
-                </h:inputTextarea>
-                <h:message for="description" infoClass="infoMessage" errorClass="errorMessage" />
+                <h:inputTextarea id="description" styleClass="description" required="true" />
+                    <!--f:validateLength maximum="500" /-->
+                <h:outputText for="description" styleClass="errorMessage" rendered="false" />
                 <br />
 
                 <h:outputLabel for="logo" value="Logo:" styleClass="outLabel"/> <br />
@@ -62,21 +60,19 @@
             <fieldset>
                 <legend>Kontaktdaten:</legend>
                 <h:outputLabel for="email" value="E-Mail Adresse:" styleClass="outLabel" />
-                <h:inputText id="email" required="true" k:placeholder="example@email.com" styleClass="input">
-                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                </h:inputText>
-                <h:message for="email" infoClass="infoMessage" errorClass="errorMessage" />
+                <h:inputText id="email" required="true" k:placeholder="example@email.com" styleClass="input" />
+                    <!--f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" /-->
+                <h:outputText for="email" styleClass="errorMessage" rendered="false" />
                 <br />
 
                 <h:outputLabel for="emailRepeat" value="E-Mail wiederholen:" styleClass="outLabel" />
                 <h:inputText id="emailRepeat" styleClass="input"/>
-                <h:outputText id="checkMail" for="emailRepeat" value="" />
+                <h:outputText for="emailRepeat" value="" styleClass="errorMessage" rendered="false" />
 
                 <h:outputLabel for="phoneNo" value="Telefonnummer:" styleClass="outLabel" />
-                <h:inputText id="phoneNo" k:placeholder="+49 123 45678910" required="true" styleClass="input">
-                    <f:validateRegex pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" />
-                </h:inputText>
-                <h:message for="phoneNo" infoClass="infoMessage" errorClass="errorMessage" />
+                <h:inputText id="phoneNo" k:placeholder="+49 123 45678910" required="true" styleClass="input" />
+                    <!--f:validateRegex pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" /  https://regexr.com/3c53v -->
+                <h:outputText for="phoneNo" styleClass="errorMessage" />
             </fieldset>
             </h:form>
         </ui:define>

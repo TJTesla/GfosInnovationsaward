@@ -19,16 +19,17 @@
         <ui:define name="content">
             <h:outputStylesheet library="css" name="login.css" />
             <h:outputScript library="javascript" name="jquery-3.6.0.js" />
+            <div align="center">
+                <h1>Willkommen!</h1>
+                <hr />
+            </div>
             <h:form id="registrationForm"
                     rendered="#{registrationController.showRegistration}"
                     enctype="multipart/form-data">
-                <div align="center">
-                    <h1>Neues Profil erstellen</h1>
-                    <hr />
-                </div>
+                <fieldset class="headingF"><p class="heading">Neues Profil erstellen</p></fieldset>
                 <fieldset class="user">
-                    <legend>Nutzer Informationen</legend>
-                    <h:outputLabel for="salutation" styleClass="regLabel1" value="Anrede:"><span class="obligatory">*</span> </h:outputLabel>
+                    <legend>Persönliche Daten</legend>
+                    <h:outputLabel for="salutation" styleClass="regLabel1" value="Anrede:"><span class="obligatory">&nbsp;*</span> </h:outputLabel>
                     <h:selectOneMenu id="salutation" name="salutation" styleClass="input" value="#{registrationController.salutation}">
                         <f:selectItem itemValue="" itemLabel="Bitte auswählen" p:selected="selected" />
                         <f:selectItem itemValue="1" itemLabel="Herr" />
@@ -44,36 +45,36 @@
                     </h:selectManyCheckbox>
                     <br />
 
-                    <h:outputLabel for="fname" styleClass="regLabel1" value="Vorname:"><span class="obligatory">*</span></h:outputLabel>
+                    <h:outputLabel for="fname" styleClass="regLabel1" value="Vorname:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputText id="fname" name="vorname" type="text" styleClass="input" value="#{registrationController.firstname}" />
                     <br/>
 
-                    <h:outputLabel for="lname" styleClass="regLabel1" value="Nachname:"><span class="obligatory">*</span></h:outputLabel>
+                    <h:outputLabel for="lname" styleClass="regLabel1" value="Nachname:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputText id="lname" name="nachname" type="text" styleClass="input" value="#{registrationController.lastname}" />
                     <br/>
                 </fieldset>
 
                 <fieldset class="data">
-                    <legend>Anmeldedaten</legend>
-                    <h:outputLabel for="username" styleClass="regLabel2" value="Benutzername:"><span class="obligatory">*</span></h:outputLabel>
+                    <legend>Profil-Daten</legend>
+                    <h:outputLabel for="username" styleClass="regLabel2" value="Benutzername:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputText id="username" value="#{registrationController.username}" styleClass="input"/>
                     <br />
 
                     <!-- Email regex: ^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$ -->
-                    <h:outputLabel for="email" styleClass="regLabel2" value="E-Mail:"><span class="obligatory">*</span></h:outputLabel>
+                    <h:outputLabel for="email" styleClass="regLabel2" value="E-Mail:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputText id="email" name="email" type="text" k:placeholder="example@email.com" styleClass="input" value="#{registrationController.email}" />
                     <br />
 
-                    <h:outputLabel for="emailRepeat" styleClass="regLabel2" value="E-Mail wiederholen:"><span class="obligatory">*</span></h:outputLabel>
+                    <h:outputLabel for="emailRepeat" styleClass="regLabel2" value="E-Mail wiederholen:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputText id="emailRepeat" name="emailWiederholen" type="text" styleClass="input" value="#{registrationController.emailRepeat}" />
                     <br />
 
                     <!-- Password regex: ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=&lt;>]).{8,20}$ -->
-                    <h:outputLabel for="password" styleClass="regLabel2" value="Passwort:"><span class="obligatory">*</span></h:outputLabel>
+                    <h:outputLabel for="password" styleClass="regLabel2" value="Passwort:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputSecret id="password" name="passwort" type="password" styleClass="input" value="#{registrationController.password}" />
                     <br />
 
-                    <h:outputLabel for="passwordRepeat" styleClass="regLabel2" value="Passwort wiederholen:"><span class="obligatory">*</span></h:outputLabel>
+                    <h:outputLabel for="passwordRepeat" styleClass="regLabel2" value="Passwort wiederholen:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputSecret id="passwordRepeat" name="passwortWiederholen" type="password" styleClass="input" value="#{registrationController.passwordRepeat}" />
                     <br />
 
@@ -81,51 +82,55 @@
                     <p:fileUpload id="photo" mode="simple" update="@form" styleClass="upload"/>
                     <br />
 
-                    <p>Sind Sie Privatnutzer oder Firmennutzer?<span class="obligatory">*</span></p>
-                    <h:selectOneRadio required="true" value="#{registrationController.userType}">
+                    <p>Sind Sie Privatnutzer oder Firmennutzer?<span class="obligatory">&nbsp;*</span></p>
+                    <h:selectOneRadio required="true" value="#{registrationController.userType}" styleClass="radioUser">
                         <f:selectItem itemValue="private" itemLabel="Privat" />
                         <f:selectItem itemValue="company" itemLabel="Firma" />
                     </h:selectOneRadio>
                 </fieldset>
 
                 <fieldset class="buttons">
-                    <p id="footnote"><span class="obligatory">*</span> Angabepflichtig</p>      <br />
+                    <p id="footnote"><span class="obligatory">&nbsp;*</span> Angabepflichtig</p>
                     <h:commandButton id="register" action="#{registrationController.register}" type="submit" value="Registrieren" styleClass="loginButton"/>
                     <br />
-
-                    <h:commandLink value="Schon ein Profil? Hier anmelden."
+                </fieldset>
+                <div class="linkAlign">
+                    Schon ein Profil? &nbsp;
+                    <h:commandLink value="Hier anmelden."
                                    id="loginLink"
                                    action="#{registrationController.switchView()}"
                                    rendered="#{registrationController.showRegistration}"
                                    styleClass="link" />
-                </fieldset>
-
+                </div>
             </h:form>
 
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
             <h:form id="loginForm" rendered="#{not registrationController.showRegistration}">
-                <fieldset class="login">
-                    <legend>Anmelden</legend>
-                    <h:outputLabel for="user" styleClass="loginLabel" value="Benutzername:" />
+                <fieldset class="login" style="margin-top: 30px">
+                    <legend>Login</legend>
+
+                    <h:outputLabel for="user" styleClass="loginLabel" value="Benutzername:" /> <br />
                     <h:inputText id="user" type="text" name="user" value="#{loginController.username}"
                                  styleClass="input" />
                     <br />
-                    <h:outputLabel for="passwordL" styleClass="loginLabel" value="Passwort:" />
+                    <h:outputLabel for="passwordL" styleClass="loginLabel" value="Passwort:" /> <br />
                     <h:inputSecret id="passwordL" type="password" name="password" value="#{loginController.password}"
                                    styleClass="input" />
                     <br />
 
                 </fieldset>
                 <fieldset class="buttons1">
-                    <br />
                     <h:commandButton id="login" action="#{loginController.login()}" value="Einloggen" styleClass="loginButton"/>
                     <br />
-                    <h:commandLink value="Noch kein Profil? Hier erstellen."
+                </fieldset>
+                <div class="linkAlign">
+                    Noch kein Profil? &nbsp;
+                    <h:commandLink value="Hier erstellen."
                                    id="registrationLink"
                                    action="#{registrationController.switchView()}"
                                    rendered="#{not registrationController.showRegistration}"
                                    styleClass="link" />
-                </fieldset>
+                </div>
             </h:form>
 
         </ui:define>

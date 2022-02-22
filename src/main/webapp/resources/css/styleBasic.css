@@ -3,6 +3,10 @@
     src: url("#{resource['fonts/Rubik-Regular.ttf']}") format("truetype"),
          url("#{resource['fonts/Rubik-Regular.woff2']}") format("woff2");
 }
+:root {
+    --dark-body-bg-color: #002147;
+    --d-input-bg-color: #13274F;
+}
 
 body {
     width: auto;
@@ -21,7 +25,7 @@ body {
     color: #c2d4df; /*Hover*/ color: #89a1b0; .sidenav hover color: #83949e
 
     /*Dark: */
-    color: #002147; color: #13274F; color:#007FFF; color: #6495ED;
+    color: #002147;color: #13274F; color:#007FFF; color: #6495ED;
     color: #7285A5;
     /*Border*/
     color: #001b3b;/*hover*/ color: #384e7b; .sidenav hover color: #123d6d; .button color: #001d3b;
@@ -63,7 +67,7 @@ body {
         background-color: #13274F;
     }
     .content {
-        background-color: #002147;
+        background-color: var(--dark-body-bg-color);
     }
     fieldset {
         background-color: #13274F;
@@ -72,10 +76,11 @@ body {
     .input {
         color: whitesmoke;
         background-color: #13274F;
+        border-color: #7285A5;
     }
     .description {
         color: whitesmoke;
-        background-color: #13274F;
+        background-color: var(--d-input-bg-color);
     }
     /*:hover {
         background-color: #384e7b;
@@ -87,7 +92,9 @@ h1 {
     font-weight: bold;
     line-height: normal;
 }
-
+.input {
+    border-radius: 5px;
+}
 
 
 .loginLink {
