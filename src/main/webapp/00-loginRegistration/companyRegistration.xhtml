@@ -21,27 +21,37 @@
             <fieldset>
                 <legend>Daten zum Unternehmen:</legend>
                 <h:outputLabel for="name" value="Name:" styleClass="outLabel"/>
-                <h:inputText id="name" required="true" styleClass="input" />
+                <h:inputText id="name" required="true" styleClass="input" value="#{companyRegistrationController.name}" />
                     <!--f:validateLength maximum="20" /-->
-                <h:outputText for="name" styleClass="errorMessage" rendered="false" />
+                <h:outputText value="#{companyRegistrationController.getErrorMessage('name')}" rendered="#{companyRegistrationController.registerError}" />
+                <br />
+
+                <h:outputLabel value="Passwort:" />
+                <h:inputSecret value="#{companyRegistrationController.password}" />
+                <h:outputText value="#{companyRegistrationController.getErrorMessage('password')}" rendered="#{companyRegistrationController.registerError}" />
+                <br />
+
+                <h:outputLabel value="Passwort wiederholung:" />
+                <h:inputSecret value="#{companyRegistrationController.passwordRepeat}" />
+                <h:outputText value="#{companyRegistrationController.getErrorMessage('passwordRepeat')}" rendered="#{companyRegistrationController.registerError}" />
                 <br />
 
                 <!--Regex: [(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&amp;//=]*) -->
                 <!--https://regexr.com/3e4a2: (https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*) -->
                 <h:outputLabel for="url" value="Verlinkung zur Website:" styleClass="outLabel" />
-                <h:inputText id="url" styleClass="input" />
-                <h:outputText for="url" styleClass="errorMessage" rendered="false" />
+                <h:inputText id="url" styleClass="input" value="#{companyRegistrationController.website}" />
+                <h:outputText value="#{companyRegistrationController.getErrorMessage('website')}" rendered="#{companyRegistrationController.registerError}" />
                 <br />
 
                 <h:outputLabel for="description" value="Beschreibung:" styleClass="outLabel" />
                 <br />
-                <h:inputTextarea id="description" styleClass="description" required="true" />
+                <h:inputTextarea id="description" styleClass="description" required="true" value="#{companyRegistrationController.description}" />
                     <!--f:validateLength maximum="500" /-->
-                <h:outputText for="description" styleClass="errorMessage" rendered="false" />
+                <h:outputText value="#{companyRegistrationController.getErrorMessage('description')}" rendered="#{companyRegistrationController.registerError}" />
                 <br />
 
                 <h:outputLabel for="logo" value="Logo:" styleClass="outLabel"/> <br />
-                <p:fileUpload id="logo" mode="simple" />
+                <p:fileUpload id="logo" mode="simple" value="#{companyRegistrationController.logoFile}" />
                 <!--p:fileUpload id="logo"
                               mode="advanced"
                               value=""
@@ -54,26 +64,30 @@
                               auto="true" />
                 <p:growl id="msg" /-->
                 <!-- TODO: add action -->
+                <!-- TODO: Den brauch man doch nicht wenn ich das eif an ein Objekt in der Bean binde -->
                 <p:commandButton value="Submit" action="#{uploadtestController.fileUploadListener}" ajax="false" />
             </fieldset>
 
             <fieldset>
                 <legend>Kontaktdaten:</legend>
                 <h:outputLabel for="email" value="E-Mail Adresse:" styleClass="outLabel" />
-                <h:inputText id="email" required="true" k:placeholder="example@email.com" styleClass="input" />
+                <h:inputText id="email" required="true" k:placeholder="example@email.com" styleClass="input" value="#{companyRegistrationController.email}" />
                     <!--f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" /-->
-                <h:outputText for="email" styleClass="errorMessage" rendered="false" />
+                <h:outputText value="#{companyRegistrationController.getErrorMessage('email')}" rendered="#{companyRegistrationController.registerError}" />
                 <br />
 
                 <h:outputLabel for="emailRepeat" value="E-Mail wiederholen:" styleClass="outLabel" />
-                <h:inputText id="emailRepeat" styleClass="input"/>
-                <h:outputText for="emailRepeat" value="" styleClass="errorMessage" rendered="false" />
+                <h:inputText id="emailRepeat" styleClass="input" value="#{companyRegistrationController.emailRepeat}" />
+                <h:outputText value="#{companyRegistrationController.getErrorMessage('emailRepeat')}" rendered="#{companyRegistrationController.registerError}" />
 
                 <h:outputLabel for="phoneNo" value="Telefonnummer:" styleClass="outLabel" />
-                <h:inputText id="phoneNo" k:placeholder="+49 123 45678910" required="true" styleClass="input" />
+                <h:inputText id="phoneNo" k:placeholder="+49 123 45678910" required="true" styleClass="input" value="#{companyRegistrationController.phoneno}" />
                     <!--f:validateRegex pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" /  https://regexr.com/3c53v -->
-                <h:outputText for="phoneNo" styleClass="errorMessage" />
+                <h:outputText value="#{companyRegistrationController.getErrorMessage('phoneno')}" rendered="#{companyRegistrationController.registerError}" />
             </fieldset>
+
+            <h:commandButton value="Registrieren" action="#{companyRegistrationController.register()}" />
+
             </h:form>
         </ui:define>
     </ui:composition>

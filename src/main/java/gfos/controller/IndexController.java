@@ -42,7 +42,7 @@ public class IndexController {
 
     public String checkLogIn() {
         if (cu.getCurrentUser() == null) {
-            return "login1.xhtml";
+            return "/00-loginRegistration/login.xhtml";
         } else {
             return "";
         }

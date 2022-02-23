@@ -24,88 +24,90 @@
                 <hr />
             </div>
             <h:form id="registrationForm"
-                    rendered="#{registrationController.showRegistration}"
+                    rendered="#{applicantRegistrationController.showRegistration}"
                     enctype="multipart/form-data">
                 <fieldset class="headingF"><p class="heading">Neues Profil erstellen</p></fieldset>
                 <fieldset class="user">
                     <legend>Persönliche Daten</legend>
                     <h:outputLabel for="salutation" styleClass="regLabel1" value="Anrede:"><span class="obligatory">&nbsp;*</span> </h:outputLabel>
-                    <h:selectOneMenu id="salutation" name="salutation" styleClass="input" value="#{registrationController.salutation}">
-                        <f:selectItem itemValue="" itemLabel="Bitte auswählen" p:selected="selected" />
+                    <h:selectOneMenu id="salutation" name="salutation" styleClass="input" value="#{applicantRegistrationController.salutation}">
+                        <f:selectItem itemValue="-1" itemLabel="Bitte auswählen" p:selected="selected" />
                         <f:selectItem itemValue="1" itemLabel="Herr" />
                         <f:selectItem itemValue="2" itemLabel="Frau" />
                         <f:selectItem itemValue="9" itemLabel="Divers" />
                         <f:selectItem itemValue="0" itemLabel="keine Angabe" />
                     </h:selectOneMenu>
+                    <h:outputText value="#{applicantRegistrationController.getErrorMessage('salutation')}" rendered="#{applicantRegistrationController.registerError}" />
                     <br/>
 
                     <h:outputLabel for="title" styleClass="regLabel1" value="Titel:" />
-                    <h:selectManyCheckbox id="title" name="title" styleClass="checkTitel">
-                        <f:selectItems value="#{registrationController.allTitles}" var="t" itemValue="#{t}" itemLabel="#{t}" />
+                    <h:selectManyCheckbox id="title" name="title" styleClass="checkTitel" value="#{applicantRegistrationController.title}" >
+                        <f:selectItems value="#{applicantRegistrationController.allTitles}" var="t" itemValue="#{t}" itemLabel="#{t}" />
                     </h:selectManyCheckbox>
                     <br />
 
                     <h:outputLabel for="fname" styleClass="regLabel1" value="Vorname:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
-                    <h:inputText id="fname" name="vorname" type="text" styleClass="input" value="#{registrationController.firstname}" />
+                    <h:inputText id="fname" name="vorname" type="text" styleClass="input" value="#{applicantRegistrationController.firstname}" />
+                    <h:outputText value="#{applicantRegistrationController.getErrorMessage('firstname')}" rendered="#{applicantRegistrationController.registerError}" />
                     <br/>
 
                     <h:outputLabel for="lname" styleClass="regLabel1" value="Nachname:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
-                    <h:inputText id="lname" name="nachname" type="text" styleClass="input" value="#{registrationController.lastname}" />
+                    <h:inputText id="lname" name="nachname" type="text" styleClass="input" value="#{applicantRegistrationController.lastname}" />
+                    <h:outputText value="#{applicantRegistrationController.getErrorMessage('lastname')}" rendered="#{applicantRegistrationController.registerError}" />
                     <br/>
                 </fieldset>
 
                 <fieldset class="data">
                     <legend>Profil-Daten</legend>
                     <h:outputLabel for="username" styleClass="regLabel2" value="Benutzername:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
-                    <h:inputText id="username" value="#{registrationController.username}" styleClass="input"/>
+                    <h:inputText id="username" value="#{applicantRegistrationController.username}" styleClass="input"/>
+                    <h:outputText value="#{applicantRegistrationController.getErrorMessage('username')}" rendered="#{applicantRegistrationController.registerError}" />
                     <br />
 
                     <!-- Email regex: ^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$ -->
                     <h:outputLabel for="email" styleClass="regLabel2" value="E-Mail:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
-                    <h:inputText id="email" name="email" type="text" k:placeholder="example@email.com" styleClass="input" value="#{registrationController.email}" />
+                    <h:inputText id="email" name="email" type="text" k:placeholder="example@email.com" styleClass="input" value="#{applicantRegistrationController.email}" />
+                    <h:outputText value="#{applicantRegistrationController.getErrorMessage('email')}" rendered="#{applicantRegistrationController.registerError}" />
                     <br />
 
                     <h:outputLabel for="emailRepeat" styleClass="regLabel2" value="E-Mail wiederholen:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
-                    <h:inputText id="emailRepeat" name="emailWiederholen" type="text" styleClass="input" value="#{registrationController.emailRepeat}" />
+                    <h:inputText id="emailRepeat" name="emailWiederholen" type="text" styleClass="input" value="#{applicantRegistrationController.emailRepeat}" />
+                    <h:outputText value="#{applicantRegistrationController.getErrorMessage('emailRepeat')}" rendered="#{applicantRegistrationController.registerError}" />
                     <br />
 
                     <!-- Password regex: ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=&lt;>]).{8,20}$ -->
                     <h:outputLabel for="password" styleClass="regLabel2" value="Passwort:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
-                    <h:inputSecret id="password" name="passwort" type="password" styleClass="input" value="#{registrationController.password}" />
+                    <h:inputSecret id="password" name="passwort" type="password" styleClass="input" value="#{applicantRegistrationController.password}" />
+                    <h:outputText value="#{applicantRegistrationController.getErrorMessage('password')}" rendered="#{applicantRegistrationController.registerError}" />
                     <br />
 
                     <h:outputLabel for="passwordRepeat" styleClass="regLabel2" value="Passwort wiederholen:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
-                    <h:inputSecret id="passwordRepeat" name="passwortWiederholen" type="password" styleClass="input" value="#{registrationController.passwordRepeat}" />
+                    <h:inputSecret id="passwordRepeat" name="passwortWiederholen" type="password" styleClass="input" value="#{applicantRegistrationController.passwordRepeat}" />
+                    <h:outputText value="#{applicantRegistrationController.getErrorMessage('passwordRepeat')}" rendered="#{applicantRegistrationController.registerError}" />
                     <br />
 
                     <h:outputLabel for="photo" styleClass="regLabel2" value="Profilbild hochladen:" />
-                    <p:fileUpload id="photo" mode="simple" update="@form" styleClass="upload"/>
+                    <p:fileUpload id="photo" mode="simple" update="@form" styleClass="upload" value="#{applicantRegistrationController.pbFile}"/>
                     <br />
-
-                    <p>Sind Sie Privatnutzer oder Firmennutzer?<span class="obligatory">&nbsp;*</span></p>
-                    <h:selectOneRadio required="true" value="#{registrationController.userType}" styleClass="radioUser">
-                        <f:selectItem itemValue="private" itemLabel="Privat" />
-                        <f:selectItem itemValue="company" itemLabel="Firma" />
-                    </h:selectOneRadio>
                 </fieldset>
 
                 <fieldset class="buttons">
                     <p id="footnote"><span class="obligatory">&nbsp;*</span> Angabepflichtig</p>
-                    <h:commandButton id="register" action="#{registrationController.register}" type="submit" value="Registrieren" styleClass="loginButton"/>
+                    <h:commandButton id="register" action="#{applicantRegistrationController.register()}" type="submit" value="Registrieren" styleClass="loginButton"/>
                     <br />
                 </fieldset>
                 <div class="linkAlign">
                     Schon ein Profil? &nbsp;
                     <h:commandLink value="Hier anmelden."
                                    id="loginLink"
-                                   action="#{registrationController.switchView()}"
-                                   rendered="#{registrationController.showRegistration}"
+                                   action="#{applicantRegistrationController.switchView()}"
+                                   rendered="#{applicantRegistrationController.showRegistration}"
                                    styleClass="link" />
                 </div>
             </h:form>
 
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-            <h:form id="loginForm" rendered="#{not registrationController.showRegistration}">
+            <h:form id="loginForm" rendered="#{not applicantRegistrationController.showRegistration}">
                 <fieldset class="login" style="margin-top: 30px">
                     <legend>Login</legend>
 
@@ -118,6 +120,8 @@
                                    styleClass="input" />
                     <br />
 
+                    <h:outputText value="Der Name ist unbekannt oder das Passwort ist falsch" rendered="#{loginController.loginError}" />
+
                 </fieldset>
                 <fieldset class="buttons1">
                     <h:commandButton id="login" action="#{loginController.login()}" value="Einloggen" styleClass="loginButton"/>
@@ -127,8 +131,8 @@
                     Noch kein Profil? &nbsp;
                     <h:commandLink value="Hier erstellen."
                                    id="registrationLink"
-                                   action="#{registrationController.switchView()}"
-                                   rendered="#{not registrationController.showRegistration}"
+                                   action="#{applicantRegistrationController.switchView()}"
+                                   rendered="#{not applicantRegistrationController.showRegistration}"
                                    styleClass="link" />
                 </div>
             </h:form>

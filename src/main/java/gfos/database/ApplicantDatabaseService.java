@@ -1,6 +1,8 @@
 package gfos.database;
 
 import gfos.beans.Applicant;
+import gfos.beans.Company;
+import gfos.beans.User;
 
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
@@ -21,7 +23,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
     public boolean createOne(Applicant a) {
         try {
             stmt = con.prepareStatement("" +
-                    "INSERT INTO applicant(id, username, password, firstname, email, lastname, gender, pb) VALUES " +
+                    "INSERT INTO applicant(id, username, password, firstname, lastname, email, gender, pb) VALUES " +
                     "(null, ?, SHA2(?, 256), ?, ?, ?, ?, ?);"
             );
             stmt.setString(1, a.getName());
@@ -31,9 +33,12 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
             stmt.setString(5, a.getEmail());
             stmt.setInt(6, a.getGender());
             stmt.setString(7, a.getPb());
-
             int affectedRows = stmt.executeUpdate();
 
+            rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
+            rs.next();
+
+            a.setId(rs.getInt("LAST_INSERT_ID()"));
             affectedRows += insertTitles(a);
 
             return affectedRows != 0;
@@ -62,19 +67,6 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         stmt = con.prepareStatement(sql);
 
         return stmt.executeUpdate();
-    }
-
-    public boolean exists(Applicant a) {
-        try {
-            stmt = con.prepareStatement("SELECT username FROM applicant WHERE username=?");
-            stmt.setString(1, a.getName());
-            rs = stmt.executeQuery();
-
-            return rs.next();
-        } catch (SQLException sqlException) {
-            System.out.println("Error while finding already existing user: " + sqlException.getMessage());
-            return true;
-        }
     }
 
     public ArrayList<Applicant> fetchAll() {
@@ -139,18 +131,68 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         return titles;
     }
 
-    public Applicant loginAttempt(String user, String password) {
+    public User loginAttempt(String user, String password) {
         try {
             stmt = con.prepareStatement("SELECT * FROM applicant WHERE username=? AND password=SHA2(?, 256)");
             stmt.setString(1, user);
             stmt.setString(2, password);
-
             rs = stmt.executeQuery();
-            return parseApplicant();
+
+            Applicant a = parseApplicant();
+            if (a != null) {
+                return a;
+            }
+
+            stmt = con.prepareStatement("SELECT * FROm company WHERE name=? AND password=SHA2(?, 256)");
+            stmt.setString(1, user);
+            stmt.setString(2, password);
+            rs = stmt.executeQuery();
+
+            return parseCompany();
 
         } catch (SQLException sqlException) {
             System.out.println("Could not check login: " + sqlException.getMessage());
             return null;
+        }
+    }
+
+    public boolean nameExists(String name) {
+        try {
+            stmt = con.prepareStatement("SELECT username FROM applicant WHERE username=?;");
+            stmt.setString(1, name);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+
+            stmt = con.prepareStatement("SELECT name FROM company WHERE name=?;");
+            stmt.setString(1, name);
+            rs = stmt.executeQuery();
+
+            return rs.next();
+        } catch (SQLException sqlException) {
+            System.out.println("Error while checking for name: " + name + ": " + sqlException.getMessage());
+            return false;
+        }
+    }
+
+    public boolean emailExists(String email) {
+        try {
+            stmt = con.prepareStatement("SELECT email FROM applicant WHERE email=?;");
+            stmt.setString(1, email);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+
+            stmt = con.prepareStatement("SELECT email FROM company WHERE email=?;");
+            stmt.setString(1, email);
+            rs = stmt.executeQuery();
+
+            return rs.next();
+        } catch (SQLException sqlException) {
+            System.out.println("Error while checking for email: " + email + ": " + sqlException.getMessage());
+            return false;
         }
     }
 
@@ -168,6 +210,23 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
                 rs.getString("email"),
                 rs.getInt("gender"),
                 getTitles(rs.getInt("id")),
+                rs.getString("pb")
+        );
+    }
+
+    private Company parseCompany() throws SQLException {
+        if (!rs.next()) {
+            return null;
+        }
+
+        return new Company(
+                rs.getInt("id"),
+                rs.getString("name"),
+                rs.getString("password"),
+                rs.getString("email"),
+                rs.getString("phoneno"),
+                rs.getString("website"),
+                rs.getString("description"),
                 rs.getString("pb")
         );
     }

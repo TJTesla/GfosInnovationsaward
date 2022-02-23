@@ -10,6 +10,7 @@ public abstract class User {
     public User(int id, String name, String password, String email, String pb) {
         this.id = id;
         this.name = name;
+        this.email = email;
         this.password = password;
         this.pb = pb;
     }

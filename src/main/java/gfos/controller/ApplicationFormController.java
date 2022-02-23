@@ -15,8 +15,6 @@ public class ApplicationFormController {
     @Inject
     CurrentUser cu;
     @Inject
-    ResourceIO io;
-    @Inject
     ApplicationDatabaseService adbs;
 
     private Offer offer;
@@ -28,7 +26,7 @@ public class ApplicationFormController {
             return "";
         }
         try {
-            Resume r = io.uploadResume(cv, offer);
+            Resume r = ResourceIO.uploadResume(cv, offer, cu.getCurrentUser());
             Application a = new Application(
                     cu.getCurrentUser().getId(),
                     offer.getId(),
