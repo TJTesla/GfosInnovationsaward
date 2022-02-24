@@ -14,6 +14,7 @@ legend {
 }
 fieldset {
     padding-left: 30px;
+    padding-bottom: 20px;
     margin: auto;
     border-width: 3px;
     overflow: hidden;
@@ -24,11 +25,11 @@ fieldset {
 /* Fieldsets */
 .user {
     margin-top: 30px;
-    height: 200px;
+    height: auto;
     width: var(--reg-width);
 }
 .data {
-    height: 300px;
+    height: auto;
     width: var(--reg-width);
 }
 .headingF {
@@ -47,6 +48,17 @@ fieldset {
     font-weight: bold;
     font-size: 28px;
     margin-top: 20px;
+}
+.inputError {
+    border-color: crimson;
+}
+.registerError {
+    font-size: 13px;
+    padding: 5px;
+    border-width: 3px;
+    border-color: red;
+    background-color: lightcoral;
+    color: darkred;
 }
 /* Persönliche Daten */
 .regLabel1{
@@ -91,7 +103,7 @@ fieldset {
 /* Login */
 /* Fieldsets */
 .login {
-    height: 180px;
+    height: auto;
     width: var(--log-width);
 }
 .headingF1 {
