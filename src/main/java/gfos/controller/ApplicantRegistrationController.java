@@ -75,8 +75,12 @@ public class ApplicantRegistrationController implements Serializable {
         }
     }
 
+    @Inject
+    LoginController login;
+
     public void switchView() {
         showRegistration = !showRegistration;
+        login.setLoginError(false);
     }
 
     public String getErrorMessage(String name) {
