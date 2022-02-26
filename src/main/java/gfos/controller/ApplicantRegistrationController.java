@@ -95,47 +95,47 @@ public class ApplicantRegistrationController implements Serializable {
         // Keine Anrede
         if (salutation.equals("-1")) {
             registerError = true;
-            errorMsgs.put("salutation", "Es muss eine Anrede ausgewählt werden");
+            errorMsgs.put("salutation", "Es muss eine Anrede ausgewählt werden.");
         }
         // Kein Vorname
         if (firstname.isEmpty()) {
             registerError = true;
-            errorMsgs.put("firstname", "Es muss ein Vorname angegeben werden");
+            errorMsgs.put("firstname", "Vorname ist erforderlich.");
         }
         // Kein Nachname
         if (lastname.isEmpty()) {
             registerError = true;
-            errorMsgs.put("lastname", "Es muss ein Nachname angegeben werden");
+            errorMsgs.put("lastname", "Nachname ist erforderlich.");
         }
         // Kein benutzername
         if (username.isEmpty()) {
             registerError = true;
-            errorMsgs.put("username", "Es muss ein Benutzername angegeben werden");
+            errorMsgs.put("username", "Es muss ein Benutzername angegeben werden.");
         }
         // Benutzername schon belegt
         if (adbs.nameExists(username)) {
             registerError = true;
-            errorMsgs.put("username", "Dieser Benutzername wird bereits verwendet");
+            errorMsgs.put("username", "Dieser Benutzername wird bereits verwendet.");
         }
         // Keine E-Mail
         if (email.isEmpty()) {
             registerError = true;
-            errorMsgs.put("email", "Es muss eine E-Mail Addresse angegeben werden");
+            errorMsgs.put("email", "Es muss eine E-Mail Adresse angegeben werden.");
         }
-        // E-mail wird schon benutzt
+        // E-Mail wird schon benutzt
         if (adbs.emailExists(email)) {
             registerError = true;
-            errorMsgs.put("email", "Diese E-Mail Adresse wird bereits verwendet");
+            errorMsgs.put("email", "Diese E-Mail Adresse wird bereits verwendet.");
         }
         // E-Mail nicht im richtigen Format
         if (!Pattern.compile(Regexes.email).matcher(email).find() && !email.isEmpty()) {
             registerError = true;
-            errorMsgs.put("email", "Die angegebene E-Mail ist keine korrekte E-Mail Addresse");
+            errorMsgs.put("email", "Die angegebene E-Mail ist keine korrekte E-Mail Adresse.");
         }
         // E-Mails sind nicht gleich
         if (!email.equals(emailRepeat)) {
             registerError = true;
-            errorMsgs.put("emailRepeat", "Beide angegebenen E-Mails müssen gleich sein");
+            errorMsgs.put("emailRepeat", "E-Mail Adressen stimmen nicht überein.");
         }
         // Kein Passwort
         if (password.isEmpty()) {
@@ -145,12 +145,12 @@ public class ApplicantRegistrationController implements Serializable {
         // Passwort regex
         if (!Pattern.compile(Regexes.password).matcher(password).find() && !email.isEmpty()) {
             registerError = true;
-            errorMsgs.put("password", "Das Passwort muss mindestens einen großen, kleinen Buchstaben, ein Sonderzeichen und eine Zahl beinhalten");
+            errorMsgs.put("password", "Das Passwort muss mindestens einen großen Buchstaben, einen kleinen Buchstaben, ein Sonderzeichen und eine Zahl beinhalten.");
         }
         // Passwörter sind nicht gleich
         if (!password.equals(passwordRepeat)) {
             registerError = true;
-            errorMsgs.put("passwordRepeat", "Beide angegebenen Passwörter müssen gleich sein");
+            errorMsgs.put("passwordRepeat", "Passwörter stimmen nicht überein.");
         }
     }
 

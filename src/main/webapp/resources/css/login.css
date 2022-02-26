@@ -1,7 +1,52 @@
 :root {
     --reg-width: 500px;
     --log-width: 300px;
+    --regL1-width: 140px;
+    --regL2-width: 200px;
 }
+
+/* Colour related */
+@media (prefers-color-scheme: dark) {
+    @keyframes reg-err-anim {
+        0% {
+            background-color: #673147;
+            border-color: crimson;
+        } /* dark blue plus red shade */
+        100% {
+            background-color: var(--d-input-bg-color);
+            border-color: #673147;
+        }
+    }
+    .input-error {
+        background-color: var(--d-input-bg-color);
+        border-color: #673147;
+    }
+    .headingF {
+        background-color: var(--d-body-bg-color);
+    }
+    .buttons {
+        background-color: var(--d-body-bg-color);
+    }
+}
+@media (prefers-color-scheme: light) {
+    @keyframes reg-err-anim {
+        0% {
+            background-color: rgb(255, 109, 106);
+            border-color: crimson;
+        }
+    }
+    .input-error {
+        background-color: var(--l-input-bg-color);
+        border-color: #673147;
+    }
+    .headingF {
+        background-color: var(--l-body-bg-color);
+    }
+    .buttons {
+        background-color: var(--l-body-bg-color);
+    }
+}
+
 body {
     line-height: 150%;
 }
@@ -20,6 +65,20 @@ fieldset {
     overflow: hidden;
     border-radius: 10px;
 }
+[class*="label-"] {
+    display: inline-block;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+[class*="errMsg-"] {
+    display: inline-block;
+    font-size: 13px;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    padding: 3px;
+    color: #fe0000;
+    font-style: italic;
+}
 
 /* Registration*/
 /* Fieldsets */
@@ -36,11 +95,9 @@ fieldset {
     margin: auto;
     width: var(--reg-width);
     padding: 0;
-    background-color: var(--dark-body-bg-color);
 }
 .buttons {
     width: var(--reg-width);
-    background-color: var(--dark-body-bg-color);
     padding: 0;
 }
 /**/
@@ -49,23 +106,20 @@ fieldset {
     font-size: 28px;
     margin-top: 20px;
 }
-.inputError {
-    border-color: crimson;
+.input-plain {
+
 }
-.registerError {
-    font-size: 13px;
-    padding: 5px;
-    border-width: 3px;
-    border-color: red;
-    background-color: lightcoral;
-    color: darkred;
+.input-error {
+    animation-name: reg-err-anim;
+    animation-duration: 2s;
 }
+
 /* Persönliche Daten */
-.regLabel1{
-    display: inline-block;
-    width: 140px;
-    margin-top: 4px;
-    margin-bottom: 4px;
+.label-reg1{
+    width: var(--regL1-width);
+}
+.errMsg-reg1 {
+    margin-left: var(--regL1-width);
 }
 .checkTitel {
     display: inline;
@@ -78,11 +132,11 @@ fieldset {
 }
 
 /* Profil-Daten */
-.regLabel2 {
-    display: inline-block;
-    width: 200px;
-    margin-top: 4px;
-    margin-bottom: 4px;
+.label-reg2 {
+    width: var(--regL2-width);
+}
+.errMsg-reg2 {
+    margin-left: var(--regL2-width);
 }
 .upload {
     font-family: inherit;
@@ -120,24 +174,22 @@ fieldset {
 .login legend {
     text-align: center;
 }
-.loginLabel {
-    display: inline-block;
+.label-login {
     font-size: 12px;
     color: #7285A5;
-    margin-top: 4px;
-    margin-bottom: 4px;
 }
-.login .input {
+.input-login {
     width: calc(var(--log-width) * 0.8);
     line-height: 20px;
 }
-
+.errMsg-login {
+    text-align: justify-all;
+}
 
 .description {
     width: 500px;
     height: 300px;
 }
-
 
 /**/
 /* Buttons */
@@ -149,7 +201,7 @@ fieldset {
     margin-left: 5px;
     width: 120px;
     height: 35px;
-    color: inherit;
+    color: whitesmoke;
     font-size: 18px;
     background-color: #007FFF;
     /*background-color: #ff1493;*/

@@ -4,17 +4,25 @@
          url("#{resource['fonts/Rubik-Regular.woff2']}") format("woff2");
 }
 :root {
-    --dark-body-bg-color: #002147;
+    --d-body-bg-color: #002147;
     --d-input-bg-color: #13274F;
+    --l-body-bg-color: #D5E9F5;
+    --l-input-bg-color: #D5E9F5;
 }
-
+html {
+    overflow-y: scroll;
+}
 body {
+    height: 100%;
     width: auto;
     font-family: "Rubik", sans-serif;
     margin: 0 auto;
     child-align: middle;
     background-color: #13274F;
     font-size: 15px;
+}
+.content {
+    height: auto;
 }
 
 .something {
@@ -36,23 +44,26 @@ body {
 
 @media (prefers-color-scheme: light) {
     body {
+        background-color: #A2D7F7;
         color: black;
     }
     .head, .foot{
-        background-color: #073980;
+        background-color: #A2D7F7;
     }
     .content {
-        background-color: #F0F8FF;
+        background-color: var(--l-body-bg-color);
     }
     fieldset {
-        background-color:#D5E9F5;
+        background-color:#A2D7F7;
         border-color: #c2d4df;
     }
     /*:hover {
         background-color: #89a1b0;
     }*/
-    .input {
+    [class*="input-"] {
+        background-color: var(--l-input-bg-color);
         color: black;
+        border-color: #4B9CD3;
     }
     .description {
         color: black;
@@ -60,6 +71,7 @@ body {
 }
 
 @media (prefers-color-scheme: dark) {
+
     body {
         color: whitesmoke;
     }
@@ -67,15 +79,15 @@ body {
         background-color: #13274F;
     }
     .content {
-        background-color: var(--dark-body-bg-color);
+        background-color: var(--d-body-bg-color);
     }
     fieldset {
         background-color: #13274F;
         border-color: #001b3b;
     }
-    .input {
+    [class*="input-"] {
         color: whitesmoke;
-        background-color: #13274F;
+        background-color: var(--d-input-bg-color);
         border-color: #7285A5;
     }
     .description {
@@ -92,10 +104,10 @@ h1 {
     font-weight: bold;
     line-height: normal;
 }
-.input {
+
+[class*="input-"] {
     border-radius: 5px;
 }
-
 
 .loginLink {
     margin-top: 10px;
