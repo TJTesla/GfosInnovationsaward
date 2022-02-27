@@ -21,7 +21,7 @@
     <!-- TODO: Change selectManyCheckboxes. CSS cannot be applied in this way -->
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
-            <h:panelGroup styleClass="filter" rendered="true" > <!-- This will raise an error since no boolean is given -->
+            <h:panelGroup styleClass="filter" rendered="true" > <!-- Rendered can be changed to boolean whether user is a company -->
                 <h:inputText id="place" k:placeholder="Standort" styleClass="navLabel" />
                 <div class="dropdown">
                     <button class="dropbtn" id="dropbtnField" onclick="fieldDrop()">Berufsfeld <i class="fa-caret-dowm" /></button>

@@ -143,9 +143,9 @@ public class ApplicantRegistrationController implements Serializable {
             errorMsgs.put("password", "Es muss ein Passwort angegeben werden");
         }
         // Passwort regex
-        if (!Pattern.compile(Regexes.password).matcher(password).find() && !email.isEmpty()) {
+        if (!Pattern.compile(Regexes.password).matcher(password).find() && !password.isEmpty()) {
             registerError = true;
-            errorMsgs.put("password", "Das Passwort muss mindestens einen großen Buchstaben, einen kleinen Buchstaben, ein Sonderzeichen und eine Zahl beinhalten.");
+            errorMsgs.put("password", "Das Passwort muss mindestens einen Großbuchstaben, einen Kleinbuchstaben, ein Sonderzeichen und eine Zahl beinhalten.");
         }
         // Passwörter sind nicht gleich
         if (!password.equals(passwordRepeat)) {

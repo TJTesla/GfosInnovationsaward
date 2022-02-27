@@ -32,7 +32,7 @@
                     <legend>Persönliche Daten</legend>
                     <h:outputLabel for="salutation" styleClass="label-reg1" value="Anrede:"><span class="obligatory">&nbsp;*</span> </h:outputLabel>
                     <h:selectOneMenu id="salutation" name="salutation"
-                                     styleClass="#{applicantRegistrationController.registerError ? 'input-error' : 'input-plain'}"
+                                     styleClass="#{applicantRegistrationController.getErrorMessage('salutation').equals('') ? 'input-plain' : 'input-error'}"
                                      value="#{applicantRegistrationController.salutation}">
                         <f:selectItem itemValue="-1" itemLabel="Bitte auswählen" p:selected="selected" />
                         <f:selectItem itemValue="1" itemLabel="Herr" />
@@ -40,7 +40,7 @@
                         <f:selectItem itemValue="9" itemLabel="Divers" />
                         <f:selectItem itemValue="0" itemLabel="keine Angabe" />
                     </h:selectOneMenu>
-                    <c:if test="#{applicantRegistrationController.registerError}">
+                    <c:if test="#{not (applicantRegistrationController.getErrorMessage('salutation').equals('')) }">
                         <div class="errMsg-reg1">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
                             <h:outputText value="#{applicantRegistrationController.getErrorMessage('salutation')}"
@@ -57,9 +57,9 @@
 
                     <h:outputLabel for="fname" styleClass="label-reg1" value="Vorname:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputText id="fname" name="vorname" type="text"
-                                 styleClass="#{applicantRegistrationController.registerError ? 'input-error' : 'input-plain'}"
+                                 styleClass="#{applicantRegistrationController.getErrorMessage('firstname').equals('') ? 'input-plain' : 'input-error'}"
                                  value="#{applicantRegistrationController.firstname}" />
-                    <c:if test="#{applicantRegistrationController.registerError}">
+                    <c:if test="#{not (applicantRegistrationController.getErrorMessage('firstname').equals('')) }">
                         <div class="errMsg-reg1">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
                             <h:outputText value="#{applicantRegistrationController.getErrorMessage('firstname')}"
@@ -70,9 +70,9 @@
 
                     <h:outputLabel for="lname" styleClass="label-reg1" value="Nachname:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputText id="lname" name="nachname" type="text"
-                                 styleClass="#{applicantRegistrationController.registerError ? 'input-error' : 'input-plain'}"
+                                 styleClass="#{applicantRegistrationController.getErrorMessage('lastname').equals('') ? 'input-plain' : 'input-error'}"
                                  value="#{applicantRegistrationController.lastname}" />
-                    <c:if test="#{applicantRegistrationController.registerError}">
+                    <c:if test="#{not (applicantRegistrationController.getErrorMessage('lastname').equals('')) }">
                         <div class="errMsg-reg1">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
                             <h:outputText value="#{applicantRegistrationController.getErrorMessage('lastname')}"
@@ -86,8 +86,8 @@
                     <legend>Profil-Daten</legend>
                     <h:outputLabel for="username" styleClass="label-reg2" value="Benutzername:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputText id="username" value="#{applicantRegistrationController.username}"
-                                 styleClass="#{applicantRegistrationController.registerError ? 'input-error' : 'input-plain'}"/>
-                    <c:if test="#{applicantRegistrationController.registerError}">
+                                 styleClass="#{applicantRegistrationController.getErrorMessage('username').equals('') ? 'input-plain' : 'input-error'}"/>
+                    <c:if test="#{not (applicantRegistrationController.getErrorMessage('username').equals('')) }">
                         <div class="errMsg-reg2">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
                             <h:outputText value="#{applicantRegistrationController.getErrorMessage('username')}"
@@ -99,9 +99,9 @@
                     <!-- Email regex: ^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$ -->
                     <h:outputLabel for="email" styleClass="label-reg2" value="E-Mail:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputText id="email" name="email" type="text" k:placeholder="example@email.com"
-                                 styleClass="#{applicantRegistrationController.registerError ? 'input-error' : 'input-plain'}"
+                                 styleClass="#{applicantRegistrationController.getErrorMessage('email').equals('') ? 'input-plain' : 'input-error'}"
                                  value="#{applicantRegistrationController.email}" />
-                    <c:if test="#{applicantRegistrationController.registerError}">
+                    <c:if test="#{not (applicantRegistrationController.getErrorMessage('email').equals('')) }">
                         <div class="errMsg-reg2">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
                             <h:outputText value="#{applicantRegistrationController.getErrorMessage('email')}"
@@ -112,9 +112,9 @@
 
                     <h:outputLabel for="emailRepeat" styleClass="label-reg2" value="E-Mail wiederholen:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputText id="emailRepeat" name="emailWiederholen" type="text"
-                                 styleClass="#{applicantRegistrationController.registerError ? 'input-error' : 'input-plain'}"
+                                 styleClass="#{applicantRegistrationController.getErrorMessage('emailRepeat').equals('') ? 'input-plain' : 'input-error'}"
                                  value="#{applicantRegistrationController.emailRepeat}" />
-                    <c:if test="#{applicantRegistrationController.registerError}">
+                    <c:if test="#{not (applicantRegistrationController.getErrorMessage('emailRepeat').equals('')) }">
                         <div class="errMsg-reg2" >
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
                             <h:outputText value="#{applicantRegistrationController.getErrorMessage('emailRepeat')}"
@@ -126,9 +126,9 @@
                     <!-- Password regex: ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=&lt;>]).{8,20}$ -->
                     <h:outputLabel for="password" styleClass="label-reg2" value="Passwort:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputSecret id="password" name="passwort" type="password"
-                                   styleClass="#{applicantRegistrationController.registerError ? 'input-error' : 'input-plain'}"
+                                   styleClass="#{applicantRegistrationController.getErrorMessage('password').equals('') ? 'input-plain' : 'input-error'}"
                                    value="#{applicantRegistrationController.password}" />
-                    <c:if test="#{applicantRegistrationController.registerError}">
+                    <c:if test="#{not (applicantRegistrationController.getErrorMessage('password').equals('')) }">
                         <div class="errMsg-reg2">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
                             <h:outputText value="#{applicantRegistrationController.getErrorMessage('password')}"
@@ -139,9 +139,9 @@
 
                     <h:outputLabel for="passwordRepeat" styleClass="label-reg2" value="Passwort wiederholen:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputSecret id="passwordRepeat" name="passwortWiederholen" type="password"
-                                   styleClass="#{applicantRegistrationController.registerError ? 'input-error' : 'input-plain'}"
+                                   styleClass="#{applicantRegistrationController.getErrorMessage('passwordRepeat').equals('') ? 'input-plain' : 'input-error'}"
                                    value="#{applicantRegistrationController.passwordRepeat}" />
-                    <c:if test="#{applicantRegistrationController.registerError}">
+                    <c:if test="#{not applicantRegistrationController.getErrorMessage('passwordRepeat').equals('')}">
                         <div class="errMsg-reg2">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
                             <h:outputText value="#{applicantRegistrationController.getErrorMessage('passwordRepeat')}"
@@ -155,7 +155,7 @@
                     <br />
                 </fieldset>
 
-                <fieldset class="buttons">
+                <fieldset class="buttons-reg">
                     <p id="footnote"><span class="obligatory">&nbsp;*</span> Angabepflichtig</p>
                     <h:commandButton id="register" action="#{applicantRegistrationController.register()}" type="submit" value="Registrieren" styleClass="loginButton"/>
                     <br />
@@ -192,7 +192,7 @@
                     </c:if>
 
                 </fieldset>
-                <fieldset class="buttons1">
+                <fieldset class="buttons-login">
                     <h:commandButton id="login" action="#{loginController.login()}" value="Einloggen" styleClass="loginButton"/>
                     <br />
                 </fieldset>

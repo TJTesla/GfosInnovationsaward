@@ -83,7 +83,7 @@ public class CompanyRegistrationController implements Serializable {
         // Name wird schon benutzt
         if (adbs.nameExists(name)) {
             registerError = true;
-            errorMsgs.put("name", "Der name wird bereits verwendet");
+            errorMsgs.put("name", "Der Name \"" + name + "\" existiert bereits.");
         }
         // Passwort leer
         if (password.isEmpty()) {
@@ -93,47 +93,47 @@ public class CompanyRegistrationController implements Serializable {
         // Passwort regex
         if (!Pattern.compile(Regexes.password).matcher(password).find() && !password.isEmpty()) {
             registerError = true;
-            errorMsgs.put("password", "Das Passwort muss mindestens einen großen, kleinen Buchstaben, ein Sonderzeichen und eine Zahl beinhalten");
+            errorMsgs.put("password", "Das Passwort muss mindestens einen Großbuchstaben, einen Kleinbuchstaben, ein Sonderzeichen und eine Zahl beinhalten.");
         }
         // Passwort wiederholung
         if (!password.equals(passwordRepeat)) {
             registerError = true;
-            errorMsgs.put("password", "Das zweite Passwort ist anders als das erste");
+            errorMsgs.put("password", "Passwörter stimmen nicht überein.");
         }
         // Webseite leer
         if (website.isEmpty()) {
             registerError = true;
-            errorMsgs.put("website", "Es muss eine Webseite angegeben werden");
+            errorMsgs.put("website", "Es muss eine Webseite angegeben werden.");
         }
         // Webseite regex
         if (!Pattern.compile(Regexes.website).matcher(website).find() && !website.isEmpty()) {
             registerError = true;
-            errorMsgs.put("website", "Die angegebene Webseite ist keine korrekte URL");
+            errorMsgs.put("website", "Die angegebene Webseite ist keine korrekte URL.");
         }
         // Email leer
         if (email.isEmpty()) {
             registerError = true;
-            errorMsgs.put("email", "Es muss eine E-Mail Addresse angegeben werden");
+            errorMsgs.put("email", "Es muss eine E-Mail Adresse angegeben werden.");
         }
         // Email regex
         if (!Pattern.compile(Regexes.email).matcher(email).find() && !email.isEmpty()) {
             registerError = true;
-            errorMsgs.put("email", "Die angegebene E-Mail ist keine korrekte E-Mail Addresse");
+            errorMsgs.put("email", "Die angegebene E-Mail ist keine korrekte E-Mail Adresse.");
         }
         // Email wird schon benutzt
         if (adbs.emailExists(email)) {
             registerError = true;
-            errorMsgs.put("email", "Die E-Mail wird bereits verwendet");
+            errorMsgs.put("email", "Die E-Mail wird bereits verwendet.");
         }
         // Email wiederholung
         if (!email.equals(emailRepeat)) {
             registerError = true;
-            errorMsgs.put("passwordRepeat", "Die zweite E-Mail ist anders als die erste");
+            errorMsgs.put("emailRepeat", "E-Mail Adressen stimmen nicht überein.");
         }
         // Telefonnr regex
         if (!Pattern.compile(Regexes.phoneno).matcher(phoneno).find() && !phoneno.isEmpty()) {
             registerError = true;
-            errorMsgs.put("phoneno", "Die angegebene Telefonnummer ist keien korrekte Nummer");
+            errorMsgs.put("phoneno", "Die angegebene Telefonnummer ist keine korrekte Nummer.");
         }
     }
 
