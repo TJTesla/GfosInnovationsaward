@@ -1,5 +1,7 @@
 package gfos.controller;
 
+import gfos.FilterObject;
+import gfos.database.MiscellaneousDatabaseService;
 import gfos.exceptions.UserException;
 import gfos.beans.Applicant;
 import gfos.beans.Company;
@@ -7,37 +9,62 @@ import gfos.beans.Offer;
 import gfos.database.ApplicantDatabaseService;
 import gfos.database.OfferDatabaseService;
 import gfos.longerBeans.CurrentUser;
+import javafx.util.Pair;
 
-import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 @Named
-public class IndexController {
+@ViewScoped
+public class IndexController implements Serializable {
     @Inject
     ApplicantDatabaseService adbs;
     @Inject
     OfferDatabaseService odbs;
     @Inject
+    MiscellaneousDatabaseService mdbs;
+    @Inject
     CurrentUser cu;
 
-    boolean isCompany;  // Maybe useful for rendering company specific ui elements
-
-    @PostConstruct
-    public void init() {
-        if (cu == null || cu.getCurrentUser() == null) {
-            return;
-        }
-        isCompany = cu.getCurrentUser() instanceof Company;
-    }
+    private ArrayList<String> field;  // 1:n
+    private ArrayList<String> level;  // 1:n
+    private ArrayList<String> time;  // 1:n
+    private String maxDistance;
 
     public ArrayList<Offer> getAllOffers() {
-        return odbs.fetchAll();
+        System.out.println("Field: " + field);
+
+        ArrayList<Offer> offerList =  odbs.fetchAll(
+                new FilterObject(
+                        field,
+                        level,
+                        time,
+                        toInt(maxDistance)
+                ),
+                (Applicant) cu.getCurrentUser()
+        );
+
+        return offerList;
     }
 
-    public String getCurrentUsername() throws UserException {
-        return cu.getCurrentUser().getName();
+    private Integer toInt(String str) {
+        if (str == null || str.equals("-1")) {
+            return null;
+        }
+
+        try {
+            return Integer.getInteger(str);
+        } catch (NumberFormatException nfe) {
+            System.out.println("Cannot change string: " + str + " to Integer: " + nfe.getMessage());
+            return null;
+        }
+    }
+
+    public String offerDetailPage(int offerId) {
+        return "/02-offer/offer.xhtml?id=" + offerId;
     }
 
     public String checkLogIn() {
@@ -48,11 +75,55 @@ public class IndexController {
         }
     }
 
-    public boolean isCompany() {
-        return isCompany;
+    public String reload() {
+        return "";
     }
 
-    public void setCompany(boolean company) {
-        isCompany = company;
+    public boolean isCompany() {
+        return cu.getCurrentUser() instanceof Company;
+    }
+
+    public ArrayList<Pair<Integer, String>> getAllFields() {
+        return mdbs.getAllFields();
+    }
+
+    public ArrayList<Pair<Integer, String>> getAllLevels() {
+        return mdbs.getAllTimes();
+    }
+
+    public ArrayList<Pair<Integer, String>> getAllTimes() {
+        return mdbs.getAllTimes();
+    }
+
+    public ArrayList<String> getField() {
+        return field;
+    }
+
+    public void setField(ArrayList<String> field) {
+        this.field = field;
+    }
+
+    public ArrayList<String> getLevel() {
+        return level;
+    }
+
+    public void setLevel(ArrayList<String> level) {
+        this.level = level;
+    }
+
+    public ArrayList<String> getTime() {
+        return time;
+    }
+
+    public void setTime(ArrayList<String> time) {
+        this.time = time;
+    }
+
+    public String getMaxDistance() {
+        return maxDistance;
+    }
+
+    public void setMaxDistance(String maxDistance) {
+        this.maxDistance = maxDistance;
     }
 }

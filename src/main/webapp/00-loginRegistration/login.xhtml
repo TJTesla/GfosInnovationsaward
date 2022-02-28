@@ -154,6 +154,17 @@
                     <p:fileUpload id="photo" mode="simple" update="@form" styleClass="upload" value="#{applicantRegistrationController.pbFile}"/>
                     <br />
                 </fieldset>
+                    <h3>Addresse:</h3>
+
+                    Straße: <h:inputText value="#{applicantRegistrationController.street}" />
+                    <br />
+                    Postleitzahl: <h:inputText value="#{applicantRegistrationController.zip}" />
+                    <br />
+                    Ort: <h:inputText value="#{applicantRegistrationController.city}" />
+                    <br />
+                <fieldset>
+
+                </fieldset>
 
                 <fieldset class="buttons-reg">
                     <p id="footnote"><span class="obligatory">&nbsp;*</span> Angabepflichtig</p>

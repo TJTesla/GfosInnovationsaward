@@ -23,8 +23,8 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
     public boolean createOne(Applicant a) {
         try {
             stmt = con.prepareStatement("" +
-                    "INSERT INTO applicant(id, username, password, firstname, lastname, email, gender, pb) VALUES " +
-                    "(null, ?, SHA2(?, 256), ?, ?, ?, ?, ?);"
+                    "INSERT INTO applicant(id, username, password, firstname, lastname, email, gender, pb, lat, lon) VALUES " +
+                    "(null, ?, SHA2(?, 256), ?, ?, ?, ?, ?, ?, ?);"
             );
             stmt.setString(1, a.getName());
             stmt.setString(2, a.getPassword());
@@ -33,6 +33,8 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
             stmt.setString(5, a.getEmail());
             stmt.setInt(6, a.getGender());
             stmt.setString(7, a.getPb());
+            stmt.setDouble(8, a.getLat());
+            stmt.setDouble(9, a.getLon());
             int affectedRows = stmt.executeUpdate();
 
             rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
@@ -85,7 +87,9 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
                         rs.getString("email"),
                         rs.getInt("gender"),
                         getTitles(rs.getInt("id")),
-                        rs.getString("pb")
+                        rs.getString("pb"),
+                        rs.getDouble("lat"),
+                        rs.getDouble("lon")
                 );
 
                 list.add(temp);
@@ -210,7 +214,9 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
                 rs.getString("email"),
                 rs.getInt("gender"),
                 getTitles(rs.getInt("id")),
-                rs.getString("pb")
+                rs.getString("pb"),
+                rs.getDouble("lat"),
+                rs.getDouble("lon")
         );
     }
 

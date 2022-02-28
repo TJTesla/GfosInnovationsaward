@@ -7,6 +7,8 @@ import gfos.database.ApplicantDatabaseService;
 import gfos.database.MiscellaneousDatabaseService;
 import gfos.exceptions.UploadException;
 import gfos.longerBeans.CurrentUser;
+import gfos.longerBeans.GeoCalculator;
+import javafx.util.Pair;
 import org.primefaces.model.file.UploadedFile;
 
 import javax.faces.view.ViewScoped;
@@ -39,6 +41,7 @@ public class ApplicantRegistrationController implements Serializable {
     private String password;
     private String passwordRepeat;
     private UploadedFile pbFile;
+    private String street, zip, city;
 
     private boolean registerError = false;
     private HashMap<String, String> errorMsgs = new HashMap<>();
@@ -51,7 +54,22 @@ public class ApplicantRegistrationController implements Serializable {
             return "";
         }
 
-        Applicant a = new Applicant(-1, username, password, firstname, lastname, email, Integer.parseInt(salutation), arrToList(title), "");
+        String address = street + " " + zip + " " + city;
+        double[] coordinates = GeoCalculator.getCoordinates(address);
+
+        Applicant a = new Applicant(
+                -1,
+                username,
+                password,
+                firstname,
+                lastname,
+                email,
+                Integer.parseInt(salutation),
+                arrToList(title),
+                "",
+                coordinates[0],  // Latitude
+                coordinates[1]  // Longitude
+        );
 
         if (pbFile != null) {
             savePb(a);
@@ -155,7 +173,14 @@ public class ApplicantRegistrationController implements Serializable {
     }
 
     public ArrayList<String> getAllTitles() {
-        return mdbs.getAllTitles();
+        ArrayList<String> arr = new ArrayList<>();
+
+        ArrayList<Pair<Integer, String>> entries = mdbs.getAllTitles();
+        for (Pair<Integer, String> p : entries) {
+            arr.add(p.getValue());
+        }
+
+        return arr;
     }
 
     public String getSalutation() {
@@ -252,5 +277,29 @@ public class ApplicantRegistrationController implements Serializable {
 
     public void setShowRegistration(boolean showRegistration) {
         this.showRegistration = showRegistration;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }
