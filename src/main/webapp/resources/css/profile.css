@@ -1,3 +1,71 @@
-.data label {
-    font-size: 9px;
+:root {
+    --profile-width: 700px;
 }
+.data {
+    width: var(--profile-width);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-bottom: 50px;
+}
+.image-profile {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.image-profile:hover {
+
+}
+@media (prefers-color-scheme: dark) {
+    .label-profile {
+        color: #7285A5;
+    }
+    .wrapper-text {
+        border-color: #7285A5;
+    }
+    .btn-edit {
+        background-color: var(--d-btn-bg-color);
+        border-color: #7285A5;
+        color: whitesmoke;
+    }
+    .btn-edit:hover {
+        background-color: #123d6d;
+    }
+}
+@media (prefers-color-scheme: light) {
+    .label-profile {
+        color: black;
+    }
+    .text-data {
+        color: #073980;
+    }
+}
+
+.label-profile {
+    font-size: 13px;
+    font-style: italic;
+    margin-top: 20px;
+}
+.wrapper-text {
+    width: calc( var(--profile-width) * 0.7 );
+    margin-left: calc( (var(--profile-width) - var(--profile-width) * 0.7) / 2);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid;
+    border-width: 1px;
+    font-size: 16px;
+}
+.text-data {
+    margin-left: 30px;
+    margin-top: 10px;
+}
+.btn-edit {
+    width: auto;
+    padding: 5px 10px;
+}
+

@@ -6,6 +6,7 @@
 :root {
     --d-body-bg-color: #002147;
     --d-input-bg-color: #13274F;
+    --d-btn-bg-color: #13274F;
     --l-body-bg-color: #D5E9F5;
     --l-input-bg-color: #D5E9F5;
 }
@@ -108,7 +109,9 @@ h1 {
 [class*="input-"] {
     border-radius: 5px;
 }
-
+[class*="btn-"] {
+    border-radius: 5px;
+}
 .loginLink {
     margin-top: 10px;
 }
@@ -124,4 +127,12 @@ h1 {
 }
 .obligatory {
     color: red;
+}
+.btn-profile {
+    margin-left: auto;
+    float: right;
+}
+.wrapper {
+    display: flex;
+    justify-content: center;
 }

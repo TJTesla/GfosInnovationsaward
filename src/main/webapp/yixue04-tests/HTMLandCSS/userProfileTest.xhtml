@@ -15,49 +15,48 @@
     <title>Profil</title>
 </head>
 <h:body>
-    <ui:composition template="../resources/templates/common.xhtml">
+    <ui:composition template="../../resources/templates/common.xhtml">
         <ui:define name="content">
             <h:outputStylesheet library="css" name="profile.css" />
             <div class="data">
                 <!-- TODO: Insert Profile Photo -->
-                <h:graphicImage value="" styleClass="image-profile"/> <br />
+                <h:graphicImage value="../TestData/Wind%20Surfer.png" styleClass="image-profile"/> <br />
+
                 <div class="wrapper-text">
                     <h:outputLabel for="username" value="Benutzername:" styleClass="label-profile" /> <br />
-                    <h:outputText id="username" value="#{detailApplicant.detailApplicant.name}" styleClass="text-data" />
+                    <h:outputText id="username" value="Yixuee04" styleClass="text-data" />
                 </div>
-
                 <br />
 
-                <div class="wrapper-text">
-                    <h:outputLabel for="email" value="E-mail:" styleClass="label-profile" />  <br />
-                    <h:outputText id="email" value="#{detailApplicant.detailApplicant.email}" styleClass="text-data" />
+            <div class="wrapper-text">
+                <h:outputLabel for="email" value="E-mail:" styleClass="label-profile" />  <br />
+                    <h:outputText id="email" value="vivien.hou@yahoo.de" styleClass="text-data" />
                 </div>
 
                 <br />
 
                 <div class="wrapper-text">
                     <h:outputLabel for="salutation" value="Anrede:" styleClass="label-profile" />  <br />
-                    <h:outputText id="salutation" value="" styleClass="text-data" />
+                    <h:outputText id="salutation" value="Fr." styleClass="text-data" />
                 </div>
 
                 <br />
 
                 <div class="wrapper-text">
                     <h:outputLabel for="fname" value="Vorname:" styleClass="label-profile"/>  <br />
-                    <h:outputText id="fname" value="#{detailApplicant.detailApplicant.firstname}" styleClass="text-data" />
+                    <h:outputText id="fname" value="Vivien Yixue" styleClass="text-data" />
                 </div>
 
                 <br />
-
                 <div class="wrapper-text">
                     <h:outputLabel for="lname" value="Nachname:" styleClass="label-profile" />  <br />
-                    <h:outputText id="lname" value="#{detailApplicant.detailApplicant.lastname}" styleClass="text-data" />
+                    <h:outputText id="lname" value="Hou" styleClass="text-data" />
                 </div>
 
 
                 <br />
                 <div class="wrapper">
-                    <h:button outcome="editProfile.xhtml" value="Profil bearbeiten" styleClass="btn-edit" />
+                    <h:button outcome="../editProfile.xhtml" value="Profil bearbeiten" styleClass="btn-edit" />
                 </div>
             </div>
 
