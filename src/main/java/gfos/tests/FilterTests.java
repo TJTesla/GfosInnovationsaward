@@ -59,14 +59,14 @@ public class FilterTests {
                 null
         ));
 
-        // Only Build a pc
+        // Sr Dev
         ArrayList<String> level = new ArrayList<String>();
-        level.add("1");
+        level.add("6");
         print(odbs.fetchAll(
                 new FilterObject(
                         null,
                         level,
-                        null,
+                        time,
                         null
                 ),
                 null

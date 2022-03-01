@@ -99,6 +99,7 @@ public class OfferDatabaseService extends DatabaseService {
                 query += " WHERE";
             }
             query += " level IN " + getBraceSyntax(f.getLevel());
+            alreadyExtended = true;
         }
         if (f.getTime() != null) {
             if (alreadyExtended) {
