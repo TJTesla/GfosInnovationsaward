@@ -26,12 +26,13 @@ public class ApplicationDatabaseService extends DatabaseService {
     }
 
     private int createResume(Resume r) throws SQLException {
-        stmt = con.prepareStatement("INSERT INTO resumes(id, path, name) VALUES (null, ?, ?); SELECT LAST_INSERT_ID();");
+        stmt = con.prepareStatement("INSERT INTO resumes(id, path, name) VALUES (null, ?, ?);");
         stmt.setString(1, r.getPath());
         stmt.setString(2, r.getName());
+        stmt.executeUpdate();
 
-        rs = stmt.executeQuery();
-        return rs.getInt("id");
+        rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
+        return rs.getInt("LAST_INSERT_ID()");
     }
 
     private boolean resumeExists() {

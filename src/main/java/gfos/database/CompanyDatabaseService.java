@@ -1,6 +1,9 @@
 package gfos.database;
 
+import gfos.beans.Application;
 import gfos.beans.Company;
+import gfos.beans.Offer;
+import jdk.management.resource.internal.inst.AbstractPlainDatagramSocketImplRMHooks;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
@@ -117,5 +120,28 @@ public class CompanyDatabaseService extends DatabaseService implements UserDatab
             System.out.println("Could not delete company: " + sqlException.getMessage());
             return 0;
         }
+    }
+
+    public ArrayList<Application> getAllApplications(int offerId) {
+        ArrayList<Application> result = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement("SELECT * FROM application WHERE offerId=?;");
+            stmt.setInt(1, offerId);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                result.add(new Application(
+                        rs.getInt("userId"),
+                        rs.getInt("offerId"),
+                        rs.getString("text"),
+                        rs.getInt("status"),
+                        rs.getInt("resumeId")
+                ));
+            }
+        } catch (SQLException sqlException) {
+            System.out.println("Could not fetch all applications with offerId: " + offerId + ": " + sqlException.getMessage());
+        }
+        return result;
     }
 }

@@ -2,6 +2,7 @@ package gfos.database;
 
 import gfos.FilterObject;
 import gfos.beans.Applicant;
+import gfos.beans.Application;
 import gfos.beans.Company;
 import gfos.beans.Offer;
 import gfos.longerBeans.GeoCalculator;
@@ -9,6 +10,7 @@ import gfos.longerBeans.GeoCalculator;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -137,21 +139,42 @@ public class OfferDatabaseService extends DatabaseService {
                 return null;
             }
 
-            return new Offer(
-                    rs.getInt("id"),
-                    rs.getString("title"),
-                    rs.getString("description"),
-                    rs.getInt("provider"),
-                    rs.getInt("field"),
-                    rs.getInt("level"),
-                    rs.getInt("time"),
-                    rs.getDouble("lat"),
-                    rs.getDouble("lon")
-            );
+            return createOffer(rs);
         } catch (SQLException sqlException) {
             System.out.println("There was an error fetching offer for id " + id + ": " + sqlException.getMessage());
             return null;
         }
+    }
+
+    public ArrayList<Offer> getAllOffers(int companyId) {
+        ArrayList<Offer> result = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement("SELECT * FROM offer WHERE provider=?;");
+            stmt.setInt(1, companyId);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                result.add(createOffer(rs));
+            }
+        } catch (SQLException sqlException) {
+            System.out.println("Could not fetch all offers from company: " + companyId + ": " + sqlException.getMessage());
+        }
+        return result;
+    }
+
+    private static Offer createOffer(ResultSet resultSet) throws SQLException {
+        return new Offer(
+                resultSet.getInt("id"),
+                resultSet.getString("title"),
+                resultSet.getString("description"),
+                resultSet.getInt("provider"),
+                resultSet.getInt("field"),
+                resultSet.getInt("level"),
+                resultSet.getInt("time"),
+                resultSet.getDouble("lat"),
+                resultSet.getDouble("lon")
+        );
     }
 
     public String getTag(int id) {

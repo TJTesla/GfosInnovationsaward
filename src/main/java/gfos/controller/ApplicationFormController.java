@@ -29,7 +29,7 @@ public class ApplicationFormController {
                     offer.getId(),
                     text,
                     0,
-                    r.getId()
+                    0
             );
 
             adbs.apply(a, r);
@@ -43,12 +43,27 @@ public class ApplicationFormController {
         return ""; // Succespage.xhtml?faces-redirect=true
     }
 
+    public String checkUserRights() {
+        if (cu.getCurrentUser() == null || cu.getCurrentUser() instanceof Company) {
+            return "/login.xhtml";
+        }
+        return "";
+    }
+
     public String getText() {
         return text;
     }
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Offer getOffer() {
+        return offer;
+    }
+
+    public void setOffer(Offer offer) {
+        this.offer = offer;
     }
 }
 
