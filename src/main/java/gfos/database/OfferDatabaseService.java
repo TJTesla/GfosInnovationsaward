@@ -85,7 +85,7 @@ public class OfferDatabaseService extends DatabaseService {
     }
 
     private String getQuery(FilterObject f) {
-        String query = "SELECT * FROM offer ";
+        String query = "SELECT * FROM offer";
 
         boolean alreadyExtended = false;
         if (f.getField() != null) {
@@ -109,6 +109,8 @@ public class OfferDatabaseService extends DatabaseService {
             query += " time IN " + getBraceSyntax(f.getTime());
         }
 
+        System.out.println(query);
+
         return query;
     }
 
@@ -116,7 +118,7 @@ public class OfferDatabaseService extends DatabaseService {
         StringBuilder result = new StringBuilder("(");
 
         for (String item : list) {
-            result.append(item).append(", ");
+            result.append(item).append(",");
         }
         result.deleteCharAt(result.length()-1);  // Delete last comma
         result.append(")");

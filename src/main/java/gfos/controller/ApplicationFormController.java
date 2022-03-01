@@ -22,9 +22,6 @@ public class ApplicationFormController {
     private String text;
 
     public String apply() {
-        if (!(cu.getCurrentUser() instanceof Applicant)) {
-            return "";
-        }
         try {
             Resume r = ResourceIO.uploadResume(cv, offer, cu.getCurrentUser());
             Application a = new Application(
@@ -32,7 +29,7 @@ public class ApplicationFormController {
                     offer.getId(),
                     text,
                     0,
-                    0
+                    r.getId()
             );
 
             adbs.apply(a, r);
