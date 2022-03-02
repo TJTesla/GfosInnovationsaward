@@ -35,11 +35,15 @@ public class LoginController implements Serializable {
 
         if (u instanceof Applicant) {
             cu.setCurrentUser((Applicant)u);
+
+            return "/index.xhtml?faces-redirect=true";
         } else if (u instanceof Company) {
             cu.setCurrentUser((Company)u);
+
+            return "/tjtesla-tests/companyIndex.xhtml?faces-redirect=true";
         }
 
-        return "/index.xhtml?faces-redirect=true";
+        return "";
     }
 
     public String getUsername() {
