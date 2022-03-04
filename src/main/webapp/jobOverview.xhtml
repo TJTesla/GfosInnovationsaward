@@ -16,9 +16,6 @@
 </h:head>
 <h:body>
     <ui:composition template="resources/templates/common.xhtml">
-        <!--ui:define name="header">
-
-        </ui:define-->
         <ui:define name="content">
             <div class="filter">
                 <ul class="navbar">
@@ -28,50 +25,53 @@
                     <li>
                         <h6>Berufsfeld</h6>
                         <h:selectManyCheckbox id="field">
-                            <f:selectItems itemValue="01" itemLabel="Bau, Architektur, Vermessung" />   <br />
-                            <f:selectItems itemValue="02" itemLabel="Dienstleistung" />                 <br />
-                            <f:selectItems itemValue="03" itemLabel="Elektro" />                        <br />
-                            <f:selectItems itemValue="04" itemLabel="Gesundheit" />                     <br />
-                            <f:selectItems itemValue="05" itemLabel="IT, Computer" />                   <br />
-                            <f:selectItems itemValue="06" itemLabel="Kunst, Kultur, Gestaltung" />      <br />
-                            <f:selectItems itemValue="07" itemLabel="Landwirtschaft, Natur, Umwelt" />  <br />
-                            <f:selectItems itemValue="08" itemLabel="Medien" />                         <br />
-                            <f:selectItems itemValue="09" itemLabel="Metall, Maschinenbau" />           <br />
-                            <f:selectItems itemValue="10" itemLabel="Naturwissenschaften" />            <br />
-                            <f:selectItems itemValue="11" itemLabel="Produktion, Fertigung" />          <br />
-                            <f:selectItems itemValue="12" itemLabel="Soziales, P&auml;dagogik" />       <br />
-                            <f:selectItems itemValue="13" itemLabel="Technik, Technologiefelder" />     <br />
-                            <f:selectItems itemValue="14" itemLabel="Verkehr, Logistik" />              <br />
-                            <f:selectItems itemValue="15" itemLabel="Wirtschaft, Verwaltung" />         <br />
+                            <f:selectItem itemValue="01" itemLabel="Bau, Architektur, Vermessung" />
+                            <f:selectItem itemValue="02" itemLabel="Dienstleistung" />
+                            <f:selectItem itemValue="03" itemLabel="Elektro" />
+                            <f:selectItem itemValue="04" itemLabel="Gesundheit" />
+                            <f:selectItem itemValue="05" itemLabel="IT, Computer" />
+                            <f:selectItem itemValue="06" itemLabel="Kunst, Kultur, Gestaltung" />
+                            <f:selectItem itemValue="07" itemLabel="Landwirtschaft, Natur, Umwelt" />
+                            <f:selectItem itemValue="08" itemLabel="Medien" />
+                            <f:selectItem itemValue="09" itemLabel="Metall, Maschinenbau" />
+                            <f:selectItem itemValue="10" itemLabel="Naturwissenschaften" />
+                            <f:selectItem itemValue="11" itemLabel="Produktion, Fertigung" />
+                            <f:selectItem itemValue="12" itemLabel="Soziales, P&auml;dagogik" />
+                            <f:selectItem itemValue="13" itemLabel="Technik, Technologiefelder" />
+                            <f:selectItem itemValue="14" itemLabel="Verkehr, Logistik" />
+                            <f:selectItem itemValue="15" itemLabel="Wirtschaft, Verwaltung" />
                         </h:selectManyCheckbox>
                     </li>
                     <li>
                         <h6>Einstiegslevel:</h6>
                         <h:selectManyCheckbox id="level">
-                            <f:selectItems itemValue="1" itemLabel="Praktikanten" />        <br />
-                            <f:selectItems itemValue="2" itemLabel="Abschlussarbeiten" />   <br />
-                            <f:selectItems itemValue="3" itemLabel="Doktoranden" />         <br />
-                            <f:selectItems itemValue="4" itemLabel="Auszubildende" />       <br />
-                            <f:selectItems itemValue="5" itemLabel="Duales Studium" />      <br />
-                            <f:selectItems itemValue="6" itemLabel="Absolventen" />         <br />
-                            <f:selectItems itemValue="7" itemLabel="Berufserfahrene" />     <br />
+                            <f:selectItem itemValue="1" itemLabel="Praktikanten" />
+                            <f:selectItem itemValue="2" itemLabel="Abschlussarbeiten" />
+                            <f:selectItem itemValue="3" itemLabel="Doktoranden" />
+                            <f:selectItem itemValue="4" itemLabel="Auszubildende" />
+                            <f:selectItem itemValue="5" itemLabel="Duales Studium" />
+                            <f:selectItem itemValue="6" itemLabel="Absolventen" />
+                            <f:selectItem itemValue="7" itemLabel="Berufserfahrene" />
                         </h:selectManyCheckbox>
                     </li>
                     <li>
                         <h6>Praktikum:</h6>
                         <h:selectManyCheckbox id="time">
-                            <f:selectItems itemValue="full" itemLabel="Vollzeit" />     <br />
-                            <f:selectItems itemValue="part" itemLabel="Teilzeit" />     <br />
-                            <f:selectItems itemValue="mini" itemLabel="Minijob" />      <br />
+                            <f:selectItem itemValue="full" itemLabel="Vollzeit" />
+                            <f:selectItem itemValue="part" itemLabel="Teilzeit" />
+                            <f:selectItem itemValue="mini" itemLabel="Minijob" />
                         </h:selectManyCheckbox>
                     </li>
                 </ul>
             </div>
             <div class="offers" onclick="redirect('offer.xhtml')">
-                <ui:repeat id="offers" var="" value="" varStatus="">
-                    <h:graphicImage value="" />
-                    <h6> <!-- Titel des Angebots --> </h6>
-                    <p> <!-- Beschreibung des Angebots --> </p>
+                <ui:repeat id="offers" var="o" value="" varStatus="">
+                    <div class="">
+                        <h:graphicImage value="" />
+                        <h6> <!-- Titel des Angebots --> </h6>
+                        <h:outputText id="location" value="" styleClass=""/> <!-- Place of the offer -->
+                        <h:outputText id="fieldOffer" value="" styleClass=""/> <!-- Field of the offer -->
+                    </div>
                 </ui:repeat>
             </div>
         </ui:define>

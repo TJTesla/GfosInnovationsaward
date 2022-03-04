@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:k="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xml:lang="en" lang="en">
+<h:head>
+    <title>Registrieren</title>
+    <!--link href="resources/css/CSSResetStyleSheet.css" rel="stylesheet" /-->
+    <!--link href="resources/css/styleBasic.css" rel="stylesheet" /-->
+</h:head>
+<h:body>
+    <ui:composition template="../resources/templates/common.xhtml">
+        <ui:define name="content">
+            <h:outputStylesheet library="css" name="login.css" />
+            <h:outputScript library="javascript" name="jquery-3.6.0.js" />
+            <div align="center">
+                <h1>Willkommen!</h1>
+                <hr />
+            </div>
+            <h:form id="registrationForm"
+                    rendered="#{applicantRegistrationController.showRegistration}"
+                    enctype="multipart/form-data">
+                <fieldset class="headingF"><p class="heading">Neues Profil erstellen</p></fieldset>
+                <fieldset class="user">
+                    <legend>Persönliche Daten</legend>
+                    <h:outputLabel for="salutation" styleClass="label-reg1" value="Anrede:"><span class="obligatory">&nbsp;*</span> </h:outputLabel>
+                    <h:selectOneMenu id="salutation" name="salutation"
+                                     styleClass="#{applicantRegistrationController.getErrorMessage('salutation').equals('') ? 'input-plain' : 'input-error'}"
+                                     value="#{applicantRegistrationController.salutation}">
+                        <f:selectItem itemValue="-1" itemLabel="Bitte auswählen" p:selected="selected" />
+                        <f:selectItem itemValue="1" itemLabel="Herr" />
+                        <f:selectItem itemValue="2" itemLabel="Frau" />
+                        <f:selectItem itemValue="9" itemLabel="Divers" />
+                        <f:selectItem itemValue="0" itemLabel="keine Angabe" />
+                    </h:selectOneMenu>
+                    <c:if test="#{not (applicantRegistrationController.getErrorMessage('salutation').equals('')) }">
+                        <div class="errMsg-reg1">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="#{applicantRegistrationController.getErrorMessage('salutation')}"
+                                          rendered="#{applicantRegistrationController.registerError}"/>
+                        </div>
+                    </c:if>
+                    <br/>
+
+                    <h:outputLabel for="title" styleClass="label-reg1" value="Titel:" />
+                    <h:selectManyCheckbox id="title" name="title" styleClass="checkTitel" value="#{applicantRegistrationController.title}" >
+                        <f:selectItems value="#{applicantRegistrationController.allTitles}" var="t" itemValue="#{t}" itemLabel="#{t}" />
+                    </h:selectManyCheckbox>
+                    <br />
+
+                    <h:outputLabel for="fname" styleClass="label-reg1" value="Vorname:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
+                    <h:inputText id="fname" name="vorname" type="text"
+                                 styleClass="#{applicantRegistrationController.getErrorMessage('firstname').equals('') ? 'input-plain' : 'input-error'}"
+                                 value="#{applicantRegistrationController.firstname}" />
+                    <c:if test="#{not (applicantRegistrationController.getErrorMessage('firstname').equals('')) }">
+                        <div class="errMsg-reg1">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="#{applicantRegistrationController.getErrorMessage('firstname')}"
+                                          rendered="#{applicantRegistrationController.registerError}" />
+                        </div>
+                    </c:if>
+                    <br/>
+
+                    <h:outputLabel for="lname" styleClass="label-reg1" value="Nachname:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
+                    <h:inputText id="lname" name="nachname" type="text"
+                                 styleClass="#{applicantRegistrationController.getErrorMessage('lastname').equals('') ? 'input-plain' : 'input-error'}"
+                                 value="#{applicantRegistrationController.lastname}" />
+                    <c:if test="#{not (applicantRegistrationController.getErrorMessage('lastname').equals('')) }">
+                        <div class="errMsg-reg1">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="#{applicantRegistrationController.getErrorMessage('lastname')}"
+                                          rendered="#{applicantRegistrationController.registerError}" />
+                        </div>
+                    </c:if>
+                    <br/>
+                </fieldset>
+
+                <fieldset class="data">
+                    <legend>Profil-Daten</legend>
+                    <h:outputLabel for="username" styleClass="label-reg2" value="Benutzername:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
+                    <h:inputText id="username" value="#{applicantRegistrationController.username}"
+                                 styleClass="#{applicantRegistrationController.getErrorMessage('username').equals('') ? 'input-plain' : 'input-error'}"/>
+                    <c:if test="#{not (applicantRegistrationController.getErrorMessage('username').equals('')) }">
+                        <div class="errMsg-reg2">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="#{applicantRegistrationController.getErrorMessage('username')}"
+                                          rendered="#{applicantRegistrationController.registerError}" />
+                        </div>
+                    </c:if>
+                    <br />
+
+                    <!-- Email regex: ^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$ -->
+                    <h:outputLabel for="email" styleClass="label-reg2" value="E-Mail:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
+                    <h:inputText id="email" name="email" type="text" k:placeholder="example@email.com"
+                                 styleClass="#{applicantRegistrationController.getErrorMessage('email').equals('') ? 'input-plain' : 'input-error'}"
+                                 value="#{applicantRegistrationController.email}" />
+                    <c:if test="#{not (applicantRegistrationController.getErrorMessage('email').equals('')) }">
+                        <div class="errMsg-reg2">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="#{applicantRegistrationController.getErrorMessage('email')}"
+                                          rendered="#{applicantRegistrationController.registerError}" />
+                        </div>
+                    </c:if>
+                    <br />
+
+                    <h:outputLabel for="emailRepeat" styleClass="label-reg2" value="E-Mail wiederholen:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
+                    <h:inputText id="emailRepeat" name="emailWiederholen" type="text"
+                                 styleClass="#{applicantRegistrationController.getErrorMessage('emailRepeat').equals('') ? 'input-plain' : 'input-error'}"
+                                 value="#{applicantRegistrationController.emailRepeat}" />
+                    <c:if test="#{not (applicantRegistrationController.getErrorMessage('emailRepeat').equals('')) }">
+                        <div class="errMsg-reg2" >
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="#{applicantRegistrationController.getErrorMessage('emailRepeat')}"
+                                          rendered="#{applicantRegistrationController.registerError}" />
+                        </div>
+                    </c:if>
+                    <br />
+
+                    <!-- Password regex: ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=&lt;>]).{8,20}$ -->
+                    <h:outputLabel for="password" styleClass="label-reg2" value="Passwort:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
+                    <h:inputSecret id="password" name="passwort" type="password"
+                                   styleClass="#{applicantRegistrationController.getErrorMessage('password').equals('') ? 'input-plain' : 'input-error'}"
+                                   value="#{applicantRegistrationController.password}" />
+                    <c:if test="#{not (applicantRegistrationController.getErrorMessage('password').equals('')) }">
+                        <div class="errMsg-reg2">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="#{applicantRegistrationController.getErrorMessage('password')}"
+                                          rendered="#{applicantRegistrationController.registerError}" />
+                        </div>
+                    </c:if>
+                    <br />
+
+                    <h:outputLabel for="passwordRepeat" styleClass="label-reg2" value="Passwort wiederholen:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
+                    <h:inputSecret id="passwordRepeat" name="passwortWiederholen" type="password"
+                                   styleClass="#{applicantRegistrationController.getErrorMessage('passwordRepeat').equals('') ? 'input-plain' : 'input-error'}"
+                                   value="#{applicantRegistrationController.passwordRepeat}" />
+                    <c:if test="#{not applicantRegistrationController.getErrorMessage('passwordRepeat').equals('')}">
+                        <div class="errMsg-reg2">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="#{applicantRegistrationController.getErrorMessage('passwordRepeat')}"
+                                          rendered="#{applicantRegistrationController.registerError}" />
+                        </div>
+                    </c:if>
+                    <br />
+
+                    <h:outputLabel for="photo" styleClass="label-reg2" value="Profilbild hochladen:" />
+                    <p:fileUpload id="photo" mode="simple" update="@form" styleClass="upload" value="#{applicantRegistrationController.pbFile}"/>
+                    <br />
+                </fieldset>
+                    <h3>Addresse:</h3>
+
+                    Straße: <h:inputText value="#{applicantRegistrationController.street}" />
+                    <br />
+                    Postleitzahl: <h:inputText value="#{applicantRegistrationController.zip}" />
+                    <br />
+                    Ort: <h:inputText value="#{applicantRegistrationController.city}" />
+                    <br />
+                <fieldset>
+
+                </fieldset>
+
+                <fieldset class="buttons-reg">
+                    <p id="footnote"><span class="obligatory">&nbsp;*</span> Angabepflichtig</p>
+                    <h:commandButton id="register" action="#{applicantRegistrationController.register()}" type="submit" value="Registrieren" styleClass="loginButton"/>
+                    <br />
+                </fieldset>
+                <div class="linkAlign">
+                    Schon ein Profil? &nbsp;
+                    <h:commandLink value="Hier anmelden."
+                                   id="loginLink"
+                                   action="#{applicantRegistrationController.switchView()}"
+                                   rendered="#{applicantRegistrationController.showRegistration}"
+                                   styleClass="link" />
+                </div>
+            </h:form>
+
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <h:form id="loginForm" rendered="#{not applicantRegistrationController.showRegistration}">
+                <fieldset class="login" style="margin-top: 30px">
+                    <legend>Login</legend>
+
+                    <h:outputLabel for="user" styleClass="label-login" value="Benutzername:" /> <br />
+                    <h:inputText id="user" type="text" name="user" value="#{loginController.username}"
+                                 styleClass="input-login" />
+                    <br />
+                    <h:outputLabel for="passwordL" styleClass="label-login" value="Passwort:" /> <br />
+                    <h:inputSecret id="passwordL" type="password" name="password" value="#{loginController.password}"
+                                   styleClass="input-login" />
+                    <br />
+                    <c:if test="#{loginController.loginError}">
+                        <p class="errMsg-login">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="Anmeldung fehlgeschlagen: Unbekannter Benutzer oder falsches Passwort."
+                                          rendered="#{loginController.loginError}" />
+                        </p>
+                    </c:if>
+
+                </fieldset>
+                <fieldset class="buttons-login">
+                    <h:commandButton id="login" action="#{loginController.login()}" value="Einloggen" styleClass="loginButton"/>
+                    <br />
+                </fieldset>
+                <div class="linkAlign">
+                    Noch kein Profil? &nbsp;
+                    <h:commandLink value="Hier erstellen."
+                                   id="registrationLink"
+                                   action="#{applicantRegistrationController.switchView()}"
+                                   rendered="#{not applicantRegistrationController.showRegistration}"
+                                   styleClass="link" />
+                </div>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

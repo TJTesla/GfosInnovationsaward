@@ -1,65 +1,129 @@
 package gfos.controller;
 
-import gfos.UserException;
+import gfos.FilterObject;
+import gfos.database.MiscellaneousDatabaseService;
+import gfos.exceptions.UserException;
 import gfos.beans.Applicant;
 import gfos.beans.Company;
 import gfos.beans.Offer;
 import gfos.database.ApplicantDatabaseService;
-import gfos.database.DatabaseService;
 import gfos.database.OfferDatabaseService;
-import gfos.sessionBeans.CurrentUser;
+import gfos.longerBeans.CurrentUser;
+import javafx.util.Pair;
 
-import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 @Named
-public class IndexController {
+@ViewScoped
+public class IndexController implements Serializable {
     @Inject
     ApplicantDatabaseService adbs;
     @Inject
     OfferDatabaseService odbs;
     @Inject
+    MiscellaneousDatabaseService mdbs;
+    @Inject
     CurrentUser cu;
 
-    boolean isCompany;  // Maybe useful for rendering company specific ui elements
-
-    @PostConstruct
-    private void init() {
-        if (cu == null) {
-            return;
-        }
-        isCompany = cu.getCurrentUser().getClass() == Company.class;
-    }
+    private ArrayList<String> field;  // 1:n
+    private ArrayList<String> level;  // 1:n
+    private ArrayList<String> time;  // 1:n
+    private String maxDistance;
 
     public ArrayList<Offer> getAllOffers() {
-        return odbs.fetchAll();
+        System.out.println("Field: " + field);
+
+        ArrayList<Offer> offerList =  odbs.fetchAll(
+                new FilterObject(
+                        field,
+                        level,
+                        time,
+                        toInt(maxDistance)
+                ),
+                (Applicant) cu.getCurrentUser()
+        );
+
+        return offerList;
     }
 
-    public String getCurrentUsername() throws UserException {
-        if (cu.getCurrentUser().getClass() == Applicant.class) {
-            return ((Applicant)cu.getCurrentUser()).getUsername();
-        } else if (cu.getCurrentUser().getClass() == Company.class) {
-            return ((Company)cu.getCurrentUser()).getName();
+    private Integer toInt(String str) {
+        if (str == null || str.equals("-1")) {
+            return null;
         }
 
-        throw new UserException("Current user has an undefined behaviour for its current user class");
+        try {
+            return Integer.getInteger(str);
+        } catch (NumberFormatException nfe) {
+            System.out.println("Cannot change string: " + str + " to Integer: " + nfe.getMessage());
+            return null;
+        }
+    }
+
+    public String offerDetailPage(int offerId) {
+        return "/02-offer/offer.xhtml?id=" + offerId;
     }
 
     public String checkLogIn() {
         if (cu.getCurrentUser() == null) {
-            return "login.xhtml";
+            return "/00-loginRegistration/login.xhtml";
         } else {
             return "";
         }
     }
 
-    public boolean isCompany() {
-        return isCompany;
+    public String reload() {
+        return "";
     }
 
-    public void setCompany(boolean company) {
-        isCompany = company;
+    public boolean isCompany() {
+        return cu.getCurrentUser() instanceof Company;
+    }
+
+    public ArrayList<Pair<Integer, String>> getAllFields() {
+        return mdbs.getAllFields();
+    }
+
+    public ArrayList<Pair<Integer, String>> getAllLevels() {
+        return mdbs.getAllLevels();
+    }
+
+    public ArrayList<Pair<Integer, String>> getAllTimes() {
+        return mdbs.getAllTimes();
+    }
+
+    public ArrayList<String> getField() {
+        return field;
+    }
+
+    public void setField(ArrayList<String> field) {
+        this.field = field;
+    }
+
+    public ArrayList<String> getLevel() {
+        return level;
+    }
+
+    public void setLevel(ArrayList<String> level) {
+        this.level = level;
+    }
+
+    public ArrayList<String> getTime() {
+        return time;
+    }
+
+    public void setTime(ArrayList<String> time) {
+        this.time = time;
+    }
+
+    public String getMaxDistance() {
+        return maxDistance;
+    }
+
+    public void setMaxDistance(String maxDistance) {
+        this.maxDistance = maxDistance;
     }
 }

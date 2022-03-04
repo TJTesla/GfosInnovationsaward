@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xml:lang="en" lang="en">
+<f:metadata>
+    <f:viewParam name="id" value="#{detailApplicant.detailApplicant}" converter="#{applicantConverter}" />
+</f:metadata>
+<head>
+    <title>Profil</title>
+</head>
+<h:body>
+    <ui:composition template="../resources/templates/common.xhtml">
+        <ui:define name="content">
+            <h:outputStylesheet library="css" name="profile.css" />
+            <div class="data">
+                <!-- TODO: Insert Profile Photo -->
+                <h:graphicImage value="" styleClass="image-profile"/> <br />
+                <div class="wrapper-text">
+                    <h:outputLabel for="username" value="Benutzername:" styleClass="label-profile" /> <br />
+                    <h:outputText id="username" value="#{detailApplicant.detailApplicant.name}" styleClass="text-data" />
+                </div>
+
+                <br />
+
+                <div class="wrapper-text">
+                    <h:outputLabel for="email" value="E-mail:" styleClass="label-profile" />  <br />
+                    <h:outputText id="email" value="#{detailApplicant.detailApplicant.email}" styleClass="text-data" />
+                </div>
+
+                <br />
+
+                <div class="wrapper-text">
+                    <h:outputLabel for="salutation" value="Anrede:" styleClass="label-profile" />  <br />
+                    <h:outputText id="salutation" value="" styleClass="text-data" />
+                </div>
+
+                <br />
+
+                <div class="wrapper-text">
+                    <h:outputLabel for="fname" value="Vorname:" styleClass="label-profile"/>  <br />
+                    <h:outputText id="fname" value="#{detailApplicant.detailApplicant.firstname}" styleClass="text-data" />
+                </div>
+
+                <br />
+
+                <div class="wrapper-text">
+                    <h:outputLabel for="lname" value="Nachname:" styleClass="label-profile" />  <br />
+                    <h:outputText id="lname" value="#{detailApplicant.detailApplicant.lastname}" styleClass="text-data" />
+                </div>
+
+
+                <br />
+                <div class="wrapper">
+                    <h:button outcome="editProfile.xhtml" value="Profil bearbeiten" styleClass="btn-edit" />
+                </div>
+            </div>
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

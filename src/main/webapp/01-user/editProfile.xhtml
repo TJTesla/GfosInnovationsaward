@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:k="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en" lang="en">
+<f:metadata>
+    <f:viewParam name="id" value="#{detailApplicant.detailApplicant}" converter="#{applicantConverter}" />
+</f:metadata>
+<head>
+    <title>Profil Bearbeiten</title>
+</head>
+<h:body>
+    <!-- TODO: Change validation -->
+    <!-- TODO: Add correct controller methods -->
+    <ui:composition template="../resources/templates/common.xhtml">
+        <ui:define name="content" class="update">
+            <h:form>
+                <h1 align="center">Profil &Auml;ndern</h1>
+                <fieldset>
+                    <h:outputLabel for="username" value="Benutzername:" styleClass="outLabel"/>
+                    <h:inputText id="username" value="#{detailApplicant.detailApplicant.name}" styleClass="input">
+                        <f:validateLength minimum="2" maximum="10" />
+                    </h:inputText>
+                    <h:message for="username" infoClass="infoMessage" errorClass="errorMessage" />
+                    <br />
+                    <h:outputLabel for="fname" value="Vorname:" styleClass="outLabel"/>
+                    <h:inputText id="fname" value="#{detailApplicant.detailApplicant.firstname}" styleClass="input">
+                        <f:validateLength minimum="2" maximum="20" />
+                    </h:inputText>
+                    <h:message for="fname" infoClass="infoMessage" errorClass="errorMessage" />
+                    <br />
+                    <h:outputLabel for="lname" value="Nachname:" styleClass="outLabel" />
+                    <h:inputText id="lname" value="#{detailApplicant.detailApplicant.lastname}" rendered="true" styleClass="input">
+                        <f:validateLength minimum="2" maximum="10" />
+                    </h:inputText>
+                    <h:message for="lname" infoClass="infoMessage" errorClass="errorMessage" rendered="true"/>
+                    <br />
+                    <h:outputLabel for="email" value="E-Mail:" styleClass="outLabel" />
+                    <h:inputText id="email" value="#{detailApplicant.detailApplicant.email}" rendered="true" styleClass="input" >
+                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                    </h:inputText>
+                    <h:message for="email" infoClass="infoMessage" errorClass="errorMessage" rendered="true" />
+                    <br />
+                    <h:outputLabel for="emailRepeat" value="E-Mail wiederholen:" styleClass="outLabel" />
+                    <h:inputText id="emailRepeat" name="emailWiederholen" type="text" required="true" styleClass="input" />
+                    <h:outputText for="emailRepeat" id="checkMail" value="" />
+                    <br />
+                    <h:outputLabel for="pswdOld" value="Altes Passwort:" styleClass="outLabel" />
+                    <h:inputSecret id="pswdOld" rendered="true" styleClass="input" />
+                    <br />
+                    <h:outputLabel for="password" value="Neues Passwort:" styleClass="outLabel" />
+                    <h:inputSecret id="password" rendered="true" styleClass="input">
+                        <f:validateRegex pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=&lt;>]).{8,20}$" />
+                    </h:inputSecret>
+                    <h:message for="password" infoClass="infoMessage" errorClass="errorMessage" rendered="true" />
+                    <br />
+                    <h:outputLabel for="passwordRepeat" value="Passwort wiederholen:" styleClass="outLabel" />
+                    <h:inputSecret id="passwordRepeat" rendered="true" styleClass="input"/>
+                    <h:outputText for="passwordRepeat" id="checkPswd" value="" />
+                    <br />
+                </fieldset>
+                <!--h:commandButton action="" value="Änderungen speichern" rendered="true"/-->
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

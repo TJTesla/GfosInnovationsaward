@@ -1,4 +1,3 @@
-
 function openNav() {
     document.getElementById("sideNav").style.width = "250px";
     $("#sideNav").show(500, "linear");

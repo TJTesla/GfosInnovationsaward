@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:k="http://xmlns.jcp.org/jsf/passthrough">
 
 <f:metadata>
     <f:viewAction action="#{indexController.checkLogIn()}" />
@@ -12,30 +13,109 @@
 
 <head>
     <title>JEE Test</title>
+    <h:outputStylesheet library="css" name="index.css" />
 </head>
 
-<body>
-<h1>Hallo <h:outputText value="#{indexController.currentUsername}" /> </h1>
+<h:body>
+    <!-- TODO: Still needs to be implemented and tested properly -->
+    <!-- TODO: Change selectManyCheckboxes. CSS cannot be applied in this way -->
+    <ui:composition template="resources/templates/common.xhtml">
+        <ui:define name="content">
+            <h:panelGroup styleClass="filter" rendered="true" > <!-- This will raise an error since no boolean is given -->
+                <h:inputText id="place" k:placeholder="Standort" styleClass="navLabel" />
+                <div class="dropdown">
+                    <button class="dropbtn" id="dropbtnField" onclick="fieldDrop()">Berufsfeld <i class="fa-caret-dowm" /></button>
+                    <div class="navContent" id="dropdownField">
+                        <h:selectOneMenu id="field" value="#{indexController.field}">
+                            <!-- f:selectItem itemValue="01" itemLabel="Bau, Architektur, Vermessung" />
+                            <f:selectItem itemValue="02" itemLabel="Dienstleistung" />
+                            <f:selectItem itemValue="03" itemLabel="Elektro" />
+                            <f:selectItem itemValue="04" itemLabel="Gesundheit" />
+                            <f:selectItem itemValue="05" itemLabel="IT, Computer" />
+                            <f:selectItem itemValue="06" itemLabel="Kunst, Kultur, Gestaltung" />
+                            <f:selectItem itemValue="07" itemLabel="Landwirtschaft, Natur, Umwelt" />
+                            <f:selectItem itemValue="08" itemLabel="Medien" />
+                            <f:selectItem itemValue="09" itemLabel="Metall, Maschinenbau" />
+                            <f:selectItem itemValue="10" itemLabel="Naturwissenschaften" />
+                            <f:selectItem itemValue="11" itemLabel="Produktion, Fertigung" />
+                            <f:selectItem itemValue="12" itemLabel="Soziales, P&auml;dagogik" />
+                            <f:selectItem itemValue="13" itemLabel="Technik, Technologiefelder" />
+                            <f:selectItem itemValue="14" itemLabel="Verkehr, Logistik" />
+                            <f:selectItem itemValue="15" itemLabel="Wirtschaft, Verwaltung" /-->
 
-<h:dataTable value="#{indexController.allApplicants}" var="i">
+                            <f:selectItem itemValue="-1" itemLabel="Berufsfelder" />
+                            <f:selectItems value="#{indexController.allFields}" var="t" itemValue="#{t.key}" itemLabel="#{t.value}" />
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn" id="dropbtnLevel" onclick="levelDrop()">Einstieglevel <i class="fa-caret-dowm" /></button>
+                    <div class="navContent" id="dropdownLevel">
+                        <h:selectOneMenu id="level" value="#{indexController.level}">
+                            <!--f:selectItem itemValue="1" itemLabel="Praktikanten" />
+                            <f:selectItem itemValue="2" itemLabel="Abschlussarbeiten" />
+                            <f:selectItem itemValue="3" itemLabel="Doktoranden" />
+                            <f:selectItem itemValue="4" itemLabel="Auszubildende" />
+                            <f:selectItem itemValue="5" itemLabel="Duales Studium" />
+                            <f:selectItem itemValue="6" itemLabel="Absolventen" />
+                            <f:selectItem itemValue="7" itemLabel="Berufserfahrene" /-->
+
+                            <f:selectItem itemValue="-1" itemLabel="Einstiegslevel" />
+                            <f:selectItems value="#{indexController.allLevels}" var="t" itemValue="#{t.key}" itemLabel="#{t.value}" />
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn" id="dropbtnTime" onclick="timeDrop()">Praktikum <i class="fa-caret-dowm" /></button>
+                    <div class="navContent" id="dropdownTime">
+                        <h:selectOneMenu id="time" value="#{indexController.time}">
+                            <!--f:selectItem itemValue="full" itemLabel="Vollzeit" />
+                            <f:selectItem itemValue="part" itemLabel="Teilzeit" />
+                            <f:selectItem itemValue="mini" itemLabel="Minijob" /-->
+
+                            <f:selectItem itemValue="-1" itemLabel="Zeitumfang" />
+                            <f:selectItems value="#{indexController.allTimes}" itemValue="#{t.key}" itemLabel="#{t.value}" />
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+
+                <div>
+                    Umfeld (in km):
+                    <h:inputText value="#{indexController.maxDistance}" />
+                </div>
+            </h:panelGroup>
+
+            <div class="offers" onclick="redirect('offer.xhtml')">
+                <ui:repeat id="offers" var="offer" value="#{indexController.allOffers}" varStatus="">
+                    <div class="">
+                        <h:graphicImage value="" />
+                        <h6> #{offer.title} </h6>
+                        <h:outputText id="location" value="" styleClass=""/> <!-- Place of the offer -->
+                        <h:outputText id="fieldOffer" value="#{offer.description}" styleClass=""/> <!-- Field of the offer -->
+                    </div>
+                </ui:repeat>
+            </div>
+
+            <h:form>
+                <h:commandButton value="Filtern" action="#{indexController.reload()}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+<!--h:dataTable value="#{indexController.allOffers}" var="i">
     <h:column>
-        <f:facet name="header">Firstname </f:facet>
-        <h:outputText value="#{i.firstname}" />
+        <f:facet name="header">Titel </f:facet>
+        <h:outputText value="#{i.title}" />
     </h:column>
     <h:column>
-        <f:facet name="header">Lastname</f:facet>
-        <h:outputText value="#{i.lastname}" />
-    </h:column>
-    <h:column>
-        <f:facet name="header">Username</f:facet>
-        <h:outputText value="#{i.username}" />
+        <f:facet name="header">description</f:facet>
+        <h:outputText value="#{i.description}" />
     </h:column>
 
-    <h:column>
-        <h:outputText value="#{i.titles}" />
-    </h:column>
-
-</h:dataTable>
-</body>
+</h:dataTable-->
+    <h:outputScript library="javascript" name="index.js" />
+</h:body>
 
 </html>

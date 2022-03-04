@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+   <h2>Theos part</h2>
+   <div class="card">
+      <p:graphicImage value="#{uploadtestController.displayImage}" />
+   </div>
+
+
+   <p>
+      <h:form enctype="multipart/form-data">
+         <p:fileUpload value="#{uploadtestController.file}" mode="simple" />
+
+         <p:commandButton value="Submit" ajax="false" action="#{uploadtestController.upload()}" />
+      </h:form>
+   </p>
+   <p>
+      <h:form>
+         <h:commandButton value="Load" action="#{uploadtestController.loadFile()}" />
+
+         <p:commandButton value="Download" ajax="false">
+            <p:fileDownload value="#{uploadtestController.downloadFile}" />
+         </p:commandButton>
+      </h:form>
+   </p>
+   <p>
+      <h:form enctype="multipart/form-data">
+         <p:fileUpload value="#{uploadtestController.file}" mode="simple" />
+
+         <p:separator/>
+         <h:commandButton value="Dummy Action" action="#{uploadtestController.dummyAction}" />
+      </h:form>
+   </p>
+   <p>
+      <h:form enctype="multipart/form-data" style="width:500px">
+         <p:fileUpload value="#{uploadtestController.file}" mode="advanced" multiple="true"
+                        allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                       fileUploadListener="#{uploadtestController.fileUploadListener}"
+                       update="msg" />
+         <p:growl id="msg" />
+      </h:form>
+   </p>
+</h:body>
+
+</html>

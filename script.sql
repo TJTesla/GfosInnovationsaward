@@ -79,9 +79,9 @@ create table offer
     tag         int         null,
     category    int         null,
     constraint offer_cat_fk
-        foreign key (category) references category (id),
+        foreign key (category) references time (id),
     constraint offer_tag_fk
-        foreign key (tag) references tags (id),
+        foreign key (tag) references fields (id),
     constraint providerFk
         foreign key (provider) references company (id)
 );

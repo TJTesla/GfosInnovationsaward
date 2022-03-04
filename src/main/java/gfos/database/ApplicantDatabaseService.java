@@ -1,6 +1,8 @@
 package gfos.database;
 
 import gfos.beans.Applicant;
+import gfos.beans.Company;
+import gfos.beans.User;
 
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
@@ -11,7 +13,7 @@ import java.util.HashMap;
 
 @Named
 @ApplicationScoped
-public class ApplicantDatabaseService extends DatabaseService {
+public class ApplicantDatabaseService extends DatabaseService implements UserDatabaseInterface {
 
     public ApplicantDatabaseService() throws SQLException {
         super();
@@ -21,17 +23,24 @@ public class ApplicantDatabaseService extends DatabaseService {
     public boolean createOne(Applicant a) {
         try {
             stmt = con.prepareStatement("" +
-                    "INSERT INTO applicant(id, username, password, firstname, lastname, gender) VALUES " +
-                    "(null, ?, SHA2(?, 256), ?, ?, ?);"
+                    "INSERT INTO applicant(id, username, password, firstname, lastname, email, gender, pb, lat, lon) VALUES " +
+                    "(null, ?, SHA2(?, 256), ?, ?, ?, ?, ?, ?, ?);"
             );
-            stmt.setString(1, a.getUsername());
+            stmt.setString(1, a.getName());
             stmt.setString(2, a.getPassword());
             stmt.setString(3, a.getFirstname());
             stmt.setString(4, a.getLastname());
-            stmt.setInt(5, a.getGender());
-
+            stmt.setString(5, a.getEmail());
+            stmt.setInt(6, a.getGender());
+            stmt.setString(7, a.getPb());
+            stmt.setDouble(8, a.getLat());
+            stmt.setDouble(9, a.getLon());
             int affectedRows = stmt.executeUpdate();
 
+            rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
+            rs.next();
+
+            a.setId(rs.getInt("LAST_INSERT_ID()"));
             affectedRows += insertTitles(a);
 
             return affectedRows != 0;
@@ -62,19 +71,6 @@ public class ApplicantDatabaseService extends DatabaseService {
         return stmt.executeUpdate();
     }
 
-    public boolean exists(Applicant a) {
-        try {
-            stmt = con.prepareStatement("SELECT username FROM applicant WHERE username=?");
-            stmt.setString(1, a.getUsername());
-            rs = stmt.executeQuery();
-
-            return rs.next();
-        } catch (SQLException sqlException) {
-            System.out.println("Error while finding already existing user: " + sqlException.getMessage());
-            return true;
-        }
-    }
-
     public ArrayList<Applicant> fetchAll() {
         ArrayList<Applicant> list = new ArrayList<>();
         try {
@@ -88,8 +84,12 @@ public class ApplicantDatabaseService extends DatabaseService {
                         rs.getString("password"),
                         rs.getString("firstname"),
                         rs.getString("lastname"),
+                        rs.getString("email"),
                         rs.getInt("gender"),
-                        getTitles(rs.getInt("id"))
+                        getTitles(rs.getInt("id")),
+                        rs.getString("pb"),
+                        rs.getDouble("lat"),
+                        rs.getDouble("lon")
                 );
 
                 list.add(temp);
@@ -99,6 +99,19 @@ public class ApplicantDatabaseService extends DatabaseService {
         }
 
         return list;
+    }
+
+    public Applicant getById(int id) {
+        try {
+            stmt = con.prepareStatement("SELECT * FROM applicant WHERE id=?;");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            return parseApplicant();
+        } catch (SQLException sqlException) {
+            System.out.println("Could not get applicant with id " + id + ": " + sqlException.getMessage());
+            return null;
+        }
     }
 
     private ArrayList<String> getTitles(int userId) {
@@ -122,31 +135,106 @@ public class ApplicantDatabaseService extends DatabaseService {
         return titles;
     }
 
-    public Applicant loginAttempt(String user, String password) {
+    public User loginAttempt(String user, String password) {
         try {
             stmt = con.prepareStatement("SELECT * FROM applicant WHERE username=? AND password=SHA2(?, 256)");
             stmt.setString(1, user);
             stmt.setString(2, password);
-
             rs = stmt.executeQuery();
-            if (!rs.next()) {
-                return null;
+
+            Applicant a = parseApplicant();
+            if (a != null) {
+                return a;
             }
 
-            return new Applicant(
-                    rs.getInt("id"),
-                    rs.getString("username"),
-                    rs.getString("password"),
-                    rs.getString("firstname"),
-                    rs.getString("lastname"),
-                    rs.getInt("gender"),
-                    getTitles(rs.getInt("id"))
-            );
+            stmt = con.prepareStatement("SELECT * FROm company WHERE name=? AND password=SHA2(?, 256)");
+            stmt.setString(1, user);
+            stmt.setString(2, password);
+            rs = stmt.executeQuery();
+
+            return parseCompany();
 
         } catch (SQLException sqlException) {
             System.out.println("Could not check login: " + sqlException.getMessage());
             return null;
         }
+    }
+
+    public boolean nameExists(String name) {
+        try {
+            stmt = con.prepareStatement("SELECT username FROM applicant WHERE username=?;");
+            stmt.setString(1, name);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+
+            stmt = con.prepareStatement("SELECT name FROM company WHERE name=?;");
+            stmt.setString(1, name);
+            rs = stmt.executeQuery();
+
+            return rs.next();
+        } catch (SQLException sqlException) {
+            System.out.println("Error while checking for name: " + name + ": " + sqlException.getMessage());
+            return false;
+        }
+    }
+
+    public boolean emailExists(String email) {
+        try {
+            stmt = con.prepareStatement("SELECT email FROM applicant WHERE email=?;");
+            stmt.setString(1, email);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+
+            stmt = con.prepareStatement("SELECT email FROM company WHERE email=?;");
+            stmt.setString(1, email);
+            rs = stmt.executeQuery();
+
+            return rs.next();
+        } catch (SQLException sqlException) {
+            System.out.println("Error while checking for email: " + email + ": " + sqlException.getMessage());
+            return false;
+        }
+    }
+
+    private Applicant parseApplicant() throws SQLException {
+        if (!rs.next()) {
+            return null;
+        }
+
+        return new Applicant(
+                rs.getInt("id"),
+                rs.getString("username"),
+                rs.getString("password"),
+                rs.getString("firstname"),
+                rs.getString("lastname"),
+                rs.getString("email"),
+                rs.getInt("gender"),
+                getTitles(rs.getInt("id")),
+                rs.getString("pb"),
+                rs.getDouble("lat"),
+                rs.getDouble("lon")
+        );
+    }
+
+    private Company parseCompany() throws SQLException {
+        if (!rs.next()) {
+            return null;
+        }
+
+        return new Company(
+                rs.getInt("id"),
+                rs.getString("name"),
+                rs.getString("password"),
+                rs.getString("email"),
+                rs.getString("phoneno"),
+                rs.getString("website"),
+                rs.getString("description"),
+                rs.getString("pb")
+        );
     }
 
 

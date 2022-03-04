@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:k="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en" lang="en">
+<f:metadata>
+    <f:viewParam name="applicantId" value="#{detailApplicant.detailApplicant}" converter="#{applicantConverter}" />
+    <f:viewParam name="offerId" value="#{detailOffer.detailOffer}" converter="#{offerConverter}" />
+</f:metadata>
+<h:head>
+    <title>Bewerbung - #{detailOffer.detailOffer.title} - #{detailApplicant.detailApplicant.firstname} #{detailApplicant.detailApplicant.lastname}</title>
+</h:head>
+<h:body>
+    <ui:composition template="../resources/templates/common.xhtml">
+        <ui:define name="content">
+            <h1>Bewerbungsformular:</h1>
+            <h:outputLabel for="offer" value="Jobangebot:" />
+            <h:outputText id="offer" value="#{detailOffer.detailOffer.title}" />
+            <br />
+            <div>
+                <h:outputLabel for="salutation" value="Anrede:" rendered="false" />
+                <h:outputLabel id="salutation" value="" rendered="false" />
+                <br />
+
+                <h:outputLabel for="title" value="Titel" styleClass="outLabel" rendered="true"/>
+                <ui:repeat id="title" var="title" value="" varStatus="" rendered="true">
+                    <h:outputText value="#{title}" />
+                </ui:repeat>
+                <br />
+
+                <h:outputLabel for="name" styleClass="outLabel" value="Name:" />
+                <h:outputText id="name" value="#{detailApplicant.detailApplicant.lastname}, #{detailApplicant.detailApplicant.firstname}" />
+                <br />
+
+                <h:outputLabel for="email" styleClass="outLabel" value="E-Mail:" />
+                <h:outputText id="email" value="#{detailApplicant.detailApplicant.email}" />
+                <br />
+
+            </div>
+            <div>
+                <h:outputLabel for="lom" value="Bewerbungsschreiben:" styleClass="outLabel"/> <br />
+                <h:outputText id="lom" value="" />
+                <br />
+
+                <h:form enctype="multipart/form-data">
+                    <!-- Way to depict the pdf directly? -->
+                    <h:outputLabel for="cv" value="Lebenslauf:" styleClass="outLabel"/>
+                    <p:commandButton id="cv" ajax="false" value="Lebenslauf herunterladen">
+                        <p:fileDownload value="" />
+                    </p:commandButton>
+                </h:form>
+
+            </div>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
