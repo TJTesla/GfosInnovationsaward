@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:metadata>
+    <f:viewAction action="#{createOfferController.checkAdminRights()}" />
+</f:metadata>
+
+<h:body>
+    <h2>Erzeugen Sie ein Stellenangebot</h2>
+
+    <h:form>
+        Titel:
+        <h:inputText value="#{createOfferController.title}" />
+        <h:outputText value="#{createOfferController.getErrorMsg('title')}" rendered="#{createOfferController.creationError}" />
+        <br />
+
+        Beschreibung:
+        <h:inputText value="#{createOfferController.description}" />
+        <h:outputText value="#{createOfferController.getErrorMsg('description')}" rendered="#{createOfferController.creationError}" />
+        <br />
+
+        <h:selectOneMenu value="#{createOfferController.field}">
+            <f:selectItem itemValue="-1" itemLabel="Feld" />
+            <f:selectItems value="#{indexController.allFields}" var="f" itemValue="#{f.key}" itemLabel="#{f.value}" />
+        </h:selectOneMenu>
+        <h:selectOneMenu value="#{createOfferController.level}">
+            <f:selectItem itemValue="-1" itemLabel="Level" />
+            <f:selectItems value="#{indexController.allLevels}" var="f" itemValue="#{f.key}" itemLabel="#{f.value}" />
+        </h:selectOneMenu>
+        <h:selectOneMenu value="#{createOfferController.time}">
+            <f:selectItem itemValue="-1" itemLabel="Zeit" />
+            <f:selectItems value="#{indexController.allTimes}" var="f" itemValue="#{f.key}" itemLabel="#{f.value}" />
+        </h:selectOneMenu>
+        <h:outputText value="#{createOfferController.getErrorMsg('filter')}" rendered="#{createOfferController.creationError}" />
+        <br />
+
+        Straße:
+        <h:inputText value="#{createOfferController.street}" />
+        Postleitzahl:
+        <h:inputText value="#{createOfferController.postalCode}" />
+        Stadt:
+        <h:inputText value="#{createOfferController.city}" />
+        <h:outputText value="#{createOfferController.getErrorMsg('address')}" rendered="#{createOfferController.creationError}" />
+
+        <h:commandButton value="Hochladen" action="#{createOfferController.save()}" />
+    </h:form>
+</h:body>
+
+</html>

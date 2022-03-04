@@ -3,6 +3,7 @@ package gfos.controller;
 import gfos.beans.Applicant;
 import gfos.beans.Application;
 import gfos.beans.Offer;
+import gfos.database.ApplicantDatabaseService;
 import gfos.database.CompanyDatabaseService;
 import gfos.database.OfferDatabaseService;
 import gfos.longerBeans.CurrentUser;
@@ -17,6 +18,8 @@ public class CompanyIndexController {
     CompanyDatabaseService cdbs;
     @Inject
     OfferDatabaseService odbs;
+    @Inject
+    ApplicantDatabaseService adbs;
     @Inject
     CurrentUser cu;
 
@@ -33,5 +36,9 @@ public class CompanyIndexController {
             return "/00-loginRegistration/login.xhtml";
         }
         return "";
+    }
+
+    public String getApplicantName(int applicantId) {
+        return adbs.getById(applicantId).getName();
     }
 }

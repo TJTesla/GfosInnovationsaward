@@ -88,7 +88,7 @@ public class IndexController implements Serializable {
     }
 
     public ArrayList<Pair<Integer, String>> getAllLevels() {
-        return mdbs.getAllTimes();
+        return mdbs.getAllLevels();
     }
 
     public ArrayList<Pair<Integer, String>> getAllTimes() {

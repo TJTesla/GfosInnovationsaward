@@ -16,8 +16,9 @@ public class GeoCalculator {
     public static double[] getCoordinates(String location) {
         location = location.replace(" ", "%20");
 
+        Unirest.config().verifySsl(false);
         HttpResponse<JsonNode> response = Unirest
-                .get("https://api.geoapify.com/v1/geocode/search?text=" + location + "&lang=de&limit=1&type=street&format=json&apiKey=" + Env.geoapifyKey)
+                .get("http://api.geoapify.com/v1/geocode/search?text=" + location + "&lang=de&limit=1&type=street&format=json&apiKey=" + Env.geoapifyKey)
                 .asJson();
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
