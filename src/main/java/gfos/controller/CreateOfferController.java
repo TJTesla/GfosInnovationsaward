@@ -54,7 +54,7 @@ public class CreateOfferController implements Serializable {
                 coordinates[1]
         ));
 
-        return "";
+        return "/tjtesla-tests/companyIndex.xhtml?faces-redirect=true";
     }
 
     private void checkCreation() {
