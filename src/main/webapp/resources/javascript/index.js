@@ -1,33 +1,50 @@
-function fieldDrop() {
-    $("#dropdownField").classList.toggle("show");
-}
-
-function levelDrop() {
-    $("#dropdownLevel").classList.toggle("show");
-}
-
-function timeDrop() {
-    $("#dropdownTime").classList.toggle("show");
-}
-
-window.onclick = function(e) {
-    var filters;
-    if(!e.target.matches('#dropdbtnField')) {
-        filters = $("#dropdownField");
-        if (filters.classList.contains("show")) {
-            filters.classList.remove("show");
-        }
+window.onclick = function (e) {
+    if ($(".dropdown")[0].contains(e.target)) {}
+    else {
+        $("#dropdownField").css("display", "none");
     }
-    if(!e.target.matches('#dropdbtnLevel')) {
-        filters = $("#dropdownLevel");
-        if (filters.classList.contains("show")) {
-            filters.classList.remove("show");
-        }
+    if ($(".dropdown")[1].contains(e.target)) {}
+    else {
+        $("#dropdownLevel").css("display", "none");
     }
-    if(!e.target.matches('#dropdbtnTime')) {
-        filters = $("#dropdownTime");
-        if (filters.classList.contains("show")) {
-            filters.classList.remove("show");
-        }
+    if ($(".dropdown")[2].contains(e.target)) {}
+    else {
+        $("#dropdownTime").css("display", "none");
     }
 }
+window.onload = (event) => {
+    $("#dropbtnField").click(function() {
+        var filter = $("#dropdownField");
+        var display = filter.css("display");
+        if(display !== "block") {
+            filter.css("display", "block");
+        } else {
+            filter.css("display", "none");
+        }
+        $("#dropdownLevel").css("display", "none");
+        $("#dropdownTime").css("display", "none");
+    })
+    $("#dropbtnLevel").click(function() {
+        var filter = $("#dropdownLevel");
+        var display = filter.css("display");
+        if(display !== "block") {
+            filter.css("display", "block");
+        } else {
+            filter.css("display", "none");
+        }
+        $("#dropdownField").css("display", "none");
+        $("#dropdownTime").css("display", "none");
+    })
+    $("#dropbtnTime").click(function() {
+        var filter = $("#dropdownTime");
+        var display = filter.css("display");
+        if(display !== "block") {
+            filter.css("display", "block");
+        } else {
+            filter.css("display", "none");
+        }
+        $("#dropdownField").css("display", "none");
+        $("#dropdownLevel").css("display", "none");
+    })
+}
+

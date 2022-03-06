@@ -1,3 +1,4 @@
+/*complementary color source: https://hexcolor.co  https://www.colorhexa.com*/
 @font-face {
     font-family: Rubik;
     src: url("#{resource['fonts/Rubik-Regular.ttf']}") format("truetype"),
@@ -66,6 +67,9 @@ body {
         color: black;
         border-color: #4B9CD3;
     }
+    [class*="input-"]:hover {
+        background-color: #d39f4b;
+    }
     .description {
         color: black;
     }
@@ -90,6 +94,9 @@ body {
         color: whitesmoke;
         background-color: var(--d-input-bg-color);
         border-color: #7285A5;
+    }
+    [class*="input-"]:hover {
+        background-color: #4f3b13;
     }
     .description {
         color: whitesmoke;

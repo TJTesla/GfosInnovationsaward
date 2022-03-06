@@ -13,17 +13,23 @@
 
 <head>
     <title>JEE Test</title>
-    <h:outputStylesheet library="css" name="index.css" />
+
 </head>
 
 <h:body>
     <!-- TODO: Still needs to be implemented and tested properly -->
     <ui:composition template="resources/templates/common.xhtml">
         <ui:define name="content">
-            <h:panelGroup styleClass="filter" rendered="true" > <!-- This will raise an error since no boolean is given -->
-                <h:inputText id="place" k:placeholder="Standort" styleClass="navLabel" />
+            <h:outputStylesheet library="css" name="index.css" />
+            <h:outputScript library="javascript" name="index.js" />
+            <div class="filter">
+                <h:inputText id="place" k:placeholder="Standort" styleClass="input-location" />
+                <div class="">
+                    Umfeld (in km):
+                    <h:inputText value="#{indexController.maxDistance}" />
+                </div>
                 <div class="dropdown">
-                    <button class="dropbtn" id="dropbtnField" onclick="fieldDrop()">Berufsfeld <i class="fa-caret-dowm" /></button>
+                    <button class="dropbtn" id="dropbtnField">Berufsfeld <i class="pi pi-caret-down" /></button>
                     <div class="navContent" id="dropdownField">
                         <ui:repeat id="field" var="f" value="#{indexController.allFields}" varStatus=""> <!-- TODO: controller method for all categories -->
                             <div class="a">
@@ -39,12 +45,12 @@
                 </div>
 
                 <div class="dropdown">
-                    <button class="dropbtn" id="dropbtnLevel" onclick="levelDrop()">Einstieglevel <i class="fa-caret-dowm" /></button>
+                    <button class="dropbtn" id="dropbtnLevel">Einstieglevel <i class="pi pi-caret-down" /></button>
                     <div class="navContent" id="dropdownLevel">
                         <ui:repeat id="level" var="l" value="#{indexController.allLevels}" varStatus=""> <!-- TODO: controller method for all categories -->
                             <div class="a">
-                                <h:selectBooleanCheckbox id="#{t.key}" styleClass="checkBox" value="true" />
-                                <h:outputLabel for="#{t.key}" styleClass="checkLabel" value="#{t.value}" />
+                                <h:selectBooleanCheckbox id="#{l.key}" styleClass="checkBox" value="true" />
+                                <h:outputLabel for="#{l.key}" styleClass="checkLabel" value="#{l.value}" />
                             </div>
                         </ui:repeat>
 
@@ -55,7 +61,7 @@
                 </div>
 
                 <div class="dropdown">
-                    <button class="dropbtn" id="dropbtnTime" onclick="timeDrop()">Praktikum <i class="fa-caret-dowm" /></button>
+                    <button class="dropbtn" id="dropbtnTime">Praktikum <i class="pi pi-caret-down" /></button>
                     <div class="navContent" id="dropdownTime">
                         <ui:repeat id="time" var="t" value="#{indexController.allTimes}" varStatus=""> <!-- TODO: controller method for all categories -->
                             <div class="a">
@@ -71,11 +77,7 @@
                     </div>
                 </div>
 
-                <div>
-                    Umfeld (in km):
-                    <h:inputText value="#{indexController.maxDistance}" />
-                </div>
-            </h:panelGroup>
+            </div>
 
             <div class="offers" onclick="redirect('offer.xhtml')">
                 <ui:repeat id="offers" var="offer" value="#{indexController.allOffers}" varStatus="">

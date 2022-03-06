@@ -5,7 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:k="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:k="http://xmlns.jcp.org/jsf/passthrough" >
 
 <!--f:metadata>
     <f:viewAction action="#{indexController.checkLogIn()}" />
@@ -13,7 +13,7 @@
 
 <head>
     <title>JEE Test</title>
-    <h:outputStylesheet library="css" name="index.css" />
+
 </head>
 
 <h:body>
@@ -21,17 +21,35 @@
     <!-- TODO: Change selectManyCheckboxes. CSS cannot be applied in this way -->
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
-            <h:panelGroup styleClass="filter" rendered="true" > <!-- Rendered can be changed to boolean whether user is a company -->
-                <h:inputText id="place" k:placeholder="Standort" styleClass="navLabel" />
+            <h:outputStylesheet library="css" name="index.css" />
+            <h:outputScript library="javascript" name="index.js"/>
+            <div class="filter">
+                <h:inputText id="place" k:placeholder="Standort..." styleClass="input-location"><i class="pi pi-map-marker" /></h:inputText>
                 <div class="dropdown">
-                    <button class="dropbtn" id="dropbtnField" onclick="fieldDrop()">Berufsfeld <i class="fa-caret-dowm" /></button>
+                    <button class="dropbtn" id="dropbtnField">Berufsfeld <i class="pi pi-caret-down" /></button>
                     <div class="navContent" id="dropdownField">
-                        <ui:repeat id="field" var="f" value="" varStatus=""> <!-- TODO: controller method for all categories -->
+                        <div class="a">
+                            <h:selectBooleanCheckbox id="build" styleClass="checkBox" />
+                            <h:outputLabel for="build" styleClass="checkLabel" value="Bau, Architektur, Vermessung" />
+                        </div>
+                        <div class="a">
+                            <h:selectBooleanCheckbox id="service" styleClass="checkBox" />
+                            <h:outputLabel for="service" styleClass="checkLabel" value="Dienstlesitung" />
+                        </div>
+                        <div class="a">
+                            <h:selectBooleanCheckbox id="et" styleClass="checkBox" />
+                            <h:outputLabel for="et" styleClass="checkLabel" value="Elektro" />
+                        </div>
+                        <div class="a">
+                            <h:selectBooleanCheckbox id="health" styleClass="checkBox" />
+                            <h:outputLabel for="health" styleClass="checkLabel" value="Gesundheit" />
+                        </div>
+                        <!--ui:repeat id="field" var="f" value="" varStatus=""> < TODO: controller method for all categories>
                             <div class="a">
                                 <h:selectBooleanCheckbox id="build" styleClass="checkBox" value="true" />
                                 <h:outputLabel for="build" styleClass="checkLabel" value="Bau, Architektur, Vermessung" />
                             </div>
-                        </ui:repeat>
+                        </ui:repeat-->
 
                         <!--h:selectManyCheckbox id="field">
                             <f:selectItem itemValue="01" itemLabel="Bau, Architektur, Vermessung" />
@@ -54,15 +72,22 @@
                 </div>
 
                 <div class="dropdown">
-                    <button class="dropbtn" id="dropbtnLevel" onclick="levelDrop()">Einstieglevel <i class="fa-caret-dowm" /></button>
+                    <button class="dropbtn" id="dropbtnLevel">Einstieglevel <i class="pi pi-caret-down" /></button>
                     <div class="navContent" id="dropdownLevel">
-
-                        <ui:repeat id="level" var="l" value="" varStatus=""> <!-- TODO: controller method for all categories -->
+                        <div class="a">
+                            <h:selectBooleanCheckbox id="intern" styleClass="checkBox" />
+                            <h:outputLabel for="intern" styleClass="checkLabel" value="Praktikum" />
+                        </div>
+                        <div class="a">
+                            <h:selectBooleanCheckbox id="end" styleClass="checkBox" />
+                            <h:outputLabel for="end" styleClass="checkLabel" value="Abschlussarbeiten" />
+                        </div>
+                        <!--ui:repeat id="level" var="l" value="" varStatus=""> < TODO: controller method for all categories>
                             <div class="a">
                                 <h:selectBooleanCheckbox id="intern" styleClass="checkBox" value="true" />
                                 <h:outputLabel for="intern" styleClass="checkLabel" value="Praktikum" />
                             </div>
-                        </ui:repeat>
+                        </ui:repeat-->
 
                         <!--h:selectManyCheckbox id="level">
                             <f:selectItem itemValue="1" itemLabel="Praktikanten" />
@@ -77,15 +102,23 @@
                 </div>
 
                 <div class="dropdown">
-                    <button class="dropbtn" id="dropbtnTime" onclick="timeDrop()">Praktikum <i class="fa-caret-dowm" /></button>
+                    <button class="dropbtn" id="dropbtnTime">Praktikum <i class="pi pi-caret-down" /></button>
                     <div class="navContent" id="dropdownTime">
 
-                        <ui:repeat id="time" var="t" value="" varStatus=""> <!-- TODO: controller method for all categories -->
+                        <div class="a">
+                            <h:selectBooleanCheckbox id="full" styleClass="checkBox" />
+                            <h:outputLabel for="full" styleClass="checkLabel" value="Vollzeit" />
+                        </div>
+                        <div class="a">
+                            <h:selectBooleanCheckbox id="part" styleClass="checkBox" />
+                            <h:outputLabel for="part" styleClass="checkLabel" value="Teilzeit" />
+                        </div>
+                        <!--ui:repeat id="time" var="t" value="" varStatus=""> < TODO: controller method for all categories>
                             <div class="a">
                                 <h:selectBooleanCheckbox id="full" styleClass="checkBox" value="true" />
                                 <h:outputLabel for="full" styleClass="checkLabel" value="Vollzeit" />
                             </div>
-                        </ui:repeat>
+                        </ui:repeat-->
 
                         <!--h:selectManyCheckbox id="time">
                             <f:selectItem itemValue="full" itemLabel="Vollzeit" />
@@ -94,15 +127,15 @@
                         </h:selectManyCheckbox-->
                     </div>
                 </div>
-            </h:panelGroup>
+            </div >
 
             <div class="offers" onclick="redirect('offer.xhtml')">
                 <ui:repeat id="offers" var="offer" value="#{indexController.allOffers}" varStatus="">
                     <div class="allOffers">
                         <h:graphicImage value="" />
-                        <h6> #{offer.title} </h6>
+                        <h:outputText id="title" value="#{offer.title}" styleclass="" />
                         <h:outputText id="location" value="" styleClass=""/> <!-- Place of the offer -->
-                        <h:outputText id="fieldOffer" value="#{offer.category}" styleClass=""/> <!-- Field of the offer -->
+                        <h:outputText id="fieldOffer" value="#{offer.description}" styleClass=""/> <!-- Field of the offer -->
                     </div>
                 </ui:repeat>
             </div>
