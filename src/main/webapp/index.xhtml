@@ -83,9 +83,9 @@
                 <ui:repeat id="offers" var="offer" value="#{indexController.allOffers}" varStatus="">
                     <div class="">
                         <h:graphicImage value="" />
+                        <h:outputLabel id="title" value="" styleClass="label-offer" />
                         <h6> #{offer.title} </h6>
                         <h:outputText id="location" value="" styleClass=""/> <!-- Place of the offer -->
-                        <h:outputText id="fieldOffer" value="#{offer.description}" styleClass=""/> <!-- Field of the offer -->
                     </div>
                 </ui:repeat>
             </div>
