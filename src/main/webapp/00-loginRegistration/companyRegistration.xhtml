@@ -23,35 +23,35 @@
             <fieldset class="coData">
                 <legend>Daten zum Unternehmen:</legend>
                 <h:outputLabel for="name" value="Name:" styleClass="label-co-reg"><span class="obligatory">&nbsp;*</span> </h:outputLabel>
-                <h:inputText id="name" styleClass="#{companyRegistrationController.getErrorMessage('name').equals('') ? 'input-co-reg' : 'input-co-err'}"
-                             value="#{companyRegistrationController.name}" />
-                <c:if test="#{not companyRegistrationController.getErrorMessage('name').equals('')}">
+                <h:inputText id="name" styleClass="#{employeeRegistrationController.getErrorMessage('name').equals('') ? 'input-co-reg' : 'input-co-err'}"
+                             value="#{employeeRegistrationController.name}" />
+                <c:if test="#{not employeeRegistrationController.getErrorMessage('name').equals('')}">
                     <div class="errMsg-co">
                         <i class="pi pi-exclamation-circle">&nbsp;</i>
-                        <h:outputText value="#{companyRegistrationController.getErrorMessage('name')}" rendered="#{companyRegistrationController.registerError}" />
+                        <h:outputText value="#{employeeRegistrationController.getErrorMessage('name')}" rendered="#{employeeRegistrationController.registerError}" />
                     </div>
 
                 </c:if>
                 <br />
 
                 <h:outputLabel value="Passwort:" styleClass="label-co-reg"><span class="obligatory">&nbsp;*</span></h:outputLabel>
-                <h:inputSecret value="#{companyRegistrationController.password}"
-                               styleClass="#{companyRegistrationController.getErrorMessage('password').equals('') ? 'input-co-reg' : 'input-co-err'}" />
-                <c:if test="#{not companyRegistrationController.getErrorMessage('password').equals('')}">
+                <h:inputSecret value="#{employeeRegistrationController.password}"
+                               styleClass="#{employeeRegistrationController.getErrorMessage('password').equals('') ? 'input-co-reg' : 'input-co-err'}" />
+                <c:if test="#{not employeeRegistrationController.getErrorMessage('password').equals('')}">
                     <div class="errMsg-co">
                         <i class="pi pi-exclamation-circle">&nbsp;</i>
-                        <h:outputText value="#{companyRegistrationController.getErrorMessage('password')}" rendered="#{companyRegistrationController.registerError}" />
+                        <h:outputText value="#{employeeRegistrationController.getErrorMessage('password')}" rendered="#{employeeRegistrationController.registerError}" />
                     </div>
                 </c:if>
                 <br />
 
                 <h:outputLabel value="Passwort wiederholen:" styleClass="label-co-reg"><span class="obligatory">&nbsp;*</span> </h:outputLabel>
-                <h:inputSecret value="#{companyRegistrationController.passwordRepeat}"
-                               styleClass="#{companyRegistrationController.getErrorMessage('password').equals('') ? 'input-co-reg' : 'input-co-err'}" />
-                <c:if test="#{not companyRegistrationController.getErrorMessage('passwordRepeat').equals('')}">
+                <h:inputSecret value="#{employeeRegistrationController.passwordRepeat}"
+                               styleClass="#{employeeRegistrationController.getErrorMessage('password').equals('') ? 'input-co-reg' : 'input-co-err'}" />
+                <c:if test="#{not employeeRegistrationController.getErrorMessage('passwordRepeat').equals('')}">
                     <div class="errMsg-co">
                         <i class="pi pi-exclamation-circle">&nbsp;</i>
-                        <h:outputText value="#{companyRegistrationController.getErrorMessage('passwordRepeat')}" rendered="#{companyRegistrationController.registerError}" />
+                        <h:outputText value="#{employeeRegistrationController.getErrorMessage('passwordRepeat')}" rendered="#{employeeRegistrationController.registerError}" />
                     </div>
                 </c:if>
                 <br />
@@ -59,18 +59,18 @@
                 <!--Regex: [(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&amp;//=]*) -->
                 <!--https://regexr.com/3e4a2: (https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*) -->
                 <h:outputLabel for="url" value="Verlinkung zur Website:" styleClass="label-co-reg"><span class="obligatory">&nbsp;*</span> </h:outputLabel>
-                <h:inputText id="url" styleClass="#{companyRegistrationController.getErrorMessage('website').equals('') ? 'input-co-reg' : 'input-co-err'}"
-                             value="#{companyRegistrationController.website}" />
-                <c:if test="#{not companyRegistrationController.getErrorMessage('website').equals('')}">
+                <h:inputText id="url" styleClass="#{employeeRegistrationController.getErrorMessage('website').equals('') ? 'input-co-reg' : 'input-co-err'}"
+                             value="#{employeeRegistrationController.website}" />
+                <c:if test="#{not employeeRegistrationController.getErrorMessage('website').equals('')}">
                     <div class="errMsg-co">
                         <i class="pi pi-exclamation-circle">&nbsp;</i>
-                        <h:outputText value="#{companyRegistrationController.getErrorMessage('website')}" rendered="#{companyRegistrationController.registerError}" />
+                        <h:outputText value="#{employeeRegistrationController.getErrorMessage('website')}" rendered="#{employeeRegistrationController.registerError}" />
                     </div>
                 </c:if>
                 <br />
 
                 <h:outputLabel for="logo" value="Logo:" styleClass="label-co-reg"/>
-                <p:fileUpload id="logo" mode="simple" update="@form" value="#{companyRegistrationController.logoFile}" />
+                <p:fileUpload id="logo" mode="simple" update="@form" value="#{employeeRegistrationController.logoFile}" />
                 <!--p:fileUpload id="logo"
                               mode="advanced"
                               value=""
@@ -86,12 +86,12 @@
 
                 <h:outputLabel for="description" value="Beschreibung:" styleClass="label-co-reg" />
                 <br />
-                <h:inputTextarea id="description" styleClass="description" required="true" value="#{companyRegistrationController.description}" />
+                <h:inputTextarea id="description" styleClass="description" required="true" value="#{employeeRegistrationController.description}" />
                     <!-- TODO: Description Input Error CSS -->
-                <c:if test="#{not companyRegistrationController.getErrorMessage('description').equals('')}">
+                <c:if test="#{not employeeRegistrationController.getErrorMessage('description').equals('')}">
                     <div class="errMsg-co" style="margin-left: 0">
                         <i class="pi pi-exclamation-circle">&nbsp;</i>
-                        <h:outputText value="#{companyRegistrationController.getErrorMessage('description')}" rendered="#{companyRegistrationController.registerError}" />
+                        <h:outputText value="#{employeeRegistrationController.getErrorMessage('description')}" rendered="#{employeeRegistrationController.registerError}" />
                     </div>
                 </c:if>
 
@@ -102,37 +102,37 @@
                 <legend>Kontaktdaten:</legend>
                 <h:outputLabel for="email" value="E-Mail Adresse:" styleClass="label-co-reg"><span class="obligatory">&nbsp;*</span> </h:outputLabel>
                 <h:inputText id="email" required="true" k:placeholder="example@email.com"
-                             styleClass="#{companyRegistrationController.getErrorMessage('email').equals('') ? 'input-co-reg' : 'input-co-err'}"
-                             value="#{companyRegistrationController.email}" />
+                             styleClass="#{employeeRegistrationController.getErrorMessage('email').equals('') ? 'input-co-reg' : 'input-co-err'}"
+                             value="#{employeeRegistrationController.email}" />
                     <!--f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" /-->
-                <c:if test="#{not companyRegistrationController.getErrorMessage('email').equals('')}">
+                <c:if test="#{not employeeRegistrationController.getErrorMessage('email').equals('')}">
                     <div class="errMsg-co">
                         <i class="pi pi-exclamation-circle">&nbsp;</i>
-                        <h:outputText value="#{companyRegistrationController.getErrorMessage('email')}" rendered="#{companyRegistrationController.registerError}" />
+                        <h:outputText value="#{employeeRegistrationController.getErrorMessage('email')}" rendered="#{employeeRegistrationController.registerError}" />
                     </div>
                 </c:if>
                 <br />
 
                 <h:outputLabel for="emailRepeat" value="E-Mail wiederholen:" styleClass="label-co-reg"><span class="obligatory">&nbsp;*</span> </h:outputLabel>
-                <h:inputText id="emailRepeat" styleClass="#{companyRegistrationController.getErrorMessage('emailRepeat').equals('') ? 'input-co-reg' : 'input-co-err'}"
-                             value="#{companyRegistrationController.emailRepeat}" />
-                <c:if test="#{not companyRegistrationController.getErrorMessage('emailRepeat').equals('')}">
+                <h:inputText id="emailRepeat" styleClass="#{employeeRegistrationController.getErrorMessage('emailRepeat').equals('') ? 'input-co-reg' : 'input-co-err'}"
+                             value="#{employeeRegistrationController.emailRepeat}" />
+                <c:if test="#{not employeeRegistrationController.getErrorMessage('emailRepeat').equals('')}">
                     <div class="errMsg-co">
                         <i class="pi pi-exclamation-circle">&nbsp;</i>
-                        <h:outputText value="#{companyRegistrationController.getErrorMessage('emailRepeat')}" rendered="#{companyRegistrationController.registerError}" />
+                        <h:outputText value="#{employeeRegistrationController.getErrorMessage('emailRepeat')}" rendered="#{employeeRegistrationController.registerError}" />
                     </div>
                 </c:if>
                 <br />
 
                 <h:outputLabel for="phoneNo" value="Telefonnummer:" styleClass="label-co-reg"><span class="obligatory">&nbsp;*</span> </h:outputLabel>
                 <h:inputText id="phoneNo" k:placeholder="+49 123 45678910" required="true"
-                             styleClass="#{companyRegistrationController.getErrorMessage('phoneno').equals('') ? 'input-co-reg' : 'input-co-err'}"
-                             value="#{companyRegistrationController.phoneno}" />
+                             styleClass="#{employeeRegistrationController.getErrorMessage('phoneno').equals('') ? 'input-co-reg' : 'input-co-err'}"
+                             value="#{employeeRegistrationController.phoneno}" />
                     <!--f:validateRegex pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" /  https://regexr.com/3c53v -->
-                <c:if test="#{not companyRegistrationController.getErrorMessage('phoneno').equals('')}">
+                <c:if test="#{not employeeRegistrationController.getErrorMessage('phoneno').equals('')}">
                     <div class="errMsg-co">
                         <i class="pi pi-exclamation-circle">&nbsp;</i>
-                        <h:outputText value="#{companyRegistrationController.getErrorMessage('phoneno')}" rendered="#{companyRegistrationController.registerError}" />
+                        <h:outputText value="#{employeeRegistrationController.getErrorMessage('phoneno')}" rendered="#{employeeRegistrationController.registerError}" />
                     </div>
                 </c:if>
             </fieldset>
@@ -141,7 +141,7 @@
             <h:form>
                 <fieldset class="buttons-co">
                     <p id="footnote"><span class="obligatory">&nbsp;*</span> Angabepflichtig</p>
-                    <h:commandButton value="Registrieren" action="#{companyRegistrationController.register()}" styleClass="loginButton"/>
+                    <h:commandButton value="Registrieren" action="#{employeeRegistrationController.register()}" styleClass="loginButton"/>
                 </fieldset>
 
 

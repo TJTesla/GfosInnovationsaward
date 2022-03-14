@@ -2,6 +2,7 @@ package gfos.database;
 
 import gfos.beans.Applicant;
 import gfos.beans.Company;
+import gfos.beans.Employee;
 import gfos.beans.User;
 
 import javax.annotation.PreDestroy;
@@ -169,11 +170,17 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
                 return true;
             }
 
-            stmt = con.prepareStatement("SELECT name FROM company WHERE name=?;");
+            stmt = con.prepareStatement("SELECT name FROM employees WHERE name=?;");
             stmt.setString(1, name);
             rs = stmt.executeQuery();
 
-            return rs.next();
+            Employee e = new Employee(
+                    rs.getString("name"),
+                    rs.getString("password"),
+                    rs.getBoolean("registered")
+            );
+
+            return e.isRegistered();
         } catch (SQLException sqlException) {
             System.out.println("Error while checking for name: " + name + ": " + sqlException.getMessage());
             return false;
