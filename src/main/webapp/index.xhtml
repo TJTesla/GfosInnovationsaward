@@ -33,8 +33,8 @@
                     <div class="navContent" id="dropdownField">
                         <ui:repeat id="field" var="f" value="#{indexController.allFields}" varStatus=""> <!-- TODO: controller method for all categories -->
                             <div class="a">
-                                <h:selectBooleanCheckbox id="#{f.key}" styleClass="checkBox" value="true" />
-                                <h:outputLabel for="#{f.key}" styleClass="checkLabel" value="#{f.value}" />
+                                <h:selectBooleanCheckbox id="#{f.first()}" styleClass="checkBox" value="true" />
+                                <h:outputLabel for="#{f.first()}" styleClass="checkLabel" value="#{f.second()}" />
                             </div>
                         </ui:repeat>
 
@@ -49,8 +49,8 @@
                     <div class="navContent" id="dropdownLevel">
                         <ui:repeat id="level" var="l" value="#{indexController.allLevels}" varStatus=""> <!-- TODO: controller method for all categories -->
                             <div class="a">
-                                <h:selectBooleanCheckbox id="#{l.key}" styleClass="checkBox" value="true" />
-                                <h:outputLabel for="#{l.key}" styleClass="checkLabel" value="#{l.value}" />
+                                <h:selectBooleanCheckbox id="#{l.first()}" styleClass="checkBox" value="true" />
+                                <h:outputLabel for="#{l.first()}" styleClass="checkLabel" value="#{l.second()}" />
                             </div>
                         </ui:repeat>
 
@@ -65,8 +65,8 @@
                     <div class="navContent" id="dropdownTime">
                         <ui:repeat id="time" var="t" value="#{indexController.allTimes}" varStatus=""> <!-- TODO: controller method for all categories -->
                             <div class="a">
-                                <h:selectBooleanCheckbox id="#{t.key}" styleClass="checkBox" value="true" />
-                                <h:outputLabel for="#{t.key}" styleClass="checkLabel" value="#{t.value}" />
+                                <h:selectBooleanCheckbox id="#{t.first()}" styleClass="checkBox" value="true" />
+                                <h:outputLabel for="#{t.first()}" styleClass="checkLabel" value="#{t.second()}" />
                             </div>
                         </ui:repeat>
 

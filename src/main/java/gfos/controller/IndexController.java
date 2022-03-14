@@ -9,7 +9,7 @@ import gfos.beans.Offer;
 import gfos.database.ApplicantDatabaseService;
 import gfos.database.OfferDatabaseService;
 import gfos.longerBeans.CurrentUser;
-import javafx.util.Pair;
+import gfos.Pair;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;

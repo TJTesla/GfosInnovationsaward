@@ -26,15 +26,15 @@
 
         <h:selectOneMenu value="#{createOfferController.field}">
             <f:selectItem itemValue="-1" itemLabel="Feld" />
-            <f:selectItems value="#{indexController.allFields}" var="f" itemValue="#{f.key}" itemLabel="#{f.value}" />
+            <f:selectItems value="#{indexController.allFields}" var="f" itemValue="#{f.first()}" itemLabel="#{f.second()}" />
         </h:selectOneMenu>
         <h:selectOneMenu value="#{createOfferController.level}">
             <f:selectItem itemValue="-1" itemLabel="Level" />
-            <f:selectItems value="#{indexController.allLevels}" var="f" itemValue="#{f.key}" itemLabel="#{f.value}" />
+            <f:selectItems value="#{indexController.allLevels}" var="f" itemValue="#{f.first()}" itemLabel="#{f.second()}" />
         </h:selectOneMenu>
         <h:selectOneMenu value="#{createOfferController.time}">
             <f:selectItem itemValue="-1" itemLabel="Zeit" />
-            <f:selectItems value="#{indexController.allTimes}" var="f" itemValue="#{f.key}" itemLabel="#{f.value}" />
+            <f:selectItems value="#{indexController.allTimes}" var="f" itemValue="#{f.first()}" itemLabel="#{f.second()}" />
         </h:selectOneMenu>
         <h:outputText value="#{createOfferController.getErrorMsg('filter')}" rendered="#{createOfferController.creationError}" />
         <br />

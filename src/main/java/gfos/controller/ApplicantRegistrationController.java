@@ -8,7 +8,7 @@ import gfos.database.MiscellaneousDatabaseService;
 import gfos.exceptions.UploadException;
 import gfos.longerBeans.CurrentUser;
 import gfos.longerBeans.GeoCalculator;
-import javafx.util.Pair;
+import gfos.Pair;
 import org.primefaces.model.file.UploadedFile;
 
 import javax.faces.view.ViewScoped;
@@ -177,7 +177,7 @@ public class ApplicantRegistrationController implements Serializable {
 
         ArrayList<Pair<Integer, String>> entries = mdbs.getAllTitles();
         for (Pair<Integer, String> p : entries) {
-            arr.add(p.getValue());
+            arr.add(p.second());
         }
 
         return arr;
