@@ -1,7 +1,6 @@
 package gfos.database;
 
 import gfos.beans.Applicant;
-import gfos.beans.Company;
 import gfos.beans.Employee;
 import gfos.beans.User;
 
@@ -148,12 +147,15 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
                 return a;
             }
 
-            stmt = con.prepareStatement("SELECT * FROm company WHERE name=? AND password=SHA2(?, 256)");
+            stmt = con.prepareStatement("SELECT * FROM employees WHERE name=? AND password=SHA2(?, 256) AND registered=TRUE");
             stmt.setString(1, user);
             stmt.setString(2, password);
             rs = stmt.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
 
-            return parseCompany();
+            return EmployeeDatabaseService.createEmployee(rs);
 
         } catch (SQLException sqlException) {
             System.out.println("Could not check login: " + sqlException.getMessage());
@@ -192,13 +194,6 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
             stmt = con.prepareStatement("SELECT email FROM applicant WHERE email=?;");
             stmt.setString(1, email);
             rs = stmt.executeQuery();
-            if (rs.next()) {
-                return true;
-            }
-
-            stmt = con.prepareStatement("SELECT email FROM company WHERE email=?;");
-            stmt.setString(1, email);
-            rs = stmt.executeQuery();
 
             return rs.next();
         } catch (SQLException sqlException) {
@@ -225,34 +220,5 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
                 rs.getDouble("lat"),
                 rs.getDouble("lon")
         );
-    }
-
-    private Company parseCompany() throws SQLException {
-        if (!rs.next()) {
-            return null;
-        }
-
-        return new Company(
-                rs.getInt("id"),
-                rs.getString("name"),
-                rs.getString("password"),
-                rs.getString("email"),
-                rs.getString("phoneno"),
-                rs.getString("website"),
-                rs.getString("description"),
-                rs.getString("pb")
-        );
-    }
-
-
-    @PreDestroy
-    private void deconstruct() {
-        try {
-            con.close();
-            stmt.close();
-            rs.close();
-        } catch (SQLException sqlException) {
-            System.out.println("Could not destroy UserDatabaseService: " + sqlException.getMessage());
-        }
     }
 }

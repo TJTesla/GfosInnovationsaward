@@ -4,7 +4,7 @@ import gfos.beans.Applicant;
 import gfos.beans.Application;
 import gfos.beans.Offer;
 import gfos.database.ApplicantDatabaseService;
-import gfos.database.CompanyDatabaseService;
+import gfos.database.EmployeeDatabaseService;
 import gfos.database.OfferDatabaseService;
 import gfos.longerBeans.CurrentUser;
 
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 @Named
 public class CompanyIndexController {
     @Inject
-    CompanyDatabaseService cdbs;
+    EmployeeDatabaseService edbs;
     @Inject
     OfferDatabaseService odbs;
     @Inject
@@ -24,11 +24,11 @@ public class CompanyIndexController {
     CurrentUser cu;
 
     public ArrayList<Application> getAllApplications(int offerId) {
-        return cdbs.getAllApplications(offerId);
+        return edbs.getAllApplications();
     }
 
     public ArrayList<Offer> getAllOffers() {
-        return odbs.getAllOffers(cu.getCurrentUser().getId());
+        return odbs.getAllOffers();
     }
 
     public String checkUserRights() {

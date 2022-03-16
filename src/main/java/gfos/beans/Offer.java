@@ -9,16 +9,14 @@ public class Offer {
     private int id;
     private String title;
     private String description;
-    private int provider;
     private int field, level, time;
     private double lat;
     private double lon;
 
-    public Offer(int id, String title, String description, int provider, int field, int level, int time, double lat, double lon) {
+    public Offer(int id, String title, String description, int field, int level, int time, double lat, double lon) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.provider = provider;
         this.field = field;
         this.level = level;
         this.time = time;
@@ -30,7 +28,6 @@ public class Offer {
         this.id = 0;
         this.title = "";
         this.description = "";
-        this.provider = 0;
         this.field = 0;
         this.level = 0;
         this.time = 0;
@@ -60,14 +57,6 @@ public class Offer {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int getProvider() {
-        return provider;
-    }
-
-    public void setProvider(int provider) {
-        this.provider = provider;
     }
 
     public int getField() {

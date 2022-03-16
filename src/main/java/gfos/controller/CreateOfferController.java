@@ -1,6 +1,6 @@
 package gfos.controller;
 
-import gfos.beans.Company;
+import gfos.beans.Employee;
 import gfos.beans.Offer;
 import gfos.database.OfferDatabaseService;
 import gfos.longerBeans.CurrentUser;
@@ -46,7 +46,6 @@ public class CreateOfferController implements Serializable {
                 -1,
                 title,
                 description,
-                cu.getCurrentUser().getId(),
                 toInt(field),
                 toInt(level),
                 toInt(time),
@@ -98,7 +97,7 @@ public class CreateOfferController implements Serializable {
     }
 
     public String checkAdminRights() {
-        if (cu.getCurrentUser() instanceof Company){
+        if (cu.getCurrentUser() instanceof Employee){
             return "";
         } else {
             return "/index.xhtml"; // *Main page* for normal user OR maybe login page?

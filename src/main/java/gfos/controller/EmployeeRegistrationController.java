@@ -1,10 +1,10 @@
 package gfos.controller;
 
 import gfos.Regexes;
-import gfos.beans.Company;
 import gfos.beans.Employee;
 import gfos.beans.ResourceIO;
 import gfos.database.ApplicantDatabaseService;
+import gfos.database.EmployeeDatabaseService;
 import gfos.exceptions.UploadException;
 import gfos.longerBeans.CurrentUser;
 import org.primefaces.model.file.UploadedFile;
@@ -23,7 +23,7 @@ public class EmployeeRegistrationController implements Serializable {
     @Inject
     ApplicantDatabaseService adbs;
     @Inject
-    EmployeeRegistrationController edbs;
+    EmployeeDatabaseService edbs;
     @Inject
     CurrentUser cu;
 
@@ -36,12 +36,19 @@ public class EmployeeRegistrationController implements Serializable {
     private HashMap<String, String> errorMsgs = new HashMap<>();
 
     public String register() {
+        errorMsgs.clear();
         checkRegistration();
         if (registerError) {
             return "";
         }
 
+        if (!edbs.employeeCreated(name, key)) {
+            return "";
+        }
+
         Employee e = new Employee(name, password, true);
+
+        edbs.registerEmployee(e);
 
         cu.setCurrentUser(e);
 
