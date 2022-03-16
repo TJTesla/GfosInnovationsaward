@@ -10,6 +10,10 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
 @Named
@@ -33,6 +37,10 @@ public class LoginController implements Serializable {
             return "";
         }
 
+        if (isSuperUser()) {
+            return ""; // Page for SU
+        }
+
         if (u instanceof Applicant) {
             cu.setCurrentUser((Applicant)u);
 
@@ -44,6 +52,30 @@ public class LoginController implements Serializable {
         }
 
         return "";
+    }
+
+    private boolean isSuperUser() {
+        String passwordHash = "24e5e1c2bbef565360c392851175f46821fc21d6725503a600353625b4c9209c";
+        return username.equals("sudo") && createHash(password).equals(passwordHash);
+    }
+
+    // Source: https://www.geeksforgeeks.org/sha-256-hash-in-java/
+    private static String createHash(String input) {
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+            System.out.println("Error while creating SHA-256 Hash for String: " + input + ":" + noSuchAlgorithmException.getMessage());
+            return "";
+        }
+
+        byte[] byteArray = md.digest(input.getBytes(StandardCharsets.UTF_8));
+        BigInteger number = new BigInteger(1, byteArray);
+        StringBuilder hexString = new StringBuilder(number.toString(16));
+        while (hexString.length() < 32) {
+            hexString.insert(0, '0');
+        }
+        return hexString.toString();
     }
 
     public String getUsername() {
