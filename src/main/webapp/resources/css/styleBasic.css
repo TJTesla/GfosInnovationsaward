@@ -10,6 +10,7 @@
     --d-btn-bg-color: #13274F;
     --l-body-bg-color: #D5E9F5;
     --l-input-bg-color: #D5E9F5;
+    --input-width: 150px;
 }
 html {
     overflow-y: scroll;
@@ -67,6 +68,14 @@ body {
         color: black;
         border-color: #4B9CD3;
     }
+    body .p-datepicker, .ui-calender, .ui-datepicker {
+        background-color: var(--l-input-bg-color);
+        color: black;
+        border-width: 2px;
+        border-color: #4B9CD3;
+        font-size: 15px;
+        font-style: inherit;
+    }
     [class*="input-"]:hover {
         background-color: #d39f4b;
     }
@@ -115,6 +124,7 @@ h1 {
 
 [class*="input-"] {
     border-radius: 5px;
+    width: var(--input-width);
 }
 [class*="btn-"] {
     border-radius: 5px;
