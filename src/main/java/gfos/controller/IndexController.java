@@ -1,15 +1,15 @@
 package gfos.controller;
 
 import gfos.FilterObject;
+import gfos.beans.Employee;
 import gfos.database.MiscellaneousDatabaseService;
 import gfos.exceptions.UserException;
 import gfos.beans.Applicant;
-import gfos.beans.Company;
 import gfos.beans.Offer;
 import gfos.database.ApplicantDatabaseService;
 import gfos.database.OfferDatabaseService;
 import gfos.longerBeans.CurrentUser;
-import javafx.util.Pair;
+import gfos.Pair;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -79,8 +79,8 @@ public class IndexController implements Serializable {
         return "";
     }
 
-    public boolean isCompany() {
-        return cu.getCurrentUser() instanceof Company;
+    public boolean isEmployee() {
+        return cu.getCurrentUser() instanceof Employee;
     }
 
     public ArrayList<Pair<Integer, String>> getAllFields() {

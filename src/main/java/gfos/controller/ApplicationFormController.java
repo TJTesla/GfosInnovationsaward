@@ -23,9 +23,10 @@ public class ApplicationFormController {
 
     public String apply() {
         try {
-            Resume r = ResourceIO.uploadResume(cv, offer, cu.getCurrentUser());
+            Applicant currentApplicant = (Applicant)(cu.getCurrentUser());
+            Resume r = ResourceIO.uploadResume(cv, offer, currentApplicant);
             Application a = new Application(
-                    cu.getCurrentUser().getId(),
+                    currentApplicant.getId(),
                     offer.getId(),
                     text,
                     0,
@@ -44,7 +45,7 @@ public class ApplicationFormController {
     }
 
     public String checkUserRights() {
-        if (cu.getCurrentUser() == null || cu.getCurrentUser() instanceof Company) {
+        if (cu.getCurrentUser() == null || cu.getCurrentUser() instanceof Employee) {
             return "/login.xhtml";
         }
         return "";

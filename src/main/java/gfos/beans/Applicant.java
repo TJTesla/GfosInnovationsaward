@@ -9,30 +9,55 @@ import java.util.ArrayList;
 //@Named
 //@RequestScoped
 public class Applicant extends User {
+    private int id;
+    private String email;
     private String firstname;
     private String lastname;
     private int gender;
     private ArrayList<String> titles;
+    private String pb;
     private double lat, lon;
 
     public Applicant(int id, String username, String password, String firstname, String lastname, String email, int gender, ArrayList<String> titles, String pb, double lat, double lon) {
-        super(id, username, password, email, pb);
+        super(username, password);
+        this.id = id;
+        this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
         this.gender = gender;
         this.titles = titles;
+        this.pb = pb;
         this.lat = lat;
         this.lon = lon;
     }
 
     public Applicant() {
-        super(0, "", "", "", "");
+        super( "", "");
+        this.id = 0;
+        this.email = "";
         this.firstname = "";
         this.lastname = "";
         this.gender = 0;
         this.titles = new ArrayList<>();
+        this.pb = "";
         this.lat = 0.0;
         this.lon = 0.0;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFirstname() {
@@ -65,6 +90,14 @@ public class Applicant extends User {
 
     public void setTitles(ArrayList<String> titles) {
         this.titles = titles;
+    }
+
+    public String getPb() {
+        return pb;
+    }
+
+    public void setPb(String pb) {
+        this.pb = pb;
     }
 
     public double getLat() {

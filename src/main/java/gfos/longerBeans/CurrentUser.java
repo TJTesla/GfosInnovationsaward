@@ -1,7 +1,7 @@
 package gfos.longerBeans;
 
 import gfos.beans.Applicant;
-import gfos.beans.Company;
+import gfos.beans.Employee;
 import gfos.beans.User;
 
 import javax.annotation.PostConstruct;

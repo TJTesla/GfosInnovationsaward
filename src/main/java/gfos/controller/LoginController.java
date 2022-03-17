@@ -1,7 +1,7 @@
 package gfos.controller;
 
 import gfos.beans.Applicant;
-import gfos.beans.Company;
+import gfos.beans.Employee;
 import gfos.beans.User;
 import gfos.database.ApplicantDatabaseService;
 import gfos.longerBeans.CurrentUser;
@@ -37,8 +37,8 @@ public class LoginController implements Serializable {
             cu.setCurrentUser((Applicant)u);
 
             return "/index.xhtml?faces-redirect=true";
-        } else if (u instanceof Company) {
-            cu.setCurrentUser((Company)u);
+        } else if (u instanceof Employee) {
+            cu.setCurrentUser((Employee)u);
 
             return "/tjtesla-tests/companyIndex.xhtml?faces-redirect=true";
         }

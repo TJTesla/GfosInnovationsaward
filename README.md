@@ -15,3 +15,29 @@ The task is to develop an application management system
 
 ## Resource
 https://www.gfos.com/gfos/mint-lab/gfos-innovationsaward.html
+
+## What we need to change
+
+### Database
+- Delete company ✅
+- Fetching independant from company ✅
+- Create new POJO/Table: Employee ✅
+
+### Backend
+- No inheritance anymore :(
+- When registering company (now employee):
+  - Super-User (hard-coded)
+  - Only function: Create Employees (Name and Key)
+  - Employee gets name and key and registers with those (enters own password)
+  - Check whether key and name match the values from Super-User
+
+### Frontend
+- Delete Company folder
+- Change registration (For employee: Less fields and key field)
+
+
+## What we have to add
+
+- **Change status of applications**
+- Save draft of application / offer
+- Birthday of Applicant

@@ -61,7 +61,7 @@ public class ApplicationDatabaseService extends DatabaseService {
         }
     }
 
-    private static Application createApplication(ResultSet rs) throws SQLException {
+    public static Application createApplication(ResultSet rs) throws SQLException {
         return new Application(
                 rs.getInt("userId"),
                 rs.getInt("offerId"),

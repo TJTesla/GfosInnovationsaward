@@ -3,6 +3,7 @@ package gfos.database;
 import gfos.Env;
 import gfos.beans.User;
 
+import javax.annotation.PreDestroy;
 import javax.inject.Named;
 import java.sql.*;
 
@@ -24,5 +25,16 @@ public abstract class DatabaseService {
 
     public Object getById(int id) {
         return null;
+    }
+
+    @PreDestroy
+    public void deconstruct() {
+        try {
+            con.close();
+            stmt.close();
+            rs.close();
+        } catch (SQLException sqlException) {
+            System.out.println("Could not destroy UserDatabaseService: " + sqlException.getMessage());
+        }
     }
 }

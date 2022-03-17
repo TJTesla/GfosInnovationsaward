@@ -3,7 +3,6 @@ package gfos.database;
 import gfos.FilterObject;
 import gfos.beans.Applicant;
 import gfos.beans.Application;
-import gfos.beans.Company;
 import gfos.beans.Offer;
 import gfos.longerBeans.GeoCalculator;
 
@@ -24,7 +23,7 @@ public class OfferDatabaseService extends DatabaseService {
     public boolean createOne(Offer o) {
         try {
             stmt = con.prepareStatement("" +
-                    "INSERT INTO offer(id, title, description, provider, field, level, time, lat, lon) VALUES " +
+                    "INSERT INTO offer(id, title, description, field, level, time, lat, lon) VALUES " +
                     "(null, ?, ?, ?, ?, ?, ?, ?, ?);"
             );
             setStmtParameters(stmt, o);
@@ -42,7 +41,6 @@ public class OfferDatabaseService extends DatabaseService {
         try {
             statement.setString(1, o.getTitle());
             statement.setString(2, o.getDescription());
-            statement.setInt(3, o.getProvider());
             statement.setInt(4, o.getField());
             statement.setInt(5, o.getLevel());
             statement.setInt(6, o.getTime());
@@ -65,7 +63,6 @@ public class OfferDatabaseService extends DatabaseService {
                         rs.getInt("id"),
                         rs.getString("title"),
                         rs.getString("description"),
-                        rs.getInt("provider"),
                         rs.getInt("field"),
                         rs.getInt("level"),
                         rs.getInt("time"),
@@ -146,29 +143,26 @@ public class OfferDatabaseService extends DatabaseService {
         }
     }
 
-    public ArrayList<Offer> getAllOffers(int companyId) {
+    public ArrayList<Offer> getAllOffers() {
         ArrayList<Offer> result = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM offer WHERE provider=?;");
-            stmt.setInt(1, companyId);
-
+            stmt = con.prepareStatement("SELECT * FROM offer");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 result.add(createOffer(rs));
             }
         } catch (SQLException sqlException) {
-            System.out.println("Could not fetch all offers from company: " + companyId + ": " + sqlException.getMessage());
+            System.out.println("Could not fetch all offers: " + sqlException.getMessage());
         }
         return result;
     }
 
-    private static Offer createOffer(ResultSet resultSet) throws SQLException {
+    public static Offer createOffer(ResultSet resultSet) throws SQLException {
         return new Offer(
                 resultSet.getInt("id"),
                 resultSet.getString("title"),
                 resultSet.getString("description"),
-                resultSet.getInt("provider"),
                 resultSet.getInt("field"),
                 resultSet.getInt("level"),
                 resultSet.getInt("time"),

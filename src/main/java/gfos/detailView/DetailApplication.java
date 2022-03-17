@@ -24,15 +24,13 @@ public class DetailApplication implements Serializable {
     OfferDatabaseService odbs;
 
     private Application application;
-    private Offer offer;
 
     private String userId;
     private String offerId;
 
     public String checkRights() {
         if (cu.getCurrentUser() == null ||
-                cu.getCurrentUser() instanceof Applicant ||
-                offer.getProvider() != cu.getCurrentUser().getId()
+                cu.getCurrentUser() instanceof Applicant
         ) {
             return "/00-loginRegistration/login.xhtml";
         }
@@ -43,7 +41,6 @@ public class DetailApplication implements Serializable {
     private void init() {
         initialized = true;
         application = adbs.getById(toInt(offerId), toInt(userId));
-        offer = odbs.getById(toInt(offerId));
     }
 
     private static int toInt(String str) {
