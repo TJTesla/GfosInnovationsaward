@@ -55,6 +55,7 @@
     }
     body .ui-inputfield:hover {
         background-color: #4f3b13;
+        border-color: #7285A5;
     }
 }
 @media (prefers-color-scheme: light) {
@@ -170,15 +171,18 @@ fieldset {
 body .ui-datepicker {
     padding: 0;
     width: var(--input-width);
-    height: 17px;
+    height: 20px;
 }
 body .ui-inputfield {
     width: var(--input-width);
-    height: auto;
+    height: 20px;
     font-size: inherit;
     border-radius: 5px;
     margin: 0;
     padding: 0;
+}
+body .ui-inputfield.ui-state-focus {
+    box-shadow: none;
 }
 
 /* Profil-Daten */
