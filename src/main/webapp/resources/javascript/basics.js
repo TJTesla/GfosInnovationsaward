@@ -8,11 +8,6 @@ function closeNav() {
     $("#sideNav").hide(500, "linear");
 }
 
-function redirect(url) {
-    var pageUrl = $(location).attr("href");
-    url = pageUrl.toString() + url.toString();
-    window.location.href = url;
-}
 //scr: https://www.primefaces.org/showcase/ui/input/datepicker/datePickerJava8.xhtml?jfwid=28da3
 PrimeFaces.locales ['de'] = {
     closeText: 'Schließen',

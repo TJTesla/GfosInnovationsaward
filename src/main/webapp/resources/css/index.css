@@ -1,8 +1,18 @@
 :root {
     --filter-bg-color: #384e7b
 }
+
+@media (prefers-color-scheme: dark) {
+    .allOffers {
+        border-color: #13274F;
+    }
+    .allOffers:hover {
+        background-color: #472600;
+    }
+}
+
 .filter {
-    margin: 50px 10%;
+    margin: 50px 10% 20px;
     background-color: var(--filter-bg-color);
 }
 .input-location {
@@ -68,8 +78,69 @@
 .checkLabel {
     padding: 8px;
 }
-
-/* Offers */
-.allOffers {
-
+.applyBtn {
+    margin-left: 10%;
+    margin-right: 10%;
 }
+.navBtn {
+    font-size: 16px;
+    font-family: inherit;
+    color: whitesmoke;
+    font-weight: bolder;
+    border-width: 0;
+    border-radius: 5px;
+    margin: 0;
+    background-color: var(--filter-bg-color);
+    height: 30px;
+    width: 100px;
+}
+.navBtn:hover {
+    background-color: #7b5138;
+}
+/* Offers */
+.offers {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 50px;
+    background-color: inherit;
+}
+.border-line {
+    border-bottom: solid;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-width: 2px;
+    border-color: #384e7b;
+    margin-top: 30px;
+}
+.allOffers {
+    border-top: solid;
+    border-bottom: solid;
+    border-left: none;
+    border-right: none;
+    border-width: 2px;
+    border-color: #384e7b;
+    margin-top: -2px;
+    padding: 15px 20px 10px;
+    height: 100px;
+}
+.offer-attr {
+    display: inline-block;
+    float: left;
+    width: 200px;
+}
+.offer-label {
+    font-weight: bolder;
+    line-height: 200%;
+    margin-bottom: 25px;
+    font-size: 18px;
+}
+.offer-location {
+    float: bottom;
+    font-size: inherit;
+}
+.offer-field {
+    float: bottom;
+    font-size: inherit;
+}
+
