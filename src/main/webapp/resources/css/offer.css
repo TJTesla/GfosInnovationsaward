@@ -1,3 +1,23 @@
+/* create Offer */
+@media (prefers-color-scheme: dark) {
+    .offer-form {
+        background-color: #13274F;
+    }
+    .offer-data {
+        border-color: #384e7b;
+    }
+}
+
+.offer-form {
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.offer-data {
+    border-bottom: solid 2px;
+}
+
+/* offer */
 .provider {
 
 }
