@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:k="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xml:lang="en" lang="en">
+<h:head>
+    <title>Angestellte Verwalten</title>
+</h:head>
+<h:body>
+    <h:outputStylesheet library="css" name="styleBasic.css" />
+    <h:outputStylesheet library="css" name="superuser.css" />
+    <div style="height: 50px; float: top" class="head">
+        <ui:include src="../resources/templates/common/header.xhtml" />
+    </div>
+
+    <div class="content">
+        <div align="center">
+            <h1>Mitarbeiter verwalten</h1>
+            <hr />
+        </div>
+        <div class="oldEmpl">
+            <ui:repeat var="x" value="">
+                <div class="empl">
+                    <h:outputText id="name" value="" styleClass="text-empl" />
+                    <h:form>
+                        <h:commandButton id="delete" value="Löschen" action="" styleClass="btn-delete" />
+                    </h:form>
+                    <div class="dropdown-empl">
+                        <h:outputLabel for="pswd" value="Passwort" styleClass="label-empl" />
+                        <h:outputText id="pswd" value="" styleClass="text-empl" />
+                    </div>
+                </div>
+            </ui:repeat>
+        </div>
+        <div class="newEmpl">
+            <h:form>
+                <fieldset>
+                    <legend class="legend-empl">Neuer Mitarbeiter:</legend>
+                    <h:outputLabel for="newName" value="Name" styleClass="label-empl" />
+                    <h:inputText id="newName" value="" styleClass="input-empl" />
+                </fieldset>
+                <h:commandButton id="add" value="Hinzufügen" action="" styleClass="btn-new-empl" />
+            </h:form>
+        </div>
+    </div>
+
+    <div style="height: 100px; overflow: hidden; margin-bottom: 0; text-align: center" class="foot">
+        <ui:include src="../resources/templates/common/footer.xhtml" />
+    </div>
+</h:body>
+</html>
