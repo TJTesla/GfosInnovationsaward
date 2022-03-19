@@ -80,6 +80,15 @@
                         </div>
                     </c:if>
                     <br/>
+                    <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true">
+                        <p:autoUpdate/>
+                    </p:growl>
+                    <h:outputLabel for="birthdate" styleClass="label-reg1" value="Geburtstag:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
+                    <p:datePicker id="birthdate" widgetVar="german" locale="de" monthNavigator="true"
+                                  value="#{datePickerTest.dateDe}"
+                                  pattern="dd.MM.yyyy"
+                                  styleClass="ui-datepicker" />
+                    <br />
                 </fieldset>
 
                 <fieldset class="data">
@@ -154,16 +163,17 @@
                     <p:fileUpload id="photo" mode="simple" update="@form" styleClass="upload" value="#{applicantRegistrationController.pbFile}"/>
                     <br />
                 </fieldset>
-                    <h3>Addresse:</h3>
-
-                    Straße: <h:inputText value="#{applicantRegistrationController.street}" />
+                <fieldset class="address">
+                    <legend>Addresse:</legend>
+                    <h:outputLabel value="Straße:" styleClass="label-add"><span class="obligatory">&nbsp;*</span></h:outputLabel>
+                    <h:inputText value="#{applicantRegistrationController.street}" styleClass="input-plain" />
                     <br />
-                    Postleitzahl: <h:inputText value="#{applicantRegistrationController.zip}" />
+                    <h:outputLabel value="Postleitzahl:" styleClass="label-add"><span class="obligatory">&nbsp;*</span></h:outputLabel>
+                    <h:inputText value="#{applicantRegistrationController.zip}" styleClass="input-plain" />
                     <br />
-                    Ort: <h:inputText value="#{applicantRegistrationController.city}" />
+                    <h:outputLabel value="Ort:" styleClass="label-add"><span class="obligatory">&nbsp;*</span></h:outputLabel>
+                    <h:inputText value="#{applicantRegistrationController.city}" styleClass="input-plain" />
                     <br />
-                <fieldset>
-
                 </fieldset>
 
                 <fieldset class="buttons-reg">

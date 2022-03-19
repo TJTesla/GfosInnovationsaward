@@ -3,11 +3,13 @@
     --log-width: 300px;
     --regL1-width: 140px;
     --regL2-width: 200px;
+    --regL3-width: 140px;
     --regCo-width: 600px;
     --regLCo-width: 200px;
 }
 
 /* Colour related */
+/* TODO: Change box-shadow when focused */
 @media (prefers-color-scheme: dark) {
     @keyframes reg-err-anim {
         0% {
@@ -32,6 +34,28 @@
     }
     [class*= "buttons-"] {
         background-color: var(--d-body-bg-color);
+    }
+    body .ui-datepicker {
+        background-color: var(--d-input-bg-color);
+        color: whitesmoke;
+        border-style: none;
+        font-size: 15px;
+        font-style: inherit;
+    }
+    body .ui-datepicker:hover {
+        background-color: #4f3b13;
+    }
+    body .ui-inputfield {
+        background-color: var(--d-input-bg-color);
+        color: whitesmoke;
+        border-width: 2px;
+        border-color: #7285A5;
+        font-size: 15px;
+        font-style: inherit;
+    }
+    body .ui-inputfield:hover {
+        background-color: #4f3b13;
+        border-color: #7285A5;
     }
 }
 @media (prefers-color-scheme: light) {
@@ -101,6 +125,10 @@ fieldset {
     height: auto;
     width: var(--reg-width);
 }
+.address {
+    height: auto;
+    width: var(--reg-width);
+}
 .headingF {
     margin: auto;
     width: var(--reg-width);
@@ -140,6 +168,22 @@ fieldset {
     margin-left: 5px;
     margin-right: 20px;
 }
+body .ui-datepicker {
+    padding: 0;
+    width: var(--input-width);
+    height: 20px;
+}
+body .ui-inputfield {
+    width: var(--input-width);
+    height: 20px;
+    font-size: inherit;
+    border-radius: 5px;
+    margin: 0;
+    padding: 0;
+}
+body .ui-inputfield.ui-state-focus {
+    box-shadow: none;
+}
 
 /* Profil-Daten */
 .label-reg2 {
@@ -155,6 +199,10 @@ fieldset {
 .radioUser label {
     margin-left: 5px;
     margin-right: 20px;
+}
+/* Adresse */
+.label-add {
+    width: var(--regL3-width);
 }
 /**/
 #footnote {

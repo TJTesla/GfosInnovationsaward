@@ -49,9 +49,9 @@ public class ResourceIO {
         String folder = "";
         if (user instanceof Applicant) {
             folder = "applicants";
-        } else if (user instanceof Company) {
+        } /*else if (user instanceof Company) {
             folder = "copanies";
-        }
+        }*/
         String path = "uploads/profilepics/" + folder + "/" + user.getName() + file.getFileName();
 
         save(file, new File(System.getProperty("user.dir"), path));

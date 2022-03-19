@@ -5,6 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:k="http://xmlns.jcp.org/jsf/passthrough">
 
 <!--f:metadata>
@@ -23,18 +24,15 @@
             <h:outputStylesheet library="css" name="index.css" />
             <h:outputScript library="javascript" name="index.js" />
             <div class="filter">
-                <h:inputText id="place" k:placeholder="Standort" styleClass="input-location" />
-                <div class="">
-                    Umfeld (in km):
-                    <h:inputText value="#{indexController.maxDistance}" />
-                </div>
+                <!--h:inputText id="place" k:placeholder="Standort" styleClass="input-location" /-->
+                <h:inputText value="#{indexController.maxDistance}" k:placeholder="Umfeld (in km)" styleClass="input-location" />
                 <div class="dropdown">
                     <button class="dropbtn" id="dropbtnField">Berufsfeld <i class="pi pi-caret-down" /></button>
                     <div class="navContent" id="dropdownField">
                         <ui:repeat id="field" var="f" value="#{indexController.allFields}" varStatus=""> <!-- TODO: controller method for all categories -->
                             <div class="a">
-                                <h:selectBooleanCheckbox id="#{f.first()}" styleClass="checkBox" value="true" />
-                                <h:outputLabel for="#{f.first()}" styleClass="checkLabel" value="#{f.second()}" />
+                                <h:selectBooleanCheckbox styleClass="checkBox" value="true" />
+                                <h:outputLabel styleClass="checkLabel" value="#{f.second()}" />
                             </div>
                         </ui:repeat>
 
@@ -49,8 +47,8 @@
                     <div class="navContent" id="dropdownLevel">
                         <ui:repeat id="level" var="l" value="#{indexController.allLevels}" varStatus=""> <!-- TODO: controller method for all categories -->
                             <div class="a">
-                                <h:selectBooleanCheckbox id="#{l.first()}" styleClass="checkBox" value="true" />
-                                <h:outputLabel for="#{l.first()}" styleClass="checkLabel" value="#{l.second()}" />
+                                <h:selectBooleanCheckbox styleClass="checkBox" value="true" />
+                                <h:outputLabel styleClass="checkLabel" value="#{l.second()}" />
                             </div>
                         </ui:repeat>
 
@@ -65,8 +63,8 @@
                     <div class="navContent" id="dropdownTime">
                         <ui:repeat id="time" var="t" value="#{indexController.allTimes}" varStatus=""> <!-- TODO: controller method for all categories -->
                             <div class="a">
-                                <h:selectBooleanCheckbox id="#{t.first()}" styleClass="checkBox" value="true" />
-                                <h:outputLabel for="#{t.first()}" styleClass="checkLabel" value="#{t.second()}" />
+                                <h:selectBooleanCheckbox styleClass="checkBox" value="true" />
+                                <h:outputLabel styleClass="checkLabel" value="#{t.second()}" />
                             </div>
                         </ui:repeat>
 
@@ -76,23 +74,30 @@
                         </h:selectOneMenu-->
                     </div>
                 </div>
-
             </div>
+            <h:form styleClass="applyBtn">
+                <h:commandButton value="Anwenden" action="#{indexController.reload()}" styleClass="navBtn" />
+            </h:form>
 
-            <div class="offers" onclick="redirect('offer.xhtml')">
+            <div class="offers">
+                <div class="border-line"> </div>
                 <ui:repeat id="offers" var="offer" value="#{indexController.allOffers}" varStatus="">
-                    <div class="">
+                    <div class="allOffers">
                         <h:graphicImage value="" />
-                        <h6> #{offer.title} </h6>
-                        <h:outputText id="location" value="" styleClass=""/> <!-- Place of the offer -->
-                        <h:outputText id="fieldOffer" value="#{offer.description}" styleClass=""/> <!-- Field of the offer -->
+                        <h:outputLabel id="title" value="#{offer.title}" styleClass="offer-label" />
+                        <br />
+                        <div class="offer-attr">
+                            <i class="pi pi-map-marker">&nbsp;</i>
+                            <h:outputText id="location" value="Essen" styleClass="offer-location" />
+                        </div>
+                        <div class="offer-attr">
+                            <i class="pi pi-briefcase">&nbsp;</i>
+                            <h:outputText id="field" value="Etwas" styleClass="offer-field" />
+                        </div>
                     </div>
                 </ui:repeat>
             </div>
 
-            <h:form>
-                <h:commandButton value="Filtern" action="#{indexController.reload()}" />
-            </h:form>
         </ui:define>
     </ui:composition>
 
