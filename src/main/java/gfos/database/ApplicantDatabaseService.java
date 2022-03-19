@@ -2,11 +2,13 @@ package gfos.database;
 
 import gfos.beans.Applicant;
 import gfos.beans.Employee;
+import gfos.beans.PasswordManager;
 import gfos.beans.User;
 
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,19 +24,24 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
 
     public boolean createOne(Applicant a) {
         try {
+            // Salt and hash password
+            a.setSalt(PasswordManager.generateSalt());
+            a.setPassword(PasswordManager.getHash(a.getPassword(), a.getSalt()));
+
             stmt = con.prepareStatement("" +
-                    "INSERT INTO applicant(id, username, password, firstname, lastname, email, gender, pb, lat, lon) VALUES " +
-                    "(null, ?, SHA2(?, 256), ?, ?, ?, ?, ?, ?, ?);"
+                    "INSERT INTO applicant(id, username, password, salt, firstname, lastname, email, gender, pb, lat, lon) VALUES " +
+                    "(null, ?, ?,?, ?, ?, ?, ?, ?, ?, ?);"
             );
             stmt.setString(1, a.getName());
             stmt.setString(2, a.getPassword());
-            stmt.setString(3, a.getFirstname());
-            stmt.setString(4, a.getLastname());
-            stmt.setString(5, a.getEmail());
-            stmt.setInt(6, a.getGender());
-            stmt.setString(7, a.getPb());
-            stmt.setDouble(8, a.getLat());
-            stmt.setDouble(9, a.getLon());
+            stmt.setString(3, a.getSalt());
+            stmt.setString(4, a.getFirstname());
+            stmt.setString(5, a.getLastname());
+            stmt.setString(6, a.getEmail());
+            stmt.setInt(7, a.getGender());
+            stmt.setString(8, a.getPb());
+            stmt.setDouble(9, a.getLat());
+            stmt.setDouble(10, a.getLon());
             int affectedRows = stmt.executeUpdate();
 
             rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
@@ -46,6 +53,9 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
             return affectedRows != 0;
         } catch (SQLException sqlException) {
             System.out.println("There was an error while creating an applicant: " + sqlException.getMessage());
+            return false;
+        } catch (NoSuchAlgorithmException exception) {
+            System.out.println("Could not generate hash for password: " + exception.getMessage());
             return false;
         }
     }
@@ -82,6 +92,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
                         rs.getInt("id"),
                         rs.getString("username"),
                         rs.getString("password"),
+                        rs.getString("salt"),
                         rs.getString("firstname"),
                         rs.getString("lastname"),
                         rs.getString("email"),
@@ -137,30 +148,63 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
 
     public User loginAttempt(String user, String password) {
         try {
-            stmt = con.prepareStatement("SELECT * FROM applicant WHERE username=? AND password=SHA2(?, 256)");
-            stmt.setString(1, user);
-            stmt.setString(2, password);
-            rs = stmt.executeQuery();
-
-            Applicant a = parseApplicant();
+            Applicant a = (Applicant)findUser("applicant", user, password);
             if (a != null) {
                 return a;
             }
 
-            stmt = con.prepareStatement("SELECT * FROM employees WHERE name=? AND password=SHA2(?, 256) AND registered=TRUE");
-            stmt.setString(1, user);
-            stmt.setString(2, password);
-            rs = stmt.executeQuery();
-            if (!rs.next()) {
-                return null;
-            }
-
-            return EmployeeDatabaseService.createEmployee(rs);
-
+            return (Employee)findUser("employee", user, password);
         } catch (SQLException sqlException) {
             System.out.println("Could not check login: " + sqlException.getMessage());
             return null;
+        } catch (NoSuchAlgorithmException exception) {
+            System.out.println("Could not generate hash: " + exception.getMessage());
+            return null;
         }
+    }
+
+    private String getSalt(String table, String name) throws SQLException {
+        String activeQuery = "";
+        if (table.equals("applicant")) {
+            activeQuery = "SELECT salt FROM applicant WHERE username=?";
+        } else if (table.equals("employee")) {
+            activeQuery = "SELECT salt FROM employees WHERE name=?";
+        }
+
+        stmt = con.prepareStatement(activeQuery);
+        stmt.setString(1, name);
+        rs = stmt.executeQuery();
+        if (!rs.next()) {
+            return null;
+        }
+        return rs.getString("salt");
+    }
+
+    private User findUser(String table, String name, String password) throws SQLException, NoSuchAlgorithmException {
+        String hashPwd = PasswordManager.getHash(password, getSalt(table, name));
+
+        String activeQuery = "";
+        if (table.equals("applicant")) {
+            activeQuery = "SELECT * FROM applicant WHERE username=? AND password=?";
+        } else if (table.equals("employee")) {
+            activeQuery = "SELECT * FROM employees WHERE name=? AND password=?";
+        }
+
+        stmt = con.prepareStatement(activeQuery);
+        stmt.setString(1, name);
+        stmt.setString(2, hashPwd);
+        rs = stmt.executeQuery();
+        if (!rs.next()) {
+            return null;
+        }
+
+        if (table.equals("applicant")) {
+            return parseApplicant();
+        } else if (table.equals("employee")) {
+            return EmployeeDatabaseService.createEmployee(rs);
+        }
+
+        return null;
     }
 
     public boolean nameExists(String name) {
@@ -176,13 +220,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
             stmt.setString(1, name);
             rs = stmt.executeQuery();
 
-            Employee e = new Employee(
-                    rs.getString("name"),
-                    rs.getString("password"),
-                    rs.getBoolean("registered")
-            );
-
-            return e.isRegistered();
+            return rs.next();
         } catch (SQLException sqlException) {
             System.out.println("Error while checking for name: " + name + ": " + sqlException.getMessage());
             return false;
@@ -211,6 +249,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
                 rs.getInt("id"),
                 rs.getString("username"),
                 rs.getString("password"),
+                rs.getString("salt"),
                 rs.getString("firstname"),
                 rs.getString("lastname"),
                 rs.getString("email"),

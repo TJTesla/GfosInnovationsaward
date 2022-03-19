@@ -46,7 +46,7 @@ public class EmployeeRegistrationController implements Serializable {
             return "";
         }
 
-        Employee e = new Employee(name, password, true);
+        Employee e = new Employee(name, password, "", true);
 
         edbs.registerEmployee(e);
 
@@ -66,9 +66,9 @@ public class EmployeeRegistrationController implements Serializable {
             errorMsgs.put("name", "Es muss ein Name angegeben werden");
         }
         // Name wird schon benutzt
-        if (adbs.nameExists(name)) {
+        if (edbs.employeeCreated(name, key)) {
             registerError = true;
-            errorMsgs.put("name", "Der Name \"" + name + "\" existiert bereits.");
+            errorMsgs.put("name", "Der Name \"" + name + "\" existiert bereits oder der Schlüssel ist falsch.");
         }
         // Passwort leer
         if (password.isEmpty()) {

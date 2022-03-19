@@ -4,11 +4,12 @@ public abstract class User {
 
     protected String name;
     protected String password;
+    protected String salt;
 
-
-    public User(String name, String password) {
+    public User(String name, String password, String salt) {
         this.name = name;
         this.password = password;
+        this.salt = salt;
     }
 
     public String getName() {
@@ -25,5 +26,13 @@ public abstract class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }

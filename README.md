@@ -22,10 +22,11 @@ https://www.gfos.com/gfos/mint-lab/gfos-innovationsaward.html
 - Delete company ✅
 - Fetching independant from company ✅
 - Create new POJO/Table: Employee ✅
+- Salting of passwords ✅
 
 ### Backend
 - No inheritance anymore :(
-- When registering company (now employee):
+- When registering company (now employee): ✅ **(Untested)**
   - Super-User (hard-coded)
   - Only function: Create Employees (Name and Key)
   - Employee gets name and key and registers with those (enters own password)

@@ -4,14 +4,14 @@ public class Employee extends User {
     private boolean registered;
 
     public Employee() {
-        super("", "");
+        super("", "", "");
         this.name = "";
         this.password = "";
         this.registered = false;
     }
 
-    public Employee(String name, String password, boolean registered) {
-        super(name, password);
+    public Employee(String name, String password, String salt, boolean registered) {
+        super(name, password, salt);
         this.registered = registered;
     }
 

@@ -18,8 +18,8 @@ public class Applicant extends User {
     private String pb;
     private double lat, lon;
 
-    public Applicant(int id, String username, String password, String firstname, String lastname, String email, int gender, ArrayList<String> titles, String pb, double lat, double lon) {
-        super(username, password);
+    public Applicant(int id, String username, String password, String salt, String firstname, String lastname, String email, int gender, ArrayList<String> titles, String pb, double lat, double lon) {
+        super(username, password, salt);
         this.id = id;
         this.email = email;
         this.firstname = firstname;
@@ -32,7 +32,7 @@ public class Applicant extends User {
     }
 
     public Applicant() {
-        super( "", "");
+        super( "", "", "");
         this.id = 0;
         this.email = "";
         this.firstname = "";

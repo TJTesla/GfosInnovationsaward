@@ -1,12 +1,10 @@
 package gfos.database;
 
-import gfos.beans.Applicant;
-import gfos.beans.Application;
-import gfos.beans.Employee;
-import gfos.beans.Offer;
+import gfos.beans.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,7 +18,11 @@ public class EmployeeDatabaseService extends DatabaseService {
 
     public void createOne(Employee e) {
         try {
-            stmt = con.prepareStatement("INSERT INTO employees(name, password, registered) VALUE (?, ?, false)");
+            // Salt and hash
+            e.setSalt(PasswordManager.generateSalt());
+            e.setPassword(PasswordManager.getHash(e.getPassword(), e.getSalt()));
+
+            stmt = con.prepareStatement("INSERT INTO employees(name, password, salt, registered) VALUE (?, ?, ?, false)");
             stmt.setString(1, e.getName());
             stmt.setString(2, e.getPassword());
 
@@ -30,6 +32,8 @@ public class EmployeeDatabaseService extends DatabaseService {
             }
         } catch (SQLException sqlException) {
             System.out.println("Could not create employee with name: " + e.getName() + ": " + sqlException.getMessage());
+        } catch (NoSuchAlgorithmException exception) {
+            System.out.println("Could not generate hash for passwort of employee: " + exception.getMessage());
         }
     }
 
@@ -54,6 +58,7 @@ public class EmployeeDatabaseService extends DatabaseService {
         return new Employee(
                 rs.getString("name"),
                 rs.getString("password"),
+                rs.getString("salt"),
                 rs.getBoolean("registered")
         );
     }
@@ -74,29 +79,51 @@ public class EmployeeDatabaseService extends DatabaseService {
 
     public boolean registerEmployee(Employee e) {
         try {
-            stmt = con.prepareStatement("UPDATE employees SET registered=?, password=SHA2(?, 256) WHERE name=?");
-            stmt.setBoolean(1, e.isRegistered());
-            stmt.setString(2, e.getPassword());
+            String salt = PasswordManager.generateSalt();
+            String hashPwd = PasswordManager.getHash(e.getPassword(), salt);
+
+            stmt = con.prepareStatement("UPDATE employees SET registered=true, password=?, salt=? WHERE name=?");
+            stmt.setString(1, hashPwd);
+            stmt.setString(2, salt);
             stmt.setString(3, e.getName());
 
             return stmt.executeUpdate() == 1;
         } catch (SQLException sqlException) {
             System.out.println("Could not register employee: " + e.getName() + ": " + sqlException.getMessage());
             return false;
+        } catch (NoSuchAlgorithmException exception) {
+            System.out.println("Could not generate hash: " + exception.getMessage());
+            return false;
         }
+    }
+
+    public String getSalt(String name) throws SQLException {
+        stmt = con.prepareStatement("SELECT salt FROM employees WHERE name=?");
+        stmt.setString(1, name);
+        rs = stmt.executeQuery();
+        if (!rs.next()) {
+            return null;
+        }
+
+        return rs.getString("salt");
     }
 
     public boolean employeeCreated(String name, String key) {
         try {
-            stmt = con.prepareStatement("SELECT * FROM employees WHERE name=? AND password=SHA2(?, 256) AND registered=false");
+            String hashKey = PasswordManager.getHash(key, getSalt(name));
+
+            stmt = con.prepareStatement("SELECT * FROM employees WHERE name=? AND password=? AND registered=false");
             stmt.setString(1, name);
-            stmt.setString(2, key);
+            stmt.setString(2, hashKey);
 
             rs = stmt.executeQuery();
 
             return rs.next();
         } catch (SQLException sqlException) {
             System.out.println("Problem occured while finding employee with name: " + name + ": " + sqlException.getMessage());
+            return false;
+        } catch (NoSuchAlgorithmException exception) {
+            System.out.println("Could not crate hash: " + exception.getMessage());
             return false;
         }
     }

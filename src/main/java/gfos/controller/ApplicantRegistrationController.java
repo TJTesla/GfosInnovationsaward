@@ -61,6 +61,7 @@ public class ApplicantRegistrationController implements Serializable {
                 -1,
                 username,
                 password,
+                "",
                 firstname,
                 lastname,
                 email,
