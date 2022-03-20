@@ -80,14 +80,18 @@
                         </div>
                     </c:if>
                     <br/>
-                    <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true">
-                        <p:autoUpdate/>
-                    </p:growl>
+
                     <h:outputLabel for="birthdate" styleClass="label-reg1" value="Geburtstag:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
-                    <p:datePicker id="birthdate" widgetVar="german" locale="de" monthNavigator="true"
-                                  value="#{datePickerTest.dateDe}"
-                                  pattern="dd.MM.yyyy"
-                                  styleClass="ui-datepicker" />
+                    <h:inputText id="birthdate" name="birthdate" type="text"
+                                 styleClass="#{applicantRegistrationController.getErrorMessage('birthdate').equals('') ? 'input-plain' : 'input-error'}"
+                                 value="#{applicantRegistrationController.birthdate}" />
+                    <c:if test="#{not (applicantRegistrationController.getErrorMessage('birthdate').equals('')) }">
+                        <div class="errMsg-reg1">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="#{applicantRegistrationController.getErrorMessage('birthdate')}"
+                                          rendered="#{applicantRegistrationController.registerError}" />
+                        </div>
+                    </c:if>
                     <br />
                 </fieldset>
 
@@ -178,7 +182,7 @@
 
                 <fieldset class="buttons-reg">
                     <p id="footnote"><span class="obligatory">&nbsp;*</span> Angabepflichtig</p>
-                    <h:commandButton id="register" action="#{applicantRegistrationController.register()}" type="submit" value="Registrieren" styleClass="loginButton"/>
+                    <h:commandButton id="register" action="#{applicantRegistrationController.register()}" type="submit" value="Registrieren" styleClass="btn-login"/>
                     <br />
                 </fieldset>
                 <div class="linkAlign">
@@ -214,7 +218,7 @@
 
                 </fieldset>
                 <fieldset class="buttons-login">
-                    <h:commandButton id="login" action="#{loginController.login()}" value="Einloggen" styleClass="loginButton"/>
+                    <h:commandButton id="login" action="#{loginController.login()}" value="Einloggen" styleClass="btn-login"/>
                     <br />
                 </fieldset>
                 <div class="linkAlign">

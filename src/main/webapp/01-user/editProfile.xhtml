@@ -51,19 +51,6 @@
                     <h:inputText id="emailRepeat" name="emailWiederholen" type="text" required="true" styleClass="input" />
                     <h:outputText for="emailRepeat" id="checkMail" value="" />
                     <br />
-                    <h:outputLabel for="pswdOld" value="Altes Passwort:" styleClass="outLabel" />
-                    <h:inputSecret id="pswdOld" rendered="true" styleClass="input" />
-                    <br />
-                    <h:outputLabel for="password" value="Neues Passwort:" styleClass="outLabel" />
-                    <h:inputSecret id="password" rendered="true" styleClass="input">
-                        <f:validateRegex pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=&lt;>]).{8,20}$" />
-                    </h:inputSecret>
-                    <h:message for="password" infoClass="infoMessage" errorClass="errorMessage" rendered="true" />
-                    <br />
-                    <h:outputLabel for="passwordRepeat" value="Passwort wiederholen:" styleClass="outLabel" />
-                    <h:inputSecret id="passwordRepeat" rendered="true" styleClass="input"/>
-                    <h:outputText for="passwordRepeat" id="checkPswd" value="" />
-                    <br />
                 </fieldset>
                 <!--h:commandButton action="" value="Änderungen speichern" rendered="true"/-->
             </h:form>

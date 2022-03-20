@@ -25,29 +25,29 @@
             <h1>Mitarbeiter verwalten</h1>
             <hr />
         </div>
+        <div class="newEmpl">
+            <h:form>
+                <fieldset>
+                    <legend class="legend-empl">Neuer Mitarbeiter:</legend>
+                    <h:outputLabel for="newName" value="Name: " styleClass="label-empl" />
+                    <h:inputText id="newName" value="" styleClass="input-empl" />
+                </fieldset>
+                <h:commandButton id="add" value="Hinzufügen" action="hello" styleClass="btn-new-empl" />
+            </h:form>
+        </div>
         <div class="oldEmpl">
             <ui:repeat var="x" value="">
                 <div class="empl">
                     <h:outputText id="name" value="" styleClass="text-empl" />
                     <h:form>
-                        <h:commandButton id="delete" value="Löschen" action="" styleClass="btn-delete" />
+                        <h:commandButton id="delete" value="Löschen" action="hello" styleClass="btn-delete" />
                     </h:form>
                     <div class="dropdown-empl">
-                        <h:outputLabel for="pswd" value="Passwort" styleClass="label-empl" />
+                        <h:outputLabel for="pswd" value="Passwort:" styleClass="label-empl" />
                         <h:outputText id="pswd" value="" styleClass="text-empl" />
                     </div>
                 </div>
             </ui:repeat>
-        </div>
-        <div class="newEmpl">
-            <h:form>
-                <fieldset>
-                    <legend class="legend-empl">Neuer Mitarbeiter:</legend>
-                    <h:outputLabel for="newName" value="Name" styleClass="label-empl" />
-                    <h:inputText id="newName" value="" styleClass="input-empl" />
-                </fieldset>
-                <h:commandButton id="add" value="Hinzufügen" action="" styleClass="btn-new-empl" />
-            </h:form>
         </div>
     </div>
 
