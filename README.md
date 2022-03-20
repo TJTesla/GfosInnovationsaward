@@ -32,12 +32,20 @@ https://www.gfos.com/gfos/mint-lab/gfos-innovationsaward.html
   - Check whether key and name match the values from Super-User
 
 ### Frontend
-- Delete Company folder
-- Change registration (For employee: Less fields and key field)
+- Delete Company folder ✅
+- Site for changing password ✅
+- Overview of applied offers
+- Overview of all applications for one offer (in detail view for offer) ✅
 
 
 ## What we have to add
 
-- **Change status of applications**
+- **Change status of applications:**
+  - Change status from employee side
+  - See status from applicant side
 - Save draft of application / offer
-- Birthday of Applicant
+- Birthday of Applicant: 
+  - Add in registration form ✅
+  - Validation ✅
+  - Add in database and bean file
+- Overview all applications for an offer
