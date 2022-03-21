@@ -16,10 +16,14 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.regex.Pattern;
+import java.time.LocalDate;
 
 @Named
 @ViewScoped
@@ -35,6 +39,7 @@ public class ApplicantRegistrationController implements Serializable {
     private String[] title;
     private String firstname;
     private String lastname;
+    private String birthdate;
     private String username;
     private String email;
     private String emailRepeat;
@@ -94,6 +99,26 @@ public class ApplicantRegistrationController implements Serializable {
         }
     }
 
+    private boolean checkDateFormat (String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        try {
+            LocalDate.parse(date, formatter);
+        } catch (DateTimeParseException e){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkAge (String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        LocalDate birthdate = LocalDate.parse(date, formatter);
+        LocalDate now = LocalDate.now();
+        LocalDate max = now.minus(67, ChronoUnit.YEARS);
+        LocalDate min = now.minus(16, ChronoUnit.YEARS);
+        return (birthdate.isAfter(max) && birthdate.isBefore(min)) || birthdate.isEqual(min);
+    }
+
+
     @Inject
     LoginController login;
 
@@ -125,6 +150,19 @@ public class ApplicantRegistrationController implements Serializable {
         if (lastname.isEmpty()) {
             registerError = true;
             errorMsgs.put("lastname", "Nachname ist erforderlich.");
+        }
+        // Kein Geburtstag
+        if (birthdate.isEmpty()) {
+            registerError = true;
+            errorMsgs.put("birthdate", "Es muss ein Geburtstag angeben werden.");
+        }
+        // Geburtstag nicht im richtigen Format
+        if(!checkDateFormat(birthdate)) {
+            registerError = false;
+            errorMsgs.put("birthdate", "Das angegebene Datum ist nicht korrekt.");
+        } else if (!checkAge(birthdate)) {
+            registerError = false;
+            errorMsgs.put("birthdate", "Das angegebene Datum ist zeitlich nicht korrekt.");
         }
         // Kein benutzername
         if (username.isEmpty()) {
@@ -215,6 +253,10 @@ public class ApplicantRegistrationController implements Serializable {
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
+
+    public String getBirthdate() { return birthdate; }
+
+    public void setBirthdate(String birthdate) { this.birthdate = birthdate; }
 
     public String getUsername() {
         return username;

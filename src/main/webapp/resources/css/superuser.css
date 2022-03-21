@@ -1,0 +1,54 @@
+.allEmpl {
+    margin-left: 30%;
+    margin-right: 30%;
+}
+.oldEmpl {
+
+}
+
+.empl {
+
+}
+
+.text-empl {
+
+}
+
+.label-empl {
+    display: inline-block;
+    width: 100px;
+}
+
+.dropdown-empl {
+
+}
+
+.new-empl {
+    margin-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+fieldset {
+    margin-left: 20%;
+    margin-right: 20%;
+    border-radius: 10px;
+    border-width: 1px;
+    padding-bottom: 20px;
+}
+
+.legend-empl {
+
+}
+
+.input-empl {
+
+}
+
+.btn-delete {
+
+}
+
+.btn-new-empl {
+    float: right;
+    margin-right: 20%;
+}

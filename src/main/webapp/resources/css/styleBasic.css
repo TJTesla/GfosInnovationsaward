@@ -97,7 +97,7 @@ body {
     }
     fieldset {
         background-color: #13274F;
-        border-color: #001b3b;
+
     }
     [class*="input-"] {
         color: whitesmoke;
@@ -120,14 +120,36 @@ h1 {
     font-size: 35px;
     font-weight: bold;
     line-height: normal;
+    text-align: center;
 }
-
+legend {
+    font-weight: bolder;
+    font-size:23px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+fieldset {
+    border: solid 1px #001b3b;
+}
 [class*="input-"] {
     border-radius: 5px;
     width: var(--input-width);
 }
 [class*="btn-"] {
     border-radius: 5px;
+    background-color: #007FFF;
+    color: whitesmoke;
+    border-width: 0;
+    padding: 10px;
+}
+[class*="btn-"]:hover {
+    background-color: #ff8200;
+}
+[class*="label-"] {
+    display: inline-block;
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
 .loginLink {
     margin-top: 10px;

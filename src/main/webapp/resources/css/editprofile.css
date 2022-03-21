@@ -1,0 +1,37 @@
+/* New Password */
+:root {
+    --newPswd-width: 350px;
+}
+.newPswd {
+    height: auto;
+    padding: 20px calc(var(--newPswd-width) * 0.1) 30px;
+    width: var(--newPswd-width);
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+.label-pswd {
+    margin-top: 20px;
+    font-style: italic;
+    color: #7285A5;
+}
+
+.input-pswd {
+    width: calc( var(--newPswd-width) * 0.8 );
+    margin-top: 5px;
+    font-size: 17px;
+}
+
+.fieldset-btn {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    border: none;
+    width: var(--newPswd-width);
+    background-color: inherit;
+}
+.btn-newPswd {
+    float: right;
+    font-weight: bolder;
+    font-size: 16px;
+}
