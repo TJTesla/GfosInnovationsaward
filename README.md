@@ -27,10 +27,10 @@ https://www.gfos.com/gfos/mint-lab/gfos-innovationsaward.html
 ### Backend
 - No inheritance anymore :(
 - When registering company (now employee): ✅ **(Untested)**
-  - Super-User (hard-coded)
-  - Only function: Create Employees (Name and Key)
-  - Employee gets name and key and registers with those (enters own password)
-  - Check whether key and name match the values from Super-User
+  - Super-User (hard-coded) ✅
+  - Only function: Create Employees (Name and Key) ✅
+  - Employee gets name and key and registers with those (enters own password) ✅
+  - Check whether key and name match the values from Super-User ✅
 
 ### Frontend
 - Delete Company folder ✅
@@ -43,10 +43,15 @@ https://www.gfos.com/gfos/mint-lab/gfos-innovationsaward.html
 
 - **Change status of applications:**
   - Change status from employee side
+  	 - Bottom of application
+  	 - Select one of options (accept, decline, in process)
   - See status from applicant side
+  	 - Show List of Applications and results in profile
+  	 - Write E-Mail to user with result
 - Save draft of application / offer
-- Birthday of Applicant: 
+  - TODO: How presented 
+- Additional filter for *applied offers*, *not applied offers* or *favorites*
+- Birthday of Applicant: ✅
   - Add in registration form ✅
   - Validation ✅
-  - Add in database and bean file
-- Overview all applications for an offer
+  - Add in database and bean file ✅
