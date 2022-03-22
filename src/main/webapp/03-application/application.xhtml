@@ -10,6 +10,7 @@
       xml:lang="en" lang="en">
 <f:metadata>
     <f:viewParam name="offerId" value="#{detailOffer.detailOffer}" converter="#{offerConverter}" />
+    <f:viewAction action="#{applicationFormController.checkUserRights()}" />
 </f:metadata>
 <head>
     <title>#{detailOffer.detailOffer.title} - Bewerben</title>
@@ -27,8 +28,8 @@
                 <h:inputTextarea id="lom" required="true" style="height: 500px; width:500px;" />
                 <br />
                 <!-- update="@form" can be used for invalid parts -->
-                <p:commandButton value="Speichern" action="#{applicationFormController.apply()}" upadte="@form" />
-                <p:commandButton value="Abschicken" action="#{applicationFormController.apply()}" />
+                <p:commandButton value="Speichern" action="#{applicationFormController.apply()}" update="@form" />
+                <p:commandButton value="Abschicken" action="#{applicationFormController.apply()}" /> <!-- TODO: Other action -->
             </h:form>
         </ui:define>
     </ui:composition>

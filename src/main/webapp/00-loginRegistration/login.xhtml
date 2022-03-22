@@ -84,7 +84,7 @@
                     <h:outputLabel for="birthdate" styleClass="label-reg1" value="Geburtstag:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputText id="birthdate" name="birthdate" type="text"
                                  styleClass="#{applicantRegistrationController.getErrorMessage('birthdate').equals('') ? 'input-plain' : 'input-error'}"
-                                 value="#{applicantRegistrationController.birthdate}" />
+                                 value="#{applicantRegistrationController.birthdate}" k:placeholder="dd.MM.yyyy" />
                     <c:if test="#{not (applicantRegistrationController.getErrorMessage('birthdate').equals('')) }">
                         <div class="errMsg-reg1">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>

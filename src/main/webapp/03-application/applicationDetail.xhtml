@@ -13,6 +13,8 @@
 <f:metadata>
     <f:viewParam name="applicantId" value="#{detailApplicant.detailApplicant}" converter="#{applicantConverter}" />
     <f:viewParam name="offerId" value="#{detailOffer.detailOffer}" converter="#{offerConverter}" />
+
+    <f:viewAction action="#{detailApplication.checkRights()}" />
 </f:metadata>
 <h:head>
     <title>Bewerbung - #{detailOffer.detailOffer.title} - #{detailApplicant.detailApplicant.firstname} #{detailApplicant.detailApplicant.lastname}</title>
@@ -46,7 +48,7 @@
             </div>
             <div>
                 <h:outputLabel for="lom" value="Bewerbungsschreiben:" styleClass="outLabel"/> <br />
-                <h:outputText id="lom" value="" />
+                <h:outputText id="lom" value="#{detailApplication.application.text}" />
                 <br />
 
                 <h:form enctype="multipart/form-data">
@@ -64,15 +66,18 @@
             </c:if>
             <c:if test=""> <!-- if it is an employee -->
                 <h:form>
-                    <h:outputLabel for="checksStatus" value="Bearbeitungsstatus setzen:" styleClass="label-status" /> <br />
-                    <h:selectOneRadio id="checksStatus" styleClass="radio-status">
-                        <f:selectItem itemValue="null" itemLabel="Nicht bearbeitet" />
-                        <f:selectItem itemValue="0" itemLabel="Bearbeitet" />
-                        <f:selectItem itemValue="1" itemLabel="Wird bearbeitet" />
-                    </h:selectOneRadio>
-                    <c:if test=""> <!-- Only if not processed yet -->
+                    <c:when test=""> <!-- Only if not processed yet -->
+                        <h:outputLabel for="checksStatus" value="Bearbeitungsstatus setzen:" styleClass="label-status" /> <br />
+                        <h:selectOneRadio id="checksStatus" styleClass="radio-status">
+                            <f:selectItem itemValue="null" itemLabel="Nicht bearbeitet" />
+                            <f:selectItem itemValue="0" itemLabel="Bearbeitet" />
+                            <f:selectItem itemValue="1" itemLabel="Wird bearbeitet" />
+                        </h:selectOneRadio>
                         <h:commandButton id="saveStatus" value="Status speichern" styleClass="btn-saveStatus" />
-                    </c:if>
+                    </c:when>
+                    <c:otherwise>
+
+                    </c:otherwise>
                 </h:form>
             </c:if>
         </ui:define>

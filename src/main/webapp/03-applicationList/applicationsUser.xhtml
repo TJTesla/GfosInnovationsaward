@@ -21,10 +21,12 @@
                 <hr />
             </div>
             <ui:repeat var="apl" value="">
-                <div class="application">
-                    <h:outputText id="offer" value="" styleClass="text-apl" />
-                    <h:outputText id="status" value="" styleClass="text-status" />
-                    <h:button value="Einsehen" outcome="" styleClass="btn-seeAppl" />
+                <div class="applications">
+                    <h:button styleClass="applications" outcome="seeAppl">
+                        <h:outputText id="offer" value="" styleClass="text-apl" />
+                        <h:outputText id="status" value="" styleClass="text-status" />
+                        <h:button value="Einsehen" outcome="seeAppl" styleClass="btn-seeAppl" />
+                    </h:button>
                 </div>
             </ui:repeat>
         </ui:define>

@@ -15,7 +15,7 @@
 
 
 <h:head>
-    <title>Angebot</title>
+    <title>#{detailOffer.detailOffer.title}</title>
 </h:head>
 <h:body>
     <ui:composition template="../resources/templates/common.xhtml">
@@ -23,10 +23,6 @@
             <h2>
                 <h:outputText value="Angebot: #{detailOffer.detailOffer.title}" />
             </h2>
-            <div>
-                <!-- TODO: Add action (connection to the providers site) -->
-                <h:commandLink value="#{detailOffer.detailOffer.provider}" styleClass="provider" action="" />
-            </div>
             <div>
                 <!-- Daten des Angebots -->
                 <h:outputLabel for="field" value="Berufsfeld" />
@@ -53,25 +49,15 @@
             <c:if test=""> <!-- if applicant -->
                 <h:form>
                     <c:when test=""> <!-- if not applied -->
-                        <h:commandButton value="Bewerben" styleClass="btn-apply" action="" />
+                        <h:button value="Bewerben" styleClass="btn-appl" outcome="apply" />
                     </c:when>
                     <c:otherwise> <!-- else -->
-                        <h:commandButton value="Bewerbung einsehen" styleClass="btn-seeAppl" action="" />
+                        <h:button value="Bewerbung einsehen" styleClass="btn-appl" outcome="seeAppl" />
                     </c:otherwise>
                 </h:form>
             </c:if>
             <c:if test=""> <!-- if employee -->
-                <ui:repeat var="appl" value="" >
-                    <div class="allAppl">
-                        <h:outputText id="lname" value="" styleClass="text-allAppl" /> <!-- Last Name of Applicant -->, &nbsp;
-                        <h:outputText id="fname" value="" styleClass="text-allAppl" /> <!-- First Name of Applicant -->
-                        <h:outputLabel for="status" value="Berarbeitungsstatus" styleClass="label-status" />
-                        <h:outputText id="status" value="" styleClass="text-status" /> <!-- current status of application -->
-                        <h:form>
-                            <h:commandButton id="seeAppl" value="Einsehen" action="" styleClass="btn-seeAppl" />
-                        </h:form>
-                    </div>
-                </ui:repeat>
+                <h:button value="Bewerbungen einsehen" styleClass="btn-appl" outcome="seeApplications" />
             </c:if>
         </ui:define>
     </ui:composition>

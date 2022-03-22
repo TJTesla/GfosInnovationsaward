@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xml:lang="en" lang="en">
+<f:metadata>
+    <f:viewParam name="id" value="#{detailOffer.detailOffer}" converter="#{offerConverter}" />
+    <f:viewAction action="#{companyIndexController.checkUserRights()}" />
+</f:metadata>
+<h:head>
+    <title>Bewerbungen - #{detailOffer.detailOffer.title}</title>
+</h:head>
+<h:body>
+    <ui:composition template="../resources/templates/common.xhtml">
+        <ui:define name="content">
+            <ui:repeat var="a" value="#{companyIndexController.getAllApplications(detailOffer.detailOffer.id)}" >
+                <div class="allAppl">
+                    <h:button outcome="applicationDetail" styleClass="btn-detailApplication">
+                        <f:param name="oId" value="#{detailOffer.detailOffer.id}" />
+                        <f:param name="aId" value="#{a.userId}" />
+                        <h:outputText id="name" value="#{companyIndexController.getApplicantName(a.userId)}" styleClass="text-allAppl" /> <!-- Last Name of Applicant -->
+                        <h:outputLabel for="status" value="Berarbeitungsstatus" styleClass="label-status" />
+                        <h:outputText id="status" value="" styleClass="text-status" /> <!-- current status of application -->
+                    </h:button>
+                </div>
+            </ui:repeat>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
