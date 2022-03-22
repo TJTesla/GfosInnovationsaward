@@ -29,8 +29,8 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
             a.setPassword(PasswordManager.getHash(a.getPassword(), a.getSalt()));
 
             stmt = con.prepareStatement("" +
-                    "INSERT INTO applicant(id, username, password, salt, firstname, lastname, email, gender, pb, lat, lon) VALUES " +
-                    "(null, ?, ?,?, ?, ?, ?, ?, ?, ?, ?);"
+                    "INSERT INTO applicant(id, username, password, salt, firstname, lastname, email, gender, pb, lat, lon, bday) VALUES " +
+                    "(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
             );
             stmt.setString(1, a.getName());
             stmt.setString(2, a.getPassword());
@@ -42,6 +42,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
             stmt.setString(8, a.getPb());
             stmt.setDouble(9, a.getLat());
             stmt.setDouble(10, a.getLon());
+            stmt.setString(11, a.getBday());
             int affectedRows = stmt.executeUpdate();
 
             rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
@@ -100,7 +101,8 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
                         getTitles(rs.getInt("id")),
                         rs.getString("pb"),
                         rs.getDouble("lat"),
-                        rs.getDouble("lon")
+                        rs.getDouble("lon"),
+                        rs.getString("bday")
                 );
 
                 list.add(temp);
@@ -257,7 +259,8 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
                 getTitles(rs.getInt("id")),
                 rs.getString("pb"),
                 rs.getDouble("lat"),
-                rs.getDouble("lon")
+                rs.getDouble("lon"),
+                rs.getString("bday")
         );
     }
 }

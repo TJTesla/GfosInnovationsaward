@@ -17,8 +17,9 @@ public class Applicant extends User {
     private ArrayList<String> titles;
     private String pb;
     private double lat, lon;
+    private String bday;
 
-    public Applicant(int id, String username, String password, String salt, String firstname, String lastname, String email, int gender, ArrayList<String> titles, String pb, double lat, double lon) {
+    public Applicant(int id, String username, String password, String salt, String firstname, String lastname, String email, int gender, ArrayList<String> titles, String pb, double lat, double lon, String bday) {
         super(username, password, salt);
         this.id = id;
         this.email = email;
@@ -29,6 +30,7 @@ public class Applicant extends User {
         this.pb = pb;
         this.lat = lat;
         this.lon = lon;
+        this.bday = bday;
     }
 
     public Applicant() {
@@ -42,6 +44,7 @@ public class Applicant extends User {
         this.pb = "";
         this.lat = 0.0;
         this.lon = 0.0;
+        this.bday = "";
     }
 
     public int getId() {
@@ -114,6 +117,14 @@ public class Applicant extends User {
 
     public void setLon(double lon) {
         this.lon = lon;
+    }
+
+    public String getBday() {
+        return bday;
+    }
+
+    public void setBday(String bday) {
+        this.bday = bday;
     }
 }
 

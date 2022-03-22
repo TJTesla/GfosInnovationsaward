@@ -47,6 +47,7 @@ public class ApplicantRegistrationController implements Serializable {
     private String passwordRepeat;
     private UploadedFile pbFile;
     private String street, zip, city;
+    private String bday;
 
     private boolean registerError = false;
     private HashMap<String, String> errorMsgs = new HashMap<>();
@@ -74,7 +75,8 @@ public class ApplicantRegistrationController implements Serializable {
                 arrToList(title),
                 "",
                 coordinates[0],  // Latitude
-                coordinates[1]  // Longitude
+                coordinates[1],  // Longitude
+                bday
         );
 
         if (pbFile != null) {
@@ -99,7 +101,7 @@ public class ApplicantRegistrationController implements Serializable {
         }
     }
 
-    private boolean checkDateFormat (String date) {
+    private boolean checkDateFormat(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         try {
             LocalDate.parse(date, formatter);
@@ -109,7 +111,7 @@ public class ApplicantRegistrationController implements Serializable {
         return true;
     }
 
-    private boolean checkAge (String date) {
+    private boolean checkAge(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         LocalDate birthdate = LocalDate.parse(date, formatter);
         LocalDate now = LocalDate.now();
@@ -170,7 +172,7 @@ public class ApplicantRegistrationController implements Serializable {
             errorMsgs.put("username", "Es muss ein Benutzername angegeben werden.");
         }
         // Benutzername schon belegt
-        if (adbs.nameExists(username)) {
+        if (adbs.nameExists(username) || username.equals("root")) {
             registerError = true;
             errorMsgs.put("username", "Dieser Benutzername wird bereits verwendet.");
         }
@@ -344,5 +346,13 @@ public class ApplicantRegistrationController implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getBday() {
+        return bday;
+    }
+
+    public void setBday(String bday) {
+        this.bday = bday;
     }
 }
