@@ -1,13 +1,16 @@
 package gfos.controller;
 
 import gfos.beans.Employee;
+import gfos.beans.SuperUser;
 import gfos.database.ApplicantDatabaseService;
 import gfos.database.EmployeeDatabaseService;
+import gfos.longerBeans.CurrentUser;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.Currency;
 import java.util.HashMap;
 
 @Named
@@ -17,6 +20,8 @@ public class SuperUserController implements Serializable {
     ApplicantDatabaseService adbs;
     @Inject
     EmployeeDatabaseService edbs;
+    @Inject
+    CurrentUser cu;
 
     private String name;
     private String key;
@@ -47,7 +52,7 @@ public class SuperUserController implements Serializable {
             errorMsgs.put("name", "Ein Name ist erforderlich");
         }
 
-        if (adbs.nameExists(name)) {
+        if (adbs.nameExists(name) || name.equals("root")) {
             registrationError = true;
             errorMsgs.put("name", "Dieser Name wird bereits verwendet");
         }
@@ -56,6 +61,14 @@ public class SuperUserController implements Serializable {
             registrationError = true;
             errorMsgs.put("key", "Es muss ein Schlüssel eingegeben werden");
         }
+    }
+
+    public String isSuperUser() {
+        if (cu.getCurrentUser() instanceof SuperUser) {
+            return "";
+        }
+
+        return "/00-registration/login.xhtml";
     }
 
     public String getName() {

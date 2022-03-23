@@ -25,6 +25,7 @@ public class EmployeeDatabaseService extends DatabaseService {
             stmt = con.prepareStatement("INSERT INTO employees(name, password, salt, registered) VALUE (?, ?, ?, false)");
             stmt.setString(1, e.getName());
             stmt.setString(2, e.getPassword());
+            stmt.setString(3, e.getSalt());
 
             int changed = stmt.executeUpdate();
             if (changed == 0) {

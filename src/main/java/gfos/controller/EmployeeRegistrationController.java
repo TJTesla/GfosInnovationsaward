@@ -66,9 +66,9 @@ public class EmployeeRegistrationController implements Serializable {
             errorMsgs.put("name", "Es muss ein Name angegeben werden");
         }
         // Name wird schon benutzt
-        if (edbs.employeeCreated(name, key)) {
+        if (!edbs.employeeCreated(name, key) || name.equals("root")) {
             registerError = true;
-            errorMsgs.put("name", "Der Name \"" + name + "\" existiert bereits oder der Schlüssel ist falsch.");
+            errorMsgs.put("name", "Es wurde kein nur eingetragener Angestellter für den Namen \"" + name + "\" und dem angegebenen Passwort gefunden.");
         }
         // Passwort leer
         if (password.isEmpty()) {
@@ -109,6 +109,14 @@ public class EmployeeRegistrationController implements Serializable {
 
     public void setPasswordRepeat(String passwordRepeat) {
         this.passwordRepeat = passwordRepeat;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public boolean isRegisterError() {

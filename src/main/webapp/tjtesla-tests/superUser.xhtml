@@ -6,17 +6,21 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+<f:metadata>
+    <f:viewAction action="#{superUserController.isSuperUser()}" />
+</f:metadata>
+
 <h:body>
     <h:form>
         Benutzername:
-        <h:inputText value="" />
+        <h:inputText value="#{superUserController.name}" />
         <br />
 
         Temporärer Key:
-        <h:inputText value="" />
+        <h:inputText value="#{superUserController.key}" />
         <br />
 
-        <h:commandButton value="Neuen Nutzer erstellen" action="" />
+        <h:commandButton value="Neuen Nutzer erstellen" action="#{superUserController.createEmployee()}" />
     </h:form>
 </h:body>
 
