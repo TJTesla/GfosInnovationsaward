@@ -22,11 +22,11 @@
             </div>
             <ui:repeat var="apl" value="">
                 <div class="applications">
-                    <h:button styleClass="applications" outcome="seeAppl">
+                    <h:form>
                         <h:outputText id="offer" value="" styleClass="text-apl" />
                         <h:outputText id="status" value="" styleClass="text-status" />
-                        <h:button value="Einsehen" outcome="seeAppl" styleClass="btn-seeAppl" />
-                    </h:button>
+                        <h:commandButton value="Einsehen" action="/03-application/applDetailUser" styleClass="btn-seeAppl" />
+                    </h:form>
                 </div>
             </ui:repeat>
         </ui:define>

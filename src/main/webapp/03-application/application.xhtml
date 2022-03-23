@@ -12,9 +12,9 @@
     <f:viewParam name="offerId" value="#{detailOffer.detailOffer}" converter="#{offerConverter}" />
     <f:viewAction action="#{applicationFormController.checkUserRights()}" />
 </f:metadata>
-<head>
+<h:head>
     <title>#{detailOffer.detailOffer.title} - Bewerben</title>
-</head>
+</h:head>
 <h:body>
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">

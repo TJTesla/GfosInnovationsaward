@@ -118,4 +118,8 @@ public class EmployeeRegistrationController implements Serializable {
     public void setRegisterError(boolean registerError) {
         this.registerError = registerError;
     }
+
+    public String getKey() { return key; }
+
+    public void setKey(String key) { this.key = key; }
 }

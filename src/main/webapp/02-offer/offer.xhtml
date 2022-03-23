@@ -49,15 +49,15 @@
             <c:if test=""> <!-- if applicant -->
                 <h:form>
                     <c:when test=""> <!-- if not applied -->
-                        <h:button value="Bewerben" styleClass="btn-appl" outcome="apply" />
+                        <h:commandButton value="Bewerben" styleClass="btn-appl" action="/03-application/application" />
                     </c:when>
                     <c:otherwise> <!-- else -->
-                        <h:button value="Bewerbung einsehen" styleClass="btn-appl" outcome="seeAppl" />
+                        <h:commandButton value="Bewerbung einsehen" styleClass="btn-appl" action="/03-application/applDetailUser" />
                     </c:otherwise>
                 </h:form>
             </c:if>
             <c:if test=""> <!-- if employee -->
-                <h:button value="Bewerbungen einsehen" styleClass="btn-appl" outcome="seeApplications" />
+                <h:commandButton value="Bewerbungen einsehen" styleClass="btn-appl" action="/03-application/applDetailEmpl" />
             </c:if>
         </ui:define>
     </ui:composition>

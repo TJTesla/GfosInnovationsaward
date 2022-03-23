@@ -36,6 +36,7 @@
         <navigation-case>
             <from-outcome>seeAppl</from-outcome>
             <to-view-id>../03-application/applDetailUser.xhtml</to-view-id>
+            <redirect />
         </navigation-case>
     </navigation-rule>
 

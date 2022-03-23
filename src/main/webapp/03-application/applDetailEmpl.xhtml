@@ -21,7 +21,7 @@
 <h:body>
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
-            <ui:include src="applicationDetail.xhtml" />
+            <ui:include src="applicationDetailTemplate.xhtml" />
             <h:form>
                 <c:when test=""> <!-- Only if not processed yet -->
                     <h:outputLabel for="checksStatus" value="Bearbeitungsstatus setzen:" styleClass="label-status" /> <br />
@@ -30,7 +30,7 @@
                         <f:selectItem itemValue="0" itemLabel="Bearbeitet" />
                         <f:selectItem itemValue="1" itemLabel="Wird bearbeitet" />
                     </h:selectOneRadio>
-                    <h:commandButton id="saveStatus" value="Status speichern" styleClass="btn-saveStatus" />
+                    <h:commandButton id="saveStatus" value="Status speichern" styleClass="btn-saveStatus" action="" />
                 </c:when>
                 <c:otherwise>
                     <h:outputLabel for="status" value="Entscheindung:" styleClass="label-status" />

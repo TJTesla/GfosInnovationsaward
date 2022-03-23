@@ -57,7 +57,10 @@
 
                 <br />
                 <div class="wrapper">
-                    <h:button outcome="editProfile.xhtml" value="Profil bearbeiten" styleClass="btn-edit" />
+                    <h:commandButton action="editProfile" value="Profil bearbeiten" styleClass="btn-edit" />
+                </div>
+                <div>
+                    <h:commandButton action="/00-loginRegistration/newPswd" value="Passwort ändern" styleClass="btn-changePswd" />
                 </div>
             </div>
 
