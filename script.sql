@@ -26,6 +26,7 @@ CREATE TABLE `applicant` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(40) NOT NULL,
   `password` varchar(100) NOT NULL,
+  `salt` varchar(100) NOT NULL,
   `firstname` varchar(40) DEFAULT NULL,
   `lastname` varchar(40) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
@@ -33,6 +34,7 @@ CREATE TABLE `applicant` (
   `pb` varchar(100) DEFAULT NULL,
   `lat` double DEFAULT NULL,
   `lon` double DEFAULT NULL,
+  `bday` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `applicant_username_uindex` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -44,7 +46,7 @@ CREATE TABLE `applicant` (
 
 LOCK TABLES `applicant` WRITE;
 /*!40000 ALTER TABLE `applicant` DISABLE KEYS */;
-INSERT INTO `applicant` VALUES (1,'Yixue','8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4','Vivien','Hou',NULL,2,NULL,NULL,NULL),(12,'TTesla','ce0b8a0eb2c976b3cfed32c653ef6f1ce08006d488b865bb4dd2beaeb555740a','Theodor','Teslia','theoteslia@gmail.com',1,'uploads/profilepics/applicants/0picture.jpg',51.44046,7.01433),(15,'brittchen','ce0b8a0eb2c976b3cfed32c653ef6f1ce08006d488b865bb4dd2beaeb555740a','Britta','Teslia','brittateslia@gmx.de',2,'uploads/profilepics/applicants/brittchen2BInFrontOfRobot.png',51.44046,7.01433),(17,'tes','ce0b8a0eb2c976b3cfed32c653ef6f1ce08006d488b865bb4dd2beaeb555740a','Anton','Teslia','teslia@gmx.de',1,'uploads/profilepics/applicants/tesKenKaneki.jpg',51.4398407,7.0275026);
+INSERT INTO `applicant` VALUES (1,'Yixue','8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4','','Vivien','Hou',NULL,2,NULL,NULL,NULL,NULL),(12,'TTesla','ce0b8a0eb2c976b3cfed32c653ef6f1ce08006d488b865bb4dd2beaeb555740a','','Theodor','Teslia','theoteslia@gmail.com',1,'uploads/profilepics/applicants/0picture.jpg',51.44046,7.01433,NULL),(15,'brittchen','ce0b8a0eb2c976b3cfed32c653ef6f1ce08006d488b865bb4dd2beaeb555740a','','Britta','Teslia','brittateslia@gmx.de',2,'uploads/profilepics/applicants/brittchen2BInFrontOfRobot.png',51.44046,7.01433,NULL),(17,'tes','ce0b8a0eb2c976b3cfed32c653ef6f1ce08006d488b865bb4dd2beaeb555740a','','Anton','Teslia','teslia@gmx.de',1,'uploads/profilepics/applicants/tesKenKaneki.jpg',51.4398407,7.0275026,NULL);
 /*!40000 ALTER TABLE `applicant` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,6 +63,7 @@ CREATE TABLE `application` (
   `text` text,
   `status` int NOT NULL DEFAULT '0' COMMENT '0: To be reviewed\n1: Currently being reviewed\n10: Accepted\n11: Declined',
   `resumeId` int DEFAULT NULL,
+  `draft` tinyint(1) DEFAULT '1',
   UNIQUE KEY `application_pk` (`userId`,`offerId`),
   KEY `application_status_id_fk` (`status`),
   KEY `application_offer_fk` (`offerId`),
@@ -78,7 +81,7 @@ CREATE TABLE `application` (
 
 LOCK TABLES `application` WRITE;
 /*!40000 ALTER TABLE `application` DISABLE KEYS */;
-INSERT INTO `application` VALUES (12,3,'Ich hab Informarik studiert und möchte dasher das hier arbeiten',0,NULL),(15,3,'KA brauche arbeit',0,NULL);
+INSERT INTO `application` VALUES (12,3,'Ich hab Informarik studiert und möchte dasher das hier arbeiten',0,NULL,1),(15,3,'KA brauche arbeit',0,NULL,1);
 /*!40000 ALTER TABLE `application` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,6 +95,7 @@ DROP TABLE IF EXISTS `employees`;
 CREATE TABLE `employees` (
   `name` varchar(30) NOT NULL,
   `password` varchar(100) NOT NULL,
+  `salt` varchar(100) NOT NULL,
   `registered` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`name`),
   UNIQUE KEY `employees_name_uindex` (`name`)
@@ -104,6 +108,7 @@ CREATE TABLE `employees` (
 
 LOCK TABLES `employees` WRITE;
 /*!40000 ALTER TABLE `employees` DISABLE KEYS */;
+INSERT INTO `employees` VALUES ('theotes','7c92ffe94cf82e94aa2cda05a5d8e5b5755bfb9c442aeadc3fca67eb515819ef','cd3f1ea903dca761106be6384a61e267',0);
 /*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,8 +123,8 @@ CREATE TABLE `favorites` (
   `applicantId` int NOT NULL,
   `offerId` int NOT NULL,
   PRIMARY KEY (`applicantId`),
-  UNIQUE KEY `favorites_applicantId_uindex` (`applicantId`),
   UNIQUE KEY `favorites_offerId_uindex` (`offerId`),
+  UNIQUE KEY `favorites_applicantId_offerId_uindex` (`applicantId`,`offerId`),
   CONSTRAINT `favorites_offer_fk` FOREIGN KEY (`offerId`) REFERENCES `offer` (`id`),
   CONSTRAINT `favorites_user_fk` FOREIGN KEY (`applicantId`) REFERENCES `applicant` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -201,6 +206,7 @@ CREATE TABLE `offer` (
   `time` int DEFAULT NULL,
   `lat` double DEFAULT NULL,
   `lon` double DEFAULT NULL,
+  `draft` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `offer_tag_fk` (`field`),
   KEY `offer_cat_fk` (`time`),
@@ -217,7 +223,7 @@ CREATE TABLE `offer` (
 
 LOCK TABLES `offer` WRITE;
 /*!40000 ALTER TABLE `offer` DISABLE KEYS */;
-INSERT INTO `offer` VALUES (2,'Build a PC','Help assemble PCs for clients',3,1,3,52.52,13.405),(3,'Sr Dev','Work as a senior dev',5,6,2,51.4556,7.0116),(4,'PR','Werbung',15,4,2,51.4367956,7.0095003);
+INSERT INTO `offer` VALUES (2,'Build a PC','Help assemble PCs for clients',3,1,3,52.52,13.405,1),(3,'Sr Dev','Work as a senior dev',5,6,2,51.4556,7.0116,1),(4,'PR','Werbung',15,4,2,51.4367956,7.0095003,1);
 /*!40000 ALTER TABLE `offer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -360,4 +366,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-16 23:43:35
+-- Dump completed on 2022-03-24 19:35:56
