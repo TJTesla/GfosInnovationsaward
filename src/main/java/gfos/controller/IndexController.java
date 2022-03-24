@@ -11,6 +11,7 @@ import gfos.database.OfferDatabaseService;
 import gfos.longerBeans.CurrentUser;
 import gfos.Pair;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -29,25 +30,65 @@ public class IndexController implements Serializable {
     @Inject
     CurrentUser cu;
 
-    private ArrayList<String> field;  // 1:n
-    private ArrayList<String> level;  // 1:n
-    private ArrayList<String> time;  // 1:n
+    private ArrayList<Boolean> field;
+    private ArrayList<Boolean> level;
+    private ArrayList<Boolean> time;
+
+    private ArrayList<String> internalField;  // 1:n
+    private ArrayList<String> internalLevel;  // 1:n
+    private ArrayList<String> internalTime;  // 1:n
     private String maxDistance;
 
-    public ArrayList<Offer> getAllOffers() {
-        System.out.println("Field: " + field);
+    @PostConstruct
+    private void init() {
+        field = new ArrayList<>();
+        field.add(false);
+        for (int i = 0; i < getAllFields().size(); i++) {
+            field.add(false);
+        }
 
-        ArrayList<Offer> offerList =  odbs.fetchAll(
+        level = new ArrayList<>();
+        level.add(false);
+        for (int i = 0; i < getAllLevels().size(); i++) {
+            level.add(false);
+        }
+
+        time = new ArrayList<>();
+        time.add(false);
+        for (int i = 0; i < getAllTimes().size(); i++) {
+            time.add(false);
+        }
+    }
+
+    public ArrayList<Offer> getAllOffers() {
+        /*System.out.println("Field: " + field.size());
+        System.out.println("Level: " + level.size());
+        System.out.println("Time: " + time.size());
+        System.out.println("Max Distance: " + maxDistance);*/
+
+        System.out.println("search");
+
+        return odbs.getAllFinalOffers(
                 new FilterObject(
-                        field,
-                        level,
-                        time,
+                        createFilterArray(field),
+                        createFilterArray(level),
+                        createFilterArray(time),
                         toInt(maxDistance)
                 ),
-                (Applicant) cu.getCurrentUser()
+                (Applicant)cu.getCurrentUser()
         );
+    }
 
-        return offerList;
+    private static ArrayList<String> createFilterArray(ArrayList<Boolean> arr) {
+        ArrayList<String> result = new ArrayList<>();
+
+        for (int i = 1; i < arr.size(); i++) {
+            if (arr.get(i)) {
+                result.add(String.valueOf(i));
+            }
+        }
+
+        return result;
     }
 
     private Integer toInt(String str) {
@@ -95,27 +136,27 @@ public class IndexController implements Serializable {
         return mdbs.getAllTimes();
     }
 
-    public ArrayList<String> getField() {
+    public ArrayList<Boolean> getField() {
         return field;
     }
 
-    public void setField(ArrayList<String> field) {
+    public void setField(ArrayList<Boolean> field) {
         this.field = field;
     }
 
-    public ArrayList<String> getLevel() {
+    public ArrayList<Boolean> getLevel() {
         return level;
     }
 
-    public void setLevel(ArrayList<String> level) {
+    public void setLevel(ArrayList<Boolean> level) {
         this.level = level;
     }
 
-    public ArrayList<String> getTime() {
+    public ArrayList<Boolean> getTime() {
         return time;
     }
 
-    public void setTime(ArrayList<String> time) {
+    public void setTime(ArrayList<Boolean> time) {
         this.time = time;
     }
 

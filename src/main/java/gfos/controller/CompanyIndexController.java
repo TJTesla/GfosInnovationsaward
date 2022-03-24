@@ -1,5 +1,6 @@
 package gfos.controller;
 
+import gfos.FilterObject;
 import gfos.beans.Applicant;
 import gfos.beans.Application;
 import gfos.beans.Offer;
@@ -28,11 +29,11 @@ public class CompanyIndexController {
     }
 
     public ArrayList<Offer> getAllFinalOffers() {
-        return odbs.getAllFinalOffers();
+        return odbs.getAllFinalOffers(new FilterObject(), null);
     }
 
     public ArrayList<Offer> getAllDrafts() {
-        return odbs.getAllDrafts();
+        return odbs.getAllDrafts(new FilterObject(), null);
     }
 
     public String checkUserRights() {
