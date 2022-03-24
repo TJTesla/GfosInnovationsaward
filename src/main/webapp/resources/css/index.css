@@ -103,6 +103,11 @@
 .select-fav {
     display: inline-block;
 }
+.check-fav {
+    border-color: #007FFF;
+    height: 20px;
+    width: 20px;
+}
 
 /* Offers */
 .offers {

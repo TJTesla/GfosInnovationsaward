@@ -14,9 +14,18 @@
 <h:body>
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
-            <h:form>
-                <h:commandButton action="createOffer" styleClass="btn-offers" />
-            </h:form>
+            <div align="center">
+                <h2>Entwürfe</h2>
+                <hr />
+            </div>
+            <ui:repeat var="oDraft" value="">
+                <div class="oDrafts">
+                    <h:outputLabel id="offerTitle" value="" styleClass="text-draftTitle" />
+                    <h:form>
+                        <h:commandButton id="editOffer" value="Bearbeiten" styleClass="btn-editDraft" action="createOffer" />
+                    </h:form>
+                </div>
+            </ui:repeat>
         </ui:define>
     </ui:composition>
 </h:body>
