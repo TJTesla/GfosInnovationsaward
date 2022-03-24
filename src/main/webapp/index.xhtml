@@ -37,7 +37,7 @@
                         </ui:repeat>
 
                         <!--h:selectOneMenu id="field" value="#{indexController.field}">
-                            <f:selectItems value="#{indexController.allFields}" var="t" itemValue="#{t.key}" itemLabel="#{t.value}" />
+                            <f:selectItems value="#{indexController.allFields}" var="t" itemValue="#{t.first()}" itemLabel="#{t.second()}" />
                         </h:selectOneMenu-->
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                         </ui:repeat>
 
                         <!--h:selectOneMenu id="level" value="#{indexController.level}">
-                            <f:selectItems value="#{indexController.allLevels}" var="t" itemValue="#{t.key}" itemLabel="#{t.value}" />
+                            <f:selectItems value="#{indexController.allLevels}" var="t" itemValue="#{t.first()}" itemLabel="#{t.second()}" />
                         </h:selectOneMenu-->
                     </div>
                 </div>
@@ -70,7 +70,7 @@
 
                         <!--h:selectOneMenu id="time" value="#{indexController.time}">
                                      <f:selectItem itemValue="-1" itemLabel="Zeitumfang" />
-                            <f:selectItems value="#{indexController.allTimes}" itemValue="#{t.key}" itemLabel="#{t.value}" />
+                            <f:selectItems value="#{indexController.allTimes}" itemValue="#{t.first()}" itemLabel="#{t.second()}" />
                         </h:selectOneMenu-->
                     </div>
                 </div>

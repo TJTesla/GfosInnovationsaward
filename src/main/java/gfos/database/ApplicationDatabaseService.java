@@ -18,11 +18,12 @@ public class ApplicationDatabaseService extends DatabaseService {
 
     public void apply(Application a, Resume r) {
         try {
-            stmt = con.prepareStatement("INSERT INTO application(userId, offerId, text, status, resumeId) VALUES (?, ?, ?, 0, ?)");
+            stmt = con.prepareStatement("INSERT INTO application(userId, offerId, text, status, resumeId, draft) VALUES (?, ?, ?, 0, ?, ?)");
             stmt.setInt(1, a.getUserId());
             stmt.setInt(2, a.getOfferId());
             stmt.setString(3, a.getText());
             stmt.setInt(4, this.createResume(r));
+            stmt.setBoolean(5, a.getDraft());
 
             stmt.executeUpdate();
         } catch (SQLException sqlException) {
@@ -67,7 +68,8 @@ public class ApplicationDatabaseService extends DatabaseService {
                 rs.getInt("offerId"),
                 rs.getString("text"),
                 rs.getInt("status"),
-                rs.getInt("resumeId")
+                rs.getInt("resumeId"),
+                rs.getBoolean("draft")
         );
     }
 }

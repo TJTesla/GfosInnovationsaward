@@ -2,6 +2,7 @@ package gfos.detailView;
 
 import gfos.beans.Applicant;
 import gfos.beans.Application;
+import gfos.beans.Employee;
 import gfos.beans.Offer;
 import gfos.database.ApplicationDatabaseService;
 import gfos.database.OfferDatabaseService;
@@ -29,8 +30,8 @@ public class DetailApplication implements Serializable {
     private String offerId;
 
     public String checkRights() {
-        if (cu.getCurrentUser() == null ||
-                cu.getCurrentUser() instanceof Applicant
+        if (cu.getCurrentUser() != null &&
+                cu.getCurrentUser() instanceof Employee
         ) {
             return "/00-loginRegistration/login.xhtml";
         }

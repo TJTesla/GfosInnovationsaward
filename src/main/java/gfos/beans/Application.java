@@ -6,13 +6,15 @@ public class Application {
     private String text;
     private int status;
     private int resumeId;
+    private boolean draft;
 
-    public Application(int userId, int offerId, String text, int status, int resumeId) {
+    public Application(int userId, int offerId, String text, int status, int resumeId, boolean draft) {
         this.userId = userId;
         this.offerId = offerId;
         this.text = text;
         this.status = status;
         this.resumeId = resumeId;
+        this.draft = draft;
     }
 
     public Application() {
@@ -21,6 +23,7 @@ public class Application {
         this.text = "";
         this.status = 0;
         this.resumeId = 0;
+        this.draft = true;
     }
 
     public int getUserId() {
@@ -61,5 +64,13 @@ public class Application {
 
     public void setResumeId(int resumeId) {
         this.resumeId = resumeId;
+    }
+
+    public boolean getDraft() {
+        return draft;
+    }
+
+    public void setDraft(boolean draft) {
+        this.draft = draft;
     }
 }

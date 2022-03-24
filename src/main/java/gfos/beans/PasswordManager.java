@@ -28,4 +28,10 @@ public class PasswordManager {
         BigInteger number = new BigInteger(1, hash);
         return number.toString(16);
     }
+
+    public static String generateKey() {
+        byte[] key = new byte[16];
+        RANDOM.nextBytes(key);
+        return toHexString(key);
+    }
 }

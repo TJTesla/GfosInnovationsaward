@@ -1,6 +1,7 @@
 package gfos.controller;
 
 import gfos.beans.Employee;
+import gfos.beans.PasswordManager;
 import gfos.beans.SuperUser;
 import gfos.database.ApplicantDatabaseService;
 import gfos.database.EmployeeDatabaseService;
@@ -37,6 +38,8 @@ public class SuperUserController implements Serializable {
             return "";
         }
 
+        key = PasswordManager.generateKey();
+
         edbs.createOne(new Employee(
                 name,
                 key,
@@ -44,6 +47,10 @@ public class SuperUserController implements Serializable {
                 false
         ));
         return "";
+    }
+
+    public String getLastKey() {
+        return this.key;
     }
 
     private void check() {
@@ -55,11 +62,6 @@ public class SuperUserController implements Serializable {
         if (adbs.nameExists(name) || name.equals("root")) {
             registrationError = true;
             errorMsgs.put("name", "Dieser Name wird bereits verwendet");
-        }
-
-        if (key.isEmpty()) {
-            registrationError = true;
-            errorMsgs.put("key", "Es muss ein Schlüssel eingegeben werden");
         }
     }
 

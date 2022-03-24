@@ -23,8 +23,8 @@ public class OfferDatabaseService extends DatabaseService {
     public boolean createOne(Offer o) {
         try {
             stmt = con.prepareStatement("" +
-                    "INSERT INTO offer(id, title, description, field, level, time, lat, lon) VALUES " +
-                    "(null, ?, ?, ?, ?, ?, ?, ?, ?);"
+                    "INSERT INTO offer(id, title, description, field, level, time, lat, lon, draft) VALUES " +
+                    "(null, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
             );
             setStmtParameters(stmt, o);
 
@@ -46,6 +46,7 @@ public class OfferDatabaseService extends DatabaseService {
             statement.setInt(6, o.getTime());
             statement.setDouble(7, o.getLat());
             statement.setDouble(8, o.getLon());
+            statement.setBoolean(9, o.getDraft());
         } catch (SQLException sqlException) {
             System.out.println("Couldn't set parameters for insertion or update of company: " + sqlException.getMessage());
         }
@@ -67,10 +68,12 @@ public class OfferDatabaseService extends DatabaseService {
                         rs.getInt("level"),
                         rs.getInt("time"),
                         rs.getDouble("lat"),
-                        rs.getDouble("lon")
+                        rs.getDouble("lon"),
+                        rs.getBoolean("draft")
                 ));
             }
 
+            // TODO: Uncomment and filter by distance
             /*result.removeIf(o ->
                     GeoCalculator.distance(
                             new double[]{o.getLat(), o.getLon()},
@@ -143,10 +146,19 @@ public class OfferDatabaseService extends DatabaseService {
         }
     }
 
-    public ArrayList<Offer> getAllOffers() {
+    public ArrayList<Offer> getAllFinalOffers() {
+        return this.getDraftType(false);
+    }
+
+    public ArrayList<Offer> getAllDrafts() {
+        return this.getDraftType(true);
+    }
+
+    private ArrayList<Offer> getDraftType(boolean draft) {
         ArrayList<Offer> result = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM offer");
+            stmt = con.prepareStatement("SELECT * FROM offer WHERE draft=?");
+            stmt.setBoolean(1, draft);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -167,7 +179,8 @@ public class OfferDatabaseService extends DatabaseService {
                 resultSet.getInt("level"),
                 resultSet.getInt("time"),
                 resultSet.getDouble("lat"),
-                resultSet.getDouble("lon")
+                resultSet.getDouble("lon"),
+                resultSet.getBoolean("draft")
         );
     }
 

@@ -21,7 +21,7 @@ public class ApplicationFormController {
     UploadedFile cv;
     private String text;
 
-    public String apply() {
+    public String apply(boolean draft) {
         try {
             Applicant currentApplicant = (Applicant)(cu.getCurrentUser());
             Resume r = ResourceIO.uploadResume(cv, offer, currentApplicant);
@@ -30,7 +30,8 @@ public class ApplicationFormController {
                     offer.getId(),
                     text,
                     0,
-                    0
+                    0,
+                    draft
             );
 
             adbs.apply(a, r);

@@ -27,8 +27,12 @@ public class CompanyIndexController {
         return edbs.getAllApplications();
     }
 
-    public ArrayList<Offer> getAllOffers() {
-        return odbs.getAllOffers();
+    public ArrayList<Offer> getAllFinalOffers() {
+        return odbs.getAllFinalOffers();
+    }
+
+    public ArrayList<Offer> getAllDrafts() {
+        return odbs.getAllDrafts();
     }
 
     public String checkUserRights() {

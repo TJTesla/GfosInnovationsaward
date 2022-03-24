@@ -33,7 +33,7 @@ public class CreateOfferController implements Serializable {
     private boolean creationError = false;
     private HashMap<String, String> errorMsgs = new HashMap<>();
 
-    public String save() {
+    public String save(boolean draft) {
         checkCreation();
         if (creationError) {
             return "";
@@ -50,7 +50,8 @@ public class CreateOfferController implements Serializable {
                 toInt(level),
                 toInt(time),
                 coordinates[0],
-                coordinates[1]
+                coordinates[1],
+                draft
         ));
 
         return "/tjtesla-tests/companyIndex.xhtml?faces-redirect=true";
