@@ -175,3 +175,11 @@ fieldset {
     display: flex;
     justify-content: center;
 }
+
+
+/* header */
+.btn-openMenu {
+    width: 100px;
+    height: 40px;
+    float: left;
+}

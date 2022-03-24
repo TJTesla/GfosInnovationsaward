@@ -11,6 +11,10 @@ window.onclick = function (e) {
     else {
         $("#dropdownTime").css("display", "none");
     }
+    if ($(".dropdown")[3].contains(e.target)) {}
+    else {
+        $("#dropdownOthers").css("display", "none");
+    }
 }
 window.onload = (event) => {
     $("#dropbtnField").click(function() {
@@ -23,6 +27,7 @@ window.onload = (event) => {
         }
         $("#dropdownLevel").css("display", "none");
         $("#dropdownTime").css("display", "none");
+        $("#dropdownOthers").css("display", "none");
     })
     $("#dropbtnLevel").click(function() {
         var filter = $("#dropdownLevel");
@@ -34,6 +39,7 @@ window.onload = (event) => {
         }
         $("#dropdownField").css("display", "none");
         $("#dropdownTime").css("display", "none");
+        $("#dropdownOthers").css("display", "none");
     })
     $("#dropbtnTime").click(function() {
         var filter = $("#dropdownTime");
@@ -45,6 +51,19 @@ window.onload = (event) => {
         }
         $("#dropdownField").css("display", "none");
         $("#dropdownLevel").css("display", "none");
+        $("#dropdownOthers").css("display", "none");
+    })
+    $("#dropbtnOthers").click(function() {
+        var filter = $("#dropdownOthers");
+        var display = filter.css("display");
+        if (display !== "block") {
+            filter.css("display", "block");
+        } else {
+            filter.css("display", "none");
+        }
+        $("#dropdownField").css("display", "none");
+        $("#dropdownLevel").css("display", "none");
+        $("#dropdownTime").css("display", "none");
     })
 }
 

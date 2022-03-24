@@ -14,18 +14,21 @@
     <h:outputStylesheet library="css" name="styleBasic.css" />
 </h:head>
 <h:body style="height: 100%">
-    <div style="height: 50px; float: top" class="head">
+    <div style="height: 75px; float: top" class="head">
         <ui:insert name="header">
             <ui:include src="common/header.xhtml" />
             <h:outputStylesheet library="css" name="sideNavbar.css" />
             <h:outputScript library="javascript" name="basics.js" />
+            <button class="btn-openMenu" id="menubtn" onclick="openNav()"> <i class="pi pi-align-right" /> Menu</button>
             <div id="sideNav" class="sidenav">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a href="#">Favorites</a>
-                <a href="#">Job Overview</a>
+                <h:form>
+                    <button class="closebtn" onclick="closeNav()">&times;</button>
+                    <h:commandButton action="/index.xhtml" value="Angebotsübersicht" styleClass="sideNavLinks" />
+                    <h:commandButton action="/03-applicationList/applicationsUser.xhtml" value="Bewerbungen" styleClass="sideNavLinks" />
+                    <h:commandButton action="/03-applicationList/applicationDrafts" value="Entwürfe" styleClass="sideNavLinks" />
+                </h:form>
             </div>
-            <h:button style="width:20px; heigh:10px; float:top-left" onclick="openNav()" id="menubtn">Menu</h:button>
-            <h:button styleClass="btn-profile" outcome="../../../01-user/userProfile.xhtml" value="Profil" />
+            <h:commandButton styleClass="btn-profile" action="Not yet" value="Profil" /> <!-- profile site still missing -->
         </ui:insert>
     </div>
     <div class="content" >

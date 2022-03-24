@@ -74,6 +74,24 @@
                         </h:selectOneMenu-->
                     </div>
                 </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn" id="dropbtnOthers">Sonstige Preferenzen <i class="pi pi-caret-down"  /></button>
+                    <div class="navContent" id="dropdownOthers">
+                        <div class="a">
+                            <h:selectBooleanCheckbox styleClass="checkBox" />
+                            <h:outputLabel styleClass="checkLabel" value="Bereits beworben" />
+                        </div>
+                        <div class="a">
+                            <h:selectBooleanCheckbox styleClass="checkBox" />
+                            <h:outputLabel styleClass="checkLabel" value="Noch nicht beworben" />
+                        </div>
+                        <div class="a">
+                            <h:selectBooleanCheckbox styleClass="checkBox" />
+                            <h:outputLabel styleClass="checkLabel" value="Favoriten" />
+                        </div>
+                    </div>
+                </div>
             </div>
             <h:form styleClass="applyBtn">
                 <h:commandButton value="Anwenden" action="#{indexController.reload()}" styleClass="navBtn" />
