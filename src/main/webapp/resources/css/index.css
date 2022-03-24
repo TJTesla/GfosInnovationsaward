@@ -97,6 +97,13 @@
 .navBtn:hover {
     background-color: #7b5138;
 }
+.select-pref {
+    display: inline-block;
+}
+.select-fav {
+    display: inline-block;
+}
+
 /* Offers */
 .offers {
     margin-left: 10%;

@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="dropdown">
-                    <button class="dropbtn" id="dropbtnTime">Praktikum <i class="pi pi-caret-down" /></button>
+                    <button class="dropbtn" id="dropbtnTime">Arbeitszeit <i class="pi pi-caret-down" /></button>
                     <div class="navContent" id="dropdownTime">
                         <ui:repeat id="time" var="t" value="#{indexController.allTimes}" varStatus=""> <!-- TODO: controller method for all categories -->
                             <div class="a">
@@ -75,22 +75,17 @@
                     </div>
                 </div>
 
-                <div class="dropdown">
-                    <button class="dropbtn" id="dropbtnOthers">Sonstige Preferenzen <i class="pi pi-caret-down"  /></button>
-                    <div class="navContent" id="dropdownOthers">
-                        <div class="a">
-                            <h:selectBooleanCheckbox styleClass="checkBox" />
-                            <h:outputLabel styleClass="checkLabel" value="Bereits beworben" />
-                        </div>
-                        <div class="a">
-                            <h:selectBooleanCheckbox styleClass="checkBox" />
-                            <h:outputLabel styleClass="checkLabel" value="Noch nicht beworben" />
-                        </div>
-                        <div class="a">
-                            <h:selectBooleanCheckbox styleClass="checkBox" />
-                            <h:outputLabel styleClass="checkLabel" value="Favoriten" />
-                        </div>
-                    </div>
+                <div class="select-pref">
+                    <h:outputLabel for="otherPrefs" value="Sonstiges" styleClass="label-pref" />
+                    <h:selectOneMenu id="otherPrefs" styleClass="menu-pref">
+                        <f:selectItem itemValue="none" itemLabel="Nicht ausgewählt" />
+                        <f:selectItem itemValue="0" itemLabel="Bereits beworben" />
+                        <f:selectItem itemValue="1" itemLabel="Noch nicht beworben" />
+                    </h:selectOneMenu>
+                </div>
+                <div class="select-fav">
+                    <h:outputLabel for="check-fav" value="Favoriten" styleClass="label-fav" />
+                    <h:selectBooleanCheckbox id="check-fav" value="true" styleClass="check-fav" />
                 </div>
             </div>
             <h:form styleClass="applyBtn">
