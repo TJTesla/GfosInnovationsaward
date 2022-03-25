@@ -6,6 +6,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xml:lang="en" lang="en">
 <h:head>
     <h:outputScript library="javascript" name="jquery-3.6.0.js" />
@@ -23,12 +24,28 @@
             <div id="sideNav" class="sidenav">
                 <h:form>
                     <button class="closebtn" onclick="closeNav()">&times;</button>
-                    <h:commandButton action="/index.xhtml" value="Angebotsübersicht" styleClass="sideNavLinks" />
-                    <h:commandButton action="/03-applicationList/applicationsUser.xhtml" value="Bewerbungen" styleClass="sideNavLinks" />
-                    <h:commandButton action="/03-applicationList/applicationDrafts" value="Entwürfe" styleClass="sideNavLinks" />
+                    <c:choose>
+                        <c:when test="#{controllerTest.checkUserRights()}">
+                            <p:commandButton styleClass="sideNavLinks-plain" action="/01-user/userProfile" value="Profil" icon="pi pi-user" />
+                        </c:when>
+                        <c:otherwise>
+                            <p:commandButton styleClass="sideNavLinks-plain" action="/00-loginRegistration/login" value="Login" icon="pi pi-user" />
+                        </c:otherwise>
+                    </c:choose>
+                    <hr class="border" />
+                    <p:commandButton action="/index.xhtml" value="Angebotsübersicht" styleClass="sideNavLinks-plain" icon="pi pi-list" />
+                    <c:if test="true">
+                        <hr class="border" />
+                        <p:commandButton action="/03-applicationList/applicationsUser" value="Gesendet" styleClass="sideNavLinks-plain" icon="pi pi-envelope" />
+                        <hr class="border" />
+                        <p:commandButton action="/03-applicationList/applicationDrafts" value="Entwürfe" styleClass="sideNavLinks-plain" icon="pi pi-pencil" />
+                    </c:if>
+                    <c:if test="#{controllerTest.checkEmployee()}">
+                        <hr class="border" />
+                        <p:commandButton action="/02-offer/offerDrafts" value="Entwürfe" styleClass="sideNavLinks-plain" icon="pi pi-pencil" />
+                    </c:if>
                 </h:form>
             </div>
-            <h:commandButton styleClass="btn-profile" action="Not yet" value="Profil" /> <!-- profile site still missing -->
         </ui:insert>
     </div>
     <div class="content" >

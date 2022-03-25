@@ -35,7 +35,7 @@ https://www.gfos.com/gfos/mint-lab/gfos-innovationsaward.html
 ### Frontend
 - Delete Company folder ✅
 - Site for changing password ✅
-- Overview of applied offers
+- Overview of applied offers ✅ (Just need controller)
 - Overview of all applications for one offer (in detail view for offer) ✅
 
 

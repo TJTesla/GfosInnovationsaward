@@ -4,7 +4,7 @@
 }*/
 .sidenav {
     height: 100%; /* 100% Full-height */
-    width: 25%;
+    width: 20%;
     position: fixed; /* Stay in place */
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
@@ -32,37 +32,44 @@
 @media (prefers-color-scheme: dark) {
     .sidenav {
         background-color: #002147;
+        border-style: solid;
         border-width: 2px;
         border-color: #001b3b;
     }
-    .sidenav a:hover {
+    .border {
+        color: #7285A5;
+        height: 2px;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .sidenav [class*="sideNavLinks-"]:hover {
         background-color: #123d6d;
     }
-    .sidenav a {
-        border-bottom-color: #123d6d;
+    .sidenav [class*="sideNavLinks-"] {
+        border-radius: 0;
+        border-style: none;
     }
 }
 
-/* The navigation menu links */
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 20px;
-    display: block;
-    transition: 0.3s;
-    border-bottom-width: 2px;
-}
 
-.sidenav .sideNavLinks {
+/* The navigation menu links */
+
+.sidenav [class*="sideNavLinks-"] {
     text-align: left;
     width: 100%;
-    border: none;
+    padding: 8px 8px 8px 10%;
     background-color: transparent;
-    padding: 8px 8px 8px 32px;
     color: inherit;
     font-size: 20px;
     transition: 0.3s;
-    border-bottom-width: 2px;
+}
+
+.sidenav .sideNavLinks-plain {
+
+}
+
+body .ui-button.ui-button-text-icon-left .ui-icon {
+    left: 7%;
 }
 /* When you mouse over the navigation links, change their color */
 

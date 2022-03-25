@@ -10,8 +10,11 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xml:lang="en" lang="en">
+<!--f:metadata>
+    <f:viewAction action="#{superUserController.isSuperUser()}" />
+</f:metadata-->
 <h:head>
-    <title>Angestellte Verwalten</title>
+    <title>Mitarbeiter Verwalten</title>
 </h:head>
 <h:body>
     <h:outputStylesheet library="css" name="styleBasic.css" />
@@ -28,26 +31,26 @@
         <div class="allEmpl">
             <div class="newEmpl">
                 <h:form>
-                    <fieldset>
+                    <fieldset class="fieldset">
                         <legend class="legend-empl">Neuer Mitarbeiter:</legend>
                         <h:outputLabel for="newName" value="Name: " styleClass="label-empl" />
-                        <h:inputText id="newName" value="" styleClass="input-empl" />
+                        <h:inputText id="newName" value="#{superUserController.name}" styleClass="input-empl" />
+                        <p:commandButton id="add" action="#{superUserController.createEmployee()}" styleClass="btn-new-empl" icon="pi pi-user-plus" />
                     </fieldset>
-                    <h:commandButton id="add" value="Hinzufügen" action="hello" styleClass="btn-new-empl" />
                 </h:form>
             </div>
             <div class="oldEmpl">
+                <h3 class="legend-oldEmpl">Liste aller Mitarbeiter:</h3>
                 <ui:repeat var="x" value="">
                     <div class="empl">
-                        <i class="pi pi-angle-right" />
-                        <h:outputText id="name" value="" styleClass="text-empl" />
                         <h:form>
-                            <h:commandButton id="delete" value="Löschen" action="hello" styleClass="btn-delete" />
+                            <h:outputText id="name" value="Vivien Hou" styleClass="text-empl" />
+                            <p:commandButton id="delete" action="hello" styleClass="btn-delete" icon="pi pi-trash" />
                         </h:form>
-                        <div class="dropdown-empl">
+                        <!--div class="dropdown-empl">
                             <h:outputLabel for="pswd" value="Passwort:" styleClass="label-empl" />
                             <h:outputText id="pswd" value="" styleClass="text-empl" />
-                        </div>
+                        </div-->
                     </div>
                 </ui:repeat>
             </div>

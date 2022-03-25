@@ -10,7 +10,7 @@
     --d-btn-bg-color: #13274F;
     --l-body-bg-color: #D5E9F5;
     --l-input-bg-color: #D5E9F5;
-    --input-width: 150px;
+    --input-width: 200px;
 }
 html {
     overflow-y: scroll;
@@ -131,7 +131,7 @@ h1 {
 legend {
     font-weight: bolder;
     font-size:23px;
-    padding-left: 20px;
+    margin-left: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
