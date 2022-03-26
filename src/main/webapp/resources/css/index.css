@@ -99,14 +99,62 @@
 }
 .select-pref {
     display: inline-block;
+    font-size: 16px;
+    padding: 10px 16px;
 }
+.label-pref {
+    padding-right: 10px;
+}
+#otherPrefs {
+    background-color: inherit;
+}
+#otherPrefs:hover {
+    background-color: #7b5138;
+}
+.menu-pref {
+    width: 150px;
+    height: 25px;
+    background-color: inherit;
+    color: inherit;
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: inherit;
+    font-size: 15px;
+    font-style: italic;
+}
+
 .select-fav {
     display: inline-block;
+    padding: 10px 16px;
+    font-size: 16px;
 }
+.label-fav {
+    padding-right: 10px;
+}
+
 .check-fav {
+    height: 22px;
+    width: 22px;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    bottom: -3px;
+    position: relative;
+}
+.check-fav label:before {
     border-color: #007FFF;
-    height: 20px;
-    width: 20px;
+    background-color: #7285A5;
+}
+.check-fav:hover {
+    background-color: #a59272;
+}
+.check-fav:checked {
+    content: none;
+    color: #007FFF;
+}
+
+
+.check-fav:active {
+    background-color: #7285A5;
 }
 
 /* Offers */
@@ -154,5 +202,16 @@
 .offer-field {
     float: bottom;
     font-size: inherit;
+}
+
+.offer-btn {
+    float: right;
+    position: relative;
+    bottom: 20px;
+}
+
+body .btn-toOffer {
+    background-color: #7285a5;
+    border: none;
 }
 

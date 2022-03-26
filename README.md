@@ -40,6 +40,7 @@ https://www.gfos.com/gfos/mint-lab/gfos-innovationsaward.html
 
 - **CSS** 
   - index ✅ 
+  - Registration, Login, Change password, superUser ✅
   - Offer Lists + Detail Offer + Create Offer
   - Application Form + Application Lists + Show Application 
   - Profile site of user

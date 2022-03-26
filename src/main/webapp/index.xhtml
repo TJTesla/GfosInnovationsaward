@@ -78,9 +78,9 @@
                 <div class="select-pref">
                     <h:outputLabel for="otherPrefs" value="Sonstiges" styleClass="label-pref" />
                     <h:selectOneMenu id="otherPrefs" styleClass="menu-pref">
-                        <f:selectItem itemValue="none" itemLabel="Nicht ausgewählt" />
-                        <f:selectItem itemValue="0" itemLabel="Bereits beworben" />
-                        <f:selectItem itemValue="1" itemLabel="Noch nicht beworben" />
+                        <f:selectItem itemValue="none" itemLabel="Nicht ausgewählt" styleClass="a" />
+                        <f:selectItem itemValue="0" itemLabel="Bereits beworben" styleClass="a" />
+                        <f:selectItem itemValue="1" itemLabel="Noch nicht beworben" styleClass="a" />
                     </h:selectOneMenu>
                 </div>
                 <div class="select-fav">
@@ -106,6 +106,9 @@
                         <div class="offer-attr">
                             <i class="pi pi-briefcase">&nbsp;</i>
                             <h:outputText id="field" value="Etwas" styleClass="offer-field" />
+                        </div>
+                        <div class="offer-btn">
+                            <p:commandButton action="/02-offer/offer" styleClass="btn-toOffer" icon="pi pi-angle-right" />
                         </div>
                     </div>
                 </ui:repeat>
