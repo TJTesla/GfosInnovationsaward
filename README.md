@@ -38,6 +38,13 @@ https://www.gfos.com/gfos/mint-lab/gfos-innovationsaward.html
 - Overview of applied offers ✅ (Just need controller)
 - Overview of all applications for one offer (in detail view for offer) ✅
 
+- **CSS** 
+  - index ✅ 
+  - Offer Lists + Detail Offer + Create Offer
+  - Application Form + Application Lists + Show Application 
+  - Profile site of user
+
+
 
 ## What we have to add
 
