@@ -55,7 +55,7 @@ public class OfferDatabaseService extends DatabaseService {
     public ArrayList<Offer> fetchAll(FilterObject filter, Applicant a) {
         ArrayList<Offer> result = new ArrayList<>();
         try {
-            String query = getQuery(filter);
+            String query = getQuery(filter, false);
             stmt = con.prepareStatement(query);
             rs = stmt.executeQuery();
 
@@ -86,15 +86,15 @@ public class OfferDatabaseService extends DatabaseService {
         return result;
     }
 
-    private String getQuery(FilterObject f) {
+    private String getQuery(FilterObject f, Boolean drafts) {
         String query = "SELECT * FROM offer";
 
         boolean alreadyExtended = false;
-        if (f.getField() != null) {
+        if (f.getField() != null && f.getField().size() != 0) {
             query += " WHERE field IN " + getBraceSyntax(f.getField());
             alreadyExtended = true;
         }
-        if (f.getLevel() != null) {
+        if (f.getLevel() != null && f.getLevel().size() != 0) {
             if (alreadyExtended) {
                 query += " AND";
             } else {
@@ -103,13 +103,21 @@ public class OfferDatabaseService extends DatabaseService {
             query += " level IN " + getBraceSyntax(f.getLevel());
             alreadyExtended = true;
         }
-        if (f.getTime() != null) {
+        if (f.getTime() != null && f.getTime().size() != 0) {
             if (alreadyExtended) {
                 query += " AND";
             } else {
                 query += " WHERE";
             }
             query += " time IN " + getBraceSyntax(f.getTime());
+        }
+        if (drafts != null) {
+            if (alreadyExtended) {
+                query += " AND";
+            } else {
+                query += " WHERE";
+            }
+            query += " draft = " + drafts;
         }
 
         System.out.println(query);
@@ -146,23 +154,32 @@ public class OfferDatabaseService extends DatabaseService {
         }
     }
 
-    public ArrayList<Offer> getAllFinalOffers() {
-        return this.getDraftType(false);
+    public ArrayList<Offer> getAllFinalOffers(FilterObject f, Applicant a) {
+        return this.getDraftType(f, a, false);
     }
 
-    public ArrayList<Offer> getAllDrafts() {
-        return this.getDraftType(true);
+    public ArrayList<Offer> getAllDrafts(FilterObject f, Applicant a) {
+        return this.getDraftType(f, a, true);
     }
 
-    private ArrayList<Offer> getDraftType(boolean draft) {
+    private ArrayList<Offer> getDraftType(FilterObject f, Applicant a, boolean draft) {
         ArrayList<Offer> result = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM offer WHERE draft=?");
-            stmt.setBoolean(1, draft);
+            stmt = con.prepareStatement(getQuery(f, draft));
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 result.add(createOffer(rs));
+            }
+
+            if (a != null) {
+                // TODO: Uncomment and filter by distance
+                /*result.removeIf(o ->
+                        GeoCalculator.distance(
+                                new double[]{o.getLat(), o.getLon()},
+                                new double[]{a.getLat(), a.getLon()}
+                        ) > filter.getMaxDistance()
+                );*/
             }
         } catch (SQLException sqlException) {
             System.out.println("Could not fetch all offers: " + sqlException.getMessage());

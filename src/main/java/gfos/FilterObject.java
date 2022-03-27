@@ -6,6 +6,13 @@ public class FilterObject {
     private final ArrayList<String> field, level, time;
     private final Integer maxDistance;
 
+    public FilterObject() {
+        field = null;
+        level = null;
+        time = null;
+        maxDistance = null;
+    }
+
     public FilterObject(ArrayList<String> field, ArrayList<String> level, ArrayList<String> time, Integer maxDistance) {
         this.field = field;
         this.level = level;
