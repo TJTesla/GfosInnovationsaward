@@ -33,9 +33,9 @@ public class FilterTests {
         ));
 
         // EVERYTHING
-        ArrayList<String> field = new ArrayList<String>();
-        field.add("5");
-        field.add("3");
+        ArrayList<Integer> field = new ArrayList<>();
+        field.add(5);
+        field.add(3);
         print(odbs.fetchAll(
                 new FilterObject(
                         field,
@@ -47,8 +47,8 @@ public class FilterTests {
         ));
 
         // Only Sr Dev
-        ArrayList<String> time = new ArrayList<String>();
-        time.add("2");
+        ArrayList<Integer> time = new ArrayList<Integer>();
+        time.add(2);
         print(odbs.fetchAll(
                 new FilterObject(
                         null,
@@ -60,8 +60,8 @@ public class FilterTests {
         ));
 
         // Sr Dev
-        ArrayList<String> level = new ArrayList<String>();
-        level.add("6");
+        ArrayList<Integer> level = new ArrayList<Integer>();
+        level.add(6);
         print(odbs.fetchAll(
                 new FilterObject(
                         null,
