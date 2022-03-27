@@ -46,19 +46,19 @@
                 <h:outputLabel for="phoneNo" value="Telefonnummer: " />
                 <h:outputText id="phoneNo" value="" />
             </div-->
-            <c:if test=""> <!-- if applicant -->
-                <h:form>
+            <h:form>
+                <c:if test=""> <!-- if applicant -->
                     <c:when test=""> <!-- if not applied -->
                         <h:commandButton value="Bewerben" styleClass="btn-appl" action="/03-application/application" />
                     </c:when>
                     <c:otherwise> <!-- else -->
                         <h:commandButton value="Bewerbung einsehen" styleClass="btn-appl" action="/03-application/applDetailUser" />
                     </c:otherwise>
-                </h:form>
-            </c:if>
-            <c:if test=""> <!-- if employee -->
-                <h:commandButton value="Bewerbungen einsehen" styleClass="btn-appl" action="/03-application/applDetailEmpl" />
-            </c:if>
+                </c:if>
+                <c:if test=""> <!-- if employee -->
+                    <h:commandButton value="Bewerbungen einsehen" styleClass="btn-appl" action="/03-application/applDetailEmpl" />
+                </c:if>
+            </h:form>
         </ui:define>
     </ui:composition>
 </h:body>
