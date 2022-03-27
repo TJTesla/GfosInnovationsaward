@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Named
 @ViewScoped
@@ -30,9 +31,9 @@ public class IndexController implements Serializable {
     @Inject
     CurrentUser cu;
 
-    private ArrayList<Boolean> field;
-    private ArrayList<Boolean> level;
-    private ArrayList<Boolean> time;
+    private HashMap<Integer, Boolean> field;
+    private HashMap<Integer, Boolean> level;
+    private HashMap<Integer, Boolean> time;
 
     private ArrayList<String> internalField;  // 1:n
     private ArrayList<String> internalLevel;  // 1:n
@@ -41,6 +42,7 @@ public class IndexController implements Serializable {
 
     @PostConstruct
     private void init() {
+        /*
         field = new ArrayList<>();
         field.add(false);
         for (int i = 0; i < getAllFields().size(); i++) {
@@ -58,6 +60,7 @@ public class IndexController implements Serializable {
         for (int i = 0; i < getAllTimes().size(); i++) {
             time.add(false);
         }
+        */
     }
 
     public ArrayList<Offer> getAllOffers() {
@@ -68,23 +71,67 @@ public class IndexController implements Serializable {
 
         System.out.println("search");
 
+        if (field == null) {
+            System.out.println("NULL");
+        } else {
+            System.out.println(field.size());
+        }
+
         return odbs.getAllFinalOffers(
                 new FilterObject(
-                        createFilterArray(field),
-                        createFilterArray(level),
-                        createFilterArray(time),
+                        createFieldFilterArray(field),
+                        createLevelFilterArray(level),
+                        createTimeFilterArray(time),
                         toInt(maxDistance)
                 ),
                 (Applicant)cu.getCurrentUser()
         );
     }
 
-    private static ArrayList<String> createFilterArray(ArrayList<Boolean> arr) {
-        ArrayList<String> result = new ArrayList<>();
+    private String findName(Integer index, ArrayList<Pair<Integer, String>> list) {
+        for (Pair<Integer, String> p : list) {
+            if (p.first().equals(index)) {
+                return p.second();
+            }
+        }
 
-        for (int i = 1; i < arr.size(); i++) {
-            if (arr.get(i)) {
-                result.add(String.valueOf(i));
+        return null;
+    }
+
+    private ArrayList<String> createFieldFilterArray(HashMap<Integer, Boolean> arr) {
+        return createFilterArray(arr, "field");
+    }
+
+    private ArrayList<String> createLevelFilterArray(HashMap<Integer, Boolean> arr) {
+        return createFilterArray(arr, "level");
+    }
+
+    private ArrayList<String> createTimeFilterArray(HashMap<Integer, Boolean> arr) {
+        return createFilterArray(arr, "time");
+    }
+
+    private ArrayList<String> createFilterArray(HashMap<Integer, Boolean> arr, String type) {
+        if (arr == null) {
+            return new ArrayList<>();
+        }
+        ArrayList<String> result = new ArrayList<>();
+        ArrayList<Pair<Integer, String>> all = new ArrayList<>();
+        switch (type) {
+            case "field":
+                all = getAllFields();
+                break;
+            case "level":
+                all = getAllLevels();
+                break;
+            case "time":
+                all = getAllTimes();
+                break;
+        }
+
+        for (int i = 0; i < arr.size(); i++) {
+            Boolean b = arr.get(i);
+            if (b) {
+                result.add(findName(i, all));
             }
         }
 
@@ -136,27 +183,27 @@ public class IndexController implements Serializable {
         return mdbs.getAllTimes();
     }
 
-    public ArrayList<Boolean> getField() {
+    public HashMap<Integer, Boolean> getField() {
         return field;
     }
 
-    public void setField(ArrayList<Boolean> field) {
+    public void setField(HashMap<Integer, Boolean> field) {
         this.field = field;
     }
 
-    public ArrayList<Boolean> getLevel() {
+    public HashMap<Integer, Boolean> getLevel() {
         return level;
     }
 
-    public void setLevel(ArrayList<Boolean> level) {
+    public void setLevel(HashMap<Integer, Boolean> level) {
         this.level = level;
     }
 
-    public ArrayList<Boolean> getTime() {
+    public HashMap<Integer, Boolean> getTime() {
         return time;
     }
 
-    public void setTime(ArrayList<Boolean> time) {
+    public void setTime(HashMap<Integer, Boolean> time) {
         this.time = time;
     }
 
