@@ -31,107 +31,47 @@ public class IndexController implements Serializable {
     @Inject
     CurrentUser cu;
 
-    private HashMap<Integer, Boolean> field;
-    private HashMap<Integer, Boolean> level;
-    private HashMap<Integer, Boolean> time;
+    private HashMap<Integer, Boolean> field = new HashMap<>();
+    private HashMap<Integer, Boolean> level = new HashMap<>();
+    private HashMap<Integer, Boolean> time = new HashMap<>();
 
-    private ArrayList<String> internalField;  // 1:n
-    private ArrayList<String> internalLevel;  // 1:n
-    private ArrayList<String> internalTime;  // 1:n
     private String maxDistance;
 
-    @PostConstruct
-    private void init() {
-        /*
-        field = new ArrayList<>();
-        field.add(false);
-        for (int i = 0; i < getAllFields().size(); i++) {
-            field.add(false);
-        }
-
-        level = new ArrayList<>();
-        level.add(false);
-        for (int i = 0; i < getAllLevels().size(); i++) {
-            level.add(false);
-        }
-
-        time = new ArrayList<>();
-        time.add(false);
-        for (int i = 0; i < getAllTimes().size(); i++) {
-            time.add(false);
-        }
-        */
-    }
-
     public ArrayList<Offer> getAllOffers() {
-        /*System.out.println("Field: " + field.size());
-        System.out.println("Level: " + level.size());
-        System.out.println("Time: " + time.size());
-        System.out.println("Max Distance: " + maxDistance);*/
-
         System.out.println("search");
 
         if (field == null) {
             System.out.println("NULL");
         } else {
-            System.out.println(field.size());
+            for (int i = 0; i < field.size(); i++) {
+                System.out.println(i + ": " + field.get(i));
+            }
         }
 
         return odbs.getAllFinalOffers(
                 new FilterObject(
-                        createFieldFilterArray(field),
-                        createLevelFilterArray(level),
-                        createTimeFilterArray(time),
+                        createFilterArray(field),
+                        createFilterArray(level),
+                        createFilterArray(time),
                         toInt(maxDistance)
                 ),
                 (Applicant)cu.getCurrentUser()
         );
     }
 
-    private String findName(Integer index, ArrayList<Pair<Integer, String>> list) {
-        for (Pair<Integer, String> p : list) {
-            if (p.first().equals(index)) {
-                return p.second();
-            }
-        }
-
-        return null;
-    }
-
-    private ArrayList<String> createFieldFilterArray(HashMap<Integer, Boolean> arr) {
-        return createFilterArray(arr, "field");
-    }
-
-    private ArrayList<String> createLevelFilterArray(HashMap<Integer, Boolean> arr) {
-        return createFilterArray(arr, "level");
-    }
-
-    private ArrayList<String> createTimeFilterArray(HashMap<Integer, Boolean> arr) {
-        return createFilterArray(arr, "time");
-    }
-
-    private ArrayList<String> createFilterArray(HashMap<Integer, Boolean> arr, String type) {
+    private static ArrayList<Integer> createFilterArray(HashMap<Integer, Boolean> arr) {
         if (arr == null) {
             return new ArrayList<>();
         }
-        ArrayList<String> result = new ArrayList<>();
-        ArrayList<Pair<Integer, String>> all = new ArrayList<>();
-        switch (type) {
-            case "field":
-                all = getAllFields();
-                break;
-            case "level":
-                all = getAllLevels();
-                break;
-            case "time":
-                all = getAllTimes();
-                break;
-        }
+        ArrayList<Integer> result = new ArrayList<>();
 
         for (int i = 0; i < arr.size(); i++) {
             Boolean b = arr.get(i);
+            if (b == null) {
+                continue;
+            }
             if (b) {
-                result.add(findName(i, all));
+                result.add(i);
             }
         }
 
