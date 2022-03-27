@@ -39,7 +39,6 @@ public class ApplicantRegistrationController implements Serializable {
     private String[] title;
     private String firstname;
     private String lastname;
-    private String birthdate;
     private String username;
     private String email;
     private String emailRepeat;
@@ -47,7 +46,7 @@ public class ApplicantRegistrationController implements Serializable {
     private String passwordRepeat;
     private UploadedFile pbFile;
     private String street, zip, city;
-    private String bday;
+    private String birthdate;
 
     private boolean registerError = false;
     private HashMap<String, String> errorMsgs = new HashMap<>();
@@ -76,7 +75,7 @@ public class ApplicantRegistrationController implements Serializable {
                 "",
                 coordinates[0],  // Latitude
                 coordinates[1],  // Longitude
-                bday
+                birthdate
         );
 
         if (pbFile != null) {
@@ -346,13 +345,5 @@ public class ApplicantRegistrationController implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public String getBday() {
-        return bday;
-    }
-
-    public void setBday(String bday) {
-        this.bday = bday;
     }
 }

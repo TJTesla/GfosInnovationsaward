@@ -56,6 +56,10 @@ public class EmployeeDatabaseService extends DatabaseService {
     }
 
     public static Employee createEmployee(ResultSet rs) throws SQLException {
+        if (!rs.next()) {
+            return null;
+        }
+
         return new Employee(
                 rs.getString("name"),
                 rs.getString("password"),

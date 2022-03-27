@@ -172,14 +172,13 @@ public class OfferDatabaseService extends DatabaseService {
                 result.add(createOffer(rs));
             }
 
-            if (a != null) {
-                // TODO: Uncomment and filter by distance
-                /*result.removeIf(o ->
+            if (a != null && f.getMaxDistance() != null) {
+                result.removeIf(o ->
                         GeoCalculator.distance(
                                 new double[]{o.getLat(), o.getLon()},
                                 new double[]{a.getLat(), a.getLon()}
-                        ) > filter.getMaxDistance()
-                );*/
+                        ) > f.getMaxDistance()
+                );
             }
         } catch (SQLException sqlException) {
             System.out.println("Could not fetch all offers: " + sqlException.getMessage());

@@ -26,7 +26,7 @@
             <h:form>
                 <div class="filter">
                     <!--h:inputText id="place" k:placeholder="Standort" styleClass="input-location" /-->
-                    <h:inputText value="#{indexController.maxDistance}" k:placeholder="Umfeld (in km)" styleClass="input-location" />
+                    <h:inputText value="#{indexController.maxDistance}" k:placeholder="Umfeld (in km)" styleClass="input-location" rendered="#{indexController.loggedIn()}" />
                     <div class="dropdown">
                         <button class="dropbtn" id="dropbtnField" type="button">Berufsfeld <i class="pi pi-caret-down" /></button>
                         <div class="navContent" id="dropdownField">

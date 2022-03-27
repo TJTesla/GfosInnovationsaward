@@ -2,6 +2,7 @@ package gfos.controller;
 
 import gfos.FilterObject;
 import gfos.beans.Employee;
+import gfos.beans.User;
 import gfos.database.MiscellaneousDatabaseService;
 import gfos.exceptions.UserException;
 import gfos.beans.Applicant;
@@ -18,6 +19,7 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 @Named
 @ViewScoped
@@ -65,29 +67,25 @@ public class IndexController implements Serializable {
         }
         ArrayList<Integer> result = new ArrayList<>();
 
-        for (int i = 0; i < arr.size(); i++) {
-            Boolean b = arr.get(i);
-            if (b == null) {
-                continue;
-            }
-            if (b) {
-                result.add(i);
+        for (Map.Entry<Integer, Boolean> i : arr.entrySet()) {
+            if (i.getValue()) {
+                result.add(i.getKey());
             }
         }
 
         return result;
     }
 
-    private Integer toInt(String str) {
+    private int toInt(String str) {
         if (str == null || str.equals("-1")) {
-            return null;
+            return -1;
         }
 
         try {
-            return Integer.getInteger(str);
+            return Integer.parseInt(str);
         } catch (NumberFormatException nfe) {
             System.out.println("Cannot change string: " + str + " to Integer: " + nfe.getMessage());
-            return null;
+            return -1;
         }
     }
 
@@ -101,6 +99,11 @@ public class IndexController implements Serializable {
         } else {
             return "";
         }
+    }
+
+    public boolean loggedIn() {
+        User u = cu.getCurrentUser();
+        return u instanceof Applicant;
     }
 
     public String reload() {

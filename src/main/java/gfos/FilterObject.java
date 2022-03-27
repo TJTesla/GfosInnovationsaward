@@ -17,7 +17,11 @@ public class FilterObject {
         this.field = field;
         this.level = level;
         this.time = time;
-        this.maxDistance = maxDistance;
+        if (maxDistance == -1) {
+            this.maxDistance = null;
+        } else {
+            this.maxDistance = maxDistance;
+        }
     }
 
     public ArrayList<Integer> getField() {

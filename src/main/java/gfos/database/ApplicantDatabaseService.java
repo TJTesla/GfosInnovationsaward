@@ -196,9 +196,6 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         stmt.setString(1, name);
         stmt.setString(2, hashPwd);
         rs = stmt.executeQuery();
-        if (!rs.next()) {
-            return null;
-        }
 
         if (table.equals("applicant")) {
             return parseApplicant();
