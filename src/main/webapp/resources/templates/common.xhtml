@@ -15,12 +15,12 @@
     <h:outputStylesheet library="css" name="styleBasic.css" />
 </h:head>
 <h:body style="height: 100%">
-    <div style="height: 75px; float: top" class="head">
+    <div class="head">
         <ui:insert name="header">
             <ui:include src="common/header.xhtml" />
             <h:outputStylesheet library="css" name="sideNavbar.css" />
             <h:outputScript library="javascript" name="basics.js" />
-            <button class="btn-openMenu" id="menubtn" onclick="openNav()"> <i class="pi pi-align-right" /> Menu</button>
+            <button class="btn-openMenu" id="menubtn" onclick="openNav()"> <i class="pi pi-align-right" /> </button>
             <div id="sideNav" class="sidenav">
                 <h:form>
                     <button class="closebtn" onclick="closeNav()">&times;</button>

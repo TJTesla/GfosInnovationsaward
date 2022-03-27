@@ -89,8 +89,13 @@ body {
     body {
         color: whitesmoke;
     }
-    .head, .foot {
-        background-color: #13274F;
+    .head {
+        background: rgb(19,39,79);
+        background: linear-gradient(0deg, rgba(19,39,79,1) 0%, rgb(23, 46, 93) 35%, rgb(29, 59, 121) 65%, rgb(54, 83, 147) 100%);
+    }
+    .foot {
+        background: #13274F;
+        background: linear-gradient(0deg, rgb(54, 83, 147) 0%, rgb(29, 59, 121) 35%, rgb(23, 46, 93) 65%, rgba(19,39,79,1) 100%);
     }
     /*.head {
         background-image: linear-gradient(to bottom, rgba(19, 39, 79, 0), rgba(19, 39, 79, 1) );
@@ -120,6 +125,9 @@ body {
     /*:hover {
         background-color: #384e7b;
     }*/
+}
+.head {
+    height: 120px;
 }
 
 h1 {
@@ -185,7 +193,14 @@ fieldset {
 
 /* header */
 .btn-openMenu {
-    width: 100px;
-    height: 40px;
+    width: auto;
+    height: auto;
     float: left;
+    padding-bottom: 5px;
+    margin: 20px;
+    background-color: #7285a5;
+}
+body .pi {
+    font-size: 25px;
+    font-weight: bold;
 }

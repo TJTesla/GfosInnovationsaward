@@ -10,7 +10,7 @@
       xml:lang="en" lang="en">
 <f:metadata>
     <f:viewParam name="offerId" value="#{detailOffer.detailOffer}" converter="#{offerConverter}" />
-    <f:viewAction action="#{applicationFormController.checkUserRights()}" />
+    <!--f:viewAction action="#{applicationFormController.checkUserRights()}" /-->
 </f:metadata>
 <h:head>
     <title>#{detailOffer.detailOffer.title} - Bewerben</title>
@@ -18,18 +18,24 @@
 <h:body>
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
-            <h1>Bewerbungsformular: #{detailOffer.detailOffer.title}</h1>
-            <h:form enctype="multipart/form-data">
-                <h:outputLabel value="Lebenslauf hochladen" />
-                <p:fileUpload value="" mode="simple" />
+            <h:outputStylesheet library="css" name="application.css" />
+            <div class="header-appl">
+                <h1>Bewerbungsformular: #{detailOffer.detailOffer.title}</h1>
+            </div>
+            <h:form enctype="multipart/form-data" class="applForm" >
+                <h:outputLabel value="Lebenslauf hochladen:" styleClass="label-applForm" />
+                <p:fileUpload value="" mode="simple" styleClass="upload-cv" />
                 <br />
 
-                <h:outputLabel for="lom" value="Motivationsschreiben:" /> <br />
-                <h:inputTextarea id="lom" required="true" style="height: 500px; width:500px;" />
-                <br />
+                <h:outputLabel for="lom" value="Motivationsschreiben:" styleClass="label-applForm" /> <br />
+                <h:inputTextarea id="lom" required="true" styleClass="text-area-appl" />
+                <div>
+                    <p:commandButton value="Speichern" action="#{applicationFormController.apply}" styleClass="btn-applForm"
+                                     style="float: left; margin-left: 5px;" />
+                    <p:commandButton value="Abschicken" action="#{applicationFormController.apply}" styleClass="btn-applForm"
+                                     style="float: right; margin-right: 5px;" /> <!-- TODO: Other action -->
+                </div>
                 <!-- update="@form" can be used for invalid parts -->
-                <p:commandButton value="Speichern" action="#{applicationFormController.apply()}" update="@form" />
-                <p:commandButton value="Abschicken" action="#{applicationFormController.apply()}" /> <!-- TODO: Other action -->
             </h:form>
         </ui:define>
     </ui:composition>

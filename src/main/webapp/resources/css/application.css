@@ -1,0 +1,53 @@
+
+@media (prefers-color-scheme: dark) {
+    .text-area-appl {
+        border-radius: 10px;
+        border-style: solid;
+        border-color: #7285A5;
+        border-width: 2px;
+    }
+}
+@media (prefers-color-scheme: light) {
+
+}
+
+/* Application Form */
+.header-appl {
+    margin-top: 1%;
+    margin-bottom: 1%
+}
+
+.applForm {
+    margin-left: 30%;
+    margin-right: 30%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.label-applForm {
+    display: inline-block;
+    width: 225px;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.upload-cv {
+    font-family: inherit;
+    font-style: italic;
+}
+
+.text-area-appl {
+    height: 500px;
+    width: 100%;
+}
+
+.applForm .btn-applForm {
+    width: auto;
+    height: auto;
+    display: block;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 17px;
+    font-weight: bold;
+}
