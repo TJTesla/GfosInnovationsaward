@@ -17,7 +17,7 @@
 }
 .input-location {
     width: 160px;
-    margin: 4px 4px;
+    margin: 7px 4px 4px;
     padding: 10px 12px;
     float: left;
     display: inline-block;
@@ -27,6 +27,8 @@
 }
 .input-location::placeholder {
     color: whitesmoke;
+    font-family: inherit;
+    font-size: 16px;
 }
 .input-location:hover {
     background-color: #7b5138;
@@ -50,6 +52,11 @@
 }
 .dropdown .dropbtn:hover {
     background-color: #7b5138;
+}
+body .pi {
+    font-size: 19px;
+    position: relative;
+    margin-left: 5px;
 }
 .navContent {
     display: none;

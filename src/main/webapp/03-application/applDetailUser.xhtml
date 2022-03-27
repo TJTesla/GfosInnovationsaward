@@ -18,9 +18,12 @@
 <h:body>
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
-            <ui:include src="applicationDetailTemplate.xhtml" />
-            <h:outputLabel for="status" value="Bearbeitungsstatus" styleClass="label-status" />
-            <h:outputText id="status" value="" styleClass="text-status" /> <!-- Given value needed -->
+            <h:outputStylesheet library="css" name="applicationDetail.css" />
+            <div class="applDetailView">
+                <ui:include src="applicationDetailTemplate.xhtml" />
+                <h:outputLabel for="status" value="Bearbeitungsstatus:" styleClass="label-status" />
+                <h:outputText id="status" value="Angenommen" styleClass="text-status" /> <!-- Given value needed -->
+            </div>
         </ui:define>
     </ui:composition>
 </h:body>

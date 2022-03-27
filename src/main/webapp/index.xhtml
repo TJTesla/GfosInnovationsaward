@@ -23,12 +23,12 @@
         <ui:define name="content">
             <h:outputStylesheet library="css" name="index.css" />
             <h:outputScript library="javascript" name="index.js" />
-            <div class="filter">
-                <h:form>
+            <h:form>
+                <div class="filter">
                     <!--h:inputText id="place" k:placeholder="Standort" styleClass="input-location" /-->
                     <h:inputText value="#{indexController.maxDistance}" k:placeholder="Umfeld (in km)" styleClass="input-location" />
                     <div class="dropdown">
-                        <button class="dropbtn" id="dropbtnField">Berufsfeld <i class="pi pi-caret-down" /></button>
+                        <button class="dropbtn" id="dropbtnField" type="button">Berufsfeld <i class="pi pi-caret-down" /></button>
                         <div class="navContent" id="dropdownField">
                             <ui:repeat id="field" var="f" value="#{indexController.allFields}" varStatus=""> <!-- TODO: controller method for all categories -->
                                 <div class="a">
@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="dropdown">
-                        <button class="dropbtn" id="dropbtnLevel">Einstieglevel <i class="pi pi-caret-down" /></button>
+                        <button class="dropbtn" id="dropbtnLevel" type="button">Einstieglevel <i class="pi pi-caret-down" /></button>
                         <div class="navContent" id="dropdownLevel">
                             <ui:repeat id="level" var="l" value="#{indexController.allLevels}" varStatus=""> <!-- TODO: controller method for all categories -->
                                 <div class="a">
@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="dropdown">
-                        <button class="dropbtn" id="dropbtnTime">Arbeitszeit <i class="pi pi-caret-down" /></button>
+                        <button class="dropbtn" id="dropbtnTime" type="button">Arbeitszeit <i class="pi pi-caret-down" /></button>
                         <div class="navContent" id="dropdownTime">
                             <ui:repeat id="time" var="t" value="#{indexController.allTimes}" varStatus=""> <!-- TODO: controller method for all categories -->
                                 <div class="a">
@@ -88,11 +88,12 @@
                         <h:outputLabel for="check-fav" value="Favoriten" styleClass="label-fav" />
                         <h:selectBooleanCheckbox id="check-fav" value="true" styleClass="check-fav" />
                     </div>
-                </h:form>
-            </div>
-            <h:form styleClass="applyBtn">
-                <h:commandButton value="Anwenden" action="#{indexController.reload()}" styleClass="navBtn" />
+                </div>
+                <div class="applyBtn">
+                    <h:commandButton value="Anwenden" action="#{indexController.reload()}" styleClass="navBtn" />
+                </div>
             </h:form>
+
 
             <div class="offers">
                 <div class="border-line"> </div>

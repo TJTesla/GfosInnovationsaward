@@ -129,6 +129,12 @@ body {
 .head {
     height: 120px;
 }
+.foot {
+    height: 150px;
+    overflow: hidden;
+    margin-bottom: 0;
+    text-align: center;
+}
 
 h1 {
     font-size: 35px;

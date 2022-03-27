@@ -1,0 +1,71 @@
+/* Template */
+h1 {
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.applDetailView {
+    margin-left: 30%;
+    margin-right: 30%;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.label-applDetail {
+    width: 200px;
+    font-size: 18px;
+    font-style: italic;
+    margin-top: 20px;
+}
+
+.text-applDetail {
+
+}
+
+.textArea-applDetail {
+    margin-top: 6px;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 10px;
+    border-width: 2px;
+    border-color: #7285a5;
+}
+
+body .btn-cv-download {
+    font-size: 13px;
+    font-style: italic;
+    background-color: #7285a5;
+    border: none;
+
+}
+
+/* User */
+
+
+/* Employer */
+.applDetailEmpl {
+
+}
+
+.label-status {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-style: italic;
+    width: 200px;
+}
+
+.radio-status {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.btn-saveStatus {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.text-status {
+    text-decoration: underline;
+    font-size: large;
+}

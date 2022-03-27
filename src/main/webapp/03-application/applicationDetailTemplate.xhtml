@@ -10,48 +10,73 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
+<f:metadata>
+    <f:viewParam name="oId" value="#{detailApplication.offerId}" />
+    <f:viewParam name="aId" value="#{detailApplication.userId}" />
+
+    <f:viewAction action="#{detailApplication.checkRights()}" />
+</f:metadata>
 <head>
 
 </head>
 <body>
     <ui:composition>
+        <h:outputStylesheet library="css" name="applicationDetail.css" />
         <h1>Bewerbungsformular:</h1>
-        <h:outputLabel for="offer" value="Jobangebot:" />
-        <h:outputText id="offer" value="#{detailOffer.detailOffer.title}" />
-        <br />
-        <div>
-            <h:outputLabel for="salutation" value="Anrede:" rendered="false" />
-            <h:outputLabel id="salutation" value="" rendered="false" />
+        <div style="padding-bottom: 20px;">
+            <h:outputLabel for="offer" value="Jobangebot:" styleClass="label-applDetail" />
+            <h:outputText id="offer" value="#{detailOffer.detailOffer.title}Etwas" styleClass="text-applDetail" />
             <br />
+            <div>
+                <h:outputLabel for="salutation" value="Anrede:" rendered="false" styleClass="label-applDetail" />
+                <h:outputText id="salutation" value="Frau" rendered="false" styleClass="text-applDetail" />
+                <br />
 
-            <h:outputLabel for="title" value="Titel" styleClass="outLabel" rendered="true"/>
-            <ui:repeat id="title" var="title" value="" varStatus="" rendered="true">
-                <h:outputText value="#{title}" />
-            </ui:repeat>
-            <br />
+                <h:outputLabel for="title" value="Titel:" styleClass="label-applDetail" rendered="true"/>
+                <ui:repeat id="title" var="title" value="" varStatus="" rendered="true">
+                    <h:outputText value="#{title}Dr." styleClass="text-applDetail" />
+                </ui:repeat>
+                <br />
 
-            <h:outputLabel for="name" styleClass="outLabel" value="Name:" />
-            <h:outputText id="name" value="#{detailApplicant.detailApplicant.lastname}, #{detailApplicant.detailApplicant.firstname}" />
-            <br />
+                <h:outputLabel for="name" styleClass="label-applDetail" value="Name:" />
+                <h:outputText id="name" value="Hou#{detailApplicant.detailApplicant.lastname}, Vivien Yixue#{detailApplicant.detailApplicant.firstname}"
+                              styleClass="text-applDetail" />
+                <br />
 
-            <h:outputLabel for="email" styleClass="outLabel" value="E-Mail:" />
-            <h:outputText id="email" value="#{detailApplicant.detailApplicant.email}" />
-            <br />
+                <h:outputLabel for="email" styleClass="label-applDetail" value="E-Mail:" />
+                <h:outputText id="email" value="vivien.hou@yahoo.de#{detailApplicant.detailApplicant.email}" styleClass="text-applDetail" />
+                <br />
 
-        </div>
-        <div>
-            <h:outputLabel for="lom" value="Bewerbungsschreiben:" styleClass="outLabel"/> <br />
-            <h:outputText id="lom" value="#{detailApplication.application.text}" />
-            <br />
+            </div>
+            <div>
+                <h:outputLabel for="lom" value="Bewerbungsschreiben:" styleClass="label-applDetail"/> <br />
+                <div class="textArea-applDetail">
+                    <h:outputText id="lom" value="
+            dsgfvasrdhijfhfaihjodprshrrrrrrrrrvknphhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+            #{detailApplication.application.text}" styleClass="text-applDetail" style="font-size: 13px;" />
+                </div>
 
-            <h:form enctype="multipart/form-data">
-                <!-- Way to depict the pdf directly? -->
-                <h:outputLabel for="cv" value="Lebenslauf:" styleClass="outLabel"/>
-                <p:commandButton id="cv" ajax="false" value="Lebenslauf herunterladen">
-                    <p:fileDownload value="" />
-                </p:commandButton>
-            </h:form>
+                <br />
 
+                <h:form enctype="multipart/form-data">
+                    <!-- Way to depict the pdf directly? -->
+                    <h:outputLabel for="cv" value="Lebenslauf:" styleClass="label-applDetail"/>
+                    <p:commandButton id="cv" ajax="false" value="Herunterladen" styleClass="btn-cv-download">
+                        <p:fileDownload value="" />
+                    </p:commandButton>
+                </h:form>
+
+            </div>
         </div>
     </ui:composition>
 </body>
