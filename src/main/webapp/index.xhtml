@@ -31,14 +31,12 @@
                     <div class="navContent" id="dropdownField">
                         <ui:repeat id="field" var="f" value="#{indexController.allFields}" varStatus=""> <!-- TODO: controller method for all categories -->
                             <div class="a">
-                                <h:selectBooleanCheckbox styleClass="checkBox" value="true" />
+                                <h:form>
+                                    <h:selectBooleanCheckbox styleClass="checkBox" value="#{indexController.field[f.first()]}"  />
+                                </h:form>
                                 <h:outputLabel styleClass="checkLabel" value="#{f.second()}" />
                             </div>
                         </ui:repeat>
-
-                        <!--h:selectOneMenu id="field" value="#{indexController.field}">
-                            <f:selectItems value="#{indexController.allFields}" var="t" itemValue="#{t.first()}" itemLabel="#{t.second()}" />
-                        </h:selectOneMenu-->
                     </div>
                 </div>
 
@@ -47,14 +45,12 @@
                     <div class="navContent" id="dropdownLevel">
                         <ui:repeat id="level" var="l" value="#{indexController.allLevels}" varStatus=""> <!-- TODO: controller method for all categories -->
                             <div class="a">
-                                <h:selectBooleanCheckbox styleClass="checkBox" value="true" />
+                                <h:form>
+                                    <h:selectBooleanCheckbox styleClass="checkBox" value="#{indexController.level[l.first()]}" />
+                                </h:form>
                                 <h:outputLabel styleClass="checkLabel" value="#{l.second()}" />
                             </div>
                         </ui:repeat>
-
-                        <!--h:selectOneMenu id="level" value="#{indexController.level}">
-                            <f:selectItems value="#{indexController.allLevels}" var="t" itemValue="#{t.first()}" itemLabel="#{t.second()}" />
-                        </h:selectOneMenu-->
                     </div>
                 </div>
 
@@ -63,15 +59,12 @@
                     <div class="navContent" id="dropdownTime">
                         <ui:repeat id="time" var="t" value="#{indexController.allTimes}" varStatus=""> <!-- TODO: controller method for all categories -->
                             <div class="a">
-                                <h:selectBooleanCheckbox styleClass="checkBox" value="true" />
+                                <h:form>
+                                    <h:selectBooleanCheckbox styleClass="checkBox" value="#{indexController.time[t.first()]}" />
+                                </h:form>
                                 <h:outputLabel styleClass="checkLabel" value="#{t.second()}" />
                             </div>
                         </ui:repeat>
-
-                        <!--h:selectOneMenu id="time" value="#{indexController.time}">
-                                     <f:selectItem itemValue="-1" itemLabel="Zeitumfang" />
-                            <f:selectItems value="#{indexController.allTimes}" itemValue="#{t.first()}" itemLabel="#{t.second()}" />
-                        </h:selectOneMenu-->
                     </div>
                 </div>
 

@@ -2,29 +2,31 @@ package gfos.controller;
 
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 @Named
-@SessionScoped
+@RequestScoped
 public class TestController implements Serializable {
-    private boolean login;
+    private boolean box = true;
 
-    @PostConstruct
-    public void init() {
-        this.login = false;
+    public void check() {
+        if (box) {
+            System.out.println("Checked");
+        } else {
+            System.out.println("Unchecked");
+        }
     }
 
-    public boolean isLogin() {
-        return login;
+    public boolean isBox() {
+        return box;
     }
 
-    public void changeToLogin() {
-        login = true;
-    }
-
-    public void changeToRegistration() {
-        login = false;
+    public void setBox(boolean box) {
+        this.box = box;
     }
 }
