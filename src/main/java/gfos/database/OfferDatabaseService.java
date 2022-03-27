@@ -125,10 +125,10 @@ public class OfferDatabaseService extends DatabaseService {
         return query;
     }
 
-    private String getBraceSyntax(ArrayList<String> list) {
+    private String getBraceSyntax(ArrayList<Integer> list) {
         StringBuilder result = new StringBuilder("(");
 
-        for (String item : list) {
+        for (Integer item : list) {
             result.append(item).append(",");
         }
         result.deleteCharAt(result.length()-1);  // Delete last comma
