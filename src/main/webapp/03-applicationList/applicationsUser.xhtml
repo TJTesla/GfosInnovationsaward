@@ -16,19 +16,31 @@
 <h:body>
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
+            <h:outputStylesheet library="css" name="applicationList.css" />
             <div align="center">
                 <h1>Alle Bewerbungen</h1>
                 <hr />
             </div>
-            <ui:repeat var="apl" value="">
-                <div class="applications">
-                    <h:form>
-                        <h:outputText id="offer" value="" styleClass="text-apl" />
-                        <h:outputText id="status" value="" styleClass="text-status" />
-                        <h:commandButton value="Einsehen" action="/03-application/applDetailUser" styleClass="btn-seeAppl" />
-                    </h:form>
-                </div>
-            </ui:repeat>
+            <div class="applications">
+                <ui:repeat var="apl" value="">
+                    <div class="application">
+                        <h:form>
+                            <div class="left">
+                                <h:outputText id="offer" value="Hello" styleClass="text-apl" />
+                            </div>
+                            <div class="right">
+                                <div class="status">
+                                    <h:outputLabel for="status" value="Status:" styleClass="label-status" />
+                                    <h:outputText id="status" value="In progress" styleClass="text-status" />
+                                </div>
+
+                                <p:commandButton value="Einsehen" action="/03-application/applDetailUser" styleClass="btn-seeAppl" />
+                            </div>
+                        </h:form>
+                    </div>
+                </ui:repeat>
+            </div>
+
         </ui:define>
     </ui:composition>
 </h:body>

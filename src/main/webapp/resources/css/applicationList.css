@@ -1,0 +1,48 @@
+.applications {
+    margin: 30px 30%;
+}
+
+.application {
+    padding: 20px;
+    border-bottom: solid 2px #7285a5;
+}
+
+.left {
+    float:left;
+}
+
+.text-apl {
+    font-size: 20px;
+    font-weight: bold;
+    float: left;
+}
+
+.status {
+    font-style: italic;
+    color: #7285a5;
+}
+
+.right {
+    float: right;
+}
+
+.label-status {
+    padding-right: 10px;
+    font-size: 15px;
+}
+
+.text-status {
+    font-size: 18px;
+}
+
+body .btn-seeAppl {
+    float: right;
+    position: relative;
+    right: 0;
+    bottom: 0;
+    margin-top: 20px;
+    background-color: #7285a5;
+    border: none;
+    font-weight: bold;
+    font-size: 17px;
+}
