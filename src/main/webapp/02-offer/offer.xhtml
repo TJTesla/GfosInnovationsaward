@@ -26,14 +26,19 @@
             <div>
                 <!-- Daten des Angebots -->
                 <h:outputLabel for="field" value="Berufsfeld" />
-                <h:outputText id="field" value="" />
-                <h:outputText id="time" value="" />
+                <h:outputText id="field" value="#{detailOffer.fieldString()}" />
+                <br />
+                <h:outputLabel for="level" value="Einstiegsniveau" />
+                <h:outputText id="level" value="#{detailOffer.levelString()}" />
+                <br />
+                <h:outputLabel for="time" value="Zeitaufwand" />
+                <h:outputText id="time" value="#{detailOffer.timeString()}" />
+                <br />
                 <h:outputLabel for="location" value="Ort: " />
-                <h:outputText id="location" value="" />
-                <h:outputLabel for="address" value="Adresse: " />
-                <h:outputText id="address" value="" />
+                <h:outputText id="location" value="#{detailOffer.detailOffer.city}" />
+
                 <p>
-                    <h:outputText id="description" value="" />
+                    <h:outputText id="description" value="#{detailOffer.detailOffer.description}" />
                 </p>
             </div>
 
@@ -47,15 +52,17 @@
                 <h:outputText id="phoneNo" value="" />
             </div-->
             <h:form>
-                <c:if test=""> <!-- if applicant -->
+                <c:if test="#{detailOffer.loggedInAsApplicant()}"> <!-- if applicant -->
                     <c:when test=""> <!-- if not applied -->
-                        <h:commandButton value="Bewerben" styleClass="btn-appl" action="/03-application/application" />
+                        <h:button value="Bewerben" styleClass="btn-appl" outcome="/03-application/application">
+                            <f:param name="id" value="#{detailOffer.detailOffer.id}" />
+                        </h:button>
                     </c:when>
                     <c:otherwise> <!-- else -->
                         <h:commandButton value="Bewerbung einsehen" styleClass="btn-appl" action="/03-application/applDetailUser" />
                     </c:otherwise>
                 </c:if>
-                <c:if test=""> <!-- if employee -->
+                <c:if test="#{detailOffer.loggedInAsEmployee()}"> <!-- if employee -->
                     <h:commandButton value="Bewerbungen einsehen" styleClass="btn-appl" action="/03-application/applDetailEmpl" />
                 </c:if>
             </h:form>

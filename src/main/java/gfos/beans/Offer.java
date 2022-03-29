@@ -13,8 +13,9 @@ public class Offer {
     private double lat;
     private double lon;
     private boolean draft;
+    private String city;
 
-    public Offer(int id, String title, String description, int field, int level, int time, double lat, double lon, boolean draft) {
+    public Offer(int id, String title, String description, int field, int level, int time, double lat, double lon, boolean draft, String city) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -24,6 +25,7 @@ public class Offer {
         this.lat = lat;
         this.lon = lon;
         this.draft = draft;
+        this.city = city;
     }
 
     public Offer() {
@@ -36,6 +38,7 @@ public class Offer {
         this.lat = 0.0;
         this.lon = 0.0;
         this.draft = true;
+        this.city = "";
     }
 
     public int getId() {
@@ -108,5 +111,13 @@ public class Offer {
 
     public void setDraft(boolean draft) {
         this.draft = draft;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

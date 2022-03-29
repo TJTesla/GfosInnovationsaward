@@ -23,8 +23,8 @@ public class OfferDatabaseService extends DatabaseService {
     public boolean createOne(Offer o) {
         try {
             stmt = con.prepareStatement("" +
-                    "INSERT INTO offer(id, title, description, field, level, time, lat, lon, draft) VALUES " +
-                    "(null, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+                    "INSERT INTO offer(id, title, description, field, level, time, lat, lon, draft, city) VALUES " +
+                    "(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
             );
             setStmtParameters(stmt, o);
 
@@ -47,6 +47,7 @@ public class OfferDatabaseService extends DatabaseService {
             statement.setDouble(7, o.getLat());
             statement.setDouble(8, o.getLon());
             statement.setBoolean(9, o.getDraft());
+            statement.setString(10, o.getCity());
         } catch (SQLException sqlException) {
             System.out.println("Couldn't set parameters for insertion or update of company: " + sqlException.getMessage());
         }
@@ -69,7 +70,8 @@ public class OfferDatabaseService extends DatabaseService {
                         rs.getInt("time"),
                         rs.getDouble("lat"),
                         rs.getDouble("lon"),
-                        rs.getBoolean("draft")
+                        rs.getBoolean("draft"),
+                        rs.getString("city")
                 ));
             }
 
@@ -196,22 +198,46 @@ public class OfferDatabaseService extends DatabaseService {
                 resultSet.getInt("time"),
                 resultSet.getDouble("lat"),
                 resultSet.getDouble("lon"),
-                resultSet.getBoolean("draft")
+                resultSet.getBoolean("draft"),
+                resultSet.getString("city")
         );
     }
 
-    public String getTag(int id) {
-        try {
-            stmt = con.prepareStatement("SELECT tag FROM fields WHERE id=?");
-            stmt.setInt(1, id);
+    public String getField(int id) {
+        return getType("field", id);
+    }
 
-            rs = stmt.executeQuery();
-            rs.next();
+    public String getLevel(int id) {
+        return getType("level", id);
+    }
 
-            return rs.getString("tag");
-        } catch (SQLException sqlException) {
-            System.out.println("Couldn't get tag: " + sqlException.getMessage());
-            return "";
+    public String getTime(int id) {
+        return getType("time", id);
+    }
+
+    public String getType(String table, int id) {
+        String query = "";
+        if (table.equals("field")) {
+            query = "SELECT tag FROM fields WHERE id=?";
+        } else if (table.equals("level")) {
+            query = "SELECT term FROM level WHERE id=?";
+        } else if (table.equals("time")) {
+            query = "SELECT term FROM time WHERE id=?";
         }
+
+        try {
+            stmt = con.prepareStatement(query);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            if (table.equals("field")) {
+                return rs.getString("tag");
+            } else if (table.equals("level") || table.equals("time")) {
+                return rs.getString("term");
+            }
+        } catch (SQLException sqlException) {
+            System.out.println("Could not transform index into name from table: " + table + ": " + sqlException.getMessage());
+        }
+        return null;
     }
 }
