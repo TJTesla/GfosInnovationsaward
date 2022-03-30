@@ -46,10 +46,10 @@ public class ApplicationFormController {
     }
 
     public String checkUserRights() {
-        if (cu.getCurrentUser() == null || cu.getCurrentUser() instanceof Employee) {
-            return "/login.xhtml";
+        if (cu.getCurrentUser() instanceof Applicant) {
+            return "";
         }
-        return "";
+        return "/login.xhtml";
     }
 
     public String getText() {

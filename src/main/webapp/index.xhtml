@@ -112,7 +112,9 @@
                         </div>
                         <div class="offer-btn">
                             <h:form>
-                                <p:commandButton action="/02-offer/offer" styleClass="btn-toOffer" icon="pi pi-angle-right" />
+                                <p:button outcome="/02-offer/offer" styleClass="btn-toOffer" icon="pi pi-angle-right">
+                                    <f:param name="id" value="#{offer.id}" />
+                                </p:button>
                             </h:form>
                         </div>
                     </div>

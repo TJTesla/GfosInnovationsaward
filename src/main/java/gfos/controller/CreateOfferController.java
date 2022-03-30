@@ -51,7 +51,8 @@ public class CreateOfferController implements Serializable {
                 toInt(time),
                 coordinates[0],
                 coordinates[1],
-                draft
+                draft,
+                city
         ));
 
         return "/tjtesla-tests/companyIndex.xhtml?faces-redirect=true";

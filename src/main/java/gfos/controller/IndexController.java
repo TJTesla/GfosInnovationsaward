@@ -101,9 +101,16 @@ public class IndexController implements Serializable {
         }
     }
 
-    public boolean loggedIn() {
-        User u = cu.getCurrentUser();
-        return u instanceof Applicant;
+    public boolean loggedInAsApplicant() {
+        return cu.getCurrentUser() instanceof Applicant;
+    }
+
+    public boolean loggedInAsEmployee() {
+        return cu.getCurrentUser() instanceof Employee;
+    }
+
+    public boolean notLoggedIn() {
+        return cu.getCurrentUser() == null;
     }
 
     public String reload() {
