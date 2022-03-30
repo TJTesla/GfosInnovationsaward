@@ -14,18 +14,27 @@
 <h:body>
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
+            <h:outputStylesheet library="css" name="applicationList.css" />
             <div align="center">
-                <h2>Entwürfe</h2>
+                <h2 style="font-size: 25px;">Entwürfe</h2>
                 <hr />
             </div>
-            <ui:repeat var="aDraft" value="">
-                <div class="aDrafts">
-                    <h:outputLabel id="offerTitle" value="" styleClass="text-draftTitle" />
-                    <h:form>
-                        <h:commandButton id="editAppl" value="Bearbeiten" styleClass="btn-editDraft" action="/03-application/application" />
-                    </h:form>
-                </div>
-            </ui:repeat>
+            <div class="applications">
+                <ui:repeat var="aDraft" value="">
+                    <div class="application">
+                        <div class="left">
+                            <h:outputLabel id="offerTitle" value="" styleClass="text-apl" />
+                        </div>
+                        <div class="right">
+                            <h:form>
+                                <h:button id="editAppl" value="Bearbeiten" styleClass="btn-seeAppl" outcome="/03-application/application">
+                                    <f:param />
+                                </h:button>
+                            </h:form>
+                        </div>
+                    </div>
+                </ui:repeat>
+            </div>
         </ui:define>
     </ui:composition>
 </h:body>
