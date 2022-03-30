@@ -71,7 +71,7 @@
                 <h:form enctype="multipart/form-data">
                     <!-- Way to depict the pdf directly? -->
                     <h:outputLabel for="cv" value="Lebenslauf:" styleClass="label-applDetail"/>
-                    <p:commandButton id="cv" ajax="false" value="Herunterladen" styleClass="btn-cv-download">
+                    <p:commandButton id="cv" ajax="false" value="Herunterladen" styleClass="btn-cv-download" action="missing">
                         <p:fileDownload value="" />
                     </p:commandButton>
                 </h:form>

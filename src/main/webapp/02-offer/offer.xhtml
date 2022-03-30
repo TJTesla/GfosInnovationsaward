@@ -59,11 +59,11 @@
                         </h:button>
                     </c:when>
                     <c:otherwise> <!-- else -->
-                        <h:commandButton value="Bewerbung einsehen" styleClass="btn-appl" action="/03-application/applDetailUser" />
+                        <h:button value="Bewerbung einsehen" styleClass="btn-appl" outcome="/03-application/applDetailUser" />
                     </c:otherwise>
                 </c:if>
                 <c:if test="#{detailOffer.loggedInAsEmployee()}"> <!-- if employee -->
-                    <h:commandButton value="Bewerbungen einsehen" styleClass="btn-appl" action="/03-application/applDetailEmpl" />
+                    <h:button value="Bewerbungen einsehen" styleClass="btn-appl" outcome="/03-application/applDetailEmpl" />
                 </c:if>
             </h:form>
         </ui:define>

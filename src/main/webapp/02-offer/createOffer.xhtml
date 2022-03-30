@@ -124,23 +124,6 @@
                             </h:inputText>
                         </f:selectItems>
 
-                        <f:selectItems itemValue="2" itemLabel="Kontaktdaten">
-                            <h:outputLabel for="pInCharge" value="Verantwortliche Person:" />
-                            <h:inputText id="pInCharge" required="false" />
-                            <br />
-                            <h:outputLabel for="email" value="E-Mail" />
-                            <h:inputText id="email" required="false">
-                                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                            </h:inputText>
-                            <h:message for="email" infoClass="infoMessage" errorClass="errorMessage" />
-                            <br />
-                            <h:outputLabel for="phoneNo" value="Telefonnummer:" />
-                            <h:inputText id="phoneNo" required="false">
-                                <f:validateRegex pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" />
-                            </h:inputText>
-                            <h:message for="phoneNo" infoClass="infoMessage" errorClass="errorMessage" />
-                        </f:selectItems>
-
                     </h:selectManyCheckbox-->
                     <div class="btns">
                         <h:commandButton value="Speichern" action="#{createOfferController.save}" styleClass="btn-save" />
