@@ -6,8 +6,10 @@ import gfos.beans.Resume;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.servlet.jsp.jstl.sql.SQLExecutionTag;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 @Named
 @ApplicationScoped
@@ -18,11 +20,13 @@ public class ApplicationDatabaseService extends DatabaseService {
 
     public void apply(Application a, Resume r) {
         try {
+            int resumeId = this.createResume(r);
+
             stmt = con.prepareStatement("INSERT INTO application(userId, offerId, text, status, resumeId, draft) VALUES (?, ?, ?, 0, ?, ?)");
             stmt.setInt(1, a.getUserId());
             stmt.setInt(2, a.getOfferId());
             stmt.setString(3, a.getText());
-            stmt.setInt(4, this.createResume(r));
+            stmt.setInt(4, resumeId);
             stmt.setBoolean(5, a.getDraft());
 
             stmt.executeUpdate();
@@ -38,6 +42,7 @@ public class ApplicationDatabaseService extends DatabaseService {
         stmt.executeUpdate();
 
         rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
+        rs.next();
         return rs.getInt("LAST_INSERT_ID()");
     }
 

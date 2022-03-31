@@ -9,7 +9,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xml:lang="en" lang="en">
 <f:metadata>
-    <f:viewParam name="offerId" value="#{detailOffer.detailOffer}" converter="#{offerConverter}" />
+    <f:viewParam name="id" value="#{applicationFormController.offer}" converter="#{offerConverter}" />
     <!--f:viewAction action="#{applicationFormController.checkUserRights()}" /-->
 </f:metadata>
 <h:head>
@@ -20,19 +20,19 @@
         <ui:define name="content">
             <h:outputStylesheet library="css" name="applicationForm.css" />
             <div class="header-appl">
-                <h1>Bewerbungsformular: #{detailOffer.detailOffer.title}</h1>
+                <h1>Bewerbungsformular: #{applicationFormController.offer.title}</h1>
             </div>
             <h:form enctype="multipart/form-data" class="applForm" >
                 <h:outputLabel value="Lebenslauf hochladen:" styleClass="label-applForm" />
-                <p:fileUpload value="" mode="simple" styleClass="upload-cv" />
+                <p:fileUpload value="#{applicationFormController.cv}" mode="simple" styleClass="upload-cv" />
                 <br />
 
                 <h:outputLabel for="lom" value="Motivationsschreiben:" styleClass="label-applForm" /> <br />
-                <h:inputTextarea id="lom" required="true" styleClass="text-area-appl" />
+                <h:inputTextarea id="lom" required="true" styleClass="text-area-appl" value="#{applicationFormController.text}" />
                 <div>
-                    <p:commandButton value="Speichern" action="#{applicationFormController.apply}" styleClass="btn-applForm"
+                    <p:commandButton value="Speichern" action="#{applicationFormController.apply(true)}" styleClass="btn-applForm"
                                      style="float: left; margin-left: 5px;" />
-                    <p:commandButton value="Abschicken" action="#{applicationFormController.apply}" styleClass="btn-applForm"
+                    <p:commandButton value="Abschicken" action="#{applicationFormController.apply(false)}" styleClass="btn-applForm"
                                      style="float: right; margin-right: 5px;" /> <!-- TODO: Other action -->
                 </div>
                 <!-- update="@form" can be used for invalid parts -->

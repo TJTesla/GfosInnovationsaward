@@ -229,6 +229,9 @@ public class OfferDatabaseService extends DatabaseService {
             stmt = con.prepareStatement(query);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
 
             if (table.equals("field")) {
                 return rs.getString("tag");

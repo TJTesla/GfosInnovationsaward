@@ -6,19 +6,21 @@ import gfos.exceptions.UploadException;
 import gfos.longerBeans.CurrentUser;
 import org.primefaces.model.file.UploadedFile;
 
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.*;
 
 @Named
-public class ApplicationFormController {
+@ViewScoped
+public class ApplicationFormController implements Serializable {
     @Inject
     CurrentUser cu;
     @Inject
     ApplicationDatabaseService adbs;
 
     private Offer offer;
-    UploadedFile cv;
+    private UploadedFile cv;
     private String text;
 
     public String apply(boolean draft) {
@@ -66,6 +68,14 @@ public class ApplicationFormController {
 
     public void setOffer(Offer offer) {
         this.offer = offer;
+    }
+
+    public UploadedFile getCv() {
+        return cv;
+    }
+
+    public void setCv(UploadedFile cv) {
+        this.cv = cv;
     }
 }
 

@@ -26,11 +26,11 @@ public class DetailOffer implements Serializable {
     }
 
     public String levelString() {
-        return odbs.getLevel(detailOffer.getId());
+        return odbs.getLevel(detailOffer.getLevel());
     }
 
     public String timeString() {
-        return odbs.getTime(detailOffer.getId());
+        return odbs.getTime(detailOffer.getTime());
     }
 
     public boolean loggedInAsApplicant() {
