@@ -26,23 +26,23 @@
                     <button class="closebtn" onclick="closeNav()">&times;</button>
                     <c:choose>
                         <c:when test="#{controllerTest.checkUserRights()}">
-                            <p:commandButton styleClass="sideNavLinks-plain" action="/01-user/userProfile" value="Profil" icon="pi pi-user" />
+                            <p:button styleClass="sideNavLinks-plain" outcome="/01-user/userProfile" value="Profil" icon="pi pi-user" />
                         </c:when>
                         <c:otherwise>
-                            <p:commandButton styleClass="sideNavLinks-plain" action="/00-loginRegistration/login" value="Login" icon="pi pi-user" />
+                            <p:button styleClass="sideNavLinks-plain" outcome="/00-loginRegistration/login" value="Login" icon="pi pi-user" />
                         </c:otherwise>
                     </c:choose>
                     <hr class="border" />
-                    <p:commandButton action="/index.xhtml" value="Angebotsübersicht" styleClass="sideNavLinks-plain" icon="pi pi-list" />
+                    <p:button outcome="/index.xhtml" value="Angebotsübersicht" styleClass="sideNavLinks-plain" icon="pi pi-list" />
                     <c:if test="true">
                         <hr class="border" />
-                        <p:commandButton action="/03-applicationList/applicationsUser" value="Gesendet" styleClass="sideNavLinks-plain" icon="pi pi-envelope" />
+                        <p:button outcome="/03-applicationList/applicationsUser" value="Gesendet" styleClass="sideNavLinks-plain" icon="pi pi-envelope" />
                         <hr class="border" />
-                        <p:commandButton action="/03-applicationList/applicationDrafts" value="Entwürfe" styleClass="sideNavLinks-plain" icon="pi pi-pencil" />
+                        <p:button outcome="/03-applicationList/applicationDrafts" value="Entwürfe" styleClass="sideNavLinks-plain" icon="pi pi-pencil" />
                     </c:if>
                     <c:if test="#{controllerTest.checkEmployee()}">
                         <hr class="border" />
-                        <p:commandButton action="/02-offer/offerDrafts" value="Entwürfe" styleClass="sideNavLinks-plain" icon="pi pi-pencil" />
+                        <p:button outcome="/02-offer/offerDrafts" value="Entwürfe" styleClass="sideNavLinks-plain" icon="pi pi-pencil" />
                     </c:if>
                 </h:form>
             </div>
