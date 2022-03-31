@@ -1,10 +1,8 @@
 package gfos.controller;
 
-import gfos.FilterObject;
+import gfos.beans.FilterObject;
 import gfos.beans.Employee;
-import gfos.beans.User;
 import gfos.database.MiscellaneousDatabaseService;
-import gfos.exceptions.UserException;
 import gfos.beans.Applicant;
 import gfos.beans.Offer;
 import gfos.database.ApplicantDatabaseService;
@@ -12,7 +10,6 @@ import gfos.database.OfferDatabaseService;
 import gfos.longerBeans.CurrentUser;
 import gfos.Pair;
 
-import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -36,6 +33,9 @@ public class IndexController implements Serializable {
     private HashMap<Integer, Boolean> field = new HashMap<>();
     private HashMap<Integer, Boolean> level = new HashMap<>();
     private HashMap<Integer, Boolean> time = new HashMap<>();
+    private String appliedChoose;
+    private boolean favorites;
+
 
     private String maxDistance;
 
@@ -55,10 +55,28 @@ public class IndexController implements Serializable {
                         createFilterArray(field),
                         createFilterArray(level),
                         createFilterArray(time),
-                        toInt(maxDistance)
+                        toInt(maxDistance),
+                        toApplyFilter(appliedChoose),
+                        favorites
                 ),
                 (Applicant)cu.getCurrentUser()
         );
+    }
+
+    private Boolean toApplyFilter(String appliedChoose) {
+        if (appliedChoose == null) {
+            return null;
+        }
+
+        switch (appliedChoose) {
+            case "-1":
+                return null;
+            case "1":
+                return true;
+            case "2":
+                return false;
+        }
+        return null;
     }
 
     private static ArrayList<Integer> createFilterArray(HashMap<Integer, Boolean> arr) {
@@ -77,7 +95,7 @@ public class IndexController implements Serializable {
     }
 
     private int toInt(String str) {
-        if (str == null || str.equals("-1")) {
+        if (str == null || str.equals("-1") || str.isEmpty()) {
             return -1;
         }
 
@@ -99,6 +117,18 @@ public class IndexController implements Serializable {
         } else {
             return "";
         }
+    }
+
+    public String fieldString(int fieldId) {
+        return odbs.getField(fieldId);
+    }
+
+    public String levelString(int levelId) {
+        return odbs.getLevel(levelId);
+    }
+
+    public String timeString(int timeId) {
+        return odbs.getTime(timeId);
     }
 
     public boolean loggedInAsApplicant() {
@@ -163,5 +193,21 @@ public class IndexController implements Serializable {
 
     public void setMaxDistance(String maxDistance) {
         this.maxDistance = maxDistance;
+    }
+
+    public String getAppliedChoose() {
+        return appliedChoose;
+    }
+
+    public void setAppliedChoose(String appliedChoose) {
+        this.appliedChoose = appliedChoose;
+    }
+
+    public boolean isFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(boolean favorites) {
+        this.favorites = favorites;
     }
 }

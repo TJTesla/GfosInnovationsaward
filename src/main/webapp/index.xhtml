@@ -78,15 +78,15 @@
 
                     <div class="select-pref">
                         <h:outputLabel for="otherPrefs" value="Sonstiges" styleClass="label-pref" />
-                        <h:selectOneMenu id="otherPrefs" styleClass="menu-pref">
-                            <f:selectItem itemValue="none" itemLabel="Nicht ausgewählt" styleClass="a" />
-                            <f:selectItem itemValue="0" itemLabel="Bereits beworben" styleClass="a" />
-                            <f:selectItem itemValue="1" itemLabel="Noch nicht beworben" styleClass="a" />
+                        <h:selectOneMenu id="otherPrefs" styleClass="menu-pref" value="#{indexController.appliedChoose}">
+                            <f:selectItem itemValue="-1" itemLabel="Nicht ausgewählt" styleClass="a" />
+                            <f:selectItem itemValue="1" itemLabel="Bereits beworben" styleClass="a" />
+                            <f:selectItem itemValue="2" itemLabel="Noch nicht beworben" styleClass="a" />
                         </h:selectOneMenu>
                     </div>
                     <div class="select-fav">
                         <h:outputLabel for="check-fav" value="Favoriten" styleClass="label-fav" />
-                        <h:selectBooleanCheckbox id="check-fav" value="true" styleClass="check-fav" />
+                        <h:selectBooleanCheckbox id="check-fav" value="#{indexController.favorites}" styleClass="check-fav" />
                     </div>
                 </div>
                 <div class="applyBtn">
@@ -104,11 +104,11 @@
                         <br />
                         <div class="offer-attr">
                             <i class="pi pi-map-marker">&nbsp;</i>
-                            <h:outputText id="location" value="Essen" styleClass="offer-location" />
+                            <h:outputText id="location" value="#{offer.city}" styleClass="offer-location" />
                         </div>
                         <div class="offer-attr">
                             <i class="pi pi-briefcase">&nbsp;</i>
-                            <h:outputText id="field" value="Etwas" styleClass="offer-field" />
+                            <h:outputText id="field" value="#{indexController.fieldString(offer.field)}" styleClass="offer-field" />
                         </div>
                         <div class="offer-btn">
                             <h:form>

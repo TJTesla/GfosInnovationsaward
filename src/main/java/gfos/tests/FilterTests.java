@@ -1,11 +1,9 @@
 package gfos.tests;
 
-import gfos.FilterObject;
+import gfos.beans.FilterObject;
 import gfos.beans.Offer;
 import gfos.database.OfferDatabaseService;
 
-import javax.inject.Inject;
-import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -27,6 +25,8 @@ public class FilterTests {
                         null,
                         null,
                         null,
+                        null,
+                        null,
                         null
                 ),
                 null
@@ -39,6 +39,8 @@ public class FilterTests {
         print(odbs.fetchAll(
                 new FilterObject(
                         field,
+                        null,
+                        null,
                         null,
                         null,
                         null
@@ -54,6 +56,8 @@ public class FilterTests {
                         null,
                         null,
                         time,
+                        null,
+                        null,
                         null
                 ),
                 null
@@ -67,6 +71,8 @@ public class FilterTests {
                         null,
                         level,
                         time,
+                        null,
+                        null,
                         null
                 ),
                 null

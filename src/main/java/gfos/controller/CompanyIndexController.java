@@ -1,6 +1,6 @@
 package gfos.controller;
 
-import gfos.FilterObject;
+import gfos.beans.FilterObject;
 import gfos.beans.Applicant;
 import gfos.beans.Application;
 import gfos.beans.Offer;

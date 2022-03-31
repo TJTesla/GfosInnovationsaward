@@ -1,8 +1,7 @@
 package gfos.database;
 
-import gfos.FilterObject;
+import gfos.beans.FilterObject;
 import gfos.beans.Applicant;
-import gfos.beans.Application;
 import gfos.beans.Offer;
 import gfos.longerBeans.GeoCalculator;
 
@@ -56,7 +55,7 @@ public class OfferDatabaseService extends DatabaseService {
     public ArrayList<Offer> fetchAll(FilterObject filter, Applicant a) {
         ArrayList<Offer> result = new ArrayList<>();
         try {
-            String query = getQuery(filter, false);
+            String query = getQuery(filter, false, a);
             stmt = con.prepareStatement(query);
             rs = stmt.executeQuery();
 
@@ -88,8 +87,17 @@ public class OfferDatabaseService extends DatabaseService {
         return result;
     }
 
-    private String getQuery(FilterObject f, Boolean drafts) {
+    private String getQuery(FilterObject f, Boolean drafts, Applicant a) {
         String query = "SELECT * FROM offer";
+        if (f.getOnlyApplied() != null && f.getOnlyApplied().equals(true) && a != null) {
+            query += " JOIN application ON offer.id=application.offerId AND application.userId=" + a.getId();
+        }
+        if (f.getOnlyApplied() != null && f.getOnlyApplied().equals(false) && a != null) {
+            query += ", (SELECT offer.id FROM offer JOIN application ON offer.id = application.offerId AND application.userID=" + a.getId() + ") AS applied";
+        }
+        if (f.getFavorites() != null && f.getFavorites().equals(true) && a != null) {
+            query += " JOIN favorites ON offer.id=favorites.offerId AND favorites.applicantId=" + a.getId();
+        }
 
         boolean alreadyExtended = false;
         if (f.getField() != null && f.getField().size() != 0) {
@@ -112,6 +120,16 @@ public class OfferDatabaseService extends DatabaseService {
                 query += " WHERE";
             }
             query += " time IN " + getBraceSyntax(f.getTime());
+            alreadyExtended = true;
+        }
+        if (f.getOnlyApplied() != null && f.getOnlyApplied().equals(false) && a != null) {
+            if (alreadyExtended) {
+                query += " AND";
+            } else {
+                query += " WHERE";
+            }
+            query += " offer.id <> applied.id";
+            alreadyExtended = true;
         }
         if (drafts != null) {
             if (alreadyExtended) {
@@ -119,7 +137,7 @@ public class OfferDatabaseService extends DatabaseService {
             } else {
                 query += " WHERE";
             }
-            query += " draft = " + drafts;
+            query += " offer.draft = " + drafts;
         }
 
         System.out.println(query);
@@ -167,7 +185,7 @@ public class OfferDatabaseService extends DatabaseService {
     private ArrayList<Offer> getDraftType(FilterObject f, Applicant a, boolean draft) {
         ArrayList<Offer> result = new ArrayList<>();
         try {
-            stmt = con.prepareStatement(getQuery(f, draft));
+            stmt = con.prepareStatement(getQuery(f, draft, a));
             rs = stmt.executeQuery();
 
             while (rs.next()) {
