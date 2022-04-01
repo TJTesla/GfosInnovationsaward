@@ -90,6 +90,68 @@ h1 {
     padding: 10px;
 }
 /* offer */
-.provider {
+.offer-title {
+    text-align: center;
+    font-size: 25px;
+}
+
+.offer {
+    margin: 20px 30% 40px;
+}
+
+.offer-data1 {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px
+}
+
+.label-offer {
+    width: 225px;
+    margin-bottom: 20px;
+    font-size: 17px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.text-offer {
 
 }
+
+.field-offer-description {
+    background-color: #13274F;
+    padding: 0 20px 20px;
+    border-radius: 10px;
+}
+
+.label-offer-description {
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+.box-description {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.text-offer-description {
+
+}
+
+.btn-appl {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.link-login {
+    font-style: italic;
+    font-size: initial;
+    color: #7285a5;
+}
+
+.link-login:hover {
+    color: #007FFF;
+}
+

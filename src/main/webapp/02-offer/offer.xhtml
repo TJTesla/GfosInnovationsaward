@@ -35,7 +35,7 @@
                     <h:outputText id="level" value="Test
                 #{detailOffer.levelString()}" styleClass="text-offer" />
                     <br />
-                    <h:outputLabel for="time" value="Zeitaufwand: " styleClass="label-offer" />
+                    <h:outputLabel for="time" value="Arbeitszeit: " styleClass="label-offer" />
                     <h:outputText id="time" value="Test
                 #{detailOffer.timeString()}" styleClass="text-offer" />
                     <br />
@@ -46,60 +46,48 @@
                     <div class="field-offer-description">
                         <h:outputLabel for="tasks" value="Aufgaben:" styleClass="label-offer-description" />
                         <div class="box-description">
-                            <h:outputText id="tasks" value="fffffffffffffffffffffffffffffffffffffffffffff
-                        ffffffffffffffffffffffffffffffffffffffffffffffff
-                        ffffffffffffffffffffffffffffffffffffffffffffffffff
-                        ffffffffffffffffffffffffffffffffffffffffffffffffff
-                        fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-
-                        #{detailOffer.detailOffer.description}" styleClass="text-offer-description" />
+                            <h:outputText id="tasks" value="#{detailOffer.detailOffer.description}" styleClass="text-offer-description" />
                         </div>
 
                         <h:outputLabel for="quali" value="Qualifikationen:" styleClass="label-offer-description" />
                         <div class="box-description">
-                            <h:outputText id="quali" value="ffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-                                                        fffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-                                                        fffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+                            <h:outputText id="quali" value=""
                                           styleClass="text-offer-description" />
                         </div>
 
-                        <h:outputLabel for="extra" value="Zusätzliche Daten" styleClass="label-offer-description" />
+                        <h:outputLabel for="extra" value="Zusätzliche Daten:" styleClass="label-offer-description" />
                         <div class="box-description">
-                            <h:outputText id="extra" value="fffffffffffffffffffffffffffffffffffffffffffff
-                        ffffffffffffffffffffffffffffffffffffffffffffffff
-                        ffffffffffffffffffffffffffffffffffffffffffffff
-                        ffffffffffffffffffffffffffffffffffffffffffff
-                        fffffffffffffffffffffffffffffffffffffffffffff
-                        ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-                        ff" styleClass="text-offer-description" />
+                            <h:outputText id="extra" value="" styleClass="text-offer-description" />
                         </div>
                     </div>
                 </div>
 
                 <!-- buttons and links -->
                 <h:form>
-                    <c:choose>
-                        <c:when test="#{detailOffer.loggedInAsApplicant()}"> <!-- if applicant -->
-                            <c:choose>
-                                <c:when test="#{not detailOffer.alreadyApplied()}"> <!-- if not applied -->
-                                    <h:button value="Bewerben" styleClass="btn-appl" outcome="/03-application/application">
-                                        <f:param name="id" value="#{detailOffer.detailOffer.id}" />
-                                    </h:button>
-                                </c:when>
-                                <c:otherwise> <!-- already applied -->
-                                    <h:button value="Bewerbung einsehen" styleClass="btn-appl" outcome="/03-application/applDetailUser">
-                                        <f:param name="id" value="#{detailOffer.detailOffer.id}" />
-                                    </h:button>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:when>
-                        <c:when test="#{detailOffer.loggedInAsEmployee()}"> <!-- if employee -->
-                            <h:button value="Bewerbungen einsehen" styleClass="btn-appl" outcome="/03-application/applDetailEmpl" />
-                        </c:when>
-                        <c:otherwise> <!-- not logged in -->
-                            <h:link outcome="/00-loginRegistration/login" value="Melden Sie sich hier an, um sich zu bewerben." styleClass="link-login" />
-                        </c:otherwise>
-                    </c:choose>
+                    <div style="text-align: center;">
+                        <c:choose>
+                            <c:when test="#{detailOffer.loggedInAsApplicant()}"> <!-- if applicant -->
+                                <c:choose>
+                                    <c:when test="#{not detailOffer.alreadyApplied()}"> <!-- if not applied -->
+                                        <h:button value="Bewerben" styleClass="btn-appl" outcome="/03-application/application">
+                                            <f:param name="id" value="#{detailOffer.detailOffer.id}" />
+                                        </h:button>
+                                    </c:when>
+                                    <c:otherwise> <!-- already applied -->
+                                        <h:button value="Bewerbung einsehen" styleClass="btn-appl" outcome="/03-application/applDetailUser">
+                                            <f:param name="id" value="#{detailOffer.detailOffer.id}" />
+                                        </h:button>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:when>
+                            <c:when test="#{detailOffer.loggedInAsEmployee()}"> <!-- if employee -->
+                                <h:button value="Bewerbungen einsehen" styleClass="btn-appl" outcome="/03-application/applDetailEmpl" />
+                            </c:when>
+                            <c:otherwise> <!-- not logged in -->
+                                <h:link outcome="/00-loginRegistration/login" value="Melden Sie sich hier an, um sich zu bewerben." styleClass="link-login" />
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
                 </h:form>
             </div>
         </ui:define>

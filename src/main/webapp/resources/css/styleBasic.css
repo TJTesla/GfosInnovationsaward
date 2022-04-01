@@ -158,13 +158,13 @@ fieldset {
 }
 [class*="btn-"] {
     border-radius: 5px;
-    background-color: #007FFF;
+    background-color: #7285A5;
     color: whitesmoke;
     border-width: 0;
     padding: 10px;
 }
 [class*="btn-"]:hover {
-    background-color: #ff8200;
+    background-color: #7b5138;
 }
 [class*="label-"] {
     display: inline-block;
