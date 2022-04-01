@@ -239,6 +239,37 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         }
     }
 
+    public String getSalutation(int id) {
+        switch (id) {
+            case 1:
+                return "Herr";
+            case 2:
+                return "Frau";
+            case 9:
+                return "Divers";
+            case 0:
+                return "k. A.";
+            default:
+                return null;
+        }
+    }
+
+    public ArrayList<String> titles(int id) {
+        ArrayList<String> result = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement("SELECT term FROM title JOIN titleRelation ON title.id = titleRelation.titleId AND titleRelation.applicantId=?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                result.add( rs.getString("term") );
+            }
+        } catch (SQLException sqlException) {
+            System.out.println("Could not fetch titles for user " + id + ": " + sqlException.getMessage());
+        }
+        return result;
+    }
+
     private Applicant parseApplicant() throws SQLException {
         if (!rs.next()) {
             return null;

@@ -68,6 +68,30 @@ public class ApplicationDatabaseService extends DatabaseService {
         }
     }
 
+    public Resume getResume(int id) {
+        try {
+            stmt = con.prepareStatement("SELECT * FROM resumes WHERE id=?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
+
+            return createResume(rs);
+        } catch (SQLException sqlException) {
+            System.out.println("Could not create resume with id " + id + ": " + sqlException.getMessage());
+            return null;
+        }
+    }
+
+    private static Resume createResume(ResultSet rs) throws SQLException {
+        return new Resume(
+                rs.getInt("id"),
+                rs.getString("path"),
+                rs.getString("name")
+        );
+    }
+
     public String getStatusString(int id) {
         final HashMap<Integer, String> status = new HashMap<>();
         status.put(0, "Noch nicht bearbeitet");
