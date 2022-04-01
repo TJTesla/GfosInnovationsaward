@@ -17,7 +17,7 @@ public class ResourceIO {
         }
 
         String path = "uploads/resumes/" + user.getName() + "/" + offer.getId() + file.getFileName();
-        Resume result = new Resume(path, file.getFileName());
+        Resume result = new Resume(-1, path, file.getFileName());
 
         File directory = new File(System.getProperty("user.dir"), "uploads/resumes/" + user.getName());
         directory.mkdirs();

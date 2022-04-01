@@ -10,11 +10,11 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xml:lang="en" lang="en">
 <f:metadata>
-    <f:viewParam name="id" value="#{detailApplication.application}" converter="#{applicationC}" />
+    <f:viewParam name="id" value="#{detailApplication.application}" converter="#{applicationConverter}" />
     <!-- TODO: Check for user rights -->
 </f:metadata>
 <h:head>
-    <title> - Bewerbung</title>
+    <title>#{detailApplication.offer.title} - Bewerbung</title>
 </h:head>
 <h:body>
     <ui:composition template="../resources/templates/common.xhtml">
@@ -23,7 +23,7 @@
             <div class="applDetailView">
                 <ui:include src="applicationDetailTemplate.xhtml" />
                 <h:outputLabel for="status" value="Bearbeitungsstatus:" styleClass="label-status" />
-                <h:outputText id="status" value="Angenommen" styleClass="text-status" /> <!-- Given value needed -->
+                <h:outputText id="status" value="#{detailApplication.statusString()}" styleClass="text-status" /> <!-- Given value needed -->
             </div>
         </ui:define>
     </ui:composition>

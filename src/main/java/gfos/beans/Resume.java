@@ -5,7 +5,8 @@ public class Resume {
     private String path;
     private String name;
 
-    public Resume(String path, String name) {
+    public Resume(int id, String path, String name) {
+        this.id = id;
         this.path = path;
         this.name = name;
     }
