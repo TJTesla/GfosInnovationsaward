@@ -16,6 +16,7 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 @Named
@@ -38,16 +39,11 @@ public class IndexController implements Serializable {
 
 
     private String maxDistance;
+    private HashSet<Integer> favoritesSet = new HashSet<>();
 
     public ArrayList<Offer> getAllOffers() {
-        System.out.println("search");
-
-        if (field == null) {
-            System.out.println("NULL");
-        } else {
-            for (int i = 0; i < field.size(); i++) {
-                System.out.println(i + ": " + field.get(i));
-            }
+        if (cu.getCurrentUser() instanceof Applicant) {
+            favoritesSet = adbs.getFavorites( ((Applicant)cu.getCurrentUser()).getId() );
         }
 
         return odbs.getAllFinalOffers(
@@ -105,6 +101,28 @@ public class IndexController implements Serializable {
             System.out.println("Cannot change string: " + str + " to Integer: " + nfe.getMessage());
             return -1;
         }
+    }
+
+    public boolean isFavorite(int id) {
+        return favoritesSet.contains(id);
+    }
+
+    public void editFavorite(int id) {
+        if (isFavorite(id)) {
+            removeFromFavorites(id);
+        } else {
+            setAsFavorite(id);
+        }
+    }
+
+    private void setAsFavorite(int id) {
+        favoritesSet.add(id);
+        adbs.addToFavorites( ((Applicant)cu.getCurrentUser()).getId(), id);
+    }
+
+    private void removeFromFavorites(int id) {
+        favoritesSet.remove(id);
+        adbs.removeFromFavorites( ((Applicant)cu.getCurrentUser()).getId(), id);
     }
 
     public String offerDetailPage(int offerId) {

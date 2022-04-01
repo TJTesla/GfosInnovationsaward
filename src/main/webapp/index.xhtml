@@ -115,7 +115,7 @@
                                 <h:outputText id="field" value="#{indexController.fieldString(offer.field)}" styleClass="offer-field" />
                             </div>
                             <div class="offer-btn">
-                                    <h:commandButton action="mnb vhj"
+                                    <h:commandButton action="#{indexController.editFavorite(offer.id)}" rendered="#{indexController.loggedInAsApplicant()}"
                                                      styleClass="btn-fav"
                                                      style="clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);">
                                         <f:param name="id" value="" />

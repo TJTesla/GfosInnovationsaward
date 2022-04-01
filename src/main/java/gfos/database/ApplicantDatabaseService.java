@@ -12,6 +12,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 @Named
 @ApplicationScoped
@@ -223,6 +224,44 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         } catch (SQLException sqlException) {
             System.out.println("Error while checking for name: " + name + ": " + sqlException.getMessage());
             return false;
+        }
+    }
+
+    public HashSet<Integer> getFavorites(int id) {
+        HashSet<Integer> result = new HashSet<>();
+        try {
+            stmt = con.prepareStatement("SELECT offerId FROM favorites WHERE applicantId=?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                result.add(rs.getInt("offerId"));
+            }
+        } catch (SQLException sqlException) {
+            System.out.println("Could not collect favorites from user: " + id + ": " + sqlException.getMessage());
+        }
+        return result;
+    }
+
+    public void addToFavorites(int userId, int offerId) {
+        try {
+            stmt = con.prepareStatement("INSERT INTO favorites(applicantId, offerId) VALUES (?, ?)");
+            stmt.setInt(1, userId);
+            stmt.setInt(2, offerId);
+            stmt.executeUpdate();
+        } catch (SQLException sqlException) {
+            System.out.println("Could not add offer " + offerId + " to favorites of applicant " + userId + ": " + sqlException.getMessage());
+        }
+    }
+
+    public void removeFromFavorites(int userId, int offerId) {
+        try {
+            stmt = con.prepareStatement("DELETE FROM favorites WHERE applicantId=? AND offerId=?");
+            stmt.setInt(1, userId);
+            stmt.setInt(2, offerId);
+            stmt.executeUpdate();
+        } catch (SQLException sqlException) {
+            System.out.println("Could not remove offer " + offerId + " from favorites of applicant " + userId + ": " + sqlException.getMessage());
         }
     }
 
