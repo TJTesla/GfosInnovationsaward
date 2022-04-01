@@ -199,7 +199,9 @@ DROP TABLE IF EXISTS `offer`;
 CREATE TABLE `offer` (
   `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
-  `description` text,
+  `tasks` text,
+  `qualifications` text,
+  `extras` text,
   `field` int DEFAULT NULL,
   `level` int DEFAULT NULL,
   `time` int DEFAULT NULL,
@@ -223,7 +225,7 @@ CREATE TABLE `offer` (
 
 LOCK TABLES `offer` WRITE;
 /*!40000 ALTER TABLE `offer` DISABLE KEYS */;
-INSERT INTO `offer` VALUES (2,'Build a PC','Help assemble PCs for clients',3,1,3,52.52,13.405,1,'Berlin'),(3,'Sr Dev','Work as a senior dev',5,6,2,51.4556,7.0116,0,'Essen'),(4,'PR','Werbung',15,4,2,52.52,13.405,0,'Berlin');
+INSERT INTO `offer` VALUES (2,'Build a PC',NULL,NULL,NULL,3,1,3,52.52,13.405,1,'Berlin'),(3,'Sr Dev',NULL,NULL,NULL,5,6,2,51.4556,7.0116,0,'Essen'),(4,'PR',NULL,NULL,NULL,15,4,2,52.52,13.405,0,'Berlin');
 /*!40000 ALTER TABLE `offer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,4 +369,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-01 23:06:27
+-- Dump completed on 2022-04-01 23:29:16

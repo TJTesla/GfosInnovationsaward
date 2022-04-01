@@ -8,17 +8,21 @@ import javax.inject.Named;
 public class Offer {
     private int id;
     private String title;
-    private String description;
+    private String tasks;
+    private String qualifications;
+    private String extras;
     private int field, level, time;
     private double lat;
     private double lon;
     private boolean draft;
     private String city;
 
-    public Offer(int id, String title, String description, int field, int level, int time, double lat, double lon, boolean draft, String city) {
+    public Offer(int id, String title, String tasks, String qualifications, String extras, int field, int level, int time, double lat, double lon, boolean draft, String city) {
         this.id = id;
         this.title = title;
-        this.description = description;
+        this.tasks = tasks;
+        this.qualifications = qualifications;
+        this.extras = extras;
         this.field = field;
         this.level = level;
         this.time = time;
@@ -31,7 +35,9 @@ public class Offer {
     public Offer() {
         this.id = 0;
         this.title = "";
-        this.description = "";
+        this.tasks = "";
+        this.qualifications = "";
+        this.extras = "";
         this.field = 0;
         this.level = 0;
         this.time = 0;
@@ -57,12 +63,28 @@ public class Offer {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTasks() {
+        return tasks;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTasks(String tasks) {
+        this.tasks = tasks;
+    }
+
+    public String getQualifications() {
+        return qualifications;
+    }
+
+    public void setQualifications(String qualifications) {
+        this.qualifications = qualifications;
+    }
+
+    public String getExtras() {
+        return extras;
+    }
+
+    public void setExtras(String extras) {
+        this.extras = extras;
     }
 
     public int getField() {

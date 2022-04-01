@@ -22,8 +22,8 @@ public class OfferDatabaseService extends DatabaseService {
     public boolean createOne(Offer o) {
         try {
             stmt = con.prepareStatement("" +
-                    "INSERT INTO offer(id, title, description, field, level, time, lat, lon, draft, city) VALUES " +
-                    "(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+                    "INSERT INTO offer(id, title, tasks, qualifications, extras, field, level, time, lat, lon, draft, city) VALUES " +
+                    "(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
             );
             setStmtParameters(stmt, o);
 
@@ -39,14 +39,16 @@ public class OfferDatabaseService extends DatabaseService {
     private void setStmtParameters(PreparedStatement statement, Offer o) {
         try {
             statement.setString(1, o.getTitle());
-            statement.setString(2, o.getDescription());
-            statement.setInt(4, o.getField());
-            statement.setInt(5, o.getLevel());
-            statement.setInt(6, o.getTime());
-            statement.setDouble(7, o.getLat());
-            statement.setDouble(8, o.getLon());
-            statement.setBoolean(9, o.getDraft());
-            statement.setString(10, o.getCity());
+            statement.setString(2, o.getTasks());
+            statement.setString(3, o.getQualifications());
+            statement.setString(4, o.getExtras());
+            statement.setInt(5, o.getField());
+            statement.setInt(6, o.getLevel());
+            statement.setInt(7, o.getTime());
+            statement.setDouble(8, o.getLat());
+            statement.setDouble(9, o.getLon());
+            statement.setBoolean(12, o.getDraft());
+            statement.setString(11, o.getCity());
         } catch (SQLException sqlException) {
             System.out.println("Couldn't set parameters for insertion or update of company: " + sqlException.getMessage());
         }
@@ -60,18 +62,7 @@ public class OfferDatabaseService extends DatabaseService {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                result.add(new Offer(
-                        rs.getInt("id"),
-                        rs.getString("title"),
-                        rs.getString("description"),
-                        rs.getInt("field"),
-                        rs.getInt("level"),
-                        rs.getInt("time"),
-                        rs.getDouble("lat"),
-                        rs.getDouble("lon"),
-                        rs.getBoolean("draft"),
-                        rs.getString("city")
-                ));
+                result.add(createOffer(rs));
             }
 
             // TODO: Uncomment and filter by distance
@@ -229,7 +220,9 @@ public class OfferDatabaseService extends DatabaseService {
         return new Offer(
                 resultSet.getInt("id"),
                 resultSet.getString("title"),
-                resultSet.getString("description"),
+                resultSet.getString("tasks"),
+                resultSet.getString("qualifications"),
+                resultSet.getString("extras"),
                 resultSet.getInt("field"),
                 resultSet.getInt("level"),
                 resultSet.getInt("time"),

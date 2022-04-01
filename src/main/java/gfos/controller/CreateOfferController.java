@@ -16,7 +16,7 @@ import java.util.HashMap;
 @ViewScoped
 public class CreateOfferController implements Serializable {
     private String title;
-    private String description;
+    private String tasks, qualifications, extras;
     private String field;
     private String level;
     private String time;
@@ -45,7 +45,9 @@ public class CreateOfferController implements Serializable {
         odbs.createOne(new Offer(
                 -1,
                 title,
-                description,
+                tasks,
+                qualifications,
+                extras,
                 toInt(field),
                 toInt(level),
                 toInt(time),
@@ -64,10 +66,15 @@ public class CreateOfferController implements Serializable {
             creationError = true;
             errorMsgs.put("title", "Es muss ein Titel eingegeben werden");
         }
-        // Beschreibung leer
-        if (description.isEmpty()) {
+        // Aufgaben leer
+        if (tasks.isEmpty()) {
             creationError = true;
-            errorMsgs.put("description", "Es muss eine Beschreibung eingegeben werden");
+            errorMsgs.put("tasks", "Es müssen Aufgaben angegeben werden");
+        }
+        // Qualifikationen leer
+        if (qualifications.isEmpty()) {
+            creationError = true;
+            errorMsgs.put("qualifications", "Es müssen Qualifikationen angegeben werden");
         }
         // Keine Adresse
         if (street.isEmpty() || postalCode.isEmpty() || city.isEmpty()) {
@@ -114,12 +121,28 @@ public class CreateOfferController implements Serializable {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTasks() {
+        return tasks;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTasks(String tasks) {
+        this.tasks = tasks;
+    }
+
+    public String getQualifications() {
+        return qualifications;
+    }
+
+    public void setQualifications(String qualifications) {
+        this.qualifications = qualifications;
+    }
+
+    public String getExtras() {
+        return extras;
+    }
+
+    public void setExtras(String extras) {
+        this.extras = extras;
     }
 
     public String getField() {
