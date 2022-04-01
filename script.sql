@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.27, for macos11.6 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for macos11.6 (x86_64)
 --
 -- Host: 127.0.0.1    Database: ApplicationManagement
 -- ------------------------------------------------------
--- Server version	8.0.27
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -37,7 +37,7 @@ CREATE TABLE `applicant` (
   `bday` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `applicant_username_uindex` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `applicant` (
 
 LOCK TABLES `applicant` WRITE;
 /*!40000 ALTER TABLE `applicant` DISABLE KEYS */;
-INSERT INTO `applicant` VALUES (1,'Yixue','8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4','','Vivien','Hou',NULL,2,NULL,NULL,NULL,NULL),(12,'TTesla','ce0b8a0eb2c976b3cfed32c653ef6f1ce08006d488b865bb4dd2beaeb555740a','','Theodor','Teslia','theoteslia@gmail.com',1,'uploads/profilepics/applicants/0picture.jpg',51.44046,7.01433,NULL),(15,'brittchen','ce0b8a0eb2c976b3cfed32c653ef6f1ce08006d488b865bb4dd2beaeb555740a','','Britta','Teslia','brittateslia@gmx.de',2,'uploads/profilepics/applicants/brittchen2BInFrontOfRobot.png',51.44046,7.01433,NULL),(17,'tes','ce0b8a0eb2c976b3cfed32c653ef6f1ce08006d488b865bb4dd2beaeb555740a','','Anton','Teslia','teslia@gmx.de',1,'uploads/profilepics/applicants/tesKenKaneki.jpg',51.4398407,7.0275026,NULL);
+INSERT INTO `applicant` VALUES (1,'Yixue','8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4','','Vivien','Hou',NULL,2,NULL,NULL,NULL,NULL),(12,'TTesla','ce0b8a0eb2c976b3cfed32c653ef6f1ce08006d488b865bb4dd2beaeb555740a','','Theodor','Teslia','theoteslia@gmail.com',1,'uploads/profilepics/applicants/0picture.jpg',51.44046,7.01433,NULL),(15,'brittchen','ce0b8a0eb2c976b3cfed32c653ef6f1ce08006d488b865bb4dd2beaeb555740a','','Britta','Teslia','brittateslia@gmx.de',2,'uploads/profilepics/applicants/brittchen2BInFrontOfRobot.png',51.44046,7.01433,NULL),(17,'tes','ce0b8a0eb2c976b3cfed32c653ef6f1ce08006d488b865bb4dd2beaeb555740a','','Anton','Teslia','teslia@gmx.de',1,'uploads/profilepics/applicants/tesKenKaneki.jpg',51.4398407,7.0275026,NULL),(19,'Muster','ca563452b72fce8b11703b0ccbbf5c5800668323663b43afafd2ca3312a075cc','92f064cb8befb1da1571e8d7a1ff82cf','Max','Mustermann','muster@mail.de',1,'uploads/profilepics/applicants/MusterIMG_9667.JPG',51.4399625,7.0135436,'01.01.1970'),(20,'Anonym','9b6aff65ecf6945910101987777a6348592252ced183cc24d00368a3ad92c798','9f06e2bf14ebc865aa3ae1abbc3e0cd3','Anonym','Anonym','anonym@mail.com',0,'',51.4367956,7.0095003,'01.01.1970');
 /*!40000 ALTER TABLE `applicant` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,6 @@ CREATE TABLE `application` (
   KEY `application_cv_fk` (`resumeId`),
   CONSTRAINT `application_cv_fk` FOREIGN KEY (`resumeId`) REFERENCES `resumes` (`id`),
   CONSTRAINT `application_offer_fk` FOREIGN KEY (`offerId`) REFERENCES `offer` (`id`),
-  CONSTRAINT `application_status_id_fk` FOREIGN KEY (`status`) REFERENCES `status` (`id`),
   CONSTRAINT `application_user_fk` FOREIGN KEY (`userId`) REFERENCES `applicant` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -81,7 +80,7 @@ CREATE TABLE `application` (
 
 LOCK TABLES `application` WRITE;
 /*!40000 ALTER TABLE `application` DISABLE KEYS */;
-INSERT INTO `application` VALUES (12,3,'Ich hab Informarik studiert und möchte dasher das hier arbeiten',0,NULL,1),(15,3,'KA brauche arbeit',0,NULL,1);
+INSERT INTO `application` VALUES (12,3,'Da hab ich Bock drauf!!!',10,11,1),(15,3,'KA brauche arbeit',0,NULL,1);
 /*!40000 ALTER TABLE `application` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +121,6 @@ DROP TABLE IF EXISTS `favorites`;
 CREATE TABLE `favorites` (
   `applicantId` int NOT NULL,
   `offerId` int NOT NULL,
-  PRIMARY KEY (`applicantId`),
   UNIQUE KEY `favorites_offerId_uindex` (`offerId`),
   UNIQUE KEY `favorites_applicantId_offerId_uindex` (`applicantId`,`offerId`),
   CONSTRAINT `favorites_offer_fk` FOREIGN KEY (`offerId`) REFERENCES `offer` (`id`),
@@ -136,6 +134,7 @@ CREATE TABLE `favorites` (
 
 LOCK TABLES `favorites` WRITE;
 /*!40000 ALTER TABLE `favorites` DISABLE KEYS */;
+INSERT INTO `favorites` VALUES (12,2),(12,3);
 /*!40000 ALTER TABLE `favorites` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,6 +206,7 @@ CREATE TABLE `offer` (
   `lat` double DEFAULT NULL,
   `lon` double DEFAULT NULL,
   `draft` tinyint(1) DEFAULT '1',
+  `city` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `offer_tag_fk` (`field`),
   KEY `offer_cat_fk` (`time`),
@@ -223,7 +223,7 @@ CREATE TABLE `offer` (
 
 LOCK TABLES `offer` WRITE;
 /*!40000 ALTER TABLE `offer` DISABLE KEYS */;
-INSERT INTO `offer` VALUES (2,'Build a PC','Help assemble PCs for clients',3,1,3,52.52,13.405,1),(3,'Sr Dev','Work as a senior dev',5,6,2,51.4556,7.0116,1),(4,'PR','Werbung',15,4,2,51.4367956,7.0095003,1);
+INSERT INTO `offer` VALUES (2,'Build a PC','Help assemble PCs for clients',3,1,3,52.52,13.405,1,'Berlin'),(3,'Sr Dev','Work as a senior dev',5,6,2,51.4556,7.0116,0,'Essen'),(4,'PR','Werbung',15,4,2,52.52,13.405,0,'Berlin');
 /*!40000 ALTER TABLE `offer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,7 +241,7 @@ CREATE TABLE `resumes` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `resumes_id_uindex` (`id`),
   UNIQUE KEY `resumes_path_uindex` (`path`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -250,6 +250,7 @@ CREATE TABLE `resumes` (
 
 LOCK TABLES `resumes` WRITE;
 /*!40000 ALTER TABLE `resumes` DISABLE KEYS */;
+INSERT INTO `resumes` VALUES (10,'uploads/resumes/TTesla/4Deutsch.pdf','Deutsch.pdf'),(11,'uploads/resumes/TTesla/3Deutsch.pdf','Deutsch.pdf');
 /*!40000 ALTER TABLE `resumes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -353,7 +354,7 @@ CREATE TABLE `titleRelation` (
 
 LOCK TABLES `titleRelation` WRITE;
 /*!40000 ALTER TABLE `titleRelation` DISABLE KEYS */;
-INSERT INTO `titleRelation` VALUES (1,4),(12,4),(15,4),(1,5),(17,5);
+INSERT INTO `titleRelation` VALUES (1,4),(12,4),(15,4),(19,4),(1,5),(12,5),(17,5);
 /*!40000 ALTER TABLE `titleRelation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -366,4 +367,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-24 19:35:56
+-- Dump completed on 2022-04-01 23:06:27
