@@ -11,8 +11,7 @@
       xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
 <f:metadata>
-    <f:viewParam name="oId" value="#{detailApplication.offerId}" />
-    <f:viewParam name="aId" value="#{detailApplication.userId}" />
+    <f:viewParam name="id" value="#{detailApplication.offerId}" converter="#{applicantConverter}" />
 
     <f:viewAction action="#{detailApplication.checkRights()}" />
 </f:metadata>
@@ -52,17 +51,6 @@
                 <h:outputLabel for="lom" value="Bewerbungsschreiben:" styleClass="label-applDetail"/> <br />
                 <div class="textArea-applDetail">
                     <h:outputText id="lom" value="
-            dsgfvasrdhijfhfaihjodprshrrrrrrrrrvknphhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
             #{detailApplication.application.text}" styleClass="text-applDetail" style="font-size: 13px;" />
                 </div>
 

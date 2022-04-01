@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 
 @Named
 @ApplicationScoped
@@ -65,6 +66,16 @@ public class ApplicationDatabaseService extends DatabaseService {
             System.out.println("Could not get application with offer Id: " + oId + " and userId: " + aId + ": " + sqlException.getMessage());
             return null;
         }
+    }
+
+    public String getStatusString(int id) {
+        final HashMap<Integer, String> status = new HashMap<>();
+        status.put(0, "Noch nicht bearbeitet");
+        status.put(1, "Wird zurzeit bearbeitet");
+        status.put(10, "Angenommen");
+        status.put(11, "Abgelehnt");
+
+        return status.get(id);
     }
 
     public static Application createApplication(ResultSet rs) throws SQLException {

@@ -25,8 +25,7 @@ public class DetailApplication implements Serializable {
     OfferDatabaseService odbs;
 
     private Application application;
-
-    private String userId;
+    private Offer offer;
     private String offerId;
 
     public String checkRights() {
@@ -36,12 +35,6 @@ public class DetailApplication implements Serializable {
             return "/00-loginRegistration/login.xhtml";
         }
         return "";
-    }
-
-    private boolean initialized = false;
-    private void init() {
-        initialized = true;
-        application = adbs.getById(toInt(offerId), toInt(userId));
     }
 
     private static int toInt(String str) {
@@ -63,18 +56,7 @@ public class DetailApplication implements Serializable {
 
     public void setApplication(Application application) {
         this.application = application;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-
-        if (this.offerId != null && !initialized) {
-            init();
-        }
+        offer = odbs.getById(this.application.getOfferId());
     }
 
     public String getOfferId() {
@@ -83,9 +65,5 @@ public class DetailApplication implements Serializable {
 
     public void setOfferId(String offerId) {
         this.offerId = offerId;
-
-        if (this.userId != null && !initialized) {
-            init();
-        }
     }
 }

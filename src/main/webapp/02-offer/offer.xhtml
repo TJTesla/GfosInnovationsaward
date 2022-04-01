@@ -53,14 +53,18 @@
             </div-->
             <h:form>
                 <c:if test="#{detailOffer.loggedInAsApplicant()}"> <!-- if applicant -->
-                    <c:when test=""> <!-- if not applied -->
-                        <h:button value="Bewerben" styleClass="btn-appl" outcome="/03-application/application">
-                            <f:param name="id" value="#{detailOffer.detailOffer.id}" />
-                        </h:button>
-                    </c:when>
-                    <c:otherwise> <!-- else -->
-                        <h:button value="Bewerbung einsehen" styleClass="btn-appl" outcome="/03-application/applDetailUser" />
-                    </c:otherwise>
+                    <c:choose>
+                        <c:when test="#{not detailOffer.alreadyApplied()}"> <!-- if not applied -->
+                            <h:button value="Bewerben" styleClass="btn-appl" outcome="/03-application/application">
+                                <f:param name="id" value="#{detailOffer.detailOffer.id}" />
+                            </h:button>
+                        </c:when>
+                        <c:otherwise> <!-- else -->
+                            <h:button value="Bewerbung einsehen" styleClass="btn-appl" outcome="/03-application/applDetailUser">
+                                <f:param name="id" value="#{detailOffer.detailOffer.id}" />
+                            </h:button>
+                        </c:otherwise>
+                    </c:choose>
                 </c:if>
                 <c:if test="#{detailOffer.loggedInAsEmployee()}"> <!-- if employee -->
                     <h:button value="Bewerbungen einsehen" styleClass="btn-appl" outcome="/03-application/applDetailEmpl" />

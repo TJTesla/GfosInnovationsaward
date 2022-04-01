@@ -21,6 +21,14 @@ public class DetailOffer implements Serializable {
 
     private Offer detailOffer = new Offer();
 
+    public boolean alreadyApplied() {
+        if (!loggedInAsApplicant()) {
+            return false;
+        }
+
+        return odbs.alreadyApplied( ((Applicant)cu.getCurrentUser()).getId(), detailOffer.getId());
+    }
+
     public String fieldString() {
         return odbs.getField(detailOffer.getField());
     }

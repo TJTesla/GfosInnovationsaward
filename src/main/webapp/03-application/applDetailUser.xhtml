@@ -10,7 +10,8 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xml:lang="en" lang="en">
 <f:metadata>
-    <f:viewParam name="oId" value="#{detailApplication.offerId}" />
+    <f:viewParam name="id" value="#{detailApplication.application}" converter="#{applicationC}" />
+    <!-- TODO: Check for user rights -->
 </f:metadata>
 <h:head>
     <title> - Bewerbung</title>

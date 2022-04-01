@@ -145,6 +145,25 @@ public class OfferDatabaseService extends DatabaseService {
         return query;
     }
 
+    public boolean alreadyApplied(int userId, int offerId) {
+        try {
+            stmt = con.prepareStatement(
+                    "SELECT * " +
+                            "FROM offer " +
+                            "JOIN application a " +
+                            "ON offer.id = a.offerId AND a.userId=? " +
+                            "WHERE offer.id=?");
+            stmt.setInt(1, userId);
+            stmt.setInt(2, offerId);
+            rs = stmt.executeQuery();
+
+            return rs.next();
+        } catch (SQLException sqlException) {
+            System.out.println("Could not find, whether applicant " + userId + " applied to offer " + offerId + ": " + sqlException.getMessage());
+            return false;
+        }
+    }
+
     private String getBraceSyntax(ArrayList<Integer> list) {
         StringBuilder result = new StringBuilder("(");
 
