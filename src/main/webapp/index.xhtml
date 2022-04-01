@@ -6,6 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:k="http://xmlns.jcp.org/jsf/passthrough">
 
 <!--f:metadata>
@@ -76,18 +77,20 @@
                         </div>
                     </div>
 
-                    <div class="select-pref">
-                        <h:outputLabel for="otherPrefs" value="Sonstiges" styleClass="label-pref" />
-                        <h:selectOneMenu id="otherPrefs" styleClass="menu-pref" value="#{indexController.appliedChoose}">
-                            <f:selectItem itemValue="-1" itemLabel="Nicht ausgewählt" styleClass="a" />
-                            <f:selectItem itemValue="1" itemLabel="Bereits beworben" styleClass="a" />
-                            <f:selectItem itemValue="2" itemLabel="Noch nicht beworben" styleClass="a" />
-                        </h:selectOneMenu>
-                    </div>
-                    <div class="select-fav">
-                        <h:outputLabel for="check-fav" value="Favoriten" styleClass="label-fav" />
-                        <h:selectBooleanCheckbox id="check-fav" value="#{indexController.favorites}" styleClass="check-fav" />
-                    </div>
+                    <c:if test="#{indexController.loggedInAsApplicant()}">
+                        <div class="select-pref">
+                            <h:outputLabel for="otherPrefs" value="Sonstiges" styleClass="label-pref" />
+                            <h:selectOneMenu id="otherPrefs" styleClass="menu-pref" value="#{indexController.appliedChoose}">
+                                <f:selectItem itemValue="-1" itemLabel="Nicht ausgewählt" styleClass="a" />
+                                <f:selectItem itemValue="1" itemLabel="Bereits beworben" styleClass="a" />
+                                <f:selectItem itemValue="2" itemLabel="Noch nicht beworben" styleClass="a" />
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="select-fav">
+                            <h:outputLabel for="check-fav" value="Favoriten" styleClass="label-fav" />
+                            <h:selectBooleanCheckbox id="check-fav" value="#{indexController.favorites}" styleClass="check-fav" />
+                        </div>
+                    </c:if>
                 </div>
                 <div class="applyBtn">
                     <h:commandButton value="Anwenden" action="#{indexController.reload()}" styleClass="navBtn" />
@@ -95,28 +98,34 @@
             </h:form>
 
 
-            <div class="offers">
+            <div class="offers" id="offers">
                 <div class="border-line"> </div>
                 <ui:repeat id="offers" var="offer" value="#{indexController.allOffers}" varStatus="">
                     <div class="allOffers">
-                        <h:graphicImage value="" />
-                        <h:outputLabel id="title" value="#{offer.title}" styleClass="offer-label" />
-                        <br />
-                        <div class="offer-attr">
-                            <i class="pi pi-map-marker">&nbsp;</i>
-                            <h:outputText id="location" value="#{offer.city}" styleClass="offer-location" />
-                        </div>
-                        <div class="offer-attr">
-                            <i class="pi pi-briefcase">&nbsp;</i>
-                            <h:outputText id="field" value="#{indexController.fieldString(offer.field)}" styleClass="offer-field" />
-                        </div>
-                        <div class="offer-btn">
-                            <h:form>
-                                <p:button outcome="/02-offer/offer" styleClass="btn-toOffer" icon="pi pi-angle-right">
-                                    <f:param name="id" value="#{offer.id}" />
-                                </p:button>
-                            </h:form>
-                        </div>
+                        <h:form>
+                            <h:graphicImage value="" />
+                            <h:outputLabel id="title" value="#{offer.title}" styleClass="offer-label" />
+                            <br />
+                            <div class="offer-attr">
+                                <i class="pi pi-map-marker">&nbsp;</i>
+                                <h:outputText id="location" value="#{offer.city}" styleClass="offer-location" />
+                            </div>
+                            <div class="offer-attr">
+                                <i class="pi pi-briefcase">&nbsp;</i>
+                                <h:outputText id="field" value="#{indexController.fieldString(offer.field)}" styleClass="offer-field" />
+                            </div>
+                            <div class="offer-btn">
+                                    <h:commandButton action="mnb vhj"
+                                                     styleClass="btn-fav"
+                                                     style="clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);">
+                                        <f:param name="id" value="" />
+                                        <f:ajax execute="@form" render=":offers" />
+                                    </h:commandButton>
+                                    <p:button outcome="/02-offer/offer" styleClass="btn-toOffer" icon="pi pi-angle-right">
+                                        <f:param name="id" value="#{offer.id}" />
+                                    </p:button>
+                            </div>
+                        </h:form>
                     </div>
                 </ui:repeat>
             </div>
@@ -139,3 +148,4 @@
 </h:body>
 
 </html>
+

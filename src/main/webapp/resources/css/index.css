@@ -6,9 +6,6 @@
     .allOffers {
         border-color: #13274F;
     }
-    .allOffers:hover {
-        background-color: #472600;
-    }
 }
 
 .filter {
@@ -130,6 +127,10 @@ body .pi {
     font-style: italic;
 }
 
+.menu-pref:hover {
+    background-color: #7b5138;
+}
+
 .select-fav {
     display: inline-block;
     padding: 10px 16px;
@@ -208,6 +209,12 @@ body .pi {
 .offer-field {
     float: bottom;
     font-size: inherit;
+}
+
+body .btn-fav {
+    width: 35px;
+    height: 35px;
+    margin-right: 20px;
 }
 
 .offer-btn {

@@ -21,15 +21,17 @@
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
             <h:outputStylesheet library="css" name="offer.css" />
-            <h2 class="offer-title">
-                <h:outputText value="Angebot: #{detailOffer.detailOffer.title}" />
-            </h2>
-            <div class="offer">
+            <div class="offer" id="offer">
+                <h:commandButton action="tfzgb" styleClass="btn-fav">
+                    <f:ajax execute="@this" render=":offer" />
+                </h:commandButton>
+                <h2 class="offer-title">
+                    <h:outputText value="Angebot: #{detailOffer.detailOffer.title}" />
+                </h2>
                 <div class="offer-data1">
                     <!-- Daten des Angebots -->
                     <h:outputLabel for="field" value="Berufsfeld: " styleClass="label-offer" />
-                    <h:outputText id="field" value="Test
-                #{detailOffer.fieldString()}" styleClass="text-offer" />
+                    <h:outputText id="field" value="#{detailOffer.fieldString()}" styleClass="text-offer" />
                     <br />
                     <h:outputLabel for="level" value="Einstiegsniveau: " styleClass="label-offer" />
                     <h:outputText id="level" value="Test
@@ -64,7 +66,7 @@
 
                 <!-- buttons and links -->
                 <h:form>
-                    <div style="text-align: center;">
+                    <div style="text-align: center; margin-top: 20px;">
                         <c:choose>
                             <c:when test="#{detailOffer.loggedInAsApplicant()}"> <!-- if applicant -->
                                 <c:choose>
