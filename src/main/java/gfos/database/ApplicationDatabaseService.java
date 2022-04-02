@@ -2,6 +2,7 @@ package gfos.database;
 
 import gfos.beans.Application;
 import gfos.beans.Resume;
+import gfos.detailView.DetailApplication;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
@@ -10,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Named
@@ -100,6 +102,22 @@ public class ApplicationDatabaseService extends DatabaseService {
         status.put(11, "Abgelehnt");
 
         return status.get(id);
+    }
+
+    public ArrayList<Application> getAllApplications(int id) {
+        ArrayList<Application> result = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement("SELECT * FROM application WHERE userId=?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                result.add(createApplication(rs));
+            }
+        } catch (SQLException sqlException) {
+            System.out.println("Could not detch all applications for user " + id + ": " + sqlException.getMessage());
+        }
+        return result;
     }
 
     public static Application createApplication(ResultSet rs) throws SQLException {

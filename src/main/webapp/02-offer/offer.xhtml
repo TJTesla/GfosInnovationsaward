@@ -48,18 +48,18 @@
                     <div class="field-offer-description">
                         <h:outputLabel for="tasks" value="Aufgaben:" styleClass="label-offer-description" />
                         <div class="box-description">
-                            <h:outputText id="tasks" value="#{detailOffer.detailOffer.description}" styleClass="text-offer-description" />
+                            <h:outputText id="tasks" value="#{detailOffer.detailOffer.tasks}" styleClass="text-offer-description" />
                         </div>
 
                         <h:outputLabel for="quali" value="Qualifikationen:" styleClass="label-offer-description" />
                         <div class="box-description">
-                            <h:outputText id="quali" value=""
+                            <h:outputText id="quali" value="#{detailOffer.detailOffer.qualifications}"
                                           styleClass="text-offer-description" />
                         </div>
 
                         <h:outputLabel for="extra" value="Zusätzliche Daten:" styleClass="label-offer-description" />
                         <div class="box-description">
-                            <h:outputText id="extra" value="" styleClass="text-offer-description" />
+                            <h:outputText id="extra" value="#{detailOffer.detailOffer.extras}" styleClass="text-offer-description" />
                         </div>
                     </div>
                 </div>
