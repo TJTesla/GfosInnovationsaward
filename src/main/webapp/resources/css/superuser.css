@@ -65,8 +65,8 @@ fieldset {
 }
 
 .empl .btn-delete {
-    height: 50px;
-    width: 50px;
+    height: 45px;
+    width: 45px;
     display: block;
     float: right;
     font-size: 18px;
@@ -76,12 +76,12 @@ fieldset {
     margin-bottom: 10px;
     background-color: darkred;
     border-width: 1px;
-    border-radius: 25%;
+    border-radius: 10px;
     border-color: black;
     border-style: solid;
 }
 body .ui-button.ui-button-text-icon-left .ui-icon {
-    left: 10%;
+
 }
 body .ui-button.ui-button-icon-only {
     width: 40px;
@@ -94,8 +94,10 @@ body .ui-button.ui-button-icon-only {
     bottom: 2px;
     display: inline-block;
     background-color: darkgreen;
-    border-radius: 25%;
+    border-radius: 10px;
     border-width: 1px;
     border-style: solid;
     border-color: black;
+    width: 45px;
+    height: 45px;
 }

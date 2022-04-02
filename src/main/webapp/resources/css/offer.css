@@ -167,3 +167,72 @@ body .btn-fav {
     color: #007FFF;
 }
 
+/* Offer Drafts */
+.drafts-title {
+    font-size: 25px;
+    margin-top: 15px;
+}
+
+.allOfferDrafts {
+    margin: 20px 30%;
+}
+
+.oDraft {
+    border-bottom-style: solid;
+    border-color: #7285a5;
+    border-width: 2px;
+    height: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.draft-text {
+    float: left;
+    height: 100%;
+}
+
+.text-draftTitle {
+    font-size: 20px;
+    position: relative;
+    top: 25px;
+}
+
+.draft-time {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #7285a5;
+}
+
+.label-time {
+    width: 150px;
+    font-style: italic;
+}
+
+.text-date {
+
+}
+
+.drafts-btns {
+    float: right;
+}
+
+.btn-editDraft {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+body .ui-button.ui-button-text-icon-left .ui-icon {
+    left: 15%;
+    top:  41%;
+}
+
+body .btn-delete {
+    float: right;
+    height: 40px;
+    width: 40px;
+    font-weight: lighter;
+    margin-top: 10px;
+    background-color: darkred;
+    border-color: black;
+    border-radius: 10px;
+}

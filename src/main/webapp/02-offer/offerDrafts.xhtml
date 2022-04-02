@@ -9,23 +9,39 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:k="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
-    <title>Title</title>
+    <title>Entwürfe Angebote</title>
 </h:head>
 <h:body>
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
-            <div align="center">
+            <h:outputStylesheet library="css" name="offer.css" />
+            <div align="center" class="drafts-title">
                 <h2>Entwürfe</h2>
                 <hr />
             </div>
-            <ui:repeat var="oDraft" value="">
-                <div class="oDrafts">
-                    <h:outputLabel id="offerTitle" value="" styleClass="text-draftTitle" />
-                    <h:form>
-                        <h:button id="editOffer" value="Bearbeiten" styleClass="btn-editDraft" outcome="createOffer" />
-                    </h:form>
-                </div>
-            </ui:repeat>
+            <div class="allOfferDrafts">
+                <ui:repeat var="oDraft" value="">
+                    <div class="oDraft">
+                        <div class="draft-text">
+                            <h:outputText id="offerTitle" value="An offer that has no name" styleClass="text-draftTitle" />
+                            <!--div class="draft-time">
+                                <h:outputLabel for="lastEdit" value="Zuletzt bearbeitet: " styleClass="label-time" />
+                                <h:outputText id="lastEdit" value="02.04.2022 13:10" styleClass="text-date" />
+                            </div-->
+                        </div>
+                        <div class="drafts-btns">
+                            <h:form>
+                                <h:button id="editOffer" value="Bearbeiten" styleClass="btn-editDraft" outcome="createOffer">
+                                    <f:param name="" value="" />
+                                </h:button>
+                                <br />
+                                <p:commandButton id="deleteDraft"  styleClass="btn-delete" value="" icon="pi pi-trash" action="fds" />
+                            </h:form>
+                        </div>
+
+                    </div>
+                </ui:repeat>
+            </div>
         </ui:define>
     </ui:composition>
 </h:body>
