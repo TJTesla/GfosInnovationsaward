@@ -116,10 +116,9 @@
                             </div>
                             <div class="offer-btn">
                                     <h:commandButton action="#{indexController.editFavorite(offer.id)}" rendered="#{indexController.loggedInAsApplicant()}"
-                                                     styleClass="btn-fav"
+                                                     styleClass="#{indexController.isFavorite(offer.id) ? 'btn-fav1' : 'btn-fav' }"
                                                      style="clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);">
-                                        <f:param name="id" value="" />
-                                        <f:ajax execute="@form" render=":offers" />
+                                        <f:ajax execute="@form" render="@form" />
                                     </h:commandButton>
                                     <p:button outcome="/02-offer/offer" styleClass="btn-toOffer" icon="pi pi-angle-right">
                                         <f:param name="id" value="#{offer.id}" />
