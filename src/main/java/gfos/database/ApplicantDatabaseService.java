@@ -56,9 +56,6 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         } catch (SQLException sqlException) {
             System.out.println("There was an error while creating an applicant: " + sqlException.getMessage());
             return false;
-        } catch (NoSuchAlgorithmException exception) {
-            System.out.println("Could not generate hash for password: " + exception.getMessage());
-            return false;
         }
     }
 
@@ -163,6 +160,23 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         } catch (NoSuchAlgorithmException exception) {
             System.out.println("Could not generate hash: " + exception.getMessage());
             return null;
+        }
+    }
+
+    public boolean changePwd(Applicant a, String newPwd) {
+        String salt = PasswordManager.generateSalt();
+        String hashPwd = PasswordManager.getHash(newPwd, salt);
+
+        try {
+            stmt = con.prepareStatement("UPDATE applicant SET password=?, salt=? WHERE id=?");
+            stmt.setString(1, hashPwd);
+            stmt.setString(2, salt);
+            stmt.setInt(3, a.getId());
+
+            return stmt.executeUpdate() == 1;
+        } catch (SQLException sqlException) {
+            System.out.println("Could not change pwd of user " + a.getId() + ": "+ sqlException.getMessage());
+            return false;
         }
     }
 
