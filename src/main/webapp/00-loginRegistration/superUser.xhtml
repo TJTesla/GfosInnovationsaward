@@ -35,7 +35,7 @@
                         <legend class="legend-empl">Neuer Mitarbeiter:</legend>
                         <h:outputLabel for="newName" value="Name: " styleClass="label-empl" />
                         <h:inputText id="newName" value="#{superUserController.name}" styleClass="input-empl" />
-                        <p:commandButton id="add" action="#{superUserController.createEmployee()}" styleClass="btn-new-empl" icon="pi pi-user-plus" />
+                        <p:commandButton id="add" action="#{superUserController.createEmployee()}" styleClass="btn-new-empl" value="" icon="pi pi-user-plus" />
                     </fieldset>
                 </h:form>
             </div>
@@ -45,7 +45,7 @@
                     <div class="empl">
                         <h:form>
                             <h:outputText id="name" value="Vivien Hou" styleClass="text-empl" />
-                            <p:commandButton id="delete" action="hello" styleClass="btn-delete" icon="pi pi-trash" />
+                            <p:commandButton id="delete" action="hello" styleClass="btn-delete" value="" icon="pi pi-trash" />
                         </h:form>
                         <!--div class="dropdown-empl">
                             <h:outputLabel for="pswd" value="Passwort:" styleClass="label-empl" />
