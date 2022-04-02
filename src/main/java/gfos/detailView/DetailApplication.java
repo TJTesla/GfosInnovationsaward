@@ -30,6 +30,17 @@ public class DetailApplication implements Serializable {
     @Inject
     OfferDatabaseService odbs;
 
+    public DetailApplication() {
+    }
+
+    public DetailApplication(Application a, ApplicationDatabaseService aDB, ApplicantDatabaseService uDB, OfferDatabaseService oDB) {
+        this.setApplication(a, uDB, oDB);
+
+        this.adbs = aDB;
+        this.udbs = uDB;
+        this.odbs = oDB;
+    }
+
     private Application application;
     private Applicant applicant;
     private Offer offer;
@@ -99,6 +110,15 @@ public class DetailApplication implements Serializable {
         this.application = application;
         applicant = udbs.getById(this.application.getUserId());
         offer = odbs.getById(this.application.getOfferId());
+    }
+
+    public void setApplication(Application application, ApplicantDatabaseService aDB, OfferDatabaseService oDB) {
+        if (application == null) {
+            return;
+        }
+        this.application = application;
+        applicant = aDB.getById(this.application.getUserId());
+        offer = oDB.getById(this.application.getOfferId());
     }
 
     public Offer getOffer() {
