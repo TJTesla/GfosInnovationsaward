@@ -54,6 +54,8 @@ public class ApplicantRegistrationController implements Serializable {
     private boolean showRegistration = false;
 
     public String register() {
+        errorMsgs.clear();
+        registerError = false;
         checkRegistration();
         if (registerError) {
             return "";

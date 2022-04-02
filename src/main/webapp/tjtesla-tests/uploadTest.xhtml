@@ -7,10 +7,14 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
+<f:metadata>
+   <f:viewAction action="#{detailApplicant.init()}" />
+</f:metadata>
+
 <h:body>
    <h2>Theos part</h2>
    <div class="card">
-      <p:graphicImage value="#{uploadtestController.displayImage}" />
+       <p:graphicImage value="#{pbLoader.load(currentUser.currentUser)}" />
    </div>
 
 

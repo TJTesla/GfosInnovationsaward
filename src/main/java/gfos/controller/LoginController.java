@@ -30,6 +30,7 @@ public class LoginController implements Serializable {
     private boolean loginError = false;
 
     public String login() {
+        loginError = false;
         if (isSuperUser()) {
             return "/tjtesla-tests/superUser.xhtml?faces-redirect=true";
         }
