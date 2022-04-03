@@ -10,12 +10,13 @@ import gfos.longerBeans.CurrentUser;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
 @Named
 @ViewScoped
-public class PasswordChange {
+public class PasswordChange implements Serializable {
     @Inject
     ApplicantDatabaseService adbs;
     @Inject

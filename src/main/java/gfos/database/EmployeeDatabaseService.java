@@ -33,8 +33,6 @@ public class EmployeeDatabaseService extends DatabaseService {
             }
         } catch (SQLException sqlException) {
             System.out.println("Could not create employee with name: " + e.getName() + ": " + sqlException.getMessage());
-        } catch (NoSuchAlgorithmException exception) {
-            System.out.println("Could not generate hash for passwort of employee: " + exception.getMessage());
         }
     }
 
@@ -96,9 +94,6 @@ public class EmployeeDatabaseService extends DatabaseService {
         } catch (SQLException sqlException) {
             System.out.println("Could not register employee: " + e.getName() + ": " + sqlException.getMessage());
             return false;
-        } catch (NoSuchAlgorithmException exception) {
-            System.out.println("Could not generate hash: " + exception.getMessage());
-            return false;
         }
     }
 
@@ -126,9 +121,6 @@ public class EmployeeDatabaseService extends DatabaseService {
             return rs.next();
         } catch (SQLException sqlException) {
             System.out.println("Problem occured while finding employee with name: " + name + ": " + sqlException.getMessage());
-            return false;
-        } catch (NoSuchAlgorithmException exception) {
-            System.out.println("Could not crate hash: " + exception.getMessage());
             return false;
         }
     }
