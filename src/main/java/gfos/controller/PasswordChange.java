@@ -46,16 +46,16 @@ public class PasswordChange implements Serializable {
     private void checkData() {
         if (oldPwd.isEmpty()) {
             success = false;
-            errorMsgs.put("oldPwd", "Es muss das alte Passwort angegeben werden");
+            errorMsgs.put("oldPwd", "Es muss das alte Passwort angegeben werden.");
         }
         if (newPwd.isEmpty()) {
             success = false;
-            errorMsgs.put("newPwd", "Es muss ein neues Passwort angegeben werden");
+            errorMsgs.put("newPwd", "Es muss ein neues Passwort angegeben werden.");
         }
 
         if (!newPwd.equals(newRepeat)) {
             success = false;
-            errorMsgs.put("pwdRepeat", "beide neuen Passwörtter müssen gleich sein");
+            errorMsgs.put("pwdRepeat", "Neue Passwörter müssen übereinstimmen.");
         }
 
         if (!Pattern.compile(Regexes.password).matcher(newPwd).find() && !newPwd.isEmpty()) {
@@ -66,7 +66,7 @@ public class PasswordChange implements Serializable {
         User u = adbs.loginAttempt(cu.getCurrentUser().getName(), oldPwd);
         if (u == null || u instanceof Employee) {
             success = false;
-            errorMsgs.put("oldPwd", "Das angegebene Passwort ist falsch");
+            errorMsgs.put("oldPwd", "Das angegebene Passwort ist nicht korrekt.");
         }
     }
 

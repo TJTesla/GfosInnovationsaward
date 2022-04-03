@@ -169,14 +169,14 @@
                 </fieldset>
                 <fieldset class="address">
                     <legend>Addresse:</legend>
-                    <h:outputLabel value="Straße:" styleClass="label-add"><span class="obligatory">&nbsp;*</span></h:outputLabel>
-                    <h:inputText value="#{applicantRegistrationController.street}" styleClass="input-plain" />
+                    <h:outputLabel for="street" value="Straße:" styleClass="label-add"><span class="obligatory">&nbsp;*</span></h:outputLabel>
+                    <h:inputText id="street" value="#{applicantRegistrationController.street}" styleClass="input-plain" />
                     <br />
-                    <h:outputLabel value="Postleitzahl:" styleClass="label-add"><span class="obligatory">&nbsp;*</span></h:outputLabel>
-                    <h:inputText value="#{applicantRegistrationController.zip}" styleClass="input-plain" />
+                    <h:outputLabel for="postCode" value="Postleitzahl:" styleClass="label-add"><span class="obligatory">&nbsp;*</span></h:outputLabel>
+                    <h:inputText id="postCode" value="#{applicantRegistrationController.zip}" styleClass="input-plain" />
                     <br />
-                    <h:outputLabel value="Ort:" styleClass="label-add"><span class="obligatory">&nbsp;*</span></h:outputLabel>
-                    <h:inputText value="#{applicantRegistrationController.city}" styleClass="input-plain" />
+                    <h:outputLabel for="city" value="Ort:" styleClass="label-add"><span class="obligatory">&nbsp;*</span></h:outputLabel>
+                    <h:inputText id="city" value="#{applicantRegistrationController.city}" styleClass="input-plain" />
                     <br />
                 </fieldset>
 

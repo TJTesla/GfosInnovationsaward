@@ -8,6 +8,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:k="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xml:lang="en" lang="en">
 <f:metadata>
     <f:viewParam name="id" value="#{detailApplicant.detailApplicant}" converter="#{applicantConverter}" />
@@ -20,39 +21,61 @@
     <!-- TODO: Add correct controller methods -->
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content" class="update">
+            <h:outputStylesheet library="css" name="editprofile.css" />
             <h:form>
-                <h1 align="center">Profil &Auml;ndern</h1>
-                <fieldset>
-                    <h:outputLabel for="username" value="Benutzername:" styleClass="outLabel"/>
-                    <h:inputText id="username" value="#{detailApplicant.detailApplicant.name}" styleClass="input">
-                        <f:validateLength minimum="2" maximum="10" />
-                    </h:inputText>
-                    <h:message for="username" infoClass="infoMessage" errorClass="errorMessage" />
+                <h1 align="center">Profil Bearbeiten</h1>
+                <hr />
+                <fieldset class="edit">
+                    <h:outputLabel for="username" value="Benutzername:" styleClass="label-edit"/>
+                    <h:inputText id="username" value="#{detailApplicant.detailApplicant.name}" styleClass="input-edit" />
+                    <c:if test="">
+                        <p class="errMsg-edit">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="dsfaerhgaetheathz" rendered="false" />
+                        </p>
+                    </c:if>
                     <br />
-                    <h:outputLabel for="fname" value="Vorname:" styleClass="outLabel"/>
-                    <h:inputText id="fname" value="#{detailApplicant.detailApplicant.firstname}" styleClass="input">
-                        <f:validateLength minimum="2" maximum="20" />
-                    </h:inputText>
-                    <h:message for="fname" infoClass="infoMessage" errorClass="errorMessage" />
+                    <h:outputLabel for="fname" value="Vorname:" styleClass="label-edit"/>
+                    <h:inputText id="fname" value="#{detailApplicant.detailApplicant.firstname}" styleClass="input-edit" />
+                    <c:if test="">
+                        <p class="errMsg-edit">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="" rendered="false" />
+                        </p>
+                    </c:if>
                     <br />
-                    <h:outputLabel for="lname" value="Nachname:" styleClass="outLabel" />
-                    <h:inputText id="lname" value="#{detailApplicant.detailApplicant.lastname}" rendered="true" styleClass="input">
-                        <f:validateLength minimum="2" maximum="10" />
-                    </h:inputText>
-                    <h:message for="lname" infoClass="infoMessage" errorClass="errorMessage" rendered="true"/>
+                    <h:outputLabel for="lname" value="Nachname:" styleClass="label-edit" />
+                    <h:inputText id="lname" value="#{detailApplicant.detailApplicant.lastname}" rendered="true" styleClass="input-edit" />
+                    <c:if test="">
+                        <p class="errMsg-edit">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="" rendered="false" />
+                        </p>
+                    </c:if>
                     <br />
-                    <h:outputLabel for="email" value="E-Mail:" styleClass="outLabel" />
-                    <h:inputText id="email" value="#{detailApplicant.detailApplicant.email}" rendered="true" styleClass="input" >
-                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                    </h:inputText>
-                    <h:message for="email" infoClass="infoMessage" errorClass="errorMessage" rendered="true" />
+                    <h:outputLabel for="email" value="E-Mail:" styleClass="label-edit" />
+                    <h:inputText id="email" value="#{detailApplicant.detailApplicant.email}" rendered="true" styleClass="input-edit" />
+                    <c:if test="">
+                        <p class="errMsg-edit">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="" rendered="false" />
+                        </p>
+                    </c:if>
                     <br />
-                    <h:outputLabel for="emailRepeat" value="E-Mail wiederholen:" styleClass="outLabel" />
-                    <h:inputText id="emailRepeat" name="emailWiederholen" type="text" required="true" styleClass="input" />
-                    <h:outputText for="emailRepeat" id="checkMail" value="" />
+                    <h:outputLabel for="emailRepeat" value="E-Mail wiederholen:" styleClass="label-edit" />
+                    <h:inputText id="emailRepeat" name="emailWiederholen" type="text" required="true" styleClass="input-edit" />
+                    <c:if test="">
+                        <p class="errMsg-edit">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="" rendered="false" />
+                        </p>
+                    </c:if>
                     <br />
                 </fieldset>
-                <h:commandButton action="hi" value="Änderungen speichern" rendered="true"/>
+                <div class="edit-btn">
+                    <h:commandButton action="." value="Änderungen speichern" styleClass="btn-saveEdit" />
+                </div>
+
             </h:form>
         </ui:define>
     </ui:composition>

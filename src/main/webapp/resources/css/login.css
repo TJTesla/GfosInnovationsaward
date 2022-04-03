@@ -213,6 +213,11 @@ body .ui-inputfield.ui-state-focus {
     color: #83949e;
 }
 
+body .pi {
+    font-size: 20px;
+    font-weight: normal;
+}
+
 
 /* Login */
 /* Fieldsets */

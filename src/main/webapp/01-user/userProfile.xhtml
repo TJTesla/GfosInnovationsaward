@@ -10,7 +10,7 @@
       xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
 <f:metadata>
-    <!-- f:viewParam name="id" value="#{detailApplicant.detailApplicant}" converter="#{applicantConverter}" / -->
+    <f:viewParam name="id" value="#{detailApplicant.detailApplicant}" converter="#{applicantConverter}" />
     <f:viewAction action="#{detailApplicant.init()}" />
 </f:metadata>
 <head>
@@ -21,7 +21,6 @@
         <ui:define name="content">
             <h:outputStylesheet library="css" name="profile.css" />
             <div class="data">
-                <!-- TODO: Insert Profile Photo -->
                 <p:graphicImage value="#{pbLoader.load()}" styleClass="image-profile" /> <br />
                 <div class="wrapper-text">
                     <h:outputLabel for="username" value="Benutzername:" styleClass="label-profile" /> <br />
@@ -56,14 +55,35 @@
                     <h:outputText id="lname" value="#{detailApplicant.detailApplicant.lastname}" styleClass="text-data" />
                 </div>
 
+                <!--div class="wrapper-text">
+                    <h:outputLabel for="street" value="Straße:" styleClass="label-profile" /> <br />
+                    <h:outputText id="street" value="" styleClass="text-data" />
+                </div>
+
+                <div class="wrapper-text">
+                    <h:outputLabel for="postCode" value="Postleitzahl:" styleClass="label-profile" />
+                    <h:outputText id="postCode" value="" styleClass="text-data" />
+                </div>
+
+                <div class="wrapper-text">
+                    <h:outputLabel for="city" value="Ort:" styleClass="label-profile" />
+                    <h:outputText id="city" value="" styleClass="text-data" />
+                </div-->
 
                 <br />
                 <h:form>
                     <div class="wrapper">
-                        <h:button outcome="editProfile" value="Profil bearbeiten" styleClass="btn-edit" />
+                        <h:button outcome="editProfile" value="Profil bearbeiten" styleClass="btn-edit">
+                            <f:param name="id" value="#{detailApplicant.detailApplicant.id}" />
+                        </h:button>
                     </div>
                     <div>
                         <h:button outcome="/00-loginRegistration/newPswd" value="Passwort ändern" styleClass="btn-changePswd" />
+                    </div>
+                    <div>
+                        <h:commandButton action="." styleClass="btn-delete" value="Profil löschen">
+                            <f:param name="" value="" />
+                        </h:commandButton>
                     </div>
                 </h:form>
             </div>

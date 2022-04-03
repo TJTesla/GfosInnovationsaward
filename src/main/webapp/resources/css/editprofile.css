@@ -1,7 +1,9 @@
 /* New Password */
 :root {
     --newPswd-width: 350px;
+    --label-edit-width: 200px;
 }
+
 .newPswd {
     height: auto;
     padding: 20px calc(var(--newPswd-width) * 0.1) 30px;
@@ -34,4 +36,50 @@
     float: right;
     font-weight: bolder;
     font-size: 16px;
+}
+
+.errMsg-newPswd {
+    text-align: justify-all;
+}
+
+/* Edit Data */
+.edit {
+    margin-right: 35%;
+    margin-left: 35%;
+    border-radius: 10px;
+    padding: 20px 30px;
+    line-height: 200%;
+    margin-top: 20px;
+}
+
+.label-edit {
+    width: var(--label-edit-width);
+    font-size: 17px;
+}
+
+.input-edit {
+    width: 200px;
+}
+
+.errMsg-edit{
+    margin-left: var(--label-edit-width);
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+body .pi {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.edit-btn {
+    margin: 20px 35%;
+    display: grid;
+    align-content: center;
+}
+
+.btn-saveEdit {
+    font-size: 18px;
+    margin-left: 30%;
+    margin-right: 30%;
 }
