@@ -16,12 +16,16 @@ public class PasswordManager {
         return toHexString(salt);
     }
 
-    public static String getHash(String str, String salt) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-
-        str += salt;
-        byte[] hash = md.digest(str.getBytes(StandardCharsets.UTF_8));
-        return toHexString(hash);
+    public static String getHash(String str, String salt) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            str += salt;
+            byte[] hash = md.digest(str.getBytes(StandardCharsets.UTF_8));
+            return toHexString(hash);
+        } catch (NoSuchAlgorithmException exception) {
+            System.out.println("There is no SHA-256 algorithm anymore?");
+            return null;
+        }
     }
 
     private static String toHexString(byte[] hash) {
