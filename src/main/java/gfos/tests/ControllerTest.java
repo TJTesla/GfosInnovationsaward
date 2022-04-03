@@ -34,4 +34,9 @@ public class ControllerTest {
     public boolean checkUserRights () {
         return cu.getCurrentUser() != null;
     }
+
+    public String logout() {
+        cu.logout();
+        return "/00-loginRegistration/login.xhtml?faces-redirect=true";
+    }
 }

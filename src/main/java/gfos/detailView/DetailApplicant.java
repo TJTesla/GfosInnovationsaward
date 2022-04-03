@@ -41,4 +41,35 @@ public class DetailApplicant implements Serializable {
     public void setDetailApplicant(Applicant detailApplicant) {
         this.detailApplicant = detailApplicant;
     }
+
+    private String emailRepeat;
+
+    private boolean changingError = false;
+    public String updateProfile() {
+        System.out.println("UPDATE");
+        changingError = false;
+        if (emailRepeat != null &&  !emailRepeat.equals(detailApplicant.getEmail())) {
+            changingError = true;
+            return "";
+        }
+
+        adbs.update(detailApplicant);
+        return "/01-user/userProfile.xhtml";
+    }
+
+    public String getEmailRepeat() {
+        return emailRepeat;
+    }
+
+    public void setEmailRepeat(String emailRepeat) {
+        this.emailRepeat = emailRepeat;
+    }
+
+    public boolean isChangingError() {
+        return changingError;
+    }
+
+    public void setChangingError(boolean changingError) {
+        this.changingError = changingError;
+    }
 }

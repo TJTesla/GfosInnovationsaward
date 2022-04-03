@@ -46,7 +46,7 @@
                     </c:if>
                     <c:if test="#{controllerTest.checkUserRights()}">
                         <hr class="border" />
-                        <p:commandButton styleClass="sideNavLinks-plain" action="." value="Abmelden" icon="pi pi-sign-out" />
+                        <p:commandButton styleClass="sideNavLinks-plain" action="#{controllerTest.logout()}" value="Abmelden" icon="pi pi-sign-out" />
                     </c:if>
                 </h:form>
             </div>

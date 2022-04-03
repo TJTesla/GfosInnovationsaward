@@ -31,8 +31,16 @@ public class PbLoader {
         return loadAlg(a);
     }
 
+    public StreamedContent load(int id) {
+        return loadAlg(adbs.getById(id));
+    }
+    // <p:graphicImage value="#{pbLoader.load(17)}" styleClass="image-profile" cache="false" />
     private StreamedContent loadAlg(Applicant a) {
         String file = a.getPb();
+        if (file == null || file.isEmpty()) {
+            file = "uploads/profilepics/applicants/default.jpg";
+        }
+
         String fileType = file.substring(file.length()-3).toLowerCase();
 
         try {

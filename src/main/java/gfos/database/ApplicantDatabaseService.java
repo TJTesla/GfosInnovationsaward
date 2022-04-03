@@ -323,6 +323,22 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         return result;
     }
 
+    public boolean update(Applicant a) {
+        try {
+            stmt = con.prepareStatement("UPDATE applicant SET username=?, firstname=?, lastname=?, email=? WHERE id=?");
+            stmt.setString(1, a.getName());
+            stmt.setString(2, a.getFirstname());
+            stmt.setString(3, a.getLastname());
+            stmt.setString(4, a.getEmail());
+            stmt.setInt(5, a.getId());
+
+            return stmt.executeUpdate() == 1;
+        } catch (SQLException sqlException) {
+            System.out.println("Could not update applicant " + a.getId() + ": " + sqlException.getMessage());
+            return false;
+        }
+    }
+
     private Applicant parseApplicant() throws SQLException {
         if (!rs.next()) {
             return null;

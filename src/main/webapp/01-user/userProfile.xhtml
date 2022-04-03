@@ -21,7 +21,7 @@
         <ui:define name="content">
             <h:outputStylesheet library="css" name="profile.css" />
             <div class="data">
-                <p:graphicImage value="#{pbLoader.load()}" styleClass="image-profile" /> <br />
+                <p:graphicImage value="#{pbLoader.load()}" styleClass="image-profile" cache="false" /> <br />
                 <div class="wrapper-text">
                     <h:outputLabel for="username" value="Benutzername:" styleClass="label-profile" /> <br />
                     <h:outputText id="username" value="#{detailApplicant.detailApplicant.name}" styleClass="text-data" />
