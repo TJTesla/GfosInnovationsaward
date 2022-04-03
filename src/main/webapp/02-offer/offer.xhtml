@@ -22,7 +22,7 @@
         <ui:define name="content">
             <h:outputStylesheet library="css" name="offer.css" />
             <div class="offer" id="offer">
-                <h:commandButton action="tfzgb" styleClass="btn-fav">
+                <h:commandButton action="." styleClass="btn-fav">
                     <f:ajax execute="@this" render=":offer" />
                 </h:commandButton>
                 <h2 class="offer-title">
@@ -34,16 +34,13 @@
                     <h:outputText id="field" value="#{detailOffer.fieldString()}" styleClass="text-offer" />
                     <br />
                     <h:outputLabel for="level" value="Einstiegsniveau: " styleClass="label-offer" />
-                    <h:outputText id="level" value="Test
-                #{detailOffer.levelString()}" styleClass="text-offer" />
+                    <h:outputText id="level" value="#{detailOffer.levelString()}" styleClass="text-offer" />
                     <br />
                     <h:outputLabel for="time" value="Arbeitszeit: " styleClass="label-offer" />
-                    <h:outputText id="time" value="Test
-                #{detailOffer.timeString()}" styleClass="text-offer" />
+                    <h:outputText id="time" value="#{detailOffer.timeString()}" styleClass="text-offer" />
                     <br />
                     <h:outputLabel for="location" value="Ort: " styleClass="label-offer" />
-                    <h:outputText id="location" value="Test
-                #{detailOffer.detailOffer.city}" styleClass="text-offer" />
+                    <h:outputText id="location" value="#{detailOffer.detailOffer.city}" styleClass="text-offer" />
 
                     <div class="field-offer-description">
                         <h:outputLabel for="tasks" value="Aufgaben:" styleClass="label-offer-description" />
