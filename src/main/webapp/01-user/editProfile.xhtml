@@ -11,7 +11,7 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xml:lang="en" lang="en">
 <f:metadata>
-    <!-- f:viewParam name="id" value="#{detailApplicant.detailApplicant}" converter="#{applicantConverter}" / -->
+    <f:viewParam name="id" value="#{detailApplicant.detailApplicant}" converter="#{applicantConverter}" />
     <f:viewAction action="#{detailApplicant.init()}" />
 </f:metadata>
 <head>
@@ -27,7 +27,7 @@
                 <h1 align="center">Profil Bearbeiten</h1>
                 <hr />
                 <fieldset class="edit">
-                    <h:graphicImage value="#{pbLoader.load()}" styleClass="image-profile" />
+                    <p:graphicImage value="#{pbLoader.load()}" styleClass="image-profile" />
                     <p:fileUpload id="photo" mode="simple" update="@form" styleClass="upload" value=""/>
                     <br />
                     <h:outputLabel for="username" value="Benutzername:" styleClass="label-edit"/>
@@ -72,6 +72,33 @@
                         <p class="errMsg-edit">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
                             <h:outputText value="Die angegebene E-Mails sind nicht gleich" rendered="#{detailApplicant.changingError}" />
+                        </p>
+                    </c:if>
+                    <br />
+                    <h:outputLabel for="street" value="Straße:" styleClass="label-edit" />
+                    <h:inputText id="street" styleClass="input-edit" value="" />
+                    <c:if test="">
+                        <p class="errMsg-edit">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="" rendered="false" />
+                        </p>
+                    </c:if>
+                    <br />
+                    <h:outputLabel for="postCode" value="Postleitzahl:" styleClass="label-edit" />
+                    <h:inputText id="postCode" styleClass="input-edit" value="" />
+                    <c:if test="">
+                        <p class="errMsg-edit">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="" rendered="false" />
+                        </p>
+                    </c:if>
+                    <br />
+                    <h:outputLabel for="city" value="Ort:" styleClass="label-edit" />
+                    <h:inputText id="city" styleClass="input-edit" value="" />
+                    <c:if test="">
+                        <p class="errMsg-edit">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="" rendered="false" />
                         </p>
                     </c:if>
                     <br />
