@@ -63,6 +63,7 @@
             <c:if test=""> <!-- if it is an applicant -->
                 <h:outputLabel for="status" value="Bearbeitungsstatus" styleClass="label-status" />
                 <h:outputText id="status" value="" styleClass="text-status" /> <!-- Given value needed -->
+                <h:commandButton id="retract" value="Zurückziehen" action="." />
             </c:if>
             <c:if test=""> <!-- if it is an employee -->
                 <h:form>
