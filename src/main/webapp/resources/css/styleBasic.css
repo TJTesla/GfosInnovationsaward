@@ -7,6 +7,7 @@
 :root {
     --d-body-bg-color: #002147;
     --d-input-bg-color: #13274F;
+    --d-input-bg-hover-color: #1d3b79;
     --d-btn-bg-color: #13274F;
     --l-body-bg-color: #D5E9F5;
     --l-input-bg-color: #D5E9F5;
@@ -20,7 +21,6 @@ body {
     width: auto;
     font-family: "Rubik", sans-serif;
     margin: 0 auto;
-    child-align: middle;
     background-color: #13274F;
     font-size: 15px;
 }
@@ -36,7 +36,7 @@ body {
     color: #c2d4df; /*Hover*/ color: #89a1b0; .sidenav hover color: #83949e
 
     /*Dark: */
-    color: #002147;color: #13274F; color:#007FFF; color: #6495ED;
+    color: #002147; color: #13274F; color:#007FFF; color: #6495ED;
     color: #7285A5;
     /*Border*/
     color: #001b3b;/*hover*/ color: #384e7b; .sidenav hover color: #123d6d; .button color: #001d3b;
@@ -116,7 +116,7 @@ body {
         border-color: #7285A5;
     }
     [class*="input-"]:hover {
-        background-color: #4f3b13;
+        background-color: var(--d-input-bg-hover-color);
     }
     .description {
         color: whitesmoke;
@@ -156,15 +156,17 @@ fieldset {
     border-radius: 5px;
     width: var(--input-width);
 }
-[class*="btn-"] {
+body [class*="btn-"] {
     border-radius: 5px;
     background-color: #7285A5;
     color: whitesmoke;
-    border-width: 0;
+    border-width: 1px;
+    border-color: black;
     padding: 10px;
 }
-[class*="btn-"]:hover {
-    background-color: #7b5138;
+body [class*="btn-"]:hover {
+    background-color: #75b4ff;
+    border-color: #75b4ff;
 }
 [class*="label-"] {
     display: inline-block;
@@ -222,16 +224,28 @@ body .btn-fav1 {
     object-fit: cover;
 }
 
+body .ui-button.ui-state-focus {
+    box-shadow: none;
+}
+
 /* header */
-.btn-openMenu {
-    width: auto;
-    height: auto;
+body .btn-openMenu {
+    width: 47px;
+    height: 47px;
     float: left;
-    padding-bottom: 5px;
+
     margin: 20px;
     background-color: #7285a5;
+    padding: 0;
 }
 body .pi {
     font-size: 25px;
-    font-weight: bold;
+    font-weight: normal;
+}
+
+#menu-icon {
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    font-size: 25px;
 }

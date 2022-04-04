@@ -68,8 +68,9 @@
 
 }
 
-body .ui-button.ui-button-text-icon-left .ui-icon {
+body .sidenav .ui-button.ui-button-text-icon-left .ui-icon {
     left: 7%;
+    top: 45%;
 }
 /* When you mouse over the navigation links, change their color */
 
@@ -95,4 +96,9 @@ body .ui-button.ui-button-text-icon-left .ui-icon {
 
 #menubtn {
     font-family: "Times New Roman", serif;
+}
+
+body .sidenav .pi {
+    font-size: 22px;
+    font-weight: normal;
 }

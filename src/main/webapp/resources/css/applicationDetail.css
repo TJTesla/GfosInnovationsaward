@@ -41,7 +41,14 @@ body .btn-cv-download {
 }
 
 /* User */
+body .btn-retract {
+    background-color: darkred;
+}
 
+body .btn-retract:hover {
+    background-color: #c70808;
+    border-color: #c70808;
+}
 
 /* Employer */
 .applDetailEmpl {

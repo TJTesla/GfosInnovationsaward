@@ -39,15 +39,39 @@
 .text-area-appl {
     height: 500px;
     width: 100%;
+    font-family: inherit;
+    padding: 15px;
+    background-color: whitesmoke;
+}
+
+.text-area-appl:hover {
+    background-color: #7285A5;
 }
 
 .applForm .btn-applForm {
     width: auto;
-    height: auto;
+    height: 38px;
     display: block;
     position: relative;
     margin-top: 10px;
     margin-bottom: 20px;
     font-size: 17px;
-    font-weight: bold;
+    font-weight: normal;
+    padding: 0;
+}
+
+body .applForm .btn-delete {
+    height: 38px;
+    width: auto;
+    background-color: darkred;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    font-size: 17px;
+    font-weight: normal;
+    padding: 0;
+}
+body .applForm .btn-delete:hover {
+    background-color: #c70808;
+    border-color: #c70808;
 }
