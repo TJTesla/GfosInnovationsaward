@@ -3,6 +3,7 @@ package gfos.detailView;
 import gfos.beans.Applicant;
 import gfos.beans.Employee;
 import gfos.beans.Offer;
+import gfos.database.ApplicantDatabaseService;
 import gfos.database.OfferDatabaseService;
 import gfos.longerBeans.CurrentUser;
 
@@ -17,6 +18,8 @@ public class DetailOffer implements Serializable {
     @Inject
     OfferDatabaseService odbs;
     @Inject
+    ApplicantDatabaseService adbs;
+    @Inject
     CurrentUser cu;
 
     private Offer detailOffer = new Offer();
@@ -27,6 +30,27 @@ public class DetailOffer implements Serializable {
         }
 
         return odbs.alreadyApplied( ((Applicant)cu.getCurrentUser()).getId(), detailOffer.getId());
+    }
+
+    public boolean isFavorite() {
+        return adbs.isFavorite( ((Applicant)cu.getCurrentUser()).getId(), detailOffer.getId());
+    }
+
+    public void editFavorite() {
+        int id = detailOffer.getId();
+        if (isFavorite()) {
+            removeFromFavorites(id);
+        } else {
+            setAsFavorite(id);
+        }
+    }
+
+    private void setAsFavorite(int id) {
+        adbs.addToFavorites( ((Applicant)cu.getCurrentUser()).getId(), id);
+    }
+
+    private void removeFromFavorites(int id) {
+        adbs.removeFromFavorites( ((Applicant)cu.getCurrentUser()).getId(), id);
     }
 
     public String fieldString() {

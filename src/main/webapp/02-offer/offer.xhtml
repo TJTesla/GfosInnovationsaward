@@ -22,8 +22,10 @@
         <ui:define name="content">
             <h:outputStylesheet library="css" name="offer.css" />
             <div class="offer" id="offer">
-                <h:commandButton action="." styleClass="btn-fav">
-                    <f:ajax execute="@this" render=":offer" />
+                <h:commandButton action="#{detailOffer.editFavorite()}" rendered="#{detailOffer.loggedInAsApplicant()}"
+                                 styleClass="#{detailOffer.isFavorite() ? 'btn-fav1' : 'btn-fav' }"
+                                 style="clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);">
+                    <f:ajax execute="@form" render="@this" />
                 </h:commandButton>
                 <h2 class="offer-title">
                     <h:outputText value="Angebot: #{detailOffer.detailOffer.title}" />

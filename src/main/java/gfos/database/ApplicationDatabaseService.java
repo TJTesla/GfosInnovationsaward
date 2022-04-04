@@ -104,11 +104,12 @@ public class ApplicationDatabaseService extends DatabaseService {
         return status.get(id);
     }
 
-    public ArrayList<Application> getAllApplications(int id) {
+    public ArrayList<Application> getAllApplications(int id, boolean draft) {
         ArrayList<Application> result = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM application WHERE userId=?");
+            stmt = con.prepareStatement("SELECT * FROM application WHERE userId=? AND draft=?");
             stmt.setInt(1, id);
+            stmt.setBoolean(2, draft);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -118,6 +119,22 @@ public class ApplicationDatabaseService extends DatabaseService {
             System.out.println("Could not detch all applications for user " + id + ": " + sqlException.getMessage());
         }
         return result;
+    }
+
+    public void delete(Application a) {
+        System.out.println("DELETE APPLICATION");
+        try {
+            stmt = con.prepareStatement("DELETE FROM application WHERE userId=? AND offerId=?");
+            stmt.setInt(1, a.getUserId());
+            stmt.setInt(2, a.getOfferId());
+            stmt.executeUpdate();
+
+            stmt = con.prepareStatement("DELETE FROM resumes WHERE id=?");
+            stmt.setInt(1, a.getResumeId());
+            stmt.executeUpdate();
+        } catch (SQLException sqlException) {
+            System.out.println("Could not delete application for offer " + a.getOfferId() + " from user " + a.getUserId() + ": " + sqlException.getMessage());
+        }
     }
 
     public static Application createApplication(ResultSet rs) throws SQLException {

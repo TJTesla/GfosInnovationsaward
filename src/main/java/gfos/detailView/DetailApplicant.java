@@ -3,6 +3,7 @@ package gfos.detailView;
 import gfos.beans.Applicant;
 import gfos.database.ApplicantDatabaseService;
 import gfos.longerBeans.CurrentUser;
+import gfos.longerBeans.GeoCalculator;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
@@ -24,8 +25,6 @@ public class DetailApplicant implements Serializable {
     CurrentUser cu;
     // <p:graphicImage value="#{detailApplicant.pb}" styleClass="image-profile" />
 
-    private String street, zip, city;
-
     private Applicant detailApplicant = new Applicant();
 
     public void init() {
@@ -45,16 +44,31 @@ public class DetailApplicant implements Serializable {
     }
 
     private String emailRepeat;
+    private String street, zip, city;
 
     private boolean changingError = false;
+
     public String updateProfile() {
         System.out.println("UPDATE");
         changingError = false;
-        if (emailRepeat != null &&  !emailRepeat.equals(detailApplicant.getEmail())) {
+        if (!emailRepeat.isEmpty() &&  !emailRepeat.equals(detailApplicant.getEmail())) {
             changingError = true;
             return "";
         }
 
+        double[] newCoords = new double[2];
+        if (!(street.isEmpty() && zip.isEmpty() && city.isEmpty())) {
+            if (street.isEmpty() || zip.isEmpty() || city.isEmpty()) {
+                changingError = true;
+                return "";
+            }
+            String location = street + " " + zip + " " + city;
+
+            newCoords= GeoCalculator.getCoordinates(location);
+        }
+
+        detailApplicant.setLat(newCoords[0]);
+        detailApplicant.setLon(newCoords[1]);
         adbs.update(detailApplicant);
         cu.setCurrentUser(detailApplicant);
         return "/01-user/userProfile.xhtml?faces-redirect=true";

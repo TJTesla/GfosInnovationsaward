@@ -27,9 +27,22 @@ public class ApplicationListController implements Serializable {
     @Inject
     OfferDatabaseService odbs;
 
+    public String delete(Application a) {
+        adbs.delete(a);
+        return "";
+    }
+
     public ArrayList<DetailApplication> appliedOffers() {
+        return offerList(false);
+    }
+
+    public ArrayList<DetailApplication> getDrafts() {
+        return offerList(true);
+    }
+
+    private ArrayList<DetailApplication> offerList(boolean draft) {
         ArrayList<DetailApplication> result = new ArrayList<>();
-        ArrayList<Application> applications = adbs.getAllApplications( ((Applicant)cu.getCurrentUser()).getId() );
+        ArrayList<Application> applications = adbs.getAllApplications( ((Applicant)cu.getCurrentUser()).getId(), draft );
 
         for (Application a : applications) {
             result.add(new DetailApplication(a, adbs, udbs, odbs));

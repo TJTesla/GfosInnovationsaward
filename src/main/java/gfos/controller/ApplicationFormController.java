@@ -24,6 +24,11 @@ public class ApplicationFormController implements Serializable {
     private String text;
 
     public String apply(boolean draft) {
+        System.out.println("APPLY");
+        if (cv == null) {
+            System.out.println("No CV uploaded");
+            return "";
+        }
         try {
             Applicant currentApplicant = (Applicant)(cu.getCurrentUser());
             Resume r = ResourceIO.uploadResume(cv, offer, currentApplicant);
@@ -44,7 +49,7 @@ public class ApplicationFormController implements Serializable {
             System.out.println(uploadException.getMessage());
         }
 
-        return ""; // Succespage.xhtml?faces-redirect=true
+        return "/03-application/applDetailUser.xhtml?id=" + offer.getId(); // Succespage.xhtml?faces-redirect=true
     }
 
     public String checkUserRights() {

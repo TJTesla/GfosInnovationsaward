@@ -30,11 +30,11 @@
                 <h:outputLabel for="lom" value="Motivationsschreiben:" styleClass="label-applForm" /> <br />
                 <h:inputTextarea id="lom" required="true" styleClass="text-area-appl" value="#{applicationFormController.text}" />
                 <div>
-                    <p:commandButton value="Speichern" action="#{applicationFormController.apply(true)}" styleClass="btn-applForm"
-                                     style="float: left; margin-left: 5px;" />
-                    <p:commandButton value="Abschicken" action="#{applicationFormController.apply(false)}" styleClass="btn-applForm"
-                                     style="float: right; margin-right: 5px;" />
-                    <h:commandButton id="deleteAppl" value="Löschen" action="" styleClass="" />
+                    <h:commandButton value="Speichern" action="#{applicationFormController.apply(true)}" styleClass="btn-applForm"
+                                     style="float: left; margin-left: 5px;" ajax="false" />
+                    <h:commandButton value="Abschicken" action="#{applicationFormController.apply(false)}" styleClass="btn-applForm"
+                                     style="float: right; margin-right: 5px;" ajax="false" />
+                    <!-- h:commandButton id="deleteAppl" value="Löschen" action="." styleClass="" / -->
                 </div>
             </h:form>
         </ui:define>

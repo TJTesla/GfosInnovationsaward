@@ -241,6 +241,21 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         }
     }
 
+    public boolean isFavorite(int aId, int oId) {
+        try {
+            stmt = con.prepareStatement("SELECT offerId FROM favorites WHERE applicantId=? AND offerId=?");
+            stmt.setInt(1, aId);
+            stmt.setInt(2, oId);
+
+            rs = stmt.executeQuery();
+
+            return rs.next();
+        } catch (SQLException sqlException) {
+            System.out.println("Could not check for favorite for offer " + oId + " and applicant " + aId + ": " + sqlException.getMessage());
+            return false;
+        }
+    }
+
     public HashSet<Integer> getFavorites(int id) {
         HashSet<Integer> result = new HashSet<>();
         try {
@@ -325,12 +340,14 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
 
     public boolean update(Applicant a) {
         try {
-            stmt = con.prepareStatement("UPDATE applicant SET username=?, firstname=?, lastname=?, email=? WHERE id=?");
+            stmt = con.prepareStatement("UPDATE applicant SET username=?, firstname=?, lastname=?, email=?, lat=?, lon=? WHERE id=?");
             stmt.setString(1, a.getName());
             stmt.setString(2, a.getFirstname());
             stmt.setString(3, a.getLastname());
             stmt.setString(4, a.getEmail());
-            stmt.setInt(5, a.getId());
+            stmt.setDouble(5, a.getLat());
+            stmt.setDouble(6, a.getLon());
+            stmt.setInt(7, a.getId());
 
             return stmt.executeUpdate() == 1;
         } catch (SQLException sqlException) {
