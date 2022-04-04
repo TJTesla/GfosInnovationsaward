@@ -22,13 +22,14 @@
     <!-- TODO: Add correct controller methods -->
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content" class="update">
+
             <h:outputStylesheet library="css" name="editprofile.css" />
             <h:form enctype="multipart/form-data">
                 <h1 align="center">Profil Bearbeiten</h1>
                 <hr />
                 <fieldset class="edit">
                     <p:graphicImage value="#{pbLoader.load()}" styleClass="image-profile" />
-                    <p:fileUpload id="photo" mode="simple" update="@form" styleClass="upload" value=""/>
+                    <!--p:fileUpload id="photo" mode="simple" update="@form" styleClass="upload" value=""/-->
                     <br />
                     <h:outputLabel for="username" value="Benutzername:" styleClass="label-edit"/>
                     <h:inputText id="username" value="#{detailApplicant.detailApplicant.name}" styleClass="input-edit" />
@@ -71,12 +72,12 @@
                     <c:if test="#{detailApplicant.changingError}">
                         <p class="errMsg-edit">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
-                            <h:outputText value="Die angegebene E-Mails sind nicht gleich" rendered="#{detailApplicant.changingError}" />
+                            <h:outputText value="Die angegebene E-Mails stimmen nicht überein." rendered="#{detailApplicant.changingError}" />
                         </p>
                     </c:if>
                     <br />
                     <h:outputLabel for="street" value="Straße:" styleClass="label-edit" />
-                    <h:inputText id="street" styleClass="input-edit" value="" />
+                    <h:inputText id="street" styleClass="input-edit" value="#{detailApplicant.street}" />
                     <c:if test="">
                         <p class="errMsg-edit">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
@@ -84,8 +85,8 @@
                         </p>
                     </c:if>
                     <br />
-                    <h:outputLabel for="postCode" value="Postleitzahl:" styleClass="label-edit" />
-                    <h:inputText id="postCode" styleClass="input-edit" value="" />
+                    <h:outputLabel for="zip" value="Postleitzahl:" styleClass="label-edit" />
+                    <h:inputText id="zip" styleClass="input-edit" value="#{detailApplicant.zip}" />
                     <c:if test="">
                         <p class="errMsg-edit">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
@@ -94,7 +95,7 @@
                     </c:if>
                     <br />
                     <h:outputLabel for="city" value="Ort:" styleClass="label-edit" />
-                    <h:inputText id="city" styleClass="input-edit" value="" />
+                    <h:inputText id="city" styleClass="input-edit" value="#{detailApplicant.city}" />
                     <c:if test="">
                         <p class="errMsg-edit">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>

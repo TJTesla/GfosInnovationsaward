@@ -24,6 +24,8 @@ public class DetailApplicant implements Serializable {
     CurrentUser cu;
     // <p:graphicImage value="#{detailApplicant.pb}" styleClass="image-profile" />
 
+    private String street, zip, city;
+
     private Applicant detailApplicant = new Applicant();
 
     public void init() {
@@ -54,7 +56,8 @@ public class DetailApplicant implements Serializable {
         }
 
         adbs.update(detailApplicant);
-        return "/01-user/userProfile.xhtml";
+        cu.setCurrentUser(detailApplicant);
+        return "/01-user/userProfile.xhtml?faces-redirect=true";
     }
 
     public String getEmailRepeat() {
@@ -71,5 +74,45 @@ public class DetailApplicant implements Serializable {
 
     public void setChangingError(boolean changingError) {
         this.changingError = changingError;
+    }
+
+    public ApplicantDatabaseService getAdbs() {
+        return adbs;
+    }
+
+    public void setAdbs(ApplicantDatabaseService adbs) {
+        this.adbs = adbs;
+    }
+
+    public CurrentUser getCu() {
+        return cu;
+    }
+
+    public void setCu(CurrentUser cu) {
+        this.cu = cu;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

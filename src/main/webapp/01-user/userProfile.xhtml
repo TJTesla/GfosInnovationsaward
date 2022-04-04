@@ -13,9 +13,9 @@
     <f:viewParam name="id" value="#{detailApplicant.detailApplicant}" converter="#{applicantConverter}" />
     <f:viewAction action="#{detailApplicant.init()}" />
 </f:metadata>
-<head>
-    <title>Profil</title>
-</head>
+<h:head>
+    <title>Profil - #{detailApplicant.detailApplicant.name}</title>
+</h:head>
 <h:body>
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
