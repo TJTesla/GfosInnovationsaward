@@ -27,32 +27,32 @@
                     <h:outputText id="username" value="#{detailApplicant.detailApplicant.name}" styleClass="text-data" />
                 </div>
 
-                <br />
 
                 <div class="wrapper-text">
                     <h:outputLabel for="email" value="E-mail:" styleClass="label-profile" />  <br />
                     <h:outputText id="email" value="#{detailApplicant.detailApplicant.email}" styleClass="text-data" />
                 </div>
 
-                <br />
 
                 <div class="wrapper-text">
                     <h:outputLabel for="salutation" value="Anrede:" styleClass="label-profile" />  <br />
                     <h:outputText id="salutation" value="#{detailApplicant.salutationString()}" styleClass="text-data" />
                 </div>
 
-                <br />
 
                 <div class="wrapper-text">
                     <h:outputLabel for="fname" value="Vorname:" styleClass="label-profile"/>  <br />
                     <h:outputText id="fname" value="#{detailApplicant.detailApplicant.firstname}" styleClass="text-data" />
                 </div>
 
-                <br />
-
                 <div class="wrapper-text">
                     <h:outputLabel for="lname" value="Nachname:" styleClass="label-profile" />  <br />
                     <h:outputText id="lname" value="#{detailApplicant.detailApplicant.lastname}" styleClass="text-data" />
+                </div>
+
+                <div class="wrapper-text">
+                    <h:outputLabel for="birthdate" value="Geburtstag:" styleClass="label-profile" /> <br />
+                    <h:outputText id="birthdate" value="#{detailApplicant.detailApplicant.bday}" styleClass="text-data" />
                 </div>
 
                 <!--div class="wrapper-text">
@@ -76,11 +76,7 @@
                         <h:button outcome="editProfile" value="Profil bearbeiten" styleClass="btn-edit">
                             <f:param name="id" value="#{detailApplicant.detailApplicant.id}" />
                         </h:button>
-                    </div>
-                    <div>
-                        <h:button outcome="/00-loginRegistration/newPswd" value="Passwort ändern" styleClass="btn-changePswd" />
-                    </div>
-                    <div>
+                        <h:button outcome="/00-loginRegistration/newPswd" value="Passwort ändern" styleClass="btn-edit" />
                         <h:commandButton action="." styleClass="btn-delete" value="Profil löschen">
                             <f:param name="" value="" />
                         </h:commandButton>

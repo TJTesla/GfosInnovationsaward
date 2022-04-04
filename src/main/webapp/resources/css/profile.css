@@ -10,13 +10,7 @@
     padding-bottom: 50px;
 }
 .image-profile {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
+    margin-top: 20px;
 }
 .image-profile:hover {
 
@@ -29,8 +23,8 @@
         border-color: #7285A5;
     }
     .btn-edit {
-        background-color: var(--d-btn-bg-color);
-        border-color: #7285A5;
+        border-width: 1px;
+        border-color: black;
         color: whitesmoke;
     }
     .btn-edit:hover {
@@ -50,15 +44,15 @@
     font-size: 13px;
     font-style: italic;
     margin-top: 20px;
+    margin-bottom: 15px;
 }
 .wrapper-text {
     width: calc( var(--profile-width) * 0.7 );
     margin-left: calc( (var(--profile-width) - var(--profile-width) * 0.7) / 2);
-    padding-top: 10px;
-    padding-bottom: 10px;
     border-bottom: solid;
-    border-width: 1px;
+    border-width: 2px;
     font-size: 16px;
+    border-color:#7285A5;
 }
 .text-data {
     margin-left: 30px;
@@ -66,6 +60,13 @@
 }
 .btn-edit {
     width: auto;
-    padding: 5px 10px;
+    margin: 20px;
+}
+
+.btn-delete {
+    margin: 20px;
+    background-color: darkred;
+    border-width: 1px;
+    border-color: black;
 }
 
