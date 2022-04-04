@@ -28,6 +28,7 @@ public class ApplicationListController implements Serializable {
     OfferDatabaseService odbs;
 
     public String delete(Application a) {
+        System.out.println("DELETE IN CONTROLLER");
         adbs.delete(a);
         return "";
     }

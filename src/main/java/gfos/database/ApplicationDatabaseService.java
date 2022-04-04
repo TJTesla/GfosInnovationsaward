@@ -21,7 +21,7 @@ public class ApplicationDatabaseService extends DatabaseService {
         super();
     }
 
-    public void apply(Application a, Resume r) {
+    public int apply(Application a, Resume r) {
         try {
             int resumeId = this.createResume(r);
 
@@ -32,10 +32,16 @@ public class ApplicationDatabaseService extends DatabaseService {
             stmt.setInt(4, resumeId);
             stmt.setBoolean(5, a.getDraft());
 
-            stmt.executeUpdate();
+            if (stmt.executeUpdate() != 1) {
+                return -1;
+            }
+
+            rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
+            return rs.getInt("LAST_INSERT_ID()");
         } catch (SQLException sqlException) {
             System.out.println("Could not create Application and/or Resume: " + sqlException.getMessage());
         }
+        return -1;
     }
 
     private int createResume(Resume r) throws SQLException {

@@ -29,6 +29,7 @@ public class ApplicationFormController implements Serializable {
             System.out.println("No CV uploaded");
             return "";
         }
+        int applicationId = -1;
         try {
             Applicant currentApplicant = (Applicant)(cu.getCurrentUser());
             Resume r = ResourceIO.uploadResume(cv, offer, currentApplicant);
@@ -41,15 +42,17 @@ public class ApplicationFormController implements Serializable {
                     draft
             );
 
-            adbs.apply(a, r);
-
+            applicationId = adbs.apply(a, r);
+            if (applicationId == -1) {
+                return "";
+            }
         } catch (IOException ioException) {
             System.out.println("Could not save file: " + ioException.getMessage());
         } catch (UploadException uploadException) {
             System.out.println(uploadException.getMessage());
         }
 
-        return "/03-application/applDetailUser.xhtml?id=" + offer.getId(); // Succespage.xhtml?faces-redirect=true
+        return "/03-application/applDetailUser.xhtml?id=" + applicationId; // Succespage.xhtml?faces-redirect=true
     }
 
     public String checkUserRights() {
