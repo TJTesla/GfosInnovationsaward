@@ -69,6 +69,8 @@ h1 {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    padding: 15px;
+    background-color: whitesmoke;
 }
 .area-descr:hover {
     background-color: #7285A5;
@@ -90,6 +92,19 @@ h1 {
     padding: 10px;
 }
 
+body .btn-deleteDraft {
+    float: left;
+    margin-left: 20px;
+    font-size: 18px;
+    padding: 10px;
+    background-color: darkred;
+    border-color: black;
+}
+
+body .btn-deleteDraft:hover {
+    background-color: #c70808;
+    border-color: #c70808;
+}
 
 /* offer */
 body .btn-fav {
@@ -222,7 +237,6 @@ body .btn-fav {
 }
 
 body .ui-button.ui-button-text-icon-left .ui-icon {
-    left: 15%;
     top:  41%;
 }
 
@@ -235,4 +249,31 @@ body .btn-delete {
     background-color: darkred;
     border-color: black;
     border-radius: 10px;
+}
+
+body .btn-delete:hover {
+    background-color: #c70808;
+    border-color: #c70808;
+}
+
+.add .btn-newOffer {
+    background-color: #7285a5;
+    border-color: black;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+.add .btn-newOffer:hover {
+    background-color: #75b4ff;
+    border-color: #75b4ff;
+}
+
+.pi-trash::before {
+    margin-left: 3.5px;
+}
+
+.pi-plus::before {
+    margin-left: 6px;
 }

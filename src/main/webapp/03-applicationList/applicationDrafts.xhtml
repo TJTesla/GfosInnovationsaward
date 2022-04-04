@@ -30,7 +30,8 @@
                                 <h:button id="editAppl" value="Bearbeiten" styleClass="btn-seeAppl" outcome="/03-application/application">
                                     <f:param name="id" value="#{aDraft.application.offerId}" />
                                 </h:button>
-                                <h:commandButton id="deleteAppl" value="#{applicationListController.delete(aDraft.application)}" styleClass="" icon="pi pi-trash" />
+                                <br />
+                                <p:commandButton id="deleteAppl" value="" styleClass="btn-delete" icon="pi pi-trash" />
                             </h:form>
                         </div>
                     </div>

@@ -63,10 +63,15 @@
     margin: 20px;
 }
 
-.btn-delete {
+body .btn-delete {
     margin: 20px;
     background-color: darkred;
     border-width: 1px;
     border-color: black;
+}
+
+.wrapper .btn-delete:hover {
+    background-color: #c70808;
+    border-color: #c70808;
 }
 

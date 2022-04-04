@@ -46,4 +46,41 @@ body .btn-seeAppl {
     border: none;
     font-weight: bold;
     font-size: 17px;
+    height: 38px;
+    padding: 0;
+}
+
+body .btn-delete {
+    background-color: darkred;
+    float: right;
+    width: 45px;
+    height: 45px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+body .btn-delete:hover {
+    background-color: #c70808;
+    border-color: #c70808;
+}
+
+body .ui-button.ui-button-text-icon-left .ui-icon {
+    top: 41%;
+    left: 8px;
+}
+
+body .btn-retract {
+    background-color: darkred;
+    margin-top: 20px;
+    font-size: 15px;
+    height: 38px;
+    padding: 0 10px;
+    font-weight: normal;
+    color: whitesmoke;
+    border: none;
+}
+
+body .btn-retract:hover {
+    background-color: #c70808;
+    border-color: #c70808;
 }
