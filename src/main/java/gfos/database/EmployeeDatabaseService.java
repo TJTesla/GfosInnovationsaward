@@ -62,10 +62,12 @@ public class EmployeeDatabaseService extends DatabaseService {
         );
     }
 
-    public ArrayList<Application> getAllApplications() {
+    public ArrayList<Application> getAllApplications(int oId) {
         ArrayList<Application> result = new ArrayList<>();
         try {
-            rs = stmt.executeQuery("SELECT * FROM application");
+            stmt = con.prepareStatement("SELECT * FROM application WHERE offerId=?");
+            stmt.setInt(1, oId);
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
                 result.add(ApplicationDatabaseService.createApplication(rs));

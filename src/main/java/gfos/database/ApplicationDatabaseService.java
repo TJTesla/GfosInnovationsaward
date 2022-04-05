@@ -225,6 +225,20 @@ public class ApplicationDatabaseService extends DatabaseService {
         }
     }
 
+    public void changeStatus(Application a) {
+        // Status of a is already changed
+        try {
+            stmt = con.prepareStatement("UPDATE application SET status=? WHERE userId=? AND offerId=?");
+            stmt.setInt(1, a.getStatus());
+            stmt.setInt(2, a.getUserId());
+            stmt.setInt(3, a.getOfferId());
+
+            stmt.executeUpdate();
+        } catch (SQLException sqlException) {
+            System.out.println("Could not change status for application from applicant " + a.getUserId() + " for offer " + a.getOfferId() + ": " + sqlException.getMessage());
+        }
+    }
+
     public static Application createApplication(ResultSet rs) throws SQLException {
         return new Application(
                 rs.getInt("userId"),

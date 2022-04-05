@@ -42,17 +42,8 @@ public class LoginController implements Serializable {
             return "";
         }
 
-        if (u instanceof Applicant) {
-            cu.setCurrentUser((Applicant)u);
-
-            return "/index.xhtml?faces-redirect=true";
-        } else if (u instanceof Employee) {
-            cu.setCurrentUser((Employee)u);
-
-            return "/tjtesla-tests/companyIndex.xhtml?faces-redirect=true";
-        }
-
-        return "";
+        cu.setCurrentUser(u);
+        return "/index.xhtml?faces-redirect=true";
     }
 
     private boolean isSuperUser() {

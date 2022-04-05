@@ -1,6 +1,7 @@
 package gfos.detailView;
 
 import gfos.beans.Applicant;
+import gfos.beans.Application;
 import gfos.beans.Employee;
 import gfos.beans.Offer;
 import gfos.database.ApplicantDatabaseService;

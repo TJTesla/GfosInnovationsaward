@@ -9,12 +9,15 @@ import gfos.database.EmployeeDatabaseService;
 import gfos.database.OfferDatabaseService;
 import gfos.longerBeans.CurrentUser;
 
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 @Named
-public class CompanyIndexController {
+@ViewScoped
+public class CompanyIndexController implements Serializable {
     @Inject
     EmployeeDatabaseService edbs;
     @Inject
@@ -24,8 +27,10 @@ public class CompanyIndexController {
     @Inject
     CurrentUser cu;
 
+    private Offer offer;
+
     public ArrayList<Application> getAllApplications(int offerId) {
-        return edbs.getAllApplications();
+        return edbs.getAllApplications(offerId);
     }
 
     public ArrayList<Offer> getAllFinalOffers() {
@@ -45,5 +50,13 @@ public class CompanyIndexController {
 
     public String getApplicantName(int applicantId) {
         return adbs.getById(applicantId).getName();
+    }
+
+    public Offer getOffer() {
+        return offer;
+    }
+
+    public void setOffer(Offer offer) {
+        this.offer = offer;
     }
 }

@@ -30,6 +30,10 @@ public class DetailApplication implements Serializable {
     @Inject
     OfferDatabaseService odbs;
 
+    private int aId = -1;
+    private int oId = -1;
+    private boolean initialized = false;
+
     public DetailApplication() {
     }
 
@@ -45,8 +49,14 @@ public class DetailApplication implements Serializable {
     private Applicant applicant;
     private Offer offer;
 
+    private String status;
+
     public String statusString() {
         return adbs.getStatusString(application.getStatus());
+    }
+
+    public String statusString(Application a) {
+        return adbs.getStatusString(a.getStatus());
     }
 
     public String salutationString() {
@@ -99,8 +109,14 @@ public class DetailApplication implements Serializable {
         if (cu.getCurrentUser() != null &&
                 cu.getCurrentUser() instanceof Employee
         ) {
-            return "/00-loginRegistration/login.xhtml";
+            return "";
         }
+        return "/00-loginRegistration/login.xhtml";
+    }
+
+    public String changeStatus() {
+        application.setStatus( toInt(status) );
+        adbs.changeStatus(application);
         return "";
     }
 
@@ -128,6 +144,7 @@ public class DetailApplication implements Serializable {
         this.application = application;
         applicant = udbs.getById(this.application.getUserId());
         offer = odbs.getById(this.application.getOfferId());
+        status = String.valueOf(application.getStatus());
     }
 
     public void setApplicationWithParams(Application application, ApplicantDatabaseService aDB, OfferDatabaseService oDB) {
@@ -137,6 +154,7 @@ public class DetailApplication implements Serializable {
         this.application = application;
         applicant = aDB.getById(this.application.getUserId());
         offer = oDB.getById(this.application.getOfferId());
+        status = String.valueOf(application.getStatus());
     }
 
     public Offer getOffer() {
@@ -153,5 +171,39 @@ public class DetailApplication implements Serializable {
 
     public void setApplicant(Applicant applicant) {
         this.applicant = applicant;
+    }
+
+    public int getaId() {
+        return aId;
+    }
+
+    public void setaId(int aId) {
+        this.aId = aId;
+
+        if (oId != -1 && !initialized) {
+            this.setApplication(adbs.getById(oId, aId));
+            initialized = true;
+        }
+    }
+
+    public int getoId() {
+        return oId;
+    }
+
+    public void setoId(int oId) {
+        this.oId = oId;
+
+        if (aId != -1 && !initialized) {
+            this.setApplication(adbs.getById(oId, aId));
+            initialized = true;
+        }
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

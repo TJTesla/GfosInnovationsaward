@@ -10,8 +10,8 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xml:lang="en" lang="en">
 <f:metadata>
-    <f:viewParam name="oId" value="#{detailApplication.offerId}" />
-    <f:viewParam name="aId" value="#{detailApplication.userId}" />
+    <f:viewParam name="oId" value="#{detailApplication.oId}" converter="#{intConverter}" />
+    <f:viewParam name="aId" value="#{detailApplication.aId}" converter="#{intConverter}" />
 
     <f:viewAction action="#{detailApplication.checkRights()}" />
 </f:metadata>
@@ -25,21 +25,14 @@
                 <ui:include src="applicationDetailTemplate.xhtml" />
                 <h:outputStylesheet library="css" name="applicationDetail.css" />
                 <h:form class="applDetailEmpl">
-                    <c:choose>
-                        <c:when test=""> <!-- Only if not processed yet -->
-                            <h:outputLabel for="checksStatus" value="Bearbeitungsstatus setzen:" styleClass="label-status" /> <br />
-                            <h:selectOneRadio id="checksStatus" styleClass="radio-status">
-                                <f:selectItem itemValue="null" itemLabel="Nicht bearbeitet" />
-                                <f:selectItem itemValue="0" itemLabel="Bearbeitet" />
-                                <f:selectItem itemValue="1" itemLabel="Wird bearbeitet" />
-                            </h:selectOneRadio>
-                            <h:commandButton id="saveStatus" value="Status speichern" styleClass="btn-saveStatus" action="Hi" />
-                        </c:when>
-                        <c:otherwise>
-                            <h:outputLabel for="status" value="Entscheindung:" styleClass="label-status" />
-                            <h:outputText id="status" value="Angenommen" styleClass="text-status" />
-                        </c:otherwise>
-                    </c:choose>
+                    <h:outputLabel for="checksStatus" value="Bearbeitungsstatus setzen:" styleClass="label-status" /> <br />
+                    <h:selectOneMenu value="#{detailApplication.status}" id="checksStatus" styleClass="radio-status">
+                        <f:selectItem itemValue="0" itemLabel="Noch nicht bearbeitet" />
+                        <f:selectItem itemValue="1" itemLabel="Wird bearbeitet" />
+                        <f:selectItem itemValue="10" itemLabel="Angenommen" />
+                        <f:selectItem itemValue="11" itemLabel="Abgelehnt" />
+                    </h:selectOneMenu>
+                    <h:commandButton value="Status speichern" action="#{detailApplication.changeStatus()}" />
                 </h:form>
             </div>
         </ui:define>

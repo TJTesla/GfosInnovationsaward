@@ -30,10 +30,10 @@
                             <div class="right">
                                 <div class="status">
                                     <h:outputLabel for="status" value="Berarbeitungsstatus:" styleClass="label-status" />
-                                    <h:outputText id="status" value="" styleClass="text-status" /> <!-- current status of application -->
+                                    <h:outputText id="status" value="#{detailApplication.statusString(a)}" styleClass="text-status" /> <!-- current status of application -->
                                 </div>
                                 <h:button outcome="/03-application/applDetailEmpl" value="Einsehen" styleClass="btn-seeAppl">
-                                    <f:param name="oId" value="#{detailOffer.detailOffer.id}" />
+                                    <f:param name="oId" value="#{a.offerId}" />
                                     <f:param name="aId" value="#{a.userId}" />
                                 </h:button>
                             </div>

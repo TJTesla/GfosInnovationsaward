@@ -83,7 +83,9 @@
                                 </c:choose>
                             </c:when>
                             <c:when test="#{detailOffer.loggedInAsEmployee()}"> <!-- if employee -->
-                                <h:button value="Bewerbungen einsehen" styleClass="btn-appl" outcome="/03-application/applDetailEmpl" />
+                                <h:button value="Bewerbungen einsehen" styleClass="btn-appl" outcome="/03-applicationList/applicationsEmpl">
+                                    <f:param name="id" value="#{detailOffer.detailOffer.id}" />
+                                </h:button>
                             </c:when>
                             <c:otherwise> <!-- not logged in -->
                                 <h:link outcome="/00-loginRegistration/login" value="Melden Sie sich hier an, um sich zu bewerben." styleClass="link-login" />
