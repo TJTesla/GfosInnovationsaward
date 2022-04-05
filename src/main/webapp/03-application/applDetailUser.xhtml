@@ -9,9 +9,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xml:lang="en" lang="en">
-<!--f:metadata>
-    <f:viewParam name="id" value="#{detailApplication.application}" converter="#{applicationConverter}" />
-</f:metadata-->
+<f:metadata>
+    <f:viewParam name="id" value="#{detailApplication.application}" converter="#{applicationObjectConverter}" />
+</f:metadata>
 <h:head>
     <title>#{detailApplication.offer.title} - Bewerbung</title>
 </h:head>
@@ -23,7 +23,16 @@
                 <ui:include src="applicationDetailTemplate.xhtml" />
                 <h:outputLabel for="status" value="Bearbeitungsstatus:" styleClass="label-status" />
                 <h:outputText id="status" value="#{detailApplication.statusString()}" styleClass="text-status" /> <!-- Given value needed -->
-                <h:commandButton id="retract" value="Zurückziehen" action="." styleClass="btn-retract" />
+                <h:form>
+                    <c:choose>
+                        <c:when test="#{not detailApplication.draft}">
+                            <h:commandButton id="retract" value="Zurückziehen" action="#{detailApplication.retract()}" styleClass="btn-retract" />
+                        </c:when>
+                        <c:otherwise>
+                            <h:commandButton id="delete" value="Löschen" action="#{detailApplication.retract()}" styleClass="btn-retract" />
+                        </c:otherwise>
+                    </c:choose>
+                </h:form>
             </div>
         </ui:define>
     </ui:composition>

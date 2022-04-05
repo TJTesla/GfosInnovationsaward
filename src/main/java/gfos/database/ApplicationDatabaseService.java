@@ -36,8 +36,7 @@ public class ApplicationDatabaseService extends DatabaseService {
                 return -1;
             }
 
-            rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
-            return rs.getInt("LAST_INSERT_ID()");
+            return a.getOfferId();
         } catch (SQLException sqlException) {
             System.out.println("Could not create Application and/or Resume: " + sqlException.getMessage());
         }
@@ -92,6 +91,20 @@ public class ApplicationDatabaseService extends DatabaseService {
         }
     }
 
+    public void changeVisibility(Application a) {
+        a.setDraft(!a.getDraft());
+
+        try {
+            stmt = con.prepareStatement("UPDATE application SET draft=? WHERE userId=? AND offerId=?");
+            stmt.setBoolean(1, a.getDraft());
+            stmt.setInt(2, a.getUserId());
+            stmt.setInt(3, a.getOfferId());
+            stmt.executeUpdate();
+        } catch (SQLException sqlException) {
+            System.out.println("Could not change visibility for application for offer " + a.getOfferId() + " from applicant " + a.getDraft() + ": " + sqlException.getMessage());
+        }
+    }
+
     private static Resume createResume(ResultSet rs) throws SQLException {
         return new Resume(
                 rs.getInt("id"),
@@ -140,6 +153,75 @@ public class ApplicationDatabaseService extends DatabaseService {
             stmt.executeUpdate();
         } catch (SQLException sqlException) {
             System.out.println("Could not delete application for offer " + a.getOfferId() + " from user " + a.getUserId() + ": " + sqlException.getMessage());
+        }
+    }
+
+    public int update(int uId, int oId, String text, Resume r, boolean draft) {
+        try {
+            int oldResumeId = -1;
+            if (r != null) {
+                oldResumeId = this.getResumeId(uId, oId);
+            }
+
+            String resumeExtension = "";
+            if (r != null) {
+                resumeExtension = "resumeID=null,";
+            }
+
+            stmt = con.prepareStatement("UPDATE application SET text=?," + resumeExtension + " draft=? WHERE userId=? AND offerId=?");
+            stmt.setString(1, text);
+            stmt.setBoolean(2, draft);
+            stmt.setInt(3, uId);
+            stmt.setInt(4, oId);
+
+            if (stmt.executeUpdate() != 1) {
+                return -1;
+            }
+
+            if (r != null) {
+                this.deleteResume(oldResumeId);
+                r.setId(this.createResume(r));
+
+                stmt = con.prepareStatement("UPDATE application SET resumeId=? WHERE userId=? AND offerId=?");
+                stmt.setInt(1, r.getId());
+                stmt.setInt(2, uId);
+                stmt.setInt(3, oId);
+
+                if (stmt.executeUpdate() != 1) {
+                    return -1;
+                }
+            }
+
+            return oId;
+        } catch (SQLException sqlException) {
+            System.out.println("Could not updatze application from applicant " + uId + " for offer " + oId + ": " + sqlException.getMessage());
+            return -1;
+        }
+    }
+
+    private int getResumeId(int uId, int oId) {
+        try {
+            stmt = con.prepareStatement("SELECT resumeId FROM application WHERE userId=? AND offerId=?");
+            stmt.setInt(1, uId);
+            stmt.setInt(2, oId);
+            rs = stmt.executeQuery();
+
+            rs.next();
+            return rs.getInt("resumeId");
+        } catch (SQLException sqlException) {
+            System.out.println("Could not get resume ID for offer " + oId + " and applicant " +  uId + ": " + sqlException.getMessage());
+            return -1;
+        }
+    }
+
+    private boolean deleteResume(int id) {
+        try {
+            stmt = con.prepareStatement("DELETE FROM resumes WHERE id=?");
+            stmt.setInt(1, id);
+            return stmt.executeUpdate() == 1;
+        } catch (SQLException sqlException) {
+            System.out.println("Could not dlete resume: " + id + ": " + sqlException.getMessage());
+            return false;
         }
     }
 

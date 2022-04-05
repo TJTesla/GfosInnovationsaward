@@ -24,6 +24,9 @@ public class ApplicationFormController implements Serializable {
     private String text;
 
     public String apply(boolean draft) {
+        if (adbs.getById(offer.getId(), ((Applicant)cu.getCurrentUser()).getId()) != null) {
+            return editAction(draft);
+        }
         System.out.println("APPLY");
         if (cv == null) {
             System.out.println("No CV uploaded");
@@ -52,7 +55,22 @@ public class ApplicationFormController implements Serializable {
             System.out.println(uploadException.getMessage());
         }
 
-        return "/03-application/applDetailUser.xhtml?id=" + applicationId; // Succespage.xhtml?faces-redirect=true
+        return "/03-application/applDetailUser.xhtml?id=" + applicationId + "&faces-redirect=true"; // Succespage.xhtml?faces-redirect=true
+    }
+
+    private String editAction(boolean draft) {
+        Resume r = null;
+        if (cv != null) {
+            try {
+                r = ResourceIO.uploadResume(cv, offer, cu.getCurrentUser());
+            } catch (Exception e) {
+                System.out.println("Could not update resume: " + e.getMessage());
+            }
+        }
+
+        int applicationId = adbs.update( ((Applicant)cu.getCurrentUser()).getId(), offer.getId(), text, r, draft);
+
+        return "/03-application/applDetailUser.xhtml?id=" + applicationId + "&faces-redirect=true";
     }
 
     public String checkUserRights() {

@@ -34,7 +34,7 @@ public class DetailApplication implements Serializable {
     }
 
     public DetailApplication(Application a, ApplicationDatabaseService aDB, ApplicantDatabaseService uDB, OfferDatabaseService oDB) {
-        this.setApplication(a, uDB, oDB);
+        this.setApplicationWithParams(a, uDB, oDB);
 
         this.adbs = aDB;
         this.udbs = uDB;
@@ -77,6 +77,19 @@ public class DetailApplication implements Serializable {
         }
     }
 
+    public String retract() {
+        if (isDraft()) {
+            return null;
+        }
+
+        adbs.changeVisibility(this.application);
+        return "";
+    }
+
+    public boolean isDraft() {
+        return this.application.getDraft();
+    }
+
     public String checkRights() {
         if (cu.getCurrentUser() != null &&
                 cu.getCurrentUser() instanceof Employee
@@ -112,7 +125,7 @@ public class DetailApplication implements Serializable {
         offer = odbs.getById(this.application.getOfferId());
     }
 
-    public void setApplication(Application application, ApplicantDatabaseService aDB, OfferDatabaseService oDB) {
+    public void setApplicationWithParams(Application application, ApplicantDatabaseService aDB, OfferDatabaseService oDB) {
         if (application == null) {
             return;
         }

@@ -9,7 +9,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xml:lang="en" lang="en">
 <f:metadata>
-    <f:viewParam name="id" value="#{applicationFormController.offer}" converter="#{offerConverter}" />
+    <f:viewParam name="id" value="#{applicationFormController.text}" converter="#{applicationTextConverter}" />
+    <f:viewParam name="id" value="#{applicationFormController.offer}" converter="#{offerConverter}"/>
     <!--f:viewAction action="#{applicationFormController.checkUserRights()}" /-->
 </f:metadata>
 <h:head>

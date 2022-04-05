@@ -22,9 +22,15 @@ public class ResourceIO {
         File directory = new File(System.getProperty("user.dir"), "uploads/resumes/" + user.getName());
         directory.mkdirs();
 
+        deleteFile(path);
         save(file, new File(System.getProperty("user.dir"), path));
 
         return result;
+    }
+
+    private static void deleteFile(String path) {
+        File f = new File(System.getProperty("user.dir"), path);
+        f.delete();
     }
 
     private static boolean isIncorrectFiletype(String str, String[] filetypes) {

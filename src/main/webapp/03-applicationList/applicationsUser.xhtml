@@ -27,7 +27,7 @@
                         <h:form>
                             <div class="left">
                                 <h:outputText id="offer" value="#{apl.offer.title}" styleClass="text-apl" /> <br />
-                                <h:commandButton id="retract" value="Zurückziehen" styleClass="btn-retract" />
+                                <h:commandButton action="#{apl.retract()}" id="retract" value="Zurückziehen" styleClass="btn-retract" />
                             </div>
                             <div class="right">
                                 <div class="status">

@@ -72,6 +72,7 @@
                                     <c:when test="#{not detailOffer.alreadyApplied()}"> <!-- if not applied -->
                                         <h:button value="Bewerben" styleClass="btn-appl" outcome="/03-application/application">
                                             <f:param name="id" value="#{detailOffer.detailOffer.id}" />
+                                            <f:param name="edit" value="false" />
                                         </h:button>
                                     </c:when>
                                     <c:otherwise> <!-- already applied -->

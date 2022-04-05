@@ -7,6 +7,7 @@ import gfos.longerBeans.GeoCalculator;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -29,6 +30,7 @@ public class DetailApplicant implements Serializable {
 
     public void init() {
         setDetailApplicant((Applicant) (cu.getCurrentUser()));
+        formerName = detailApplicant.getName();
     }
 
     public String salutationString() {
@@ -43,6 +45,8 @@ public class DetailApplicant implements Serializable {
         this.detailApplicant = detailApplicant;
     }
 
+    private String formerName;
+
     private String emailRepeat;
     private String street, zip, city;
 
@@ -54,6 +58,12 @@ public class DetailApplicant implements Serializable {
         if (!emailRepeat.isEmpty() &&  !emailRepeat.equals(detailApplicant.getEmail())) {
             changingError = true;
             return "";
+        }
+        if (!formerName.equals(detailApplicant.getName())) {
+            if (adbs.nameExists(detailApplicant.getName())) {
+                changingError = true;
+                return "";
+            }
         }
 
         double[] newCoords = new double[2];
