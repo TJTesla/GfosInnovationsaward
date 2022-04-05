@@ -32,7 +32,7 @@ public class LoginController implements Serializable {
     public String login() {
         loginError = false;
         if (isSuperUser()) {
-            return "/tjtesla-tests/superUser.xhtml?faces-redirect=true";
+            return "/00-loginRegistration/superUser.xhtml?faces-redirect=true";
         }
 
         User u = adbs.loginAttempt(username, password);

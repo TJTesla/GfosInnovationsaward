@@ -41,6 +41,13 @@ public class IndexController implements Serializable {
     private String maxDistance;
     private HashSet<Integer> favoritesSet = new HashSet<>();
 
+    private Applicant optionalApplicant() {
+        if (cu.getCurrentUser() instanceof Applicant) {
+            return (Applicant)(cu.getCurrentUser());
+        }
+        return null;
+    }
+
     public ArrayList<Offer> getAllOffers() {
         if (cu.getCurrentUser() instanceof Applicant) {
             favoritesSet = adbs.getFavorites( ((Applicant)cu.getCurrentUser()).getId() );
@@ -55,7 +62,7 @@ public class IndexController implements Serializable {
                         toApplyFilter(appliedChoose),
                         favorites
                 ),
-                (Applicant)cu.getCurrentUser()
+                optionalApplicant()
         );
     }
 

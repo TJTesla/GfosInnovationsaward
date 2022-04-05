@@ -118,6 +118,9 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
 
+            if (!rs.next()) {
+                return null;
+            }
             return parseApplicant();
         } catch (SQLException sqlException) {
             System.out.println("Could not get applicant with id " + id + ": " + sqlException.getMessage());
@@ -204,13 +207,17 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         if (table.equals("applicant")) {
             activeQuery = "SELECT * FROM applicant WHERE username=? AND password=?";
         } else if (table.equals("employee")) {
-            activeQuery = "SELECT * FROM employees WHERE name=? AND password=?";
+            activeQuery = "SELECT * FROM employees WHERE name=? AND password=? AND registered=TRUE";
         }
 
         stmt = con.prepareStatement(activeQuery);
         stmt.setString(1, name);
         stmt.setString(2, hashPwd);
         rs = stmt.executeQuery();
+
+        if  (!rs.next()) {
+            return null;
+        }
 
         if (table.equals("applicant")) {
             return parseApplicant();
@@ -357,10 +364,6 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
     }
 
     private Applicant parseApplicant() throws SQLException {
-        if (!rs.next()) {
-            return null;
-        }
-
         return new Applicant(
                 rs.getInt("id"),
                 rs.getString("username"),

@@ -42,10 +42,6 @@ public class EmployeeRegistrationController implements Serializable {
             return "";
         }
 
-        if (!edbs.employeeCreated(name, key)) {
-            return "";
-        }
-
         Employee e = new Employee(name, password, "", true);
 
         edbs.registerEmployee(e);

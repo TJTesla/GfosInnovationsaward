@@ -35,17 +35,19 @@
                         <legend class="legend-empl">Neuer Mitarbeiter:</legend>
                         <h:outputLabel for="newName" value="Name: " styleClass="label-empl" />
                         <h:inputText id="newName" value="#{superUserController.name}" styleClass="input-empl" />
-                        <p:commandButton id="add" action="#{superUserController.createEmployee()}" styleClass="btn-new-empl" value="" icon="pi pi-user-plus" />
+                        <p:commandButton id="add" action="#{superUserController.createEmployee()}" styleClass="btn-new-empl" value="" icon="pi pi-user-plus" ajax="false" />
+                        <h:outputText value="#{superUserController.key}" rendered="#{superUserController.renderKey}" />
                     </fieldset>
                 </h:form>
             </div>
             <div class="oldEmpl">
                 <h3 class="legend-oldEmpl">Liste aller Mitarbeiter:</h3>
-                <ui:repeat var="x" value="">
+                <ui:repeat var="x" value="#{superUserController.allEmployees}">
                     <div class="empl">
                         <h:form>
-                            <h:outputText id="name" value="Vivien Hou" styleClass="text-empl" />
-                            <p:commandButton id="delete" action="hello" styleClass="btn-delete" value="" icon="pi pi-trash" />
+                            <h:outputText id="name" value="#{x.name}" styleClass="text-empl" />
+                            <p:commandButton id="delete" action="#{superUserController.delete(x)}" styleClass="btn-delete" value="" icon="pi pi-trash" ajax="false" />
+                            <h:outputText value="#{superUserController.activationStatus(x)}" />
                         </h:form>
                     </div>
                 </ui:repeat>

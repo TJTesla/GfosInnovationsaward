@@ -11,6 +11,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Currency;
 import java.util.HashMap;
 
@@ -27,10 +28,14 @@ public class SuperUserController implements Serializable {
     private String name;
     private String key;
 
+    private boolean renderKey = false;
+
     boolean registrationError = false;
+
     HashMap<String, String> errorMsgs = new HashMap<>();
 
     public String createEmployee() {
+        renderKey = false;
         errorMsgs.clear();
         registrationError = false;
         check();
@@ -46,6 +51,7 @@ public class SuperUserController implements Serializable {
                 "",
                 false
         ));
+        renderKey = true;
         return "";
     }
 
@@ -65,12 +71,28 @@ public class SuperUserController implements Serializable {
         }
     }
 
+    public void delete(Employee e) {
+        edbs.deleteEmployee(e);
+    }
+
+    public String activationStatus(Employee e) {
+        if (e.isRegistered()) {
+            return "Aktiviert";
+        } else {
+            return "Nicht aktiviert";
+        }
+    }
+
     public String isSuperUser() {
         if (cu.getCurrentUser() instanceof SuperUser) {
             return "";
         }
 
-        return "/00-registration/login.xhtml";
+        return "/00-loginRegistration/login.xhtml";
+    }
+
+    public ArrayList<Employee> getAllEmployees() {
+        return edbs.getAllEmployees();
     }
 
     public String getName() {
@@ -87,5 +109,13 @@ public class SuperUserController implements Serializable {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public boolean isRenderKey() {
+        return renderKey;
+    }
+
+    public void setRenderKey(boolean renderKey) {
+        this.renderKey = renderKey;
     }
 }

@@ -34,7 +34,7 @@ public class PasswordManager {
     }
 
     public static String generateKey() {
-        byte[] key = new byte[16];
+        byte[] key = new byte[8];
         RANDOM.nextBytes(key);
         return toHexString(key);
     }

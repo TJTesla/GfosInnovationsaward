@@ -54,10 +54,6 @@ public class EmployeeDatabaseService extends DatabaseService {
     }
 
     public static Employee createEmployee(ResultSet rs) throws SQLException {
-        if (!rs.next()) {
-            return null;
-        }
-
         return new Employee(
                 rs.getString("name"),
                 rs.getString("password"),
@@ -78,6 +74,31 @@ public class EmployeeDatabaseService extends DatabaseService {
             System.out.println("Could not fetch all applications: " + sqlException.getMessage());
         }
         return result;
+    }
+
+    public ArrayList<Employee> getAllEmployees() {
+        ArrayList<Employee> result = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement("SELECT * FROM employees");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                result.add(createEmployee(rs));
+            }
+        } catch (SQLException sqlException) {
+            System.out.println("Could not fetch all employees: " + sqlException.getMessage());
+        }
+        return result;
+    }
+
+    public void deleteEmployee(Employee e) {
+        try {
+            stmt = con.prepareStatement("DELETE FROM employees WHERE name=?");
+            stmt.setString(1, e.getName());
+            stmt.executeUpdate();
+        } catch (SQLException sqlException) {
+            System.out.println("Could not delete employee " + e.getName() + ": " + sqlException.getMessage());
+        }
     }
 
     public boolean registerEmployee(Employee e) {

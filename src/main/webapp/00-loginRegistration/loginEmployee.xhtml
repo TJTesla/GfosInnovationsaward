@@ -24,11 +24,11 @@
             <h:form>
                 <fieldset class="emplLogin">
                     <h:outputLabel for="user" styleClass="label-loginE" value="Benutzername:" /> <br />
-                    <h:inputText id="user" type="text" name="user" value=""
-                                 styleClass="input-loginE" />
+                    <h:inputText id="user" type="text" name="user" value="#{employeeRegistrationController.name}" styleClass="input-loginE" />
+                    <h:outputText value="#{employeeRegistrationController.getErrorMessage('name')}" rendered="#{employeeRegistrationController.registerError}" />
                     <br />
                     <h:outputLabel for="key" styleClass="label-loginE" value="Schlüssel:" /> <br />
-                    <h:inputText id="key"  value="" styleClass="input-loginE" />
+                    <h:inputText id="key"  value="#{employeeRegistrationController.key}" styleClass="input-loginE" />
                     <c:if test="" >
                         <c:if test="">
                             <p class="errMsg-">
@@ -39,7 +39,8 @@
                     </c:if>
                     <br />
                     <h:outputLabel for="pswd" styleClass="label-loginE" value="Passwort:" /> <br />
-                    <h:inputSecret id="pswd" value="" styleClass="input-loginE" />
+                    <h:inputSecret id="pswd" value="#{employeeRegistrationController.password}" styleClass="input-loginE" />
+                    <h:outputText value="#{employeeRegistrationController.getErrorMessage('password')}" rendered="#{employeeRegistrationController.registerError}" />
                     <c:if test="">
                         <p class="errMsg-">
                             <i class="pi pi-exclamation-circle" />
@@ -48,7 +49,8 @@
                     </c:if>
                     <br />
                     <h:outputLabel for="pswdRepeat" value="Passwort wiederholen: " styleClass="label-loginE" /> <br />
-                    <h:inputSecret id="pswdRepeat" value="" styleClass="input-loginE" />
+                    <h:inputSecret id="pswdRepeat" value="#{employeeRegistrationController.passwordRepeat}" styleClass="input-loginE" />
+                    <h:outputText value="#{employeeRegistrationController.getErrorMessage('passwordRepeat')}" rendered="#{employeeRegistrationController.registerError}" />
                     <c:if test="">
                         <p class="errMsg-">
                             <i class="pi pi-exclamation-circle" />
@@ -57,7 +59,7 @@
                     </c:if>
                 </fieldset>
                 <div class="emplLogin-btns">
-                    <h:commandButton id="save" value="Speichern" action="." styleClass="btn-loginE" />
+                    <h:commandButton id="save" value="Registrieren" action="#{employeeRegistrationController.register()}" styleClass="btn-loginE" />
                 </div>
             </h:form>
         </ui:define>
