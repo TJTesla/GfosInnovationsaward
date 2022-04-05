@@ -86,6 +86,11 @@ public class DetailApplication implements Serializable {
         return "";
     }
 
+    public String delete() {
+        adbs.delete(this.application);
+        return "/03-applicationList/applicationsDraft?faces-redirect=true";
+    }
+
     public boolean isDraft() {
         return this.application.getDraft();
     }
