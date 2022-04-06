@@ -1,9 +1,6 @@
 package gfos.database;
 
-import gfos.beans.Applicant;
-import gfos.beans.Employee;
-import gfos.beans.PasswordManager;
-import gfos.beans.User;
+import gfos.beans.*;
 
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
@@ -361,6 +358,80 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
             System.out.println("Could not update applicant " + a.getId() + ": " + sqlException.getMessage());
             return false;
         }
+    }
+
+    public void delete(Applicant a) {
+        try {
+            // Favorites
+            // DELETE FROM favorites WHERE applicantId = a.getId()
+            stmt = con.prepareStatement("DELETE FROM favorites WHERE applicantId=?");
+            stmt.setInt(1, a.getId());
+            stmt.executeUpdate();
+
+            // Applications from applicant + Resumes (also in files)
+            // SELECT resumeId FROM applications WHERE userId = a.getId() // ==> rIds
+            // DELETE FROM application WHERE userId = a.getId()
+            // SELECT path FROM resumes WHERE id IN rIds // ==> paths
+            // DELETE FROM resumes WHERE id in rIds
+            // ResourceIO.delete(paths)
+            deleteApplications(a.getId());
+
+            // Title relation
+            // DELETE FROM titleRelation WHERE applicantId = a.getId()
+            stmt = con.prepareStatement("DELETE FROM titleRelation WHERE applicantId=?");
+            stmt.setInt(1, a.getId());
+            stmt.executeUpdate();
+
+            // Delete applicant
+            // DELETE FROM applicant WHERE id = a.getId()
+            stmt = con.prepareStatement("DELETE FROM applicant WHERE id=?");
+            stmt.setInt(1, a.getId());
+            stmt.executeUpdate();
+        } catch (SQLException sqlException) {
+            System.out.println("Could not delete applicant " + a.getId() + ": " + sqlException.getMessage());
+        }
+    }
+
+    private void deleteApplications(int applicantId) throws SQLException {
+        stmt = con.prepareStatement("SELECT resumeId FROM application WHERE userId=?");
+        stmt.setInt(1, applicantId);
+        rs = stmt.executeQuery();
+
+        ArrayList<Integer> rIds = new ArrayList<>();
+        while (rs.next()) {
+            rIds.add(rs.getInt("resumeId"));
+        }
+
+        stmt = con.prepareStatement("SELECT pb FROM applicant WHERE id=?");
+        stmt.setInt(1, applicantId);
+        rs = stmt.executeQuery();
+        rs.next();
+        String pbPath = rs.getString("pb");
+        ResourceIO.deleteFile(pbPath);
+
+        stmt = con.prepareStatement("DELETE FROM application WHERE userId=?");
+        stmt.setInt(1, applicantId);
+        stmt.executeUpdate();
+
+        String braceIds = OfferDatabaseService.getBraceSyntax(rIds);
+        stmt = con.prepareStatement("SELECT path FROM resumes WHERE id IN " + braceIds);
+        rs = stmt.executeQuery();
+
+        ArrayList<String> paths = new ArrayList<>();
+        while (rs.next()) {
+            paths.add(rs.getString("path"));
+        }
+
+        stmt = con.prepareStatement("DELETE FROM resumes WHERE id IN " + braceIds);
+        stmt.executeUpdate();
+
+        for (String path : paths) {
+            ResourceIO.deleteFile(path);
+        }
+        if (paths.size() > 0) {
+            ResourceIO.deleteUserDir(paths.get(0));
+        }
+
     }
 
     private Applicant parseApplicant() throws SQLException {

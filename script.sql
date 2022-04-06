@@ -37,7 +37,7 @@ CREATE TABLE `applicant` (
   `bday` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `applicant_username_uindex` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `applicant` (
 
 LOCK TABLES `applicant` WRITE;
 /*!40000 ALTER TABLE `applicant` DISABLE KEYS */;
-INSERT INTO `applicant` VALUES (1,'Yixue','8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4','','Vivien','Hou',NULL,2,NULL,NULL,NULL,NULL),(12,'TTesla','ce0b8a0eb2c976b3cfed32c653ef6f1ce08006d488b865bb4dd2beaeb555740a','','Theodor','Teslia','theoteslia@gmail.com',1,'uploads/profilepics/applicants/0picture.jpg',51.44046,7.01433,NULL),(15,'brittchen','ce0b8a0eb2c976b3cfed32c653ef6f1ce08006d488b865bb4dd2beaeb555740a','','Britta','Teslia','brittateslia@gmx.de',2,'uploads/profilepics/applicants/brittchen2BInFrontOfRobot.png',51.44046,7.01433,NULL),(17,'tes','ce0b8a0eb2c976b3cfed32c653ef6f1ce08006d488b865bb4dd2beaeb555740a','','Anton','Teslia','teslia@gmx.de',1,'uploads/profilepics/applicants/tesKenKaneki.jpg',51.4398407,7.0275026,NULL),(19,'Muster','ca563452b72fce8b11703b0ccbbf5c5800668323663b43afafd2ca3312a075cc','92f064cb8befb1da1571e8d7a1ff82cf','Max','Mustermann','muster@mail.de',1,'uploads/profilepics/applicants/MusterIMG_9667.JPG',51.4399625,7.0135436,'01.01.1970'),(20,'Anonym','9b6aff65ecf6945910101987777a6348592252ced183cc24d00368a3ad92c798','9f06e2bf14ebc865aa3ae1abbc3e0cd3','Anonym','Anonym','anonym@mail.com',0,'',51.4367956,7.0095003,'01.01.1970');
+INSERT INTO `applicant` VALUES (1,'Yixue','8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4','','Vivien','Hou',NULL,2,NULL,NULL,NULL,NULL),(12,'TTesla','ce0b8a0eb2c976b3cfed32c653ef6f1ce08006d488b865bb4dd2beaeb555740a','','Theodor','Teslia','theoteslia@gmail.com',1,'uploads/profilepics/applicants/0picture.jpg',0,0,'05.10.2004'),(15,'brittchen','b82b453b88c3947b4154c1482d88822778f030541477a1172baaa66623dab93c','a588359e573cd3fd535cebb966538559','Britta','Teslia','brittateslia@gmx.de',2,'uploads/profilepics/applicants/brittchen2BInFrontOfRobot.png',52.5551088,13.4255875,NULL),(19,'Muster','ca563452b72fce8b11703b0ccbbf5c5800668323663b43afafd2ca3312a075cc','92f064cb8befb1da1571e8d7a1ff82cf','Max','Mustermann','muster@mail.de',1,'uploads/profilepics/applicants/MusterIMG_9667.JPG',51.4399625,7.0135436,'01.01.1970'),(20,'Anonym','9b6aff65ecf6945910101987777a6348592252ced183cc24d00368a3ad92c798','9f06e2bf14ebc865aa3ae1abbc3e0cd3','Anonym','Anonym','anonym@mail.com',0,'',51.4367956,7.0095003,'01.01.1970');
 /*!40000 ALTER TABLE `applicant` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,7 +80,7 @@ CREATE TABLE `application` (
 
 LOCK TABLES `application` WRITE;
 /*!40000 ALTER TABLE `application` DISABLE KEYS */;
-INSERT INTO `application` VALUES (12,3,'Da hab ich Bock drauf!!!',10,11,1),(15,3,'KA brauche arbeit',0,NULL,1);
+INSERT INTO `application` VALUES (12,3,'Meine Motivation: >///<\r\nNah, eig hab ich gar keine Lust',11,31,0),(12,4,'Eig bin ja eher Entwickler, aber naja',0,33,0),(15,3,'KA brauche arbeit',0,NULL,1);
 /*!40000 ALTER TABLE `application` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +107,7 @@ CREATE TABLE `employees` (
 
 LOCK TABLES `employees` WRITE;
 /*!40000 ALTER TABLE `employees` DISABLE KEYS */;
-INSERT INTO `employees` VALUES ('theotes','7c92ffe94cf82e94aa2cda05a5d8e5b5755bfb9c442aeadc3fca67eb515819ef','cd3f1ea903dca761106be6384a61e267',0);
+INSERT INTO `employees` VALUES ('theotes','7ffafb946f829995af81ebccd36a8ffd4da666ef12cf3630754fe9ce507b5ddc','f63891cad24ee0834ebb8122d6bc73b5',1);
 /*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,10 +121,10 @@ DROP TABLE IF EXISTS `favorites`;
 CREATE TABLE `favorites` (
   `applicantId` int NOT NULL,
   `offerId` int NOT NULL,
-  UNIQUE KEY `favorites_offerId_uindex` (`offerId`),
-  UNIQUE KEY `favorites_applicantId_offerId_uindex` (`applicantId`,`offerId`),
-  CONSTRAINT `favorites_offer_fk` FOREIGN KEY (`offerId`) REFERENCES `offer` (`id`),
-  CONSTRAINT `favorites_user_fk` FOREIGN KEY (`applicantId`) REFERENCES `applicant` (`id`)
+  PRIMARY KEY (`applicantId`,`offerId`),
+  KEY `favorites_offer_fk` (`offerId`),
+  CONSTRAINT `favorites_applicant_fk` FOREIGN KEY (`applicantId`) REFERENCES `applicant` (`id`),
+  CONSTRAINT `favorites_offer_fk` FOREIGN KEY (`offerId`) REFERENCES `offer` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -134,7 +134,7 @@ CREATE TABLE `favorites` (
 
 LOCK TABLES `favorites` WRITE;
 /*!40000 ALTER TABLE `favorites` DISABLE KEYS */;
-INSERT INTO `favorites` VALUES (12,2),(12,3);
+INSERT INTO `favorites` VALUES (12,3);
 /*!40000 ALTER TABLE `favorites` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,7 +243,7 @@ CREATE TABLE `resumes` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `resumes_id_uindex` (`id`),
   UNIQUE KEY `resumes_path_uindex` (`path`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -252,7 +252,7 @@ CREATE TABLE `resumes` (
 
 LOCK TABLES `resumes` WRITE;
 /*!40000 ALTER TABLE `resumes` DISABLE KEYS */;
-INSERT INTO `resumes` VALUES (10,'uploads/resumes/TTesla/4Deutsch.pdf','Deutsch.pdf'),(11,'uploads/resumes/TTesla/3Deutsch.pdf','Deutsch.pdf');
+INSERT INTO `resumes` VALUES (31,'uploads/resumes/TTesla/3Kuki.pdf','Kuki.pdf'),(33,'uploads/resumes/TTesla/4Kuki.pdf','Kuki.pdf');
 /*!40000 ALTER TABLE `resumes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -356,7 +356,7 @@ CREATE TABLE `titleRelation` (
 
 LOCK TABLES `titleRelation` WRITE;
 /*!40000 ALTER TABLE `titleRelation` DISABLE KEYS */;
-INSERT INTO `titleRelation` VALUES (1,4),(12,4),(15,4),(19,4),(1,5),(12,5),(17,5);
+INSERT INTO `titleRelation` VALUES (12,4),(15,4),(19,4),(1,5),(12,5);
 /*!40000 ALTER TABLE `titleRelation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -369,4 +369,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-01 23:29:16
+-- Dump completed on 2022-04-06 20:28:23

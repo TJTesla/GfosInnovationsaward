@@ -84,6 +84,12 @@ public class DetailApplicant implements Serializable {
         return "/01-user/userProfile.xhtml?faces-redirect=true";
     }
 
+    public String delete() {
+        adbs.delete(detailApplicant);
+        cu.setCurrentUser(null);
+        return "/00-loginRegistration/login.xhtml";
+    }
+
     public String getEmailRepeat() {
         return emailRepeat;
     }

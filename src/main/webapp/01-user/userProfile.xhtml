@@ -75,9 +75,7 @@
                     <div class="wrapper">
                         <h:button outcome="editProfile" value="Profil bearbeiten" styleClass="btn-edit" />
                         <h:button outcome="/00-loginRegistration/newPswd" value="Passwort ändern" styleClass="btn-edit" />
-                        <h:commandButton action="." styleClass="btn-delete" value="Profil löschen">
-                            <f:param name="" value="" />
-                        </h:commandButton>
+                        <h:commandButton action="#{detailApplicant.delete()}" styleClass="btn-delete" value="Profil löschen" />
                     </div>
                 </h:form>
             </div>

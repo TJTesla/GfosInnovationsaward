@@ -28,7 +28,7 @@ public class ResourceIO {
         return result;
     }
 
-    private static void deleteFile(String path) {
+    public static void deleteFile(String path) {
         File f = new File(System.getProperty("user.dir"), path);
         f.delete();
     }
@@ -71,6 +71,12 @@ public class ResourceIO {
         while ((read = is.read(bytes)) != -1) {
             os.write(bytes, 0, read);
         }
+    }
+
+    public static void deleteUserDir(String filePath) {
+        File file = new File(System.getProperty("user.dir"), filePath);
+        File dir = file.getParentFile();
+        dir.delete();
     }
 
     public StreamedContent downloadPb(User user) {

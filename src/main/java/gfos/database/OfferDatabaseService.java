@@ -155,7 +155,7 @@ public class OfferDatabaseService extends DatabaseService {
         }
     }
 
-    private String getBraceSyntax(ArrayList<Integer> list) {
+    public static String getBraceSyntax(ArrayList<Integer> list) {
         StringBuilder result = new StringBuilder("(");
 
         for (Integer item : list) {
