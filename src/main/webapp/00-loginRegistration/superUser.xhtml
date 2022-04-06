@@ -47,7 +47,8 @@
                         <h:form>
                             <h:outputText id="name" value="#{x.name}" styleClass="text-empl" />
                             <p:commandButton id="delete" action="#{superUserController.delete(x)}" styleClass="btn-delete" value="" icon="pi pi-trash" ajax="false" />
-                            <h:outputText value="#{superUserController.activationStatus(x)}" />
+                            <br />
+                            <h:outputText value="#{superUserController.activationStatus(x)}" styleClass="text-emplStatus" />
                         </h:form>
                     </div>
                 </ui:repeat>

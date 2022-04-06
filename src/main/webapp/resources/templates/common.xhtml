@@ -24,15 +24,14 @@
             <div id="sideNav" class="sidenav">
                 <h:form>
                     <button class="closebtn" type="button" onclick="closeNav()">&times;</button>
-                    <c:choose>
-                        <c:when test="#{controllerTest.checkUserRights()}">
-                            <p:button styleClass="sideNavLinks-plain" outcome="/01-user/userProfile" value="Profil" icon="pi pi-user" />
-                        </c:when>
-                        <c:otherwise>
-                            <p:button styleClass="sideNavLinks-plain" outcome="/00-loginRegistration/login" value="Login" icon="pi pi-sign-in" />
-                        </c:otherwise>
-                    </c:choose>
-                    <hr class="border" />
+                    <c:if test="#{controllerTest.checkApplicant()}">
+                        <p:button styleClass="sideNavLinks-plain" outcome="/01-user/userProfile" value="Profil" icon="pi pi-user" />
+                        <hr class="border" />
+                    </c:if>
+                    <c:if test="#{not controllerTest.checkUserRights()}">
+                        <p:button styleClass="sideNavLinks-plain" outcome="/00-loginRegistration/login" value="Login" icon="pi pi-sign-in" />
+                        <hr class="border" />
+                    </c:if>
                     <p:button outcome="/index.xhtml" value="Angebotsübersicht" styleClass="sideNavLinks-plain" icon="pi pi-list" />
                     <c:if test="#{controllerTest.checkApplicant()}">
                         <hr class="border" />

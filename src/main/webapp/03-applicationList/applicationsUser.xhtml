@@ -18,8 +18,16 @@
         <ui:define name="content">
             <h:outputStylesheet library="css" name="applicationList.css" />
             <div align="center">
-                <h1>Alle Bewerbungen</h1>
-                <hr />
+                <h1 align="center">Alle Bewerbungen</h1>
+                <h:form styleClass="form-filter">
+                    <h:selectOneMenu id="filterMenu" styleClass="menu-filter" >
+                        <f:selectItem itemValue="0" itemLabel="Alle" />
+                        <f:selectItem itemValue="1" itemLabel="Wird bearbeitet" />
+                        <f:selectItem itemValue="10" itemLabel="Angenommen" />
+                        <f:selectItem itemValue="11" itemLabel="Abgelehnt" />
+                    </h:selectOneMenu>
+                    <h:commandButton id="filterBtn" value="Anwenden" action="." styleClass="btn-filter" />
+                </h:form>
             </div>
             <div class="applications">
                 <ui:repeat value="#{applicationListController.appliedOffers()}" var="apl">

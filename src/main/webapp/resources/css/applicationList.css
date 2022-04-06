@@ -1,5 +1,5 @@
 .applications {
-    margin: 30px 30%;
+    margin: 20px 30%;
 }
 
 .application {
@@ -83,4 +83,30 @@ body .btn-retract {
 body .btn-retract:hover {
     background-color: #c70808;
     border-color: #c70808;
+}
+
+.form-filter {
+    margin: 20px 0 0 0;
+}
+
+.menu-filter {
+    background-color: var(--d-input-bg-color);
+    color: whitesmoke;
+    font-family: inherit;
+    border-radius: 10px;
+    height: 30px;
+    width: 150px;
+    font-size: inherit;
+    margin: 0 50px 0 0;
+    border-width: 2px;
+    border-color: #7285a5;
+}
+
+.menu-filter:hover {
+    background-color: var(--d-input-bg-hover-color);
+}
+
+body .btn-filter {
+    padding: 7px 10px;
+    font-size: inherit;
 }

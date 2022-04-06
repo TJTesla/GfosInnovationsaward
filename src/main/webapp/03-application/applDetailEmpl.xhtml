@@ -22,17 +22,19 @@
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
             <div class="applDetailView">
+                <h1>Bewerbungsformular:</h1>
+                <p:graphicImage value="#{pbLoader.load(detailApplication.applicant)}" styleClass="image-profile" cache="false" /> <br />
                 <ui:include src="applicationDetailTemplate.xhtml" />
                 <h:outputStylesheet library="css" name="applicationDetail.css" />
                 <h:form class="applDetailEmpl">
                     <h:outputLabel for="checksStatus" value="Bearbeitungsstatus setzen:" styleClass="label-status" /> <br />
-                    <h:selectOneMenu value="#{detailApplication.status}" id="checksStatus" styleClass="radio-status">
+                    <h:selectOneMenu value="#{detailApplication.status}" id="checksStatus" styleClass="menu-status">
                         <f:selectItem itemValue="0" itemLabel="Noch nicht bearbeitet" />
                         <f:selectItem itemValue="1" itemLabel="Wird bearbeitet" />
                         <f:selectItem itemValue="10" itemLabel="Angenommen" />
                         <f:selectItem itemValue="11" itemLabel="Abgelehnt" />
                     </h:selectOneMenu>
-                    <h:commandButton value="Status speichern" action="#{detailApplication.changeStatus()}" />
+                    <h:commandButton value="Status speichern" action="#{detailApplication.changeStatus()}" styleClass="btn-saveStatus" />
                 </h:form>
             </div>
         </ui:define>

@@ -188,9 +188,14 @@ body .pi {
     border-width: 2px;
     border-color: #384e7b;
     margin-top: -2px;
-    padding: 15px 20px 10px;
+    padding: 15px 20px 15px;
     height: 100px;
 }
+
+.offer-left {
+    float: left;
+}
+
 .offer-attr {
     display: inline-block;
     float: left;
@@ -215,18 +220,20 @@ body .btn-fav {
     width: 35px;
     height: 35px;
     margin-right: 20px;
+    transform: translate(0, 50%);
 }
 
 body .btn-fav1 {
     width: 35px;
     height: 35px;
     margin-right: 20px;
+    transform: translate(0, 50%);
 }
 
 .offer-btn {
     float: right;
     position: relative;
-    bottom: 20px;
+    height: 70px;
 }
 
 body .btn-toOffer {
@@ -234,6 +241,7 @@ body .btn-toOffer {
     border: none;
     width: 40px;
     height: 40px;
+    transform: translate(0, 50%);
 }
 
 .pi-angle-right::before {

@@ -81,6 +81,9 @@
                 </div>
                 <div class="applyBtn">
                     <h:commandButton value="Anwenden" action="#{indexController.reload()}" styleClass="navBtn" />
+                    <c:if test="#{indexController.loggedInAsEmployee()}" >
+                        <h:button value="Neues Angebot erstellen" outcome="/02-offer/createOffer.xhtml" styleClass="navBtn" style="margin-left: 50px; width: 220px;" />
+                    </c:if>
                 </div>
             </h:form>
 
@@ -90,16 +93,17 @@
                 <ui:repeat id="offers" var="offer" value="#{indexController.allOffers}" varStatus="">
                     <div class="allOffers">
                         <h:form>
-                            <h:graphicImage value="" />
-                            <h:outputLabel id="title" value="#{offer.title}" styleClass="offer-label" />
-                            <br />
-                            <div class="offer-attr">
-                                <i class="pi pi-map-marker">&nbsp;</i>
-                                <h:outputText id="location" value="#{offer.city}" styleClass="offer-location" />
-                            </div>
-                            <div class="offer-attr">
-                                <i class="pi pi-briefcase">&nbsp;</i>
-                                <h:outputText id="field" value="#{indexController.fieldString(offer.field)}" styleClass="offer-field" />
+                            <div class="offer-left">
+                                <h:outputLabel id="title" value="#{offer.title}" styleClass="offer-label" />
+                                <br />
+                                <div class="offer-attr">
+                                    <i class="pi pi-map-marker">&nbsp;</i>
+                                    <h:outputText id="location" value="#{offer.city}" styleClass="offer-location" />
+                                </div>
+                                <div class="offer-attr">
+                                    <i class="pi pi-briefcase">&nbsp;</i>
+                                    <h:outputText id="field" value="#{indexController.fieldString(offer.field)}" styleClass="offer-field" />
+                                </div>
                             </div>
                             <div class="offer-btn">
                                     <h:commandButton action="#{indexController.editFavorite(offer.id)}" rendered="#{indexController.loggedInAsApplicant()}"

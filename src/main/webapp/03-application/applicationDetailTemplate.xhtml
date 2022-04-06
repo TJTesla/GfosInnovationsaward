@@ -14,11 +14,9 @@
 <body>
     <ui:composition>
         <h:outputStylesheet library="css" name="applicationDetail.css" />
-        <h1>Bewerbungsformular:</h1>
         <div style="padding-bottom: 20px;">
             <h:outputLabel for="offer" value="Jobangebot:" styleClass="label-applDetail" />
             <h:outputText id="offer" value="#{detailApplication.offer.title}" styleClass="text-applDetail" />
-            <br />
             <div>
                 <h:outputLabel for="salutation" value="Anrede:" rendered="false" styleClass="label-applDetail" />
                 <h:outputText id="salutation" value="#{detailApplication.salutationString()}" rendered="false" styleClass="text-applDetail" />
@@ -43,8 +41,7 @@
             <div>
                 <h:outputLabel for="lom" value="Bewerbungsschreiben:" styleClass="label-applDetail"/> <br />
                 <div class="textArea-applDetail">
-                    <h:outputText id="lom" value="
-            #{detailApplication.application.text}" styleClass="text-applDetail" style="font-size: 13px;" />
+                    <h:outputText id="lom" value="#{detailApplication.application.text}" styleClass="text-applDetail" style="font-size: 13px;" />
                 </div>
 
                 <br />
