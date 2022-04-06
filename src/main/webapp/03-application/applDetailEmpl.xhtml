@@ -12,6 +12,7 @@
 <f:metadata>
     <f:viewParam name="oId" value="#{detailApplication.oId}" converter="#{intConverter}" />
     <f:viewParam name="aId" value="#{detailApplication.aId}" converter="#{intConverter}" />
+    <f:viewParam name="aId" value="#{profilePicHolder.id}" converter="#{intConverter}" />
 
     <f:viewAction action="#{detailApplication.checkRights()}" />
 </f:metadata>
@@ -23,7 +24,10 @@
         <ui:define name="content">
             <div class="applDetailView">
                 <h1>Bewerbungsformular:</h1>
-                <p:graphicImage value="#{pbLoader.load(detailApplication.applicant)}" styleClass="image-profile" cache="false" /> <br />
+                <p:graphicImage value="#{pbLoader.loadWithContext()}" styleClass="image-profile" cache="false">
+                    <f:param name="id" value="#{profilePicHolder.id}" />
+                </p:graphicImage>
+                <br />
                 <ui:include src="applicationDetailTemplate.xhtml" />
                 <h:outputStylesheet library="css" name="applicationDetail.css" />
                 <h:form class="applDetailEmpl">

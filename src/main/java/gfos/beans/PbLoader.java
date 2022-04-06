@@ -6,6 +6,8 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.BufferedInputStream;
@@ -34,7 +36,16 @@ public class PbLoader {
     public StreamedContent load(int id) {
         return loadAlg(adbs.getById(id));
     }
-    // <p:graphicImage value="#{pbLoader.load(17)}" styleClass="image-profile" cache="false" />
+
+    public StreamedContent loadWithContext() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+            return new DefaultStreamedContent();
+        }
+        String id = context.getExternalContext().getRequestParameterMap().get("id");
+        return load( Integer.parseInt(id) );
+    }
+
     private StreamedContent loadAlg(Applicant a) {
         String file = a.getPb();
         if (file == null || file.isEmpty()) {
