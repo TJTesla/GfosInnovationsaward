@@ -12,6 +12,7 @@
       xml:lang="en" lang="en">
 <f:metadata>
     <f:viewParam name="id" value="#{detailApplicant.detailApplicant}" converter="#{applicantConverter}" />
+    <f:viewAction action="#{detailApplicant.isApplicant()}" />
     <f:viewAction action="#{detailApplicant.init()}" />
 </f:metadata>
 <head>

@@ -104,10 +104,17 @@ public class DetailApplication implements Serializable {
         return this.application.getDraft();
     }
 
-    public String checkRights() {
+    public String checkEmployee() {
         if (cu.getCurrentUser() != null &&
                 cu.getCurrentUser() instanceof Employee
         ) {
+            return "";
+        }
+        return "/00-loginRegistration/login.xhtml";
+    }
+
+    public String checkApplicant() {
+        if (cu.getCurrentUser() instanceof Applicant) {
             return "";
         }
         return "/00-loginRegistration/login.xhtml";

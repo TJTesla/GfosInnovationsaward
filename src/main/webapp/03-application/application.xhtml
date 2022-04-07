@@ -12,7 +12,7 @@
 <f:metadata>
     <f:viewParam name="id" value="#{applicationFormController.text}" converter="#{applicationTextConverter}" />
     <f:viewParam name="id" value="#{applicationFormController.offer}" converter="#{offerConverter}"/>
-    <!--f:viewAction action="#{applicationFormController.checkUserRights()}" /-->
+    <f:viewAction action="#{applicationFormController.checkUserRights()}" />
 </f:metadata>
 <h:head>
     <title>#{applicationFormController.offer.title} - Bewerben</title>

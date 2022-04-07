@@ -93,7 +93,7 @@ public class ApplicationFormController implements Serializable {
         if (cu.getCurrentUser() instanceof Applicant) {
             return "";
         }
-        return "/login.xhtml";
+        return "/00-loginRegistration/login.xhtml";
     }
 
     public String getText() {

@@ -158,6 +158,13 @@ public class IndexController implements Serializable {
         }
     }
 
+    public String isEmployee() {
+        if(cu.getCurrentUser() instanceof Employee) {
+            return "";
+        }
+        return "/00-loginRegistration/login.xhtml";
+    }
+
     public String fieldString(int fieldId) {
         return odbs.getField(fieldId);
     }
@@ -186,9 +193,6 @@ public class IndexController implements Serializable {
         return "";
     }
 
-    public boolean isEmployee() {
-        return cu.getCurrentUser() instanceof Employee;
-    }
 
     public ArrayList<Pair<Integer, String>> getAllFields() {
         return mdbs.getAllFields();

@@ -1,9 +1,6 @@
 package gfos.controller;
 
-import gfos.pojos.FilterObject;
-import gfos.pojos.Applicant;
-import gfos.pojos.Application;
-import gfos.pojos.Offer;
+import gfos.pojos.*;
 import gfos.database.ApplicantDatabaseService;
 import gfos.database.EmployeeDatabaseService;
 import gfos.database.OfferDatabaseService;
@@ -42,10 +39,10 @@ public class CompanyIndexController implements Serializable {
     }
 
     public String checkUserRights() {
-        if (cu.getCurrentUser() == null || cu.getCurrentUser() instanceof Applicant) {
-            return "/00-loginRegistration/login.xhtml";
+        if (cu.getCurrentUser() instanceof Employee) {
+            return "";
         }
-        return "";
+        return "/00-loginRegistration/login.xhtml";
     }
 
     public String getApplicantName(int applicantId) {

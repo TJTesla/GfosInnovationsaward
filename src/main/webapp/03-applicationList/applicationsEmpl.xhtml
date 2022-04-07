@@ -11,7 +11,7 @@
       xml:lang="en" lang="en">
 <f:metadata>
     <f:viewParam name="id" value="#{detailOffer.detailOffer}" converter="#{offerConverter}" />
-    <!--f:viewAction action="#{companyIndexController.checkUserRights()}" /-->
+    <f:viewAction action="#{companyIndexController.checkUserRights()}" />
 </f:metadata>
 <h:head>
     <title>Bewerbungen - #{detailOffer.detailOffer.title}</title>

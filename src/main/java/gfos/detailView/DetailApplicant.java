@@ -1,5 +1,6 @@
 package gfos.detailView;
 
+import gfos.pojos.Employee;
 import gfos.pojos.Regexes;
 import gfos.pojos.Applicant;
 import gfos.pojos.ResourceIO;
@@ -25,6 +26,13 @@ public class DetailApplicant implements Serializable {
     @Inject
     CurrentUser cu;
     // <p:graphicImage value="#{detailApplicant.pb}" styleClass="image-profile" />
+
+    public String isApplicant() {
+        if (cu.getCurrentUser() instanceof Applicant) {
+            return "";
+        }
+        return "/00-loginRegistration/login.xhtml";
+    }
 
     private Applicant detailApplicant = new Applicant();
 

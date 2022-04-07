@@ -29,6 +29,13 @@ public class PasswordChange implements Serializable {
     boolean success;
     HashMap<String, String> errorMsgs = new HashMap<>();
 
+    public String checkUserRights() {
+        if (cu.getCurrentUser() instanceof Applicant || cu.getCurrentUser() instanceof Employee) {
+            return "";
+        }
+        return "/00-loginRegistration/login.xhtml";
+    }
+
     public String changePwd() {
         errorMsgs.clear();
         success = true;

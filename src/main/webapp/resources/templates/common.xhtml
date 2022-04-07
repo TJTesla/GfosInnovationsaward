@@ -42,6 +42,8 @@
                     <c:if test="#{controllerTest.checkEmployee()}">
                         <hr class="border" />
                         <p:button outcome="/02-offer/offerDrafts" value="Entwürfe" styleClass="sideNavLinks-plain" icon="pi pi-pencil" />
+                        <hr class="border" />
+                        <p:button outcome="/00-loginRegistration/newPswd" value="Passwort ändern" styleClass="sideNavLinks-plain" icon="pi pi-key" />
                     </c:if>
                     <c:if test="#{controllerTest.checkUserRights()}">
                         <hr class="border" />

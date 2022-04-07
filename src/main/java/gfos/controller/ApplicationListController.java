@@ -66,6 +66,13 @@ public class ApplicationListController implements Serializable {
         }
     }
 
+    public String checkUserRights(){
+        if(cu.getCurrentUser() instanceof Applicant) {
+            return "";
+        }
+        return "/00-loginRegistration/login.xhtml";
+    }
+
     public String getFilter() {
         return filter;
     }

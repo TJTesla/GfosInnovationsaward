@@ -11,6 +11,7 @@
       xml:lang="en" lang="en">
 <f:metadata>
     <f:viewParam name="id" value="#{detailApplication.application}" converter="#{applicationObjectConverter}" />
+    <f:viewAction action="#{detailApplication.checkApplicant()}" />
 </f:metadata>
 <h:head>
     <title>#{detailApplication.offer.title} - Bewerbung</title>

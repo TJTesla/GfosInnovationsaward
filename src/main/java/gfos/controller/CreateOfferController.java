@@ -1,5 +1,6 @@
 package gfos.controller;
 
+import gfos.pojos.Applicant;
 import gfos.pojos.Pair;
 import gfos.pojos.Employee;
 import gfos.pojos.Offer;
@@ -37,6 +38,13 @@ public class CreateOfferController implements Serializable {
 
     private boolean creationError = false;
     private HashMap<String, String> errorMsgs = new HashMap<>();
+
+    public String isEmployee() {
+        if (cu.getCurrentUser() instanceof Employee) {
+            return "";
+        }
+        return "/00-loginRegistration/login.xhtml";
+    }
 
     public String save(boolean draft) {
         creationError = false;
