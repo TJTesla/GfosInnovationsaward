@@ -38,12 +38,13 @@ body .btn-cv-download {
     font-style: italic;
     background-color: #7285a5;
     border: none;
-    padding: 2px;
+    padding: 1px;
 }
 
 /* User */
 body .btn-retract {
     background-color: darkred;
+    margin: 0 0 20px 0;
 }
 
 body .btn-retract:hover {
@@ -60,7 +61,7 @@ body .btn-retract:hover {
     font-size: 18px;
     margin-bottom: 20px;
     font-style: italic;
-    width: auto;
+    width: 200px;
 }
 
 .menu-status {
