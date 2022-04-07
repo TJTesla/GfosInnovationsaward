@@ -65,7 +65,7 @@
 
                 <!-- buttons and links -->
                 <h:form>
-                    <div style="text-align: center; margin-top: 20px;">
+                    <div class="div-btn">
                         <c:choose>
                             <c:when test="#{detailOffer.loggedInAsApplicant()}"> <!-- if applicant -->
                                 <c:choose>
@@ -83,10 +83,10 @@
                                 </c:choose>
                             </c:when>
                             <c:when test="#{detailOffer.loggedInAsEmployee()}"> <!-- if employee -->
-                                <h:button value="Bewerbungen einsehen" styleClass="btn-appl" outcome="/03-applicationList/applicationsEmpl">
+                                <h:button value="Bewerbungen einsehen" styleClass="btn-seeAppl" outcome="/03-applicationList/applicationsEmpl">
                                     <f:param name="id" value="#{detailOffer.detailOffer.id}" />
                                 </h:button>
-                                <h:commandButton id="delete" value="Löschen" styleClass="btn-delete" action="." />
+                                <h:commandButton id="delete" value="Löschen" styleClass="btn-deleteOffer" action="." />
                             </c:when>
                             <c:otherwise> <!-- not logged in -->
                                 <h:link outcome="/00-loginRegistration/login" value="Melden Sie sich hier an, um sich zu bewerben." styleClass="link-login" />

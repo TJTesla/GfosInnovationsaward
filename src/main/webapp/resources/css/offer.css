@@ -71,6 +71,7 @@ h1 {
     margin-right: auto;
     padding: 15px;
     background-color: whitesmoke;
+    white-space: pre-line;
 }
 .area-descr:hover {
     background-color: #7285A5;
@@ -136,9 +137,7 @@ body .btn-fav1 {
 }
 
 .offer-data1 {
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px
+    margin: 20px 10px 10px;
 }
 
 .label-offer {
@@ -173,12 +172,35 @@ body .btn-fav1 {
 }
 
 .text-offer-description {
-
+    white-space: pre-line;
 }
 
-.btn-appl {
+.div-btn {
+    margin: 20px 10px 0 10px;
+    text-align: center;
+}
+
+body .btn-appl {
     font-size: 18px;
     font-weight: bold;
+}
+
+body .btn-seeAppl {
+    font-size: 18px;
+    font-weight: bold;
+    float: right;
+}
+
+body .btn-deleteOffer {
+    font-size: 18px;
+    font-weight: bold;
+    background-color: darkred;
+    float: left;
+}
+
+body .btn-deleteOffer:hover {
+    background-color: #c70808;
+    border-color: #c70808;
 }
 
 .link-login {
