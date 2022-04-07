@@ -31,7 +31,7 @@
                     <div class="dropdown">
                         <button class="dropbtn" id="dropbtnField" type="button">Berufsfeld <i class="pi pi-caret-down" /></button>
                         <div class="navContent" id="dropdownField">
-                            <ui:repeat id="field" var="f" value="#{indexController.allFields}" varStatus="">
+                            <ui:repeat id="field" var="f" value="#{indexController.allFields}">
                                 <div class="a">
                                     <h:selectBooleanCheckbox styleClass="checkBox" value="#{indexController.field[f.first()]}" />
                                     <h:outputLabel styleClass="checkLabel" value="#{f.second()}" />
@@ -82,7 +82,7 @@
                 <div class="applyBtn">
                     <h:commandButton value="Anwenden" action="#{indexController.reload()}" styleClass="navBtn" />
                     <c:if test="#{indexController.loggedInAsEmployee()}" >
-                        <h:button value="Neues Angebot erstellen" outcome="/02-offer/createOffer.xhtml" styleClass="navBtn" style="margin-left: 50px; width: 220px;" />
+                        <h:button value="Neues Angebot erstellen" outcome="/02-offer/createOffer.xhtml" styleClass="btn-newOffer" />
                     </c:if>
                 </div>
             </h:form>

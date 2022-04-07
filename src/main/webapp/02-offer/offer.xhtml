@@ -86,6 +86,7 @@
                                 <h:button value="Bewerbungen einsehen" styleClass="btn-appl" outcome="/03-applicationList/applicationsEmpl">
                                     <f:param name="id" value="#{detailOffer.detailOffer.id}" />
                                 </h:button>
+                                <h:commandButton id="delete" value="Löschen" styleClass="btn-delete" action="." />
                             </c:when>
                             <c:otherwise> <!-- not logged in -->
                                 <h:link outcome="/00-loginRegistration/login" value="Melden Sie sich hier an, um sich zu bewerben." styleClass="link-login" />

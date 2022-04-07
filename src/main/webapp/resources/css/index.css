@@ -97,6 +97,21 @@ body .pi {
     height: 30px;
     width: 100px;
 }
+
+body .btn-newOffer {
+    float: right;
+    height: 30px;
+    width: 220px;
+    font-size: 16px;
+    font-family: inherit;
+    color: inherit;
+    font-weight: bolder;
+    border-width: 0;
+    border-radius: 5px;
+    margin: 0;
+    background-color: darkgreen;
+}
+
 .navBtn:hover {
     background-color: #7b5138;
 }
