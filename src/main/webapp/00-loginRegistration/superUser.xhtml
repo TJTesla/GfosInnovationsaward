@@ -36,7 +36,18 @@
                         <h:outputLabel for="newName" value="Name: " styleClass="label-empl" />
                         <h:inputText id="newName" value="#{superUserController.name}" styleClass="input-empl" />
                         <p:commandButton id="add" action="#{superUserController.createEmployee()}" styleClass="btn-new-empl" value="" icon="pi pi-user-plus" ajax="false" />
-                        <h:outputText value="#{superUserController.key}" rendered="#{superUserController.renderKey}" />
+                        <c:if test="#{not superUserController.getErrorMessage('name').equals('')}">
+                            <div class="errMsg-newUser">
+                                <i class="pi pi-exclamation-circle">&nbsp;</i>
+                                <h:outputText value="#{superUserController.getErrorMessage('name')}" />
+                            </div>
+                        </c:if>
+                        <c:if test="#{superUserController.renderKey}">
+                            <div style="margin: 15px 0 0 0;">
+                                <h:outputLabel for="key" value="Schlüssel:" styleClass="label-key" />
+                                <h:outputText id="key" value="#{superUserController.key}" rendered="#{superUserController.renderKey}" styleClass="text-key" />
+                            </div>
+                             </c:if>
                     </fieldset>
                 </h:form>
             </div>

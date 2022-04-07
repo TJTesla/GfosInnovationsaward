@@ -59,6 +59,10 @@ public class SuperUserController implements Serializable {
         return this.key;
     }
 
+    public String getErrorMessage(String name) {
+        return errorMsgs.get(name) == null ? "" : errorMsgs.get(name);
+    }
+
     private void check() {
         if (name.isEmpty()) {
             registrationError = true;
@@ -118,4 +122,5 @@ public class SuperUserController implements Serializable {
     public void setRenderKey(boolean renderKey) {
         this.renderKey = renderKey;
     }
+
 }

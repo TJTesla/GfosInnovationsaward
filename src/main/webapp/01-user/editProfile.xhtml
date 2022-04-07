@@ -33,73 +33,61 @@
                     <br />
                     <h:outputLabel for="username" value="Benutzername:" styleClass="label-edit"/>
                     <h:inputText id="username" value="#{detailApplicant.detailApplicant.name}" styleClass="input-edit" />
-                    <c:if test="">
+                    <c:if test="#{not detailApplicant.getErrorMessage('name').equals('')}">
                         <p class="errMsg-edit">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
-                            <h:outputText value="" rendered="false" />
+                            <h:outputText value="#{detailApplicant.getErrorMessage('name')}" />
                         </p>
                     </c:if>
                     <br />
                     <h:outputLabel for="fname" value="Vorname:" styleClass="label-edit"/>
                     <h:inputText id="fname" value="#{detailApplicant.detailApplicant.firstname}" styleClass="input-edit" />
-                    <c:if test="">
+                    <c:if test="#{not detailApplicant.getErrorMessage('firstname').equals('')}">
                         <p class="errMsg-edit">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
-                            <h:outputText value="" rendered="false" />
+                            <h:outputText value="#{detailApplicant.getErrorMessage('firstname')}" />
                         </p>
                     </c:if>
                     <br />
                     <h:outputLabel for="lname" value="Nachname:" styleClass="label-edit" />
                     <h:inputText id="lname" value="#{detailApplicant.detailApplicant.lastname}" rendered="true" styleClass="input-edit" />
-                    <c:if test="">
+                    <c:if test="#{not detailApplicant.getErrorMessage('lastname').equals('')}">
                         <p class="errMsg-edit">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
-                            <h:outputText value="" rendered="false" />
+                            <h:outputText value="#{detailApplicant.getErrorMessage('lastname')}" />
                         </p>
                     </c:if>
                     <br />
                     <h:outputLabel for="email" value="E-Mail:" styleClass="label-edit" />
                     <h:inputText id="email" value="#{detailApplicant.detailApplicant.email}" rendered="true" styleClass="input-edit" />
-                    <c:if test="">
+                    <c:if test="#{not detailApplicant.getErrorMessage('email').equals('')}">
                         <p class="errMsg-edit">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
-                            <h:outputText value="" rendered="false" />
+                            <h:outputText value="#{detailApplicant.getErrorMessage('email')}" />
                         </p>
                     </c:if>
                     <br />
                     <h:outputLabel for="emailRepeat" value="E-Mail wiederholen:" styleClass="label-edit" />
                     <h:inputText id="emailRepeat" name="emailWiederholen" type="text" styleClass="input-edit" value="#{detailApplicant.emailRepeat}" />
-                    <c:if test="#{detailApplicant.changingError}">
+                    <c:if test="#{not detailApplicant.getErrorMessage('emailRepeat').equals('')}">
                         <p class="errMsg-edit">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
-                            <h:outputText value="Die angegebene E-Mails stimmen nicht überein." rendered="#{detailApplicant.changingError}" />
+                            <h:outputText value="#{detailApplicant.getErrorMessage('emailRepeat')}" />
                         </p>
                     </c:if>
                     <br />
                     <h:outputLabel for="street" value="Straße:" styleClass="label-edit" />
                     <h:inputText id="street" styleClass="input-edit" value="#{detailApplicant.street}" />
-                    <c:if test="">
-                        <p class="errMsg-edit">
-                            <i class="pi pi-exclamation-circle">&nbsp;</i>
-                            <h:outputText value="" rendered="false" />
-                        </p>
-                    </c:if>
                     <br />
                     <h:outputLabel for="zip" value="Postleitzahl:" styleClass="label-edit" />
                     <h:inputText id="zip" styleClass="input-edit" value="#{detailApplicant.zip}" />
-                    <c:if test="">
-                        <p class="errMsg-edit">
-                            <i class="pi pi-exclamation-circle">&nbsp;</i>
-                            <h:outputText value="" rendered="false" />
-                        </p>
-                    </c:if>
                     <br />
                     <h:outputLabel for="city" value="Ort:" styleClass="label-edit" />
                     <h:inputText id="city" styleClass="input-edit" value="#{detailApplicant.city}" />
-                    <c:if test="">
+                    <c:if test="#{not detailApplicant.getErrorMessage('location').equals('')}">
                         <p class="errMsg-edit">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
-                            <h:outputText value="" rendered="false" />
+                            <h:outputText value="#{detailApplicant.getErrorMessage('location')}" />
                         </p>
                     </c:if>
                     <br />

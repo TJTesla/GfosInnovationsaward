@@ -161,10 +161,10 @@ public class ApplicantRegistrationController implements Serializable {
         }
         // Geburtstag nicht im richtigen Format
         if(!checkDateFormat(birthdate)) {
-            registerError = false;
+            registerError = true;
             errorMsgs.put("birthdate", "Das angegebene Datum ist nicht korrekt.");
         } else if (!checkAge(birthdate)) {
-            registerError = false;
+            registerError = true;
             errorMsgs.put("birthdate", "Das angegebene Datum ist zeitlich nicht korrekt.");
         }
         // Kein benutzername

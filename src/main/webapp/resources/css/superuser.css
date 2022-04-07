@@ -70,6 +70,20 @@ fieldset {
     width: 225px;
 }
 
+.errMsg-newUser {
+    margin: 10px 0 0 0;
+}
+
+.label-key {
+    margin: 0 20px 0 0;
+    font-size: larger;
+}
+
+.text-key {
+    margin: 0;
+    padding: 0;
+}
+
 .empl .btn-delete {
     height: 45px;
     width: 45px;

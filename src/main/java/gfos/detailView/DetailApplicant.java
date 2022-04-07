@@ -1,5 +1,6 @@
 package gfos.detailView;
 
+import gfos.Regexes;
 import gfos.beans.Applicant;
 import gfos.database.ApplicantDatabaseService;
 import gfos.longerBeans.CurrentUser;
@@ -16,6 +17,8 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.regex.Pattern;
 
 @Named
 @ViewScoped
@@ -50,27 +53,63 @@ public class DetailApplicant implements Serializable {
     private String emailRepeat;
     private String street, zip, city;
 
+    private HashMap<String, String> errorMsgs =new HashMap<>();
+
     private boolean changingError = false;
 
+    public String getErrorMessage(String name) {
+        return errorMsgs.get(name) == null ? "" : errorMsgs.get(name);
+    }
+
     public String updateProfile() {
+        errorMsgs.clear();
         System.out.println("UPDATE");
         changingError = false;
+        //Kein Vorname
+        if (detailApplicant.getFirstname().isEmpty()) {
+            changingError = true;
+            errorMsgs.put("firstname", "Vorname ist erforderlich.");
+        }
+        //Kein Nachname
+        if (detailApplicant.getLastname().isEmpty()) {
+            changingError = true;
+            errorMsgs.put("lastname", "Nachname ist erforderlich.");
+        }
+        //Keine Email
+        if (detailApplicant.getEmail().isEmpty()) {
+            changingError = true;
+            errorMsgs.put("email", "Es muss eine E-Mail Adresse angegeben werden.");
+        }
+        //E-Mail existiert schon
+        if (adbs.emailExists(detailApplicant.getEmail())) {
+            changingError = true;
+            errorMsgs.put("email", "Diese E-Mail Adresse wird bereits verwendet.");
+        }
+        //Keine korrekte E-Mail
+        if (!Pattern.compile(Regexes.email).matcher(detailApplicant.getEmail()).find() && !detailApplicant.getEmail().isEmpty()) {
+            changingError = true;
+            errorMsgs.put("email", "Diese E-Mail ist keine korrekte E-Mail Adresse.");
+        }
+        //E-Mails nicht gleich
         if (!emailRepeat.isEmpty() &&  !emailRepeat.equals(detailApplicant.getEmail())) {
             changingError = true;
-            return "";
+            errorMsgs.put("emailRepeat", "E-Mail Adressen stimmen nicht überein.");
         }
+        //Benutzername wird schon verwendet
         if (!formerName.equals(detailApplicant.getName())) {
-            if (adbs.nameExists(detailApplicant.getName())) {
+            if (adbs.nameExists(detailApplicant.getName()) || detailApplicant.getName().equals("sudo") ) {
                 changingError = true;
-                return "";
+                errorMsgs.put("name", "Dieser Benutzername wird bereits verwendet.");
             }
         }
 
         double[] newCoords = new double[2];
+        //Nicht alle Teile der Adresse angegeben
         if (!(street.isEmpty() && zip.isEmpty() && city.isEmpty())) {
             if (street.isEmpty() || zip.isEmpty() || city.isEmpty()) {
                 changingError = true;
-                return "";
+                errorMsgs.put("location", "Es muss die komplette Adresse angegeben werden.");
+                return"";
             }
             String location = street + " " + zip + " " + city;
 
@@ -81,6 +120,9 @@ public class DetailApplicant implements Serializable {
         detailApplicant.setLon(newCoords[1]);
         adbs.update(detailApplicant);
         cu.setCurrentUser(detailApplicant);
+        if(changingError) {
+            return "";
+        }
         return "/01-user/userProfile.xhtml?faces-redirect=true";
     }
 
