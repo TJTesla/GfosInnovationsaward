@@ -66,6 +66,20 @@ public class IndexController implements Serializable {
         );
     }
 
+    public ArrayList<Offer> getAllOfferDrafts() {
+        return odbs.getAllDrafts(
+                new FilterObject(
+                        createFilterArray(field),
+                        createFilterArray(level),
+                        createFilterArray(time),
+                        toInt(maxDistance),
+                        toApplyFilter(appliedChoose),
+                        favorites
+                ),
+                null
+        );
+    }
+
     private Boolean toApplyFilter(String appliedChoose) {
         if (appliedChoose == null) {
             return null;

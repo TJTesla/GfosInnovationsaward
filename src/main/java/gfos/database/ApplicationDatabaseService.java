@@ -123,12 +123,20 @@ public class ApplicationDatabaseService extends DatabaseService {
         return status.get(id);
     }
 
-    public ArrayList<Application> getAllApplications(int id, boolean draft) {
+    public ArrayList<Application> getAllApplications(int id, boolean draft, int filter) {
         ArrayList<Application> result = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM application WHERE userId=? AND draft=?");
+            String query = "SELECT * FROM application WHERE userId=? AND draft=?";
+            if (filter != -1) {
+                query += " AND status=?";
+            }
+
+            stmt = con.prepareStatement(query);
             stmt.setInt(1, id);
             stmt.setBoolean(2, draft);
+            if (filter != -1) {
+                stmt.setInt(3, filter);
+            }
             rs = stmt.executeQuery();
 
             while (rs.next()) {

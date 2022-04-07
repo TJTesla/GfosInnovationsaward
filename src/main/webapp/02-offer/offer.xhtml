@@ -56,10 +56,12 @@
                                           styleClass="text-offer-description" />
                         </div>
 
-                        <h:outputLabel for="extra" value="Zusätzliche Daten:" styleClass="label-offer-description" />
-                        <div class="box-description">
-                            <h:outputText id="extra" value="#{detailOffer.detailOffer.extras}" styleClass="text-offer-description" />
-                        </div>
+                        <c:if test="#{detailOffer.hasExtraInfos()}">
+                            <h:outputLabel for="extra" value="Zusätzliche Daten:" styleClass="label-offer-description" />
+                            <div class="box-description">
+                                <h:outputText id="extra" value="#{detailOffer.detailOffer.extras}" styleClass="text-offer-description" />
+                            </div>
+                        </c:if>
                     </div>
                 </div>
 
@@ -83,10 +85,17 @@
                                 </c:choose>
                             </c:when>
                             <c:when test="#{detailOffer.loggedInAsEmployee()}"> <!-- if employee -->
-                                <h:button value="Bewerbungen einsehen" styleClass="btn-seeAppl" outcome="/03-applicationList/applicationsEmpl">
-                                    <f:param name="id" value="#{detailOffer.detailOffer.id}" />
-                                </h:button>
-                                <h:commandButton id="delete" value="Löschen" styleClass="btn-deleteOffer" action="." />
+                                <c:choose>
+                                    <c:when test="#{detailOffer.finalOffer}">
+                                        <h:button value="Bewerbungen einsehen" styleClass="btn-seeAppl" outcome="/03-applicationList/applicationsEmpl">
+                                            <f:param name="id" value="#{detailOffer.detailOffer.id}" />
+                                        </h:button>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h:commandButton value="Veröffentlichen" action="#{detailOffer.publish()}" />
+                                    </c:otherwise>
+                                </c:choose>
+                                <h:commandButton id="delete" value="Löschen" styleClass="btn-deleteOffer" action="#{detailOffer.delete()}" />
                             </c:when>
                             <c:otherwise> <!-- not logged in -->
                                 <h:link outcome="/00-loginRegistration/login" value="Melden Sie sich hier an, um sich zu bewerben." styleClass="link-login" />

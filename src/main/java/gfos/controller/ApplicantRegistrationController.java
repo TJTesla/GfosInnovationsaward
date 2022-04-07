@@ -84,7 +84,7 @@ public class ApplicantRegistrationController implements Serializable {
             savePb(a);
         }
 
-        adbs.createOne(a);
+        a.setId(adbs.createOne(a));
 
         cu.setCurrentUser(a);
 

@@ -88,7 +88,7 @@ public class DetailApplication implements Serializable {
     }
 
     public String retract() {
-        if (isDraft()) {
+        if (isDraft() || application.getStatus() != 0) {
             return null;
         }
 

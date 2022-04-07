@@ -2,11 +2,14 @@ package gfos.detailView;
 
 import gfos.Regexes;
 import gfos.beans.Applicant;
+import gfos.beans.ResourceIO;
 import gfos.database.ApplicantDatabaseService;
+import gfos.exceptions.UploadException;
 import gfos.longerBeans.CurrentUser;
 import gfos.longerBeans.GeoCalculator;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
+import org.primefaces.model.file.UploadedFile;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -19,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.regex.Pattern;
+import java.io.*;
 
 @Named
 @ViewScoped
@@ -34,6 +38,7 @@ public class DetailApplicant implements Serializable {
     public void init() {
         setDetailApplicant((Applicant) (cu.getCurrentUser()));
         formerName = detailApplicant.getName();
+        formerEmail = detailApplicant.getEmail();
     }
 
     public String salutationString() {
@@ -48,10 +53,11 @@ public class DetailApplicant implements Serializable {
         this.detailApplicant = detailApplicant;
     }
 
-    private String formerName;
+    private String formerName, formerEmail;
 
     private String emailRepeat;
     private String street, zip, city;
+    private UploadedFile cv;
 
     private HashMap<String, String> errorMsgs =new HashMap<>();
 
@@ -81,7 +87,7 @@ public class DetailApplicant implements Serializable {
             errorMsgs.put("email", "Es muss eine E-Mail Adresse angegeben werden.");
         }
         //E-Mail existiert schon
-        if (adbs.emailExists(detailApplicant.getEmail())) {
+        if (!formerEmail.equals(detailApplicant.getEmail()) && adbs.emailExists(detailApplicant.getEmail())) {
             changingError = true;
             errorMsgs.put("email", "Diese E-Mail Adresse wird bereits verwendet.");
         }
@@ -116,20 +122,35 @@ public class DetailApplicant implements Serializable {
             newCoords= GeoCalculator.getCoordinates(location);
         }
 
+        if(changingError) {
+            return "";
+        }
+
+        updatePb(detailApplicant);
+
         detailApplicant.setLat(newCoords[0]);
         detailApplicant.setLon(newCoords[1]);
         adbs.update(detailApplicant);
         cu.setCurrentUser(detailApplicant);
-        if(changingError) {
-            return "";
-        }
+
         return "/01-user/userProfile.xhtml?faces-redirect=true";
+    }
+
+    private void updatePb(Applicant a) {
+        try {
+            String pbDir = ResourceIO.uploadPb(cv, a);
+            a.setPb(pbDir);
+        } catch (IOException ioException) {
+            System.out.println("There was an internal error while saving pb file: "+ ioException.getMessage());
+        } catch (UploadException uploadException) {
+            System.out.println("There was an error while saving pb file: " + uploadException.getMessage());
+        }
     }
 
     public String delete() {
         adbs.delete(detailApplicant);
         cu.setCurrentUser(null);
-        return "/00-loginRegistration/login.xhtml";
+        return "/00-loginRegistration/login.xhtml?faces-redirect=true";
     }
 
     public String getEmailRepeat() {
@@ -186,5 +207,13 @@ public class DetailApplicant implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public UploadedFile getCv() {
+        return cv;
+    }
+
+    public void setCv(UploadedFile cv) {
+        this.cv = cv;
     }
 }

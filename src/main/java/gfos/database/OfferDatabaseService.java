@@ -19,7 +19,7 @@ public class OfferDatabaseService extends DatabaseService {
         super();
     }
 
-    public boolean createOne(Offer o) {
+    public int createOne(Offer o) {
         try {
             stmt = con.prepareStatement("" +
                     "INSERT INTO offer(id, title, tasks, qualifications, extras, field, level, time, lat, lon, draft, city) VALUES " +
@@ -29,10 +29,13 @@ public class OfferDatabaseService extends DatabaseService {
 
             int affectedRows = stmt.executeUpdate();
 
-            return affectedRows != 0;
+            stmt = con.prepareStatement("SELECT LAST_INSERT_ID()");
+            rs = stmt.executeQuery();
+            rs.next();
+            return rs.getInt("LAST_INSERT_ID()");
         } catch (SQLException sqlException) {
             System.out.println("There was an error while creating an applicant: " + sqlException.getMessage());
-            return false;
+            return -1;
         }
     }
 
@@ -47,7 +50,7 @@ public class OfferDatabaseService extends DatabaseService {
             statement.setInt(7, o.getTime());
             statement.setDouble(8, o.getLat());
             statement.setDouble(9, o.getLon());
-            statement.setBoolean(12, o.getDraft());
+            statement.setBoolean(10, o.getDraft());
             statement.setString(11, o.getCity());
         } catch (SQLException sqlException) {
             System.out.println("Couldn't set parameters for insertion or update of company: " + sqlException.getMessage());
@@ -272,5 +275,33 @@ public class OfferDatabaseService extends DatabaseService {
             System.out.println("Could not transform index into name from table: " + table + ": " + sqlException.getMessage());
         }
         return null;
+    }
+
+    public void publish(Offer o) {
+        try {
+            stmt = con.prepareStatement("UPDATE offer SET draft=FALSE WHERE id=?");
+            stmt.setInt(1, o.getId());
+            stmt.executeUpdate();
+        } catch (SQLException sqlException) {
+            System.out.println("Could not publish offer " + o.getId() + ": " + sqlException.getMessage());
+        }
+    }
+
+    public void delete(Offer o) {
+        try {
+            stmt = con.prepareStatement("DELETE FROM application WHERE offerId=?");
+            stmt.setInt(1, o.getId());
+            stmt.executeUpdate();
+
+            stmt = con.prepareStatement("DELETE FROM favorites WHERE offerId=?");
+            stmt.setInt(1, o.getId());
+            stmt.executeUpdate();
+
+            stmt = con.prepareStatement("DELETE FROM offer WHERE id=?");
+            stmt.setInt(1, o.getId());
+            stmt.executeUpdate();
+        } catch (SQLException sqlException) {
+            System.out.println("Could not delete offer " + o.getId() + ": " + sqlException.getMessage());
+        }
     }
 }

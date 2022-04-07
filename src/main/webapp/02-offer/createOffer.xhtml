@@ -21,78 +21,54 @@
                     <legend>Allgemeines:</legend>
                     <div class="offer-data">
                         <h:outputLabel for="title" value="Titel:" styleClass="label-offAttr" />
-                        <h:inputText id="title" styleClass="input-plain" />
+                        <h:inputText id="title" value="#{createOfferController.title}" styleClass="input-plain" />
                         <br />
 
                         <h:outputLabel for="address" value="Adresse:" styleClass="label-title" />
                         <div id="address">
                             <div class="offer-attr">
                                 <h:outputLabel for="street" value="Straße:" />
-                                <h:inputText id="street" required="true" styleClass="input-plain" />
-                            </div>
-
-                            <div class="offer-attr">
-                                <h:outputLabel for="hNo" value="Hausnummer:" styleClass="label-offAttr" />
-                                <h:inputText id="hNo" styleClass="input-plain" />
+                                <h:inputText id="street" value="#{createOfferController.street}" required="true" styleClass="input-plain" />
                             </div>
 
                             <div class="offer-attr">
                                 <h:outputLabel for="postCode" value="Postleitzahl:" styleClass="label-offAttr" />
-                                <h:inputText id="postCode" required="true" styleClass="input-plain" />
+                                <h:inputText id="postCode" value="#{createOfferController.postalCode}" required="true" styleClass="input-plain" />
                             </div>
 
                             <div class="offer-attr">
                                 <h:outputLabel for="location" value="Ort:" styleClass="label-offAttr" />
-                                <h:inputText id="location" required="true" styleClass="input-plain" />
+                                <h:inputText id="location" value="#{createOfferController.city}" required="true" styleClass="input-plain" />
                             </div>
-                        </div>
-
-                        <div class="offer-attr">
-                            <h:outputLabel for="level" value="Einstiegslevel:" styleClass="label-offAttr" />
-                            <br />
-                            <h:selectOneMenu id="level" styleClass="input-plain" >
-                                <f:selectItem itemValue="null" itemLabel="/nicht ausgewählt" />
-                                <f:selectItem itemValue="1" itemLabel="Praktikanten" />
-                                <f:selectItem itemValue="2" itemLabel="Abschlussarbeiten" />
-                                <f:selectItem itemValue="3" itemLabel="Doktoranden" />
-                                <f:selectItem itemValue="4" itemLabel="Auszubildende" />
-                                <f:selectItem itemValue="5" itemLabel="Duales Studium" />
-                                <f:selectItem itemValue="6" itemLabel="Absolventen" />
-                                <f:selectItem itemValue="7" itemLabel="Berufserfahrene" />
-                            </h:selectOneMenu>
                         </div>
 
                         <div class="offer-attr">
                             <h:outputLabel for="field" value="Berufsfeld:" styleClass="label-offAttr" />
                             <br />
-                            <h:selectOneMenu id="field" styleClass="input-plain">
-                                <f:selectItem itemValue="null" itemLabel="/nicht ausgewählt" />
-                                <f:selectItem itemValue="01" itemLabel="Bau, Architektur, Vermessung" />
-                                <f:selectItem itemValue="02" itemLabel="Dienstleistung" />
-                                <f:selectItem itemValue="03" itemLabel="Elektro" />
-                                <f:selectItem itemValue="04" itemLabel="Gesundheit" />
-                                <f:selectItem itemValue="05" itemLabel="IT, Computer" />
-                                <f:selectItem itemValue="06" itemLabel="Kunst, Kultur, Gestaltung" />
-                                <f:selectItem itemValue="07" itemLabel="Landwirtschaft, Natur, Umwelt" />
-                                <f:selectItem itemValue="08" itemLabel="Medien" />
-                                <f:selectItem itemValue="09" itemLabel="Metall, Maschinenbau" />
-                                <f:selectItem itemValue="10" itemLabel="Naturwissenschaften" />
-                                <f:selectItem itemValue="11" itemLabel="Produktion, Fertigung" />
-                                <f:selectItem itemValue="12" itemLabel="Soziales, P&auml;dagogik" />
-                                <f:selectItem itemValue="13" itemLabel="Technik, Technologiefelder" />
-                                <f:selectItem itemValue="14" itemLabel="Verkehr, Logistik" />
-                                <f:selectItem itemValue="15" itemLabel="Wirtschaft, Verwaltung" />
+                            <h:selectOneMenu id="field" value="#{createOfferController.field}" styleClass="input-plain">
+                                <f:selectItem itemValue="-1" itemLabel="/nicht ausgewählt" />
+                                <f:selectItems value="#{createOfferController.allFields}" var="field"
+                                               itemValue="#{field.first()}" itemLabel="#{field.second()}" />
+                            </h:selectOneMenu>
+                        </div>
+
+                        <div class="offer-attr">
+                            <h:outputLabel for="level" value="Einstiegslevel:" styleClass="label-offAttr" />
+                            <br />
+                            <h:selectOneMenu id="level" value="#{createOfferController.level}" styleClass="input-plain" >
+                                <f:selectItem itemValue="-1" itemLabel="/nicht ausgewählt" />
+                                <f:selectItems value="#{createOfferController.allLevels}" var="level"
+                                               itemValue="#{level.first()}" itemLabel="#{level.second()}" />
                             </h:selectOneMenu>
                         </div>
 
                         <div class="offer-attr">
                             <h:outputLabel for="time" value="Praktikum:" styleClass="label-offAttr" />
                             <br />
-                            <h:selectOneMenu id="time" styleClass="input-plain">
-                                <f:selectItem itemValue="null" itemLabel="/nicht ausgewählt" />
-                                <f:selectItem itemValue="full" itemLabel="Vollzeit" />
-                                <f:selectItem itemValue="part" itemLabel="Teilzeit" />
-                                <f:selectItem itemValue="mini" itemLabel="Minijob" />
+                            <h:selectOneMenu id="time" value="#{createOfferController.time}" styleClass="input-plain">
+                                <f:selectItem itemValue="-1" itemLabel="/nicht ausgewählt" />
+                                <f:selectItems value="#{createOfferController.allTimes}" var="time"
+                                               itemValue="#{time.first()}" itemLabel="#{time.second()}" />
                             </h:selectOneMenu>
                         </div>
                     </div>
@@ -101,17 +77,17 @@
                     <div class="offer-descr">
                         <h:outputLabel for="tasks" value="Aufgaben:" styleClass="label-offDescr" />
                         <br />
-                        <h:inputTextarea id="tasks" styleClass="area-descr" />
+                        <h:inputTextarea id="tasks" value="#{createOfferController.tasks}" styleClass="area-descr" />
                         <br />
 
                         <h:outputLabel for="quali" value="Qualifikationen:" styleClass="label-offDescr" />
                         <br />
-                        <h:inputTextarea id="quali" styleClass="area-descr" />
+                        <h:inputTextarea id="quali" value="#{createOfferController.qualifications}" styleClass="area-descr" />
                         <br />
 
                         <h:outputLabel for="extra" value="Zusätzliche Daten:" styleClass="label-offDescr" />
                         <br />
-                        <h:inputTextarea id="extra" styleClass="area-descr" />
+                        <h:inputTextarea id="extra" value="#{createOfferController.extras}" styleClass="area-descr" />
                     </div>
                     <br />
 
@@ -126,9 +102,8 @@
 
                     </h:selectManyCheckbox-->
                     <div class="btns">
-                        <h:commandButton value="Speichern" action="#{createOfferController.save}" styleClass="btn-save" />
-                        <h:commandButton value="Veröffentlichen" action="#{createOfferController.save}" styleClass="btn-upload" />
-                        <h:commandButton value="Entwurf löschen" action="." styleClass="btn-deleteDraft" />
+                        <h:commandButton value="Speichern" action="#{createOfferController.save(true)}" styleClass="btn-save" />
+                        <h:commandButton value="Veröffentlichen" action="#{createOfferController.save(false)}" styleClass="btn-upload" />
                     </div>
 
                 </h:form>

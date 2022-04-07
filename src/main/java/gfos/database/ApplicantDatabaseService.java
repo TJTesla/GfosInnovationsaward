@@ -19,8 +19,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         super();
     }
 
-
-    public boolean createOne(Applicant a) {
+    public int createOne(Applicant a) {
         try {
             // Salt and hash password
             a.setSalt(PasswordManager.generateSalt());
@@ -47,12 +46,14 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
             rs.next();
 
             a.setId(rs.getInt("LAST_INSERT_ID()"));
-            affectedRows += insertTitles(a);
+            if (a.getTitles().size() > 0) {
+                affectedRows += insertTitles(a);
+            }
 
-            return affectedRows != 0;
+            return a.getId();
         } catch (SQLException sqlException) {
             System.out.println("There was an error while creating an applicant: " + sqlException.getMessage());
-            return false;
+            return -1;
         }
     }
 
@@ -344,14 +345,15 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
 
     public boolean update(Applicant a) {
         try {
-            stmt = con.prepareStatement("UPDATE applicant SET username=?, firstname=?, lastname=?, email=?, lat=?, lon=? WHERE id=?");
+            stmt = con.prepareStatement("UPDATE applicant SET username=?, firstname=?, lastname=?, email=?, pb=?, lat=?, lon=? WHERE id=?");
             stmt.setString(1, a.getName());
             stmt.setString(2, a.getFirstname());
             stmt.setString(3, a.getLastname());
             stmt.setString(4, a.getEmail());
-            stmt.setDouble(5, a.getLat());
-            stmt.setDouble(6, a.getLon());
-            stmt.setInt(7, a.getId());
+            stmt.setString(5, a.getPb());
+            stmt.setDouble(6, a.getLat());
+            stmt.setDouble(7, a.getLon());
+            stmt.setInt(8, a.getId());
 
             return stmt.executeUpdate() == 1;
         } catch (SQLException sqlException) {
@@ -413,23 +415,25 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         stmt.setInt(1, applicantId);
         stmt.executeUpdate();
 
-        String braceIds = OfferDatabaseService.getBraceSyntax(rIds);
-        stmt = con.prepareStatement("SELECT path FROM resumes WHERE id IN " + braceIds);
-        rs = stmt.executeQuery();
+        if (rIds.size() > 0) {
+            String braceIds = OfferDatabaseService.getBraceSyntax(rIds);
+            stmt = con.prepareStatement("SELECT path FROM resumes WHERE id IN " + braceIds);
+            rs = stmt.executeQuery();
 
-        ArrayList<String> paths = new ArrayList<>();
-        while (rs.next()) {
-            paths.add(rs.getString("path"));
-        }
+            ArrayList<String> paths = new ArrayList<>();
+            while (rs.next()) {
+                paths.add(rs.getString("path"));
+            }
 
-        stmt = con.prepareStatement("DELETE FROM resumes WHERE id IN " + braceIds);
-        stmt.executeUpdate();
+            stmt = con.prepareStatement("DELETE FROM resumes WHERE id IN " + braceIds);
+            stmt.executeUpdate();
 
-        for (String path : paths) {
-            ResourceIO.deleteFile(path);
-        }
-        if (paths.size() > 0) {
-            ResourceIO.deleteUserDir(paths.get(0));
+            for (String path : paths) {
+                ResourceIO.deleteFile(path);
+            }
+            if (paths.size() > 0) {
+                ResourceIO.deleteUserDir(paths.get(0));
+            }
         }
 
     }

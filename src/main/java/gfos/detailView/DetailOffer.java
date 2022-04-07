@@ -37,6 +37,11 @@ public class DetailOffer implements Serializable {
         return adbs.isFavorite( ((Applicant)cu.getCurrentUser()).getId(), detailOffer.getId());
     }
 
+    public String delete() {
+        odbs.delete(detailOffer);
+        return "/index.xhtml?faces-redirect=true";
+    }
+
     public void editFavorite() {
         int id = detailOffer.getId();
         if (isFavorite()) {
@@ -46,12 +51,25 @@ public class DetailOffer implements Serializable {
         }
     }
 
+    public boolean hasExtraInfos() {
+        return detailOffer.getExtras() != null && !detailOffer.getExtras().isEmpty();
+    }
+
     private void setAsFavorite(int id) {
         adbs.addToFavorites( ((Applicant)cu.getCurrentUser()).getId(), id);
     }
 
     private void removeFromFavorites(int id) {
         adbs.removeFromFavorites( ((Applicant)cu.getCurrentUser()).getId(), id);
+    }
+
+    public boolean isFinalOffer() {
+        return !detailOffer.getDraft();
+    }
+
+    public void publish() {
+        detailOffer.setDraft(false);
+        odbs.publish(detailOffer);
     }
 
     public String fieldString() {

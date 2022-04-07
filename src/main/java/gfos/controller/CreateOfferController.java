@@ -1,7 +1,9 @@
 package gfos.controller;
 
+import gfos.Pair;
 import gfos.beans.Employee;
 import gfos.beans.Offer;
+import gfos.database.MiscellaneousDatabaseService;
 import gfos.database.OfferDatabaseService;
 import gfos.longerBeans.CurrentUser;
 import gfos.longerBeans.GeoCalculator;
@@ -10,6 +12,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Named
@@ -29,6 +32,8 @@ public class CreateOfferController implements Serializable {
     CurrentUser cu;
     @Inject
     OfferDatabaseService odbs;
+    @Inject
+    MiscellaneousDatabaseService mdbs;
 
     private boolean creationError = false;
     private HashMap<String, String> errorMsgs = new HashMap<>();
@@ -42,7 +47,7 @@ public class CreateOfferController implements Serializable {
         String location = street + " " + postalCode + " " + city;
         double[] coordinates = GeoCalculator.getCoordinates(location);
 
-        odbs.createOne(new Offer(
+        int oId = odbs.createOne(new Offer(
                 -1,
                 title,
                 tasks,
@@ -57,7 +62,7 @@ public class CreateOfferController implements Serializable {
                 city
         ));
 
-        return "/tjtesla-tests/companyIndex.xhtml?faces-redirect=true";
+        return "/02-offer/offer.xhtml?faces-redirect=true&id=" + oId;
     }
 
     private void checkCreation() {
@@ -90,6 +95,18 @@ public class CreateOfferController implements Serializable {
 
     public String getErrorMsg(String name) {
         return errorMsgs.get(name) == null ? "" : errorMsgs.get(name);
+    }
+
+    public ArrayList<Pair<Integer, String>> getAllFields() {
+        return mdbs.getAllFields();
+    }
+
+    public ArrayList<Pair<Integer, String>> getAllLevels() {
+        return mdbs.getAllLevels();
+    }
+
+    public ArrayList<Pair<Integer, String>> getAllTimes() {
+        return mdbs.getAllTimes();
     }
 
     private static int toInt(String str) {

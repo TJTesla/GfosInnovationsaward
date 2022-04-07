@@ -27,6 +27,12 @@ public class ApplicationListController implements Serializable {
     @Inject
     OfferDatabaseService odbs;
 
+    private String filter;
+
+    public String filter() {
+        return "";
+    }
+
     public String delete(Application a) {
         System.out.println("DELETE IN CONTROLLER");
         adbs.delete(a);
@@ -43,12 +49,29 @@ public class ApplicationListController implements Serializable {
 
     private ArrayList<DetailApplication> offerList(boolean draft) {
         ArrayList<DetailApplication> result = new ArrayList<>();
-        ArrayList<Application> applications = adbs.getAllApplications( ((Applicant)cu.getCurrentUser()).getId(), draft );
+        ArrayList<Application> applications = adbs.getAllApplications( ((Applicant)cu.getCurrentUser()).getId(), draft, toInt(filter) );
 
         for (Application a : applications) {
             result.add(new DetailApplication(a, adbs, udbs, odbs));
         }
 
         return result;
+    }
+
+    private int toInt(String s) {
+        try {
+            return Integer.parseInt(s);
+        } catch (Exception e) {
+            System.out.println("Could not parse " + s + " to int");
+            return -1;
+        }
+    }
+
+    public String getFilter() {
+        return filter;
+    }
+
+    public void setFilter(String filter) {
+        this.filter = filter;
     }
 }
