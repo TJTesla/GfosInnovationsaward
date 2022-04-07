@@ -10,6 +10,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.*;
+import java.util.HashMap;
 
 @Named
 @ViewScoped
@@ -22,14 +23,29 @@ public class ApplicationFormController implements Serializable {
     private Offer offer;
     private UploadedFile cv;
     private String text;
+    private HashMap<String, String> errMsgs = new HashMap<>();
+    boolean applicationError;
+
+    public String getErrorMsg(String name) {
+        return errMsgs.get(name) == null ? "" : errMsgs.get(name);
+    }
 
     public String apply(boolean draft) {
+        applicationError = false;
         if (adbs.getById(offer.getId(), ((Applicant)cu.getCurrentUser()).getId()) != null) {
             return editAction(draft);
         }
         System.out.println("APPLY");
         if (cv == null) {
             System.out.println("No CV uploaded");
+            errMsgs.put("cv", "Es muss ein Lebenslauf hochgeladen werden.");
+            applicationError = true;
+        }
+        if (text.isEmpty()) {
+            errMsgs.put("text", "Es muss ein Motivationsschreiben vorliegen.");
+            applicationError = true;
+        }
+        if (applicationError) {
             return "";
         }
         int applicationId = -1;

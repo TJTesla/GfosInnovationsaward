@@ -170,14 +170,24 @@
                 <fieldset class="address">
                     <legend>Addresse:</legend>
                     <h:outputLabel for="street" value="Straße:" styleClass="label-add"><span class="obligatory">&nbsp;*</span></h:outputLabel>
-                    <h:inputText id="street" value="#{applicantRegistrationController.street}" styleClass="input-plain" />
+                    <h:inputText id="street" value="#{applicantRegistrationController.street}"
+                                 styleClass="#{applicantRegistrationController.getErrorMessage('address').equals('') ? 'input-plain' : 'input-error'}" />
                     <br />
                     <h:outputLabel for="postCode" value="Postleitzahl:" styleClass="label-add"><span class="obligatory">&nbsp;*</span></h:outputLabel>
-                    <h:inputText id="postCode" value="#{applicantRegistrationController.zip}" styleClass="input-plain" />
+                    <h:inputText id="postCode" value="#{applicantRegistrationController.zip}"
+                                 styleClass="#{applicantRegistrationController.getErrorMessage('address').equals('') ? 'input-plain' : 'input-error'}" />
                     <br />
                     <h:outputLabel for="city" value="Ort:" styleClass="label-add"><span class="obligatory">&nbsp;*</span></h:outputLabel>
-                    <h:inputText id="city" value="#{applicantRegistrationController.city}" styleClass="input-plain" />
+                    <h:inputText id="city" value="#{applicantRegistrationController.city}"
+                                 styleClass="#{applicantRegistrationController.getErrorMessage('address').equals('') ? 'input-plain' : 'input-error'}" />
                     <br />
+                    <c:if test="#{not applicantRegistrationController.getErrorMessage('address').equals('')}">
+                        <div class="errMsg-reg1">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="#{applicantRegistrationController.getErrorMessage('address')}"
+                                          rendered="#{applicantRegistrationController.registerError}" />
+                        </div>
+                    </c:if>
                 </fieldset>
 
                 <fieldset class="buttons-reg">

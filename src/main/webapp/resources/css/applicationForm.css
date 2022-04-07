@@ -45,8 +45,12 @@
     white-space: pre-line;
 }
 
-.text-area-appl:hover {
-    background-color: #7285A5;
+.errMsg-application {
+    margin: 0 0 5px 0;
+}
+
+body .pi {
+    font-size: 20px;
 }
 
 .applForm .btn-applForm {

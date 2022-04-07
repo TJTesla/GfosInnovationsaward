@@ -55,27 +55,12 @@
                     <h:outputText id="birthdate" value="#{detailApplicant.detailApplicant.bday}" styleClass="text-data" />
                 </div>
 
-                <!--div class="wrapper-text">
-                    <h:outputLabel for="street" value="Straße:" styleClass="label-profile" /> <br />
-                    <h:outputText id="street" value="" styleClass="text-data" />
-                </div>
-
-                <div class="wrapper-text">
-                    <h:outputLabel for="postCode" value="Postleitzahl:" styleClass="label-profile" />
-                    <h:outputText id="postCode" value="" styleClass="text-data" />
-                </div>
-
-                <div class="wrapper-text">
-                    <h:outputLabel for="city" value="Ort:" styleClass="label-profile" />
-                    <h:outputText id="city" value="" styleClass="text-data" />
-                </div-->
-
                 <br />
                 <h:form>
                     <div class="wrapper">
+                        <h:commandButton action="#{detailApplicant.delete()}" styleClass="btn-delete" value="Profil löschen" />
                         <h:button outcome="editProfile" value="Profil bearbeiten" styleClass="btn-edit" />
                         <h:button outcome="/00-loginRegistration/newPswd" value="Passwort ändern" styleClass="btn-edit" />
-                        <h:commandButton action="#{detailApplicant.delete()}" styleClass="btn-delete" value="Profil löschen" />
                     </div>
                 </h:form>
             </div>

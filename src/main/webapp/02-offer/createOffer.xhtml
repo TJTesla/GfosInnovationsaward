@@ -6,6 +6,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xml:lang="en" lang="en">
 <head>
     <title>Angebot</title>
@@ -23,24 +24,39 @@
                         <h:outputLabel for="title" value="Titel:" styleClass="label-offAttr" />
                         <h:inputText id="title" value="#{createOfferController.title}" styleClass="input-plain" />
                         <br />
+                        <c:if test="#{not createOfferController.getErrorMsg('title').equals('')}">
+                            <div class="errMsg-createOffer">
+                                <i class="pi pi-exclamation-circle">&nbsp;</i>
+                                <h:outputText value="#{createOfferController.getErrorMsg('title')}" />
+                            </div>
+                        </c:if>
+                        <br />
 
                         <h:outputLabel for="address" value="Adresse:" styleClass="label-title" />
                         <div id="address">
                             <div class="offer-attr">
                                 <h:outputLabel for="street" value="Straße:" />
-                                <h:inputText id="street" value="#{createOfferController.street}" required="true" styleClass="input-plain" />
+                                <h:inputText id="street" value="#{createOfferController.street}" styleClass="input-plain" />
                             </div>
 
                             <div class="offer-attr">
                                 <h:outputLabel for="postCode" value="Postleitzahl:" styleClass="label-offAttr" />
-                                <h:inputText id="postCode" value="#{createOfferController.postalCode}" required="true" styleClass="input-plain" />
+                                <h:inputText id="postCode" value="#{createOfferController.postalCode}" styleClass="input-plain" />
                             </div>
 
                             <div class="offer-attr">
                                 <h:outputLabel for="location" value="Ort:" styleClass="label-offAttr" />
-                                <h:inputText id="location" value="#{createOfferController.city}" required="true" styleClass="input-plain" />
+                                <h:inputText id="location" value="#{createOfferController.city}" styleClass="input-plain" />
                             </div>
+                            <br />
+                            <c:if test="#{not createOfferController.getErrorMsg('address').equals('')}">
+                                <div class="errMsg-createOffer">
+                                    <i class="pi pi-exclamation-circle">&nbsp;</i>
+                                    <h:outputText value="#{createOfferController.getErrorMsg('address')}" />
+                                </div>
+                            </c:if>
                         </div>
+
 
                         <div class="offer-attr">
                             <h:outputLabel for="field" value="Berufsfeld:" styleClass="label-offAttr" />
@@ -71,17 +87,37 @@
                                                itemValue="#{time.first()}" itemLabel="#{time.second()}" />
                             </h:selectOneMenu>
                         </div>
+                        <br />
+                        <c:if test="#{not createOfferController.getErrorMsg('filter').equals('')}">
+                            <div class="errMsg-createO">
+                                <i class="pi pi-exclamation-circle">&nbsp;</i>
+                                <h:outputText value="#{createOfferController.getErrorMsg('filter')}" />
+                            </div>
+                        </c:if>
                     </div>
 
                     <legend>Beschreibung:</legend>
                     <div class="offer-descr">
                         <h:outputLabel for="tasks" value="Aufgaben:" styleClass="label-offDescr" />
+                        <c:if test="#{not createOfferController.getErrorMsg('tasks').equals('')}">
+                            <div class="errMsg-createO">
+                                <i class="pi pi-exclamation-circle">&nbsp;</i>
+                                <h:outputText value="#{createOfferController.getErrorMsg('tasks')}" />
+                            </div>
+                        </c:if>
                         <br />
                         <h:inputTextarea id="tasks" value="#{createOfferController.tasks}" styleClass="area-descr" />
                         <br />
 
+
                         <h:outputLabel for="quali" value="Qualifikationen:" styleClass="label-offDescr" />
-                        <br />
+                        <c:if test="#{not createOfferController.getErrorMsg('qualifications').equals('')}">
+                            <div class="errMsg-createO">
+                                <i class="pi pi-exclamation-circle">&nbsp;</i>
+                                <h:outputText value="#{createOfferController.getErrorMsg('qualifications')}" />
+                            </div>
+                        </c:if>
+                        <br/>
                         <h:inputTextarea id="quali" value="#{createOfferController.qualifications}" styleClass="area-descr" />
                         <br />
 
@@ -91,16 +127,6 @@
                     </div>
                     <br />
 
-                    <!-- optional fields -->
-                    <!--h:selectManyCheckbox> Only if there is time left
-
-                        <f:selectItems itemValue="1" itemLabel="Datum:">
-                            <h:inputText id="date" required="false">
-                                <f:convertDateTime pattern="dd.mm.yyyy" />
-                            </h:inputText>
-                        </f:selectItems>
-
-                    </h:selectManyCheckbox-->
                     <div class="btns">
                         <h:commandButton value="Speichern" action="#{createOfferController.save(true)}" styleClass="btn-save" />
                         <h:commandButton value="Veröffentlichen" action="#{createOfferController.save(false)}" styleClass="btn-upload" />

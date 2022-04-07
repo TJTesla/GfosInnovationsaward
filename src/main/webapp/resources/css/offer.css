@@ -43,6 +43,15 @@ h1 {
 
 }
 
+body .pi {
+    font-size: 20px;
+}
+
+.errMsg-createO {
+    margin: 0;
+    padding: 0;
+}
+
 .offer-attr {
     display: inline-block;
     width: 200px;
@@ -60,6 +69,7 @@ h1 {
     margin-bottom: 10px;
     font-size: 17px;
     font-style: italic;
+    width: 150px;
 }
 
 .area-descr {
@@ -72,9 +82,6 @@ h1 {
     padding: 15px;
     background-color: whitesmoke;
     white-space: pre-line;
-}
-.area-descr:hover {
-    background-color: #7285A5;
 }
 .btns {
     padding-top: 20px;

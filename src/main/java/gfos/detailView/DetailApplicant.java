@@ -107,7 +107,7 @@ public class DetailApplicant implements Serializable {
         if (!(street.isEmpty() && zip.isEmpty() && city.isEmpty())) {
             if (street.isEmpty() || zip.isEmpty() || city.isEmpty()) {
                 changingError = true;
-                errorMsgs.put("location", "Es muss die komplette Adresse angegeben werden.");
+                errorMsgs.put("location", "Es müssen alle Bestandteile der Adresse angegeben werden.");
                 return"";
             }
             String location = street + " " + zip + " " + city;

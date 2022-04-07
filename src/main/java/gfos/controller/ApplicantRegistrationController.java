@@ -212,6 +212,10 @@ public class ApplicantRegistrationController implements Serializable {
             registerError = true;
             errorMsgs.put("passwordRepeat", "Passwörter stimmen nicht überein.");
         }
+        if (street.isEmpty() || zip.isEmpty() || city.isEmpty()) {
+            registerError = true;
+            errorMsgs.put("address", "Es müssen alle Bestandteile der Adresse eingegeben werden.");
+        }
     }
 
     public ArrayList<String> getAllTitles() {

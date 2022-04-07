@@ -39,7 +39,10 @@ public class CreateOfferController implements Serializable {
     private HashMap<String, String> errorMsgs = new HashMap<>();
 
     public String save(boolean draft) {
+        creationError = false;
+        errorMsgs.clear();
         checkCreation();
+        boolean sth = this.getErrorMsg("title").equals("");
         if (creationError) {
             return "";
         }
@@ -69,27 +72,27 @@ public class CreateOfferController implements Serializable {
         // Titel leer
         if (title.isEmpty()) {
             creationError = true;
-            errorMsgs.put("title", "Es muss ein Titel eingegeben werden");
+            errorMsgs.put("title", "Es muss ein Titel eingegeben werden.");
         }
         // Aufgaben leer
         if (tasks.isEmpty()) {
             creationError = true;
-            errorMsgs.put("tasks", "Es müssen Aufgaben angegeben werden");
+            errorMsgs.put("tasks", "Es müssen Aufgaben angegeben werden.");
         }
         // Qualifikationen leer
         if (qualifications.isEmpty()) {
             creationError = true;
-            errorMsgs.put("qualifications", "Es müssen Qualifikationen angegeben werden");
+            errorMsgs.put("qualifications", "Es müssen Qualifikationen angegeben werden.");
         }
         // Keine Adresse
         if (street.isEmpty() || postalCode.isEmpty() || city.isEmpty()) {
             creationError = true;
-            errorMsgs.put("address", "Es müssen alle Bestandteile der Adresse eingegeben werden");
+            errorMsgs.put("address", "Es müssen alle Bestandteile der Adresse eingegeben werden.");
         }
         // Keine Filter ausgewählt
         if (field.equals("-1") || level.equals("-1") || time.equals("-1")) {
             creationError = true;
-            errorMsgs.put("filter", "Es muss für alle Filter ein Wert eingegeben werden");
+            errorMsgs.put("filter", "Es muss für alle Filter ein Wert eingegeben werden.");
         }
     }
 

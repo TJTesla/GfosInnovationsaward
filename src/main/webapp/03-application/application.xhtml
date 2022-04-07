@@ -7,6 +7,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xml:lang="en" lang="en">
 <f:metadata>
     <f:viewParam name="id" value="#{applicationFormController.text}" converter="#{applicationTextConverter}" />
@@ -27,9 +28,24 @@
                 <h:outputLabel value="Lebenslauf hochladen:" styleClass="label-applForm" />
                 <p:fileUpload value="#{applicationFormController.cv}" mode="simple" styleClass="upload-cv" />
                 <br />
+                <c:if test="#{not (applicationFormController.getErrorMsg('cv').equals('')) }">
+                    <div class="errMsg-application">
+                        <i class="pi pi-exclamation-circle">&nbsp;</i>
+                        <h:outputText value="#{applicationFormController.getErrorMsg('cv')}" />
+                    </div>
+                </c:if>
+                <br />
 
-                <h:outputLabel for="lom" value="Motivationsschreiben:" styleClass="label-applForm" /> <br />
-                <h:inputTextarea id="lom" required="true" styleClass="text-area-appl" value="#{applicationFormController.text}" />
+                <h:outputLabel for="lom" value="Motivationsschreiben:" styleClass="label-applForm" />
+                <br />
+                <h:inputTextarea id="lom" styleClass="text-area-appl" value="#{applicationFormController.text}" />
+                <br />
+                <c:if test="#{not (applicationFormController.getErrorMsg('text').equals('')) }">
+                    <div class="errMsg-application">
+                        <i class="pi pi-exclamation-circle">&nbsp;</i>
+                        <h:outputText value="#{applicationFormController.getErrorMsg('text')}" />
+                    </div>
+                </c:if>
                 <div>
                     <h:commandButton value="Speichern" action="#{applicationFormController.apply(true)}" styleClass="btn-applForm"
                                      style="float: left; margin-left: 5px;" ajax="false" />
