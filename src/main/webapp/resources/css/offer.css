@@ -272,14 +272,14 @@ body .ui-button.ui-button-text-icon-left .ui-icon {
 }
 
 body .btn-delete {
-    float: right;
     height: 40px;
     width: 40px;
     font-weight: lighter;
-    margin-top: 10px;
     background-color: darkred;
     border-color: black;
     border-radius: 10px;
+    transform: translate(0, 50%);
+    margin: 0 20px 0 0;
 }
 
 body .btn-delete:hover {

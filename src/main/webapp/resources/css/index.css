@@ -110,6 +110,8 @@ body .btn-newOffer {
     border-radius: 5px;
     margin: 0;
     background-color: darkgreen;
+    text-align: center;
+    line-height: 12px;
 }
 
 .navBtn:hover {
