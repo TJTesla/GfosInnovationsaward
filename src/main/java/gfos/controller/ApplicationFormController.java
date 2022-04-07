@@ -40,6 +40,8 @@ public class ApplicationFormController implements Serializable {
             System.out.println("No CV uploaded");
             errMsgs.put("cv", "Es muss ein Lebenslauf hochgeladen werden.");
             applicationError = true;
+        } else if (cv.getSize() > 50000) {
+            errMsgs.put("cv", "Die Maximalgröße sind 5MB");
         }
         if (text.isEmpty()) {
             errMsgs.put("text", "Es muss ein Motivationsschreiben vorliegen.");

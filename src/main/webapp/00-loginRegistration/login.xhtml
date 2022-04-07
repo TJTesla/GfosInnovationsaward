@@ -165,6 +165,13 @@
 
                     <h:outputLabel for="photo" styleClass="label-reg2" value="Profilbild hochladen:" />
                     <p:fileUpload id="photo" mode="simple" update="@form" styleClass="upload" value="#{applicantRegistrationController.pbFile}"/>
+                    <c:if test="#{not applicantRegistrationController.getErrorMessage('photo').equals('')}">
+                        <div class="errMsg-reg2">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="#{applicantRegistrationController.getErrorMessage('photo')}"
+                                          rendered="#{applicantRegistrationController.registerError}" />
+                        </div>
+                    </c:if>
                     <br />
                 </fieldset>
                 <fieldset class="address">

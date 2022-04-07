@@ -76,12 +76,4 @@ public class ResourceIO {
         File dir = file.getParentFile();
         dir.delete();
     }
-
-    public StreamedContent downloadPb(User user) {
-        return null;
-    }
-
-    public StreamedContent downloadResume(Applicant applicant, Offer offer) {
-        return null;
-    }
 }

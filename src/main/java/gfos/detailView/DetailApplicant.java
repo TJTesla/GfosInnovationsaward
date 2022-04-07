@@ -109,6 +109,11 @@ public class DetailApplicant implements Serializable {
                 errorMsgs.put("name", "Dieser Benutzername wird bereits verwendet.");
             }
         }
+        // Profilbild zu groß
+        if (cv != null && cv.getSize() > 2000000) {
+            changingError = true;
+            errorMsgs.put("photo", "Die maximalgröße sind 2MB");
+        }
 
         double[] newCoords = new double[2];
         //Nicht alle Teile der Adresse angegeben
