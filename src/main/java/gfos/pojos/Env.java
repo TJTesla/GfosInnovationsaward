@@ -1,4 +1,4 @@
-package gfos;
+package gfos.pojos;
 
 public class Env {
     public static String user = "root";

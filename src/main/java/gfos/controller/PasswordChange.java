@@ -1,11 +1,11 @@
 package gfos.controller;
 
-import gfos.Regexes;
-import gfos.beans.Applicant;
-import gfos.beans.Employee;
-import gfos.beans.User;
+import gfos.pojos.Regexes;
+import gfos.pojos.Applicant;
+import gfos.pojos.Employee;
+import gfos.pojos.User;
 import gfos.database.ApplicantDatabaseService;
-import gfos.longerBeans.CurrentUser;
+import gfos.beans.CurrentUser;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;

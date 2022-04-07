@@ -1,4 +1,4 @@
-package gfos.beans;
+package gfos.pojos;
 
 import java.util.ArrayList;
 

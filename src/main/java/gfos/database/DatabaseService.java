@@ -1,10 +1,8 @@
 package gfos.database;
 
-import gfos.Env;
-import gfos.beans.User;
+import gfos.pojos.Env;
 
 import javax.annotation.PreDestroy;
-import javax.inject.Named;
 import java.sql.*;
 
 public abstract class DatabaseService {

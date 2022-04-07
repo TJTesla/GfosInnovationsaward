@@ -1,7 +1,6 @@
 package gfos.detailView;
 
-import gfos.beans.Application;
-import gfos.converter.ApplicationConverter;
+import gfos.pojos.Application;
 import gfos.database.ApplicationDatabaseService;
 
 import javax.faces.view.ViewScoped;

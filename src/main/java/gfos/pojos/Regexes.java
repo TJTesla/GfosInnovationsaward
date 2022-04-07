@@ -1,4 +1,4 @@
-package gfos;
+package gfos.pojos;
 
 public class Regexes {
     // Source: https://emailregex.com/

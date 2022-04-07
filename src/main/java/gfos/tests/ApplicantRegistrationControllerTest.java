@@ -1,15 +1,15 @@
 package gfos.tests;
 
-import gfos.Pair;
-import gfos.Regexes;
-import gfos.beans.Applicant;
-import gfos.beans.ResourceIO;
+import gfos.pojos.Pair;
+import gfos.pojos.Regexes;
+import gfos.pojos.Applicant;
+import gfos.pojos.ResourceIO;
 import gfos.controller.LoginController;
 import gfos.database.ApplicantDatabaseService;
 import gfos.database.MiscellaneousDatabaseService;
 import gfos.exceptions.UploadException;
-import gfos.longerBeans.CurrentUser;
-import gfos.longerBeans.GeoCalculator;
+import gfos.beans.CurrentUser;
+import gfos.beans.GeoCalculator;
 import org.primefaces.model.file.UploadedFile;
 
 import javax.faces.view.ViewScoped;

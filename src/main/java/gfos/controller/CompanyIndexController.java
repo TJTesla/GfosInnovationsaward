@@ -1,13 +1,13 @@
 package gfos.controller;
 
-import gfos.beans.FilterObject;
-import gfos.beans.Applicant;
-import gfos.beans.Application;
-import gfos.beans.Offer;
+import gfos.pojos.FilterObject;
+import gfos.pojos.Applicant;
+import gfos.pojos.Application;
+import gfos.pojos.Offer;
 import gfos.database.ApplicantDatabaseService;
 import gfos.database.EmployeeDatabaseService;
 import gfos.database.OfferDatabaseService;
-import gfos.longerBeans.CurrentUser;
+import gfos.beans.CurrentUser;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;

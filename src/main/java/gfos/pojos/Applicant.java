@@ -1,7 +1,5 @@
-package gfos.beans;
+package gfos.pojos;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import java.util.ArrayList;
 
 

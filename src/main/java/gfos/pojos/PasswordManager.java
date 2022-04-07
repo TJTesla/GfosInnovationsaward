@@ -1,4 +1,4 @@
-package gfos.beans;
+package gfos.pojos;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;

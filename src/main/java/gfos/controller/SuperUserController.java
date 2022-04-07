@@ -1,18 +1,17 @@
 package gfos.controller;
 
-import gfos.beans.Employee;
-import gfos.beans.PasswordManager;
-import gfos.beans.SuperUser;
+import gfos.pojos.Employee;
+import gfos.pojos.PasswordManager;
+import gfos.pojos.SuperUser;
 import gfos.database.ApplicantDatabaseService;
 import gfos.database.EmployeeDatabaseService;
-import gfos.longerBeans.CurrentUser;
+import gfos.beans.CurrentUser;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.HashMap;
 
 @Named

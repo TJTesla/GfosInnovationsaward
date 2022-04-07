@@ -1,9 +1,9 @@
 package gfos.database;
 
-import gfos.beans.FilterObject;
-import gfos.beans.Applicant;
-import gfos.beans.Offer;
-import gfos.longerBeans.GeoCalculator;
+import gfos.pojos.FilterObject;
+import gfos.pojos.Applicant;
+import gfos.pojos.Offer;
+import gfos.beans.GeoCalculator;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;

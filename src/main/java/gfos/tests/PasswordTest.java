@@ -1,6 +1,6 @@
 package gfos.tests;
 
-import gfos.beans.PasswordManager;
+import gfos.pojos.PasswordManager;
 
 import java.security.NoSuchAlgorithmException;
 

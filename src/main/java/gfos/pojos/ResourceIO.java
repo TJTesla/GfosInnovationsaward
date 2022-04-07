@@ -1,11 +1,9 @@
-package gfos.beans;
+package gfos.pojos;
 
 import gfos.exceptions.UploadException;
-import gfos.longerBeans.CurrentUser;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.file.UploadedFile;
 
-import javax.inject.Inject;
 import java.io.*;
 
 

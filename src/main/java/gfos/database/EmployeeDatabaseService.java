@@ -1,10 +1,11 @@
 package gfos.database;
 
-import gfos.beans.*;
+import gfos.pojos.Application;
+import gfos.pojos.Employee;
+import gfos.pojos.PasswordManager;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
-import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

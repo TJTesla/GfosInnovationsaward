@@ -1,6 +1,6 @@
 package gfos.controller;
 
-import gfos.beans.Offer;
+import gfos.pojos.Offer;
 import gfos.database.OfferDatabaseService;
 
 import javax.faces.view.ViewScoped;

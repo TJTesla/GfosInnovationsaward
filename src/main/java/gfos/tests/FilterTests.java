@@ -1,7 +1,7 @@
 package gfos.tests;
 
-import gfos.beans.FilterObject;
-import gfos.beans.Offer;
+import gfos.pojos.FilterObject;
+import gfos.pojos.Offer;
 import gfos.database.OfferDatabaseService;
 
 import java.sql.SQLException;

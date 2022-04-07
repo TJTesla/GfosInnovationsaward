@@ -1,6 +1,6 @@
 package gfos.database;
 
-import gfos.Pair;
+import gfos.pojos.Pair;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;

@@ -1,24 +1,17 @@
 package gfos.detailView;
 
-import gfos.Regexes;
-import gfos.beans.Applicant;
-import gfos.beans.ResourceIO;
+import gfos.pojos.Regexes;
+import gfos.pojos.Applicant;
+import gfos.pojos.ResourceIO;
 import gfos.database.ApplicantDatabaseService;
 import gfos.exceptions.UploadException;
-import gfos.longerBeans.CurrentUser;
-import gfos.longerBeans.GeoCalculator;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
+import gfos.beans.CurrentUser;
+import gfos.beans.GeoCalculator;
 import org.primefaces.model.file.UploadedFile;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.regex.Pattern;

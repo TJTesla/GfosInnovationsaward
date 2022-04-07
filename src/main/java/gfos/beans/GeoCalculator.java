@@ -1,7 +1,7 @@
-package gfos.longerBeans;
+package gfos.beans;
 
 import com.google.gson.*;
-import gfos.Env;
+import gfos.pojos.Env;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;

@@ -1,8 +1,8 @@
 package gfos.converter;
 
-import gfos.beans.Applicant;
+import gfos.pojos.Applicant;
 import gfos.database.ApplicationDatabaseService;
-import gfos.longerBeans.CurrentUser;
+import gfos.beans.CurrentUser;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

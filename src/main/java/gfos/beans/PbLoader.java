@@ -1,7 +1,7 @@
 package gfos.beans;
 
 import gfos.database.ApplicantDatabaseService;
-import gfos.longerBeans.CurrentUser;
+import gfos.pojos.Applicant;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 

@@ -1,16 +1,12 @@
 package gfos.database;
 
-import gfos.beans.Application;
-import gfos.beans.Resume;
-import gfos.detailView.DetailApplication;
+import gfos.pojos.Application;
+import gfos.pojos.Resume;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
-import javax.servlet.jsp.jstl.sql.SQLExecutionTag;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 

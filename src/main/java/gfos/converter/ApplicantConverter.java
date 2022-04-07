@@ -1,8 +1,7 @@
 package gfos.converter;
 
-import gfos.beans.Applicant;
+import gfos.pojos.Applicant;
 import gfos.database.ApplicantDatabaseService;
-import gfos.database.DatabaseService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;

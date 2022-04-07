@@ -1,10 +1,8 @@
 package gfos.controller;
 
-import gfos.beans.Applicant;
-import gfos.beans.Employee;
-import gfos.beans.User;
+import gfos.pojos.User;
 import gfos.database.ApplicantDatabaseService;
-import gfos.longerBeans.CurrentUser;
+import gfos.beans.CurrentUser;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -14,7 +12,6 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
 
 @Named
 @ViewScoped

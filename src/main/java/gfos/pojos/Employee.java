@@ -1,4 +1,4 @@
-package gfos.beans;
+package gfos.pojos;
 
 public class Employee extends User {
     private boolean registered;

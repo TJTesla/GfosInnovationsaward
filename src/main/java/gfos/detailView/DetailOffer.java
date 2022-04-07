@@ -1,12 +1,11 @@
 package gfos.detailView;
 
-import gfos.beans.Applicant;
-import gfos.beans.Application;
-import gfos.beans.Employee;
-import gfos.beans.Offer;
+import gfos.pojos.Applicant;
+import gfos.pojos.Employee;
+import gfos.pojos.Offer;
 import gfos.database.ApplicantDatabaseService;
 import gfos.database.OfferDatabaseService;
-import gfos.longerBeans.CurrentUser;
+import gfos.beans.CurrentUser;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;

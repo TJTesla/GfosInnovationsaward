@@ -1,8 +1,6 @@
-package gfos.longerBeans;
+package gfos.beans;
 
-import gfos.beans.Applicant;
-import gfos.beans.Employee;
-import gfos.beans.User;
+import gfos.pojos.User;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;

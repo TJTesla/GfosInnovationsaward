@@ -1,13 +1,11 @@
 package gfos.tests;
 
-import gfos.beans.Applicant;
-import gfos.beans.Application;
-import gfos.beans.Employee;
-import gfos.beans.Offer;
+import gfos.pojos.Applicant;
+import gfos.pojos.Employee;
 import gfos.database.ApplicantDatabaseService;
 import gfos.database.EmployeeDatabaseService;
 import gfos.database.OfferDatabaseService;
-import gfos.longerBeans.CurrentUser;
+import gfos.beans.CurrentUser;
 
 import javax.inject.Named;
 import javax.inject.Inject;

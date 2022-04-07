@@ -1,14 +1,13 @@
 package gfos.detailView;
 
-import gfos.beans.*;
 import gfos.database.ApplicantDatabaseService;
 import gfos.database.ApplicationDatabaseService;
 import gfos.database.OfferDatabaseService;
-import gfos.longerBeans.CurrentUser;
+import gfos.beans.CurrentUser;
+import gfos.pojos.*;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
-import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;

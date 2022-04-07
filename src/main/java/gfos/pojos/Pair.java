@@ -1,4 +1,4 @@
-package gfos;
+package gfos.pojos;
 
 public class Pair <Type1, Type2>{
     Type1 t1;

@@ -1,6 +1,6 @@
 package gfos.converter;
 
-import gfos.beans.Offer;
+import gfos.pojos.Offer;
 import gfos.database.OfferDatabaseService;
 
 import javax.enterprise.context.RequestScoped;

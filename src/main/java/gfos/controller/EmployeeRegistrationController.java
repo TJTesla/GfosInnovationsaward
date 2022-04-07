@@ -1,18 +1,14 @@
 package gfos.controller;
 
-import gfos.Regexes;
-import gfos.beans.Employee;
-import gfos.beans.ResourceIO;
+import gfos.pojos.Regexes;
+import gfos.pojos.Employee;
 import gfos.database.ApplicantDatabaseService;
 import gfos.database.EmployeeDatabaseService;
-import gfos.exceptions.UploadException;
-import gfos.longerBeans.CurrentUser;
-import org.primefaces.model.file.UploadedFile;
+import gfos.beans.CurrentUser;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.regex.Pattern;

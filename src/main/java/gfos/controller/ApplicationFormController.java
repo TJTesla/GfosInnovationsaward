@@ -1,9 +1,9 @@
 package gfos.controller;
 
-import gfos.beans.*;
 import gfos.database.ApplicationDatabaseService;
 import gfos.exceptions.UploadException;
-import gfos.longerBeans.CurrentUser;
+import gfos.beans.CurrentUser;
+import gfos.pojos.*;
 import org.primefaces.model.file.UploadedFile;
 
 import javax.faces.view.ViewScoped;

@@ -1,8 +1,7 @@
 package gfos.database;
 
-import gfos.beans.*;
+import gfos.pojos.*;
 
-import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import java.security.NoSuchAlgorithmException;

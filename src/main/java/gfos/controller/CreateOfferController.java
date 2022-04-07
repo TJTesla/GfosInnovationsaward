@@ -1,12 +1,12 @@
 package gfos.controller;
 
-import gfos.Pair;
-import gfos.beans.Employee;
-import gfos.beans.Offer;
+import gfos.pojos.Pair;
+import gfos.pojos.Employee;
+import gfos.pojos.Offer;
 import gfos.database.MiscellaneousDatabaseService;
 import gfos.database.OfferDatabaseService;
-import gfos.longerBeans.CurrentUser;
-import gfos.longerBeans.GeoCalculator;
+import gfos.beans.CurrentUser;
+import gfos.beans.GeoCalculator;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
