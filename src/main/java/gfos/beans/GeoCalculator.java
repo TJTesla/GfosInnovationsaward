@@ -9,6 +9,8 @@ import kong.unirest.Unirest;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 
+// Statische Klasse, fürs Geocoding und Distanz berechnen (Haversine formula)
+
 @Named
 @ApplicationScoped
 public class GeoCalculator {

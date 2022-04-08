@@ -14,6 +14,8 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+// Controller zum bekommen der Listen an Bewerbungen
+
 @Named
 @ViewScoped
 public class ApplicationListController implements Serializable {

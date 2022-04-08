@@ -25,6 +25,8 @@ import java.util.HashMap;
 import java.util.regex.Pattern;
 import java.time.LocalDate;
 
+// Controller zum Registrieren von Applicants
+
 @Named
 @ViewScoped
 public class ApplicantRegistrationController implements Serializable {
@@ -35,6 +37,7 @@ public class ApplicantRegistrationController implements Serializable {
     @Inject
     CurrentUser cu;
 
+    // Alle Felder des Formulars
     private String salutation;
     private String[] title;
     private String firstname;
@@ -54,6 +57,7 @@ public class ApplicantRegistrationController implements Serializable {
     private boolean showRegistration = false;
 
     public String register() {
+        // Erlauben, dass fehler zurückgesetzt werden
         errorMsgs.clear();
         registerError = false;
         checkRegistration();
@@ -91,6 +95,7 @@ public class ApplicantRegistrationController implements Serializable {
         return "/index.xhtml?faces-redirect=true";
     }
 
+    // Speichern des Profilbilds
     private void savePb(Applicant a) {
         try {
             String pbDir = ResourceIO.uploadPb(pbFile, a);
@@ -102,6 +107,7 @@ public class ApplicantRegistrationController implements Serializable {
         }
     }
 
+    // Überprüfen on gegebenes Geburtsdatum in richtigen Format ist
     private boolean checkDateFormat(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         try {
@@ -112,6 +118,7 @@ public class ApplicantRegistrationController implements Serializable {
         return true;
     }
 
+    // Mindestalter (16) und Maximalalter (67) überprüfen
     private boolean checkAge(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         LocalDate birthdate = LocalDate.parse(date, formatter);
@@ -125,6 +132,7 @@ public class ApplicantRegistrationController implements Serializable {
     @Inject
     LoginController login;
 
+    // Wechseln der Ansicht von Login zu Registrierung
     public void switchView() {
         showRegistration = !showRegistration;
         login.setLoginError(false);
@@ -138,6 +146,7 @@ public class ApplicantRegistrationController implements Serializable {
         return new ArrayList<>(Arrays.asList(arr));
     }
 
+    // Überprüfen, ob Fehler gemacht wurden
     private void checkRegistration() {
         // Keine Anrede
         if (salutation.equals("-1")) {
@@ -233,6 +242,8 @@ public class ApplicantRegistrationController implements Serializable {
 
         return arr;
     }
+
+    // Getter und Setter //
 
     public String getSalutation() {
         return salutation;

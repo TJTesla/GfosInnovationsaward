@@ -12,7 +12,12 @@ public abstract class DatabaseService {
 
     public DatabaseService() throws SQLException {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ApplicationManagement?useSSL=false&allowPublicKeyRetrieval=true", Env.user, Env.password);
+            //con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ApplicationManagement?useSSL=false&allowPublicKeyRetrieval=true", Env.user, Env.password);
+            con = DriverManager.getConnection(
+                    "jdbc:mysql://bewerbermanagement.educationhost.cloud:3306/fdrvpqxv_applicationmanagement?useSSL=false&allowPublicKeyRetrieval=true",
+                    Env.remoteUser,
+                    Env.remotePassword
+            );
             stmt = null;
             rs = null;
         } catch (SQLException sqlException) {

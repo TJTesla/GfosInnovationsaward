@@ -7,9 +7,13 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 
+// Speichert, dem aktuell angemeldeten Nutzer als Onjekt von Typ User
+// Ermöglicht einfaches Überprüfen, wer angemeldet ist
+
 @Named
 @SessionScoped
 public class CurrentUser implements Serializable {
+    // Aktuell angemeldeter Nutzer
     private User currentUser;
 
     @PostConstruct

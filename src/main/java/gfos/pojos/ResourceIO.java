@@ -53,8 +53,12 @@ public class ResourceIO {
         String folder = "";
         folder = "applicants";
         String path = "uploads/profilepics/" + folder + "/" + user.getName() + file.getFileName();
+        File f = new File(System.getProperty("user.dir"), path);
 
-        save(file, new File(System.getProperty("user.dir"), path));
+        File parent = f.getParentFile();
+        f.mkdirs();
+
+        save(file, f);
 
         return path;
     }

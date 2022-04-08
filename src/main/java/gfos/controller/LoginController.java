@@ -1,5 +1,6 @@
 package gfos.controller;
 
+import gfos.pojos.SuperUser;
 import gfos.pojos.User;
 import gfos.database.ApplicantDatabaseService;
 import gfos.beans.CurrentUser;
@@ -29,6 +30,7 @@ public class LoginController implements Serializable {
     public String login() {
         loginError = false;
         if (isSuperUser()) {
+            cu.setCurrentUser(new SuperUser());
             return "/00-loginRegistration/superUser.xhtml?faces-redirect=true";
         }
 

@@ -16,9 +16,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// Controller zum Erstellen eines Angebots
+
 @Named
 @ViewScoped
 public class CreateOfferController implements Serializable {
+    // Alle Felder
     private String title;
     private String tasks, qualifications, extras;
     private String field;

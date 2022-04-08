@@ -12,6 +12,8 @@ import javax.inject.Named;
 import java.io.*;
 import java.util.HashMap;
 
+// Controller zum Bewerben
+
 @Named
 @ViewScoped
 public class ApplicationFormController implements Serializable {
@@ -32,10 +34,11 @@ public class ApplicationFormController implements Serializable {
 
     public String apply(boolean draft) {
         applicationError = false;
+        // Falls schon application existiert, bearbeiten, nicht erstellen
         if (adbs.getById(offer.getId(), ((Applicant)cu.getCurrentUser()).getId()) != null) {
             return editAction(draft);
         }
-        System.out.println("APPLY");
+        // Auf Fehler überprüfen
         if (cv == null) {
             System.out.println("No CV uploaded");
             errMsgs.put("cv", "Es muss ein Lebenslauf hochgeladen werden.");
@@ -50,6 +53,7 @@ public class ApplicationFormController implements Serializable {
         if (applicationError) {
             return "";
         }
+
         int applicationId = -1;
         try {
             Applicant currentApplicant = (Applicant)(cu.getCurrentUser());
@@ -73,7 +77,7 @@ public class ApplicationFormController implements Serializable {
             System.out.println(uploadException.getMessage());
         }
 
-        return "/03-application/applDetailUser.xhtml?id=" + applicationId + "&faces-redirect=true"; // Succespage.xhtml?faces-redirect=true
+        return "/03-application/applDetailUser.xhtml?id=" + applicationId + "&faces-redirect=true";
     }
 
     private String editAction(boolean draft) {
