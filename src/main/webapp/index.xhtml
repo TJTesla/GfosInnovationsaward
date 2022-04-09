@@ -33,8 +33,8 @@
                         <div class="navContent" id="dropdownField">
                             <ui:repeat id="field" var="f" value="#{indexController.allFields}">
                                 <div class="a">
-                                    <h:selectBooleanCheckbox styleClass="checkBox" value="#{indexController.field[f.first()]}" />
-                                    <h:outputLabel styleClass="checkLabel" value="#{f.second()}" />
+                                    <h:selectBooleanCheckbox for="fCheck" styleClass="checkBox" value="#{indexController.field[f.first()]}" />
+                                    <h:outputLabel id="fCheck" styleClass="checkLabel" value="#{f.second()}" />
                                 </div>
                             </ui:repeat>
                         </div>
@@ -45,8 +45,8 @@
                         <div class="navContent" id="dropdownLevel">
                             <ui:repeat id="level" var="l" value="#{indexController.allLevels}" varStatus="">
                                 <div class="a">
-                                    <h:selectBooleanCheckbox styleClass="checkBox" value="#{indexController.level[l.first()]}" />
-                                    <h:outputLabel styleClass="checkLabel" value="#{l.second()}" />
+                                    <h:selectBooleanCheckbox for="lCheck" styleClass="checkBox" value="#{indexController.level[l.first()]}" />
+                                    <h:outputLabel id="lCheck" styleClass="checkLabel" value="#{l.second()}" />
                                 </div>
                             </ui:repeat>
                         </div>
@@ -57,8 +57,8 @@
                         <div class="navContent" id="dropdownTime">
                             <ui:repeat id="time" var="t" value="#{indexController.allTimes}" varStatus="">
                                 <div class="a">
-                                    <h:selectBooleanCheckbox styleClass="checkBox" value="#{indexController.time[t.first()]}" />
-                                    <h:outputLabel styleClass="checkLabel" value="#{t.second()}" />
+                                    <h:selectBooleanCheckbox for="tCheck" styleClass="checkBox" value="#{indexController.time[t.first()]}" />
+                                    <h:outputLabel id="tCheck" styleClass="checkLabel" value="#{t.second()}" />
                                 </div>
                             </ui:repeat>
                         </div>

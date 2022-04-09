@@ -9,8 +9,9 @@
     --d-input-bg-color: #13274F;
     --d-input-bg-hover-color: #1d3b79;
     --d-btn-bg-color: #13274F;
-    --l-body-bg-color: #D5E9F5;
-    --l-input-bg-color: #D5E9F5;
+    --l-body-bg-color: whitesmoke;
+    --l-input-bg-color: #F0F8FF;
+    --l-input-bg-hover-color: #bcc5e1;
     --input-width: 200px;
 }
 html {
@@ -30,8 +31,7 @@ body {
 
 .something {
     /*Light: */
-    color: #F0F8FF; color: #D5E9F5; color:#A2D7F7; color: #4B9CD3;
-    color: #073980;
+    color: whitesmoke; color: #F0F8FF; color: #a7b6c7; color: #7285A5; color: #073980;
     /*Border*/
     color: #c2d4df; /*Hover*/ color: #89a1b0; .sidenav hover color: #83949e
 
@@ -47,18 +47,23 @@ body {
 
 @media (prefers-color-scheme: light) {
     body {
-        background-color: #A2D7F7;
-        color: black;
+        background-color: #384e7b;
+        color: #13274F;
     }
-    .head, .foot{
-        background-color: #A2D7F7;
+    .head {
+        background: rgb(56, 78, 123);
+        background: linear-gradient(0deg, rgba(245,245,245,1) 0%, rgba(56,78,123,1) 100%);
+    }
+    .foot{
+        background: rgb(56, 78, 123);
+        background: linear-gradient(0deg, rgba(56,78,123,1) 0%, rgba(245,245,245,1) 100%);
     }
     .content {
         background-color: var(--l-body-bg-color);
     }
     fieldset {
-        background-color:#A2D7F7;
-        border-color: #c2d4df;
+        background-color: #a7b6c7;
+        border-color: #7285a5;
     }
     /*:hover {
         background-color: #89a1b0;
@@ -66,18 +71,10 @@ body {
     [class*="input-"] {
         background-color: var(--l-input-bg-color);
         color: black;
-        border-color: #4B9CD3;
-    }
-    body .p-datepicker, .ui-calender, .ui-datepicker {
-        background-color: var(--l-input-bg-color);
-        color: black;
-        border-width: 2px;
-        border-color: #4B9CD3;
-        font-size: 15px;
-        font-style: inherit;
+        border-color: #7285a5;
     }
     [class*="input-"]:hover {
-        background-color: #d39f4b;
+        background-color: var(--l-input-bg-hover-color);
     }
     .description {
         color: black;
@@ -88,14 +85,15 @@ body {
 
     body {
         color: whitesmoke;
+        background-color: #365393;
     }
     .head {
         background: rgb(19,39,79);
-        background: linear-gradient(0deg, rgba(19,39,79,1) 0%, rgb(23, 46, 93) 35%, rgb(29, 59, 121) 65%, rgb(54, 83, 147) 100%);
+        background: linear-gradient(0deg, rgb(0, 33, 71) 0%, rgb(23, 46, 93) 35%, rgb(29, 59, 121) 65%, rgb(54, 83, 147) 100%);
     }
     .foot {
         background: #13274F;
-        background: linear-gradient(0deg, rgb(54, 83, 147) 0%, rgb(29, 59, 121) 35%, rgb(23, 46, 93) 65%, rgba(19,39,79,1) 100%);
+        background: linear-gradient(0deg, rgb(54, 83, 147) 0%, rgb(29, 59, 121) 35%, rgb(23, 46, 93) 65%, rgb(0, 33, 71) 100%);
     }
     /*.head {
         background-image: linear-gradient(to bottom, rgba(19, 39, 79, 0), rgba(19, 39, 79, 1) );
@@ -130,7 +128,7 @@ body {
     height: 120px;
 }
 .foot {
-    height: 150px;
+    height: 300px;
     overflow: hidden;
     margin-bottom: 0;
     text-align: center;

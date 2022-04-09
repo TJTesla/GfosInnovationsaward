@@ -1,16 +1,108 @@
 :root {
-    --filter-bg-color: #384e7b
+    --filter-d-bg-color: #384e7b;
+    --filter-l-bg-color: #7285a5;
 }
 
 @media (prefers-color-scheme: dark) {
     .allOffers {
+        border-top: solid;
+        border-bottom: solid;
+        border-left: none;
+        border-right: none;
+        border-width: 2px;
         border-color: #13274F;
+    }
+    .filter {
+        background-color: var(--filter-d-bg-color);
+    }
+    .navContent .a {
+        background-color: #7285A5;
+    }
+    .navContent .a:hover {
+        background-color: #a59272;
+    }
+    .navBtn {
+        background-color: var(--filter-d-bg-color);
+    }
+    .navBtn:hover {
+        background-color: #7b5138;
+    }
+    .input-location {
+        background-color: var(--filter-d-bg-color);
+    }
+    .input-location:hover {
+        background-color: #7b5138;
+    }
+    .menu-pref:hover {
+        background-color: #7b5138;
+    }
+    .dropdown .dropbtn:hover {
+        background-color: #7b5138;
+    }
+    .border-line {
+        border-bottom: solid;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-width: 2px;
+        border-color: #384e7b;
+    }
+    .allOffers {
+        border-top: solid;
+        border-bottom: solid;
+        border-left: none;
+        border-right: none;
+        border-width: 2px;
+        border-color: #384e7b;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+
+    .filter {
+        background-color: var(--filter-l-bg-color);
+    }
+    .navContent .a {
+        background-color: #a7b6c7;
+    }
+    .navBtn {
+        background-color: var(--filter-l-bg-color);
+    }
+    .navBtn:hover {
+        background-color: #a59272;
+    }
+    .input-location {
+        background-color: var(--filter-l-bg-color);
+    }
+    .input-location:hover {
+        background-color: #a59272;
+    }
+    .menu-pref:hover {
+        background-color: #a59272;
+    }
+    .dropdown .dropbtn:hover {
+        background-color: #a59272;
+    }
+    .border-line {
+        border-bottom: solid;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-width: 2px;
+        border-color: #a7b6c7;
+    }
+    .allOffers {
+        border-top: solid;
+        border-bottom: solid;
+        border-left: none;
+        border-right: none;
+        border-width: 2px;
+        border-color: #a7b6c7;
     }
 }
 
 .filter {
     margin: 50px 10% 20px;
-    background-color: var(--filter-bg-color);
 }
 .input-location {
     width: 160px;
@@ -18,7 +110,6 @@
     padding: 10px 12px;
     float: left;
     display: inline-block;
-    background-color: var(--filter-bg-color);
     border-width: 0;
     font-size: 16px;
 }
@@ -26,9 +117,6 @@
     color: whitesmoke;
     font-family: inherit;
     font-size: 16px;
-}
-.input-location:hover {
-    background-color: #7b5138;
 }
 
 .dropdown {
@@ -47,9 +135,7 @@
     font-family: inherit;
     margin: 0;
 }
-.dropdown .dropbtn:hover {
-    background-color: #7b5138;
-}
+
 body .pi {
     font-size: 19px;
     margin-left: 5px;
@@ -63,15 +149,12 @@ body .pi {
     float: none;
     width: auto;
     z-index: 1;
-    background-color: #7285A5;
     display: block;
     text-align: left;
     padding: 10px 20px;
     height: auto;
 }
-.navContent .a:hover {
-    background-color: #a59272;
-}
+
 
 .checkBox {
     display: inline-block;
@@ -93,7 +176,6 @@ body .pi {
     border-width: 0;
     border-radius: 5px;
     margin: 0;
-    background-color: var(--filter-bg-color);
     height: 30px;
     width: 100px;
 }
@@ -114,10 +196,9 @@ body .btn-newOffer {
     line-height: 12px;
 }
 
-.navBtn:hover {
-    background-color: #7b5138;
-}
+
 .select-pref {
+    color: whitesmoke;
     display: inline-block;
     font-size: 16px;
     padding: 10px 16px;
@@ -125,12 +206,7 @@ body .btn-newOffer {
 .label-pref {
     padding-right: 10px;
 }
-#otherPrefs {
-    background-color: inherit;
-}
-#otherPrefs:hover {
-    background-color: #7b5138;
-}
+
 .menu-pref {
     width: 150px;
     height: 25px;
@@ -144,11 +220,10 @@ body .btn-newOffer {
     font-style: italic;
 }
 
-.menu-pref:hover {
-    background-color: #7b5138;
-}
+
 
 .select-fav {
+    color: whitesmoke;
     display: inline-block;
     padding: 10px 16px;
     font-size: 16px;
@@ -189,21 +264,9 @@ body .btn-newOffer {
     background-color: inherit;
 }
 .border-line {
-    border-bottom: solid;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-width: 2px;
-    border-color: #384e7b;
     margin-top: 30px;
 }
 .allOffers {
-    border-top: solid;
-    border-bottom: solid;
-    border-left: none;
-    border-right: none;
-    border-width: 2px;
-    border-color: #384e7b;
     margin-top: -2px;
     padding: 15px 20px 15px;
     height: 100px;

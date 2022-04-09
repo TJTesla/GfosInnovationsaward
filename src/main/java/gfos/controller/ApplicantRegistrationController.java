@@ -226,9 +226,11 @@ public class ApplicantRegistrationController implements Serializable {
             errorMsgs.put("address", "Es müssen alle Bestandteile der Adresse eingegeben werden.");
         }
         // Profilbild Datei ist zu groß
-        if (pbFile.getSize() > 2000000) {
-            registerError = true;
-            errorMsgs.put("photo", "Die Maximalgröße sind 2MB");
+        if(pbFile != null) {
+            if (pbFile.getSize() > 2000000) {
+                registerError = true;
+                errorMsgs.put("photo", "Die Datei darf maximal 2MB groß sein.");
+            }
         }
     }
 
