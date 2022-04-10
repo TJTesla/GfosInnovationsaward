@@ -25,37 +25,11 @@
         background-color: var(--d-input-bg-color);
         border-color: #673147;
     }
-    .input-co-error {
-        background-color: var(--d-input-bg-color);
-        border-color: #673147;
-    }
     .headingF {
         background-color: var(--d-body-bg-color);
     }
     [class*= "buttons-"] {
         background-color: var(--d-body-bg-color);
-    }
-    body .ui-datepicker {
-        background-color: var(--d-input-bg-color);
-        color: whitesmoke;
-        border-style: none;
-        font-size: 15px;
-        font-style: inherit;
-    }
-    body .ui-datepicker:hover {
-        background-color: #4f3b13;
-    }
-    body .ui-inputfield {
-        background-color: var(--d-input-bg-color);
-        color: whitesmoke;
-        border-width: 2px;
-        border-color: #7285A5;
-        font-size: 15px;
-        font-style: inherit;
-    }
-    body .ui-inputfield:hover {
-        background-color: #4f3b13;
-        border-color: #7285A5;
     }
 }
 @media (prefers-color-scheme: light) {
@@ -67,11 +41,7 @@
     }
     .input-error {
         background-color: var(--l-input-bg-color);
-        border-color: #673147;
-    }
-    .input-co-error {
-        background-color: var(--l-input-bg-color);
-        border-color: #673147;
+        border-color: #ffa6a6;
     }
     .headingF {
         background-color: var(--l-body-bg-color);
@@ -170,22 +140,6 @@ fieldset {
 .checkTitel label {
     margin-left: 5px;
     margin-right: 20px;
-}
-body .ui-datepicker {
-    padding: 0;
-    width: var(--input-width);
-    height: 20px;
-}
-body .ui-inputfield {
-    width: var(--input-width);
-    height: 20px;
-    font-size: inherit;
-    border-radius: 5px;
-    margin: 0;
-    padding: 0;
-}
-body .ui-inputfield.ui-state-focus {
-    box-shadow: none;
 }
 
 /* Profil-Daten */
@@ -324,8 +278,5 @@ body .pi {
     color: #6495ED;
     /*color: #fc95e6;*/
 }
-.link:visited {
-    color: #14ff80;
-    text-shadow: #ff1493;
-}
+
 

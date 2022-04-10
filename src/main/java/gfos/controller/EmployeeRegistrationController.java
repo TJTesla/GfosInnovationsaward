@@ -60,12 +60,12 @@ public class EmployeeRegistrationController implements Serializable {
         // Name wird schon benutzt
         if (!edbs.employeeCreated(name, key) || name.equals("root")) {
             registerError = true;
-            errorMsgs.put("name", "Es wurde kein nur eingetragener Angestellter für den Namen \"" + name + "\" und dem angegebenen Passwort gefunden.");
+            errorMsgs.put("name", "Es wurde kein noch nicht aktivierter eingetragener Angestellter für den Namen \"" + name + "\" und dem angegebenen Passwort gefunden.");
         }
         // Passwort leer
         if (password.isEmpty()) {
             registerError = true;
-            errorMsgs.put("password", "Es muss ein Passwort angegeben werden");
+            errorMsgs.put("password", "Es muss ein Passwort angegeben werden.");
         }
         // Passwort regex
         if (!Pattern.compile(Regexes.password).matcher(password).find() && !password.isEmpty()) {
@@ -75,7 +75,7 @@ public class EmployeeRegistrationController implements Serializable {
         // Passwort wiederholung
         if (!password.equals(passwordRepeat)) {
             registerError = true;
-            errorMsgs.put("password", "Passwörter stimmen nicht überein.");
+            errorMsgs.put("passwordRepeat", "Passwörter stimmen nicht überein.");
         }
     }
 

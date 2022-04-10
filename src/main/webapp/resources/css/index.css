@@ -63,7 +63,10 @@
         background-color: var(--filter-l-bg-color);
     }
     .navContent .a {
-        background-color: #a7b6c7;
+        background-color: #cfd8e1;
+    }
+    .navContent .a:hover {
+        background-color: #e1d8cf;
     }
     .navBtn {
         background-color: var(--filter-l-bg-color);
@@ -89,7 +92,7 @@
         border-left: none;
         border-right: none;
         border-width: 2px;
-        border-color: #a7b6c7;
+        border-color: #cfd8e1;
     }
     .allOffers {
         border-top: solid;
@@ -97,7 +100,7 @@
         border-left: none;
         border-right: none;
         border-width: 2px;
-        border-color: #a7b6c7;
+        border-color: #cfd8e1;
     }
 }
 

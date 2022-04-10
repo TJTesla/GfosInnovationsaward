@@ -136,6 +136,8 @@ public class ApplicantRegistrationController implements Serializable {
     public void switchView() {
         showRegistration = !showRegistration;
         login.setLoginError(false);
+        registerError = false;
+        errorMsgs.clear();
     }
 
     public String getErrorMessage(String name) {

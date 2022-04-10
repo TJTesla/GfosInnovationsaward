@@ -10,7 +10,7 @@
     --d-input-bg-hover-color: #1d3b79;
     --d-btn-bg-color: #13274F;
     --l-body-bg-color: whitesmoke;
-    --l-input-bg-color: #F0F8FF;
+    --l-input-bg-color: #f3f7fc;
     --l-input-bg-hover-color: #bcc5e1;
     --input-width: 200px;
 }
@@ -62,22 +62,27 @@ body {
         background-color: var(--l-body-bg-color);
     }
     fieldset {
-        background-color: #a7b6c7;
+        background-color: #cfd8e1;;
         border-color: #7285a5;
+        border-width: 3px;
+        border-style: solid;
     }
-    /*:hover {
-        background-color: #89a1b0;
-    }*/
     [class*="input-"] {
         background-color: var(--l-input-bg-color);
         color: black;
-        border-color: #7285a5;
+        border-color: #a7b6c7;
     }
     [class*="input-"]:hover {
         background-color: var(--l-input-bg-hover-color);
     }
     .description {
         color: black;
+    }
+    .body.btn-fav {
+        background-color: #a7b6c7;
+    }
+    .body.btn-fav1 {
+        background-color: gold;
     }
 }
 
@@ -95,18 +100,13 @@ body {
         background: #13274F;
         background: linear-gradient(0deg, rgb(54, 83, 147) 0%, rgb(29, 59, 121) 35%, rgb(23, 46, 93) 65%, rgb(0, 33, 71) 100%);
     }
-    /*.head {
-        background-image: linear-gradient(to bottom, rgba(19, 39, 79, 0), rgba(19, 39, 79, 1) );
-    }
-    .foot {
-        background-image: linear-gradient(to bottom, rgba(19, 39, 79, 0), rgba(19, 39, 79, 1) );
-    }*/
     .content {
         background-color: var(--d-body-bg-color);
     }
     fieldset {
         background-color: #13274F;
-
+        border-width: 3px;
+        border-style: solid;
     }
     [class*="input-"] {
         color: whitesmoke;
@@ -120,9 +120,12 @@ body {
         color: whitesmoke;
         background-color: var(--d-input-bg-color);
     }
-    /*:hover {
-        background-color: #384e7b;
-    }*/
+    .body.btn-fav {
+        background-color: #7285A5;
+    }
+    .body.btn-fav1 {
+        background-color: #B98B0E;
+    }
 }
 .head {
     height: 120px;
@@ -147,9 +150,7 @@ legend {
     padding-top: 10px;
     padding-bottom: 10px;
 }
-fieldset {
-    border: solid 1px #001b3b;
-}
+
 [class*="input-"] {
     border-radius: 5px;
     width: var(--input-width);
@@ -209,7 +210,6 @@ body .btn-fav {
 }
 body .btn-fav1 {
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    background-color: #B98B0E; /* for if it is favorite */
 }
 
 .image-profile {
