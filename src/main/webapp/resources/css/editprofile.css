@@ -43,6 +43,10 @@
 }
 
 /* Edit Data */
+.upload {
+    font-family: inherit;
+    font-style: italic;
+}
 .edit {
     margin-right: 35%;
     margin-left: 35%;

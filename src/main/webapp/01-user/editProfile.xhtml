@@ -30,6 +30,8 @@
                 <hr />
                 <fieldset class="edit">
                     <p:graphicImage value="#{pbLoader.load()}" styleClass="image-profile" cache="false" />
+                    <br />
+                    <h:outputLabel for="photo" value="Profilbild:" styleClass="label-edit"/>
                     <p:fileUpload id="photo" mode="simple" update="@form" styleClass="upload" value="#{detailApplicant.cv}" />
                     <br />
                     <h:outputLabel for="username" value="Benutzername:" styleClass="label-edit"/>
@@ -77,6 +79,7 @@
                         </p>
                     </c:if>
                     <br />
+                    <hr style="margin-left: 5%; margin-right: 5%" />
                     <h:outputLabel for="street" value="Straße:" styleClass="label-edit" />
                     <h:inputText id="street" styleClass="input-edit" value="#{detailApplicant.street}" />
                     <br />

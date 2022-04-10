@@ -189,7 +189,7 @@ body .btn-newOffer {
     width: 220px;
     font-size: 16px;
     font-family: inherit;
-    color: inherit;
+    color: whitesmoke;
     font-weight: bolder;
     border-width: 0;
     border-radius: 5px;
@@ -197,6 +197,10 @@ body .btn-newOffer {
     background-color: darkgreen;
     text-align: center;
     line-height: 12px;
+}
+body .btn-newOffer:hover {
+    background-color: #19c866;
+    border-color: #19c866;
 }
 
 

@@ -15,36 +15,13 @@
 .image-profile:hover {
 
 }
-@media (prefers-color-scheme: dark) {
-    .label-profile {
-        color: #7285A5;
-    }
-    .wrapper-text {
-        border-color: #7285A5;
-    }
-    .btn-edit {
-        border-width: 1px;
-        border-color: black;
-        color: whitesmoke;
-    }
-    .btn-edit:hover {
-        background-color: #123d6d;
-    }
-}
-@media (prefers-color-scheme: light) {
-    .label-profile {
-        color: black;
-    }
-    .text-data {
-        color: #073980;
-    }
-}
 
 .label-profile {
     font-size: 13px;
     font-style: italic;
     margin-top: 20px;
     margin-bottom: 15px;
+    color: #7285A5;
 }
 .wrapper-text {
     width: calc( var(--profile-width) * 0.7 );

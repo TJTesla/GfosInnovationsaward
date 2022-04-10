@@ -47,29 +47,31 @@ body {
 
 @media (prefers-color-scheme: light) {
     body {
-        background-color: #384e7b;
+        background-color: #7285A5;
         color: #13274F;
     }
+    hr  {
+        color: #cfd8e1;
+    }
     .head {
-        background: rgb(56, 78, 123);
-        background: linear-gradient(0deg, rgba(245,245,245,1) 0%, rgba(56,78,123,1) 100%);
+        background: rgb(114, 133, 165);
+        background: linear-gradient(0deg, rgba(245,245,245,1) 0%, rgb(114, 133, 165) 100%);
     }
     .foot{
-        background: rgb(56, 78, 123);
-        background: linear-gradient(0deg, rgba(56,78,123,1) 0%, rgba(245,245,245,1) 100%);
+        background: rgb(114, 133, 165);
+        background: linear-gradient(0deg, rgb(114, 133, 165) 0%, rgba(245,245,245,1) 100%);
     }
     .content {
         background-color: var(--l-body-bg-color);
     }
     fieldset {
-        background-color: #cfd8e1;;
+        background-color: #cfd8e1;
         border-color: #7285a5;
         border-width: 3px;
         border-style: solid;
     }
     [class*="input-"] {
         background-color: var(--l-input-bg-color);
-        color: black;
         border-color: #a7b6c7;
     }
     [class*="input-"]:hover {
@@ -92,6 +94,9 @@ body {
         color: whitesmoke;
         background-color: #365393;
     }
+    hr {
+        color: #7285A5;
+    }
     .head {
         background: rgb(19,39,79);
         background: linear-gradient(0deg, rgb(0, 33, 71) 0%, rgb(23, 46, 93) 35%, rgb(29, 59, 121) 65%, rgb(54, 83, 147) 100%);
@@ -107,6 +112,7 @@ body {
         background-color: #13274F;
         border-width: 3px;
         border-style: solid;
+        border-color: #001b3b;
     }
     [class*="input-"] {
         color: whitesmoke;
@@ -152,8 +158,12 @@ legend {
 }
 
 [class*="input-"] {
+    font-family: inherit;
     border-radius: 5px;
     width: var(--input-width);
+    height: 22px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 body [class*="btn-"] {
     border-radius: 5px;
