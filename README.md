@@ -41,25 +41,30 @@ https://www.gfos.com/gfos/mint-lab/gfos-innovationsaward.html
 - **CSS** 
   - index ✅ 
   - Registration, Login, Change password, superUser ✅
-  - Offer Lists + Detail Offer + Create Offer
-  - Application Form + Application Lists + Show Application 
-  - Profile site of user
+  - Offer Lists + Detail Offer + Create Offer ✅
+  - Application Form + Application Lists + Show Application ✅
+  - Profile site of user ✅
 
 
 
 ## What we have to add
 
 - **Change status of applications:**
-  - Change status from employee side
-  	 - Bottom of application
-  	 - Select one of options (accept, decline, in process)
-  - See status from applicant side
-  	 - Show List of Applications and results in profile
-  	 - Write E-Mail to user with result
-- Save draft of application / offer
+  - Change status from employee side ✅
+       - Bottom of application 
+       - Select one of options (accept, decline, in process)
+  - See status from applicant side ✅
+       - Show List of Applications and results in profile
+       - Write E-Mail to user with result
+- Save draft of application / offer ✅
   - TODO: How presented 
-- Additional filter for *applied offers*, *not applied offers* or *favorites*
+- Additional filter for *applied offers*, *not applied offers* or *favorites* ✅
 - Birthday of Applicant: ✅
   - Add in registration form ✅
   - Validation ✅
   - Add in database and bean file ✅
+
+## Problems that need to be fixed
+- Title of an offer needs more storage capacity
+- It must be possible to edit offer drafts (completely missing)
+- Should the superuser be able to log out?
