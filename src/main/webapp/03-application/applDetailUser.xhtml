@@ -21,17 +21,28 @@
         <ui:define name="content">
             <h:outputStylesheet library="css" name="applicationDetail.css" />
             <div class="applDetailView">
-                <h1>Bewerbungsformular:</h1>
+                <h1>Bewerbungsformular</h1>
                 <ui:include src="applicationDetailTemplate.xhtml" />
-                <h:outputLabel for="status" value="Bearbeitungsstatus:" styleClass="label-status" />
-                <h:outputText id="status" value="#{detailApplication.statusString()}" styleClass="text-status" /> <!-- Given value needed -->
+                 <!-- Given value needed -->
                 <h:form>
                     <c:choose>
                         <c:when test="#{not detailApplication.draft}">
+                            <h:outputLabel for="status" value="Bearbeitungsstatus:" styleClass="label-status" />
+                            <h:outputText id="status" value="#{detailApplication.statusString()}" styleClass="text-status" />
+                            <hr class="border-line" />
+                            <br />
                             <h:commandButton id="retract" value="Zurückziehen" action="#{detailApplication.retract()}" styleClass="btn-retract" />
                         </c:when>
                         <c:otherwise>
-                            <h:commandButton id="delete" value="Löschen" action="#{detailApplication.delete()}" styleClass="btn-retract" />
+                            <div style="text-align: center">
+                                <hr class="border-line" />
+                                <br />
+                                <h:commandButton id="delete" value="Löschen" action="#{detailApplication.delete()}" styleClass="btn-retract" />
+                                <h:button value="Bearbeiten" styleClass="btn-editDraft" outcome="/03-application/application.xhtml" >
+                                    <f:param name="id" value="#{detailApplication.application.offerId}" />
+                                    <f:param name="edit" value="true" />
+                                </h:button>
+                            </div>
                         </c:otherwise>
                     </c:choose>
                 </h:form>

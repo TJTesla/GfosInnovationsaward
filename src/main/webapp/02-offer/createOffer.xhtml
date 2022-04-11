@@ -25,7 +25,7 @@
                     <legend>Allgemeines:</legend>
                     <div class="offer-data">
                         <h:outputLabel for="title" value="Titel:" styleClass="label-offAttr" />
-                        <h:inputText id="title" value="#{createOfferController.title}" styleClass="input-plain" />
+                        <h:inputText id="title" value="#{createOfferController.title}" styleClass="input-plain" style="width: 70%" />
                         <br />
                         <c:if test="#{not createOfferController.getErrorMsg('title').equals('')}">
                             <div class="errMsg-createOffer">

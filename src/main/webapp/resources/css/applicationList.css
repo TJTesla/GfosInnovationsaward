@@ -1,14 +1,41 @@
+@media (prefers-color-scheme: dark) {
+    .application {
+        border-bottom: solid 2px #7285a5;
+    }
+    .menu-filter {
+        background-color: var(--d-input-bg-color);
+        border-width: 2px;
+        border-color: #7285a5;
+    }
+    .menu-filter:hover {
+        background-color: var(--d-input-bg-hover-color);
+    }
+}
+@media (prefers-color-scheme: light) {
+    .application {
+        border-bottom: solid 2px #a7b6c7;
+    }
+    .menu-filter {
+        background-color: var(--l-input-bg-color);
+        border-width: 2px;
+        border-color: #a7b6c7;
+    }
+    .menu-filter:hover {
+        background-color: var(--l-input-bg-hover-color);
+    }
+}
 .applications {
     margin: 20px 30%;
 }
 
 .application {
     padding: 20px;
-    border-bottom: solid 2px #7285a5;
 }
 
 .left {
     float:left;
+    height: 100px;
+    transform: translate(0, 50%);
 }
 
 .text-apl {
@@ -47,7 +74,7 @@ body .btn-seeAppl {
     font-weight: bold;
     font-size: 17px;
     height: 38px;
-    padding: 0;
+    /*padding: 0;*/
 }
 
 body .btn-delete {
@@ -90,21 +117,15 @@ body .btn-retract:hover {
 }
 
 .menu-filter {
-    background-color: var(--d-input-bg-color);
-    color: whitesmoke;
     font-family: inherit;
     border-radius: 10px;
     height: 30px;
     width: 150px;
     font-size: inherit;
     margin: 0 50px 0 0;
-    border-width: 2px;
-    border-color: #7285a5;
+    color: inherit;
 }
 
-.menu-filter:hover {
-    background-color: var(--d-input-bg-hover-color);
-}
 
 body .btn-filter {
     padding: 7px 10px;

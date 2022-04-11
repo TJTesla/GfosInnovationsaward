@@ -4,7 +4,26 @@
         background-color: #13274F;
     }
     .offer-data {
+        border-bottom: solid 2px;
+        border-color: #384e7b;
+    }
+    .offer-descr {
+        border-bottom: solid 2px;
+        border-color: #384e7b;
+    }
+}
 
+@media (prefers-color-scheme: light) {
+    .offer-form {
+        background-color: #cfd8e1;
+    }
+    .offer-data {
+        border-bottom: solid 2px;
+        border-color: #a7b6c7;
+    }
+    .offer-descr {
+        border-bottom: solid 2px;
+        border-color: #a7b6c7;
     }
 }
 h1 {
@@ -20,10 +39,8 @@ h1 {
 }
 
 .offer-data {
-    border-bottom: solid 2px;
     padding-bottom: 20px;
     padding-left: 20px;
-    border-color: #384e7b;
 }
 .label-title {
     font-size: 17px;
@@ -54,14 +71,13 @@ body .pi {
 
 .offer-attr {
     display: inline-block;
-    width: 200px;
+    width: 210px;
+    padding: 0 2px 2px 2px;
 }
 
 .offer-descr {
     padding-left: 20px;
     padding-bottom: 20px;
-    border-bottom: solid 2px;
-    border-color: #384e7b;
 }
 
 .label-offDescr {
@@ -74,6 +90,7 @@ body .pi {
 
 .area-descr {
     font-family: inherit;
+    color: #13274F;
     width: 60%;
     height: 300px;
     display: block;
@@ -88,16 +105,23 @@ body .pi {
     padding-bottom: 20px;
 }
 
-.btn-save {
+body .btn-save {
+    font-weight: bold;
     float: left;
     font-size: 18px;
     padding: 10px;
 }
 
-.btn-upload {
+body .btn-upload {
     float: right;
     font-size: 18px;
+    font-weight: bold;
     padding: 10px;
+    background-color: darkgreen;
+}
+body .btn-upload:hover {
+    background-color: #0fa852;
+    border-color: #0fa852;
 }
 
 body .btn-deleteDraft {
@@ -125,7 +149,7 @@ body .btn-deleteDraft:hover {
 }
 @media (prefers-color-scheme: light) {
     .field-offer-description {
-        background-color: #cfd8e1;;
+        background-color: #cfd8e1;
     }
 }
 
@@ -283,7 +307,7 @@ body .btn-deleteOffer:hover {
 }
 
 .btn-editDraft {
-    font-size: 17px;
+    font-size: 18px;
     font-weight: bold;
 }
 

@@ -53,7 +53,6 @@ public class CreateOfferController implements Serializable {
         creationError = false;
         errorMsgs.clear();
         checkCreation();
-        boolean sth = this.getErrorMsg("title").equals("");
         if (creationError) {
             return "";
         }

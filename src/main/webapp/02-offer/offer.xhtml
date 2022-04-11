@@ -28,7 +28,7 @@
                     <f:ajax execute="@form" render="@this" />
                 </h:commandButton>
                 <h2 class="offer-title">
-                    <h:outputText value="Angebot: #{detailOffer.detailOffer.title}" />
+                    <h:outputText value="#{detailOffer.detailOffer.title}" />
                 </h2>
                 <div class="offer-data1">
                     <!-- Daten des Angebots -->
@@ -92,7 +92,10 @@
                                         </h:button>
                                     </c:when>
                                     <c:otherwise>
-                                        <h:commandButton value="Veröffentlichen" action="#{detailOffer.publish()}" />
+                                        <h:commandButton value="Veröffentlichen" action="#{detailOffer.publish()}" styleClass="btn-upload" />
+                                        <h:button value="Bearbeiten" outcome="createOffer" styleClass="btn-editDraft">
+                                            <f:param name="id" value="#{detailOffer.detailOffer.id}" />
+                                        </h:button>
                                     </c:otherwise>
                                 </c:choose>
                                 <h:commandButton id="delete" value="Löschen" styleClass="btn-deleteOffer" action="#{detailOffer.delete()}" />

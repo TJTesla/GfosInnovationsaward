@@ -10,6 +10,7 @@ h1 {
     margin-right: 30%;
     padding-left: 30px;
     padding-right: 30px;
+    border-radius: 10px;
 }
 
 .label-applDetail {
@@ -42,7 +43,20 @@ body .btn-cv-download {
 }
 
 /* User */
+@media (prefers-color-scheme: dark) {
+    .border-line {
+        color: #384e7b;
+    }
+}
+@media (prefers-color-scheme: light) {
+    .border-line {
+        color: #a7b6c7;
+    }
+}
+
 body .btn-retract {
+    font-size: 17px;
+    float: left;
     background-color: darkred;
     margin: 0 0 20px 0;
 }
@@ -52,7 +66,43 @@ body .btn-retract:hover {
     border-color: #c70808;
 }
 
+body .btn-editDraft {
+    float: right;
+    margin: 0 0 20px 0;
+    font-size: 17px;
+}
+
+
 /* Employer */
+@media (prefers-color-scheme: dark) {
+    .applDetailView {
+        background-color: #13274F;
+    }
+    .menu-status {
+        background-color: var(--d-input-bg-color);
+        border-radius: 10px;
+        border-width: 2px;
+        border-color: #7285a5;
+    }
+    .menu-status:hover {
+        background-color: var(--d-input-bg-hover-color);
+    }
+}
+@media (prefers-color-scheme: light) {
+    .applDetailView {
+        background-color: #cfd8e1;
+    }
+    .menu-status {
+        background-color: var(--l-input-bg-color);
+        border-radius: 10px;
+        border-width: 2px;
+        border-color: #7285a5;
+    }
+    .menu-status:hover {
+        background-color: var(--l-input-bg-hover-color);
+    }
+}
+
 .applDetailEmpl {
 
 }
@@ -61,7 +111,7 @@ body .btn-retract:hover {
     font-size: 18px;
     margin-bottom: 20px;
     font-style: italic;
-    width: 200px;
+    width: 240px;
 }
 
 .menu-status {
@@ -69,17 +119,10 @@ body .btn-retract:hover {
     height: 30px;
     margin: 0 0 20px 0;
     font-size: inherit;
-    background-color: var(--d-input-bg-color);
-    border-radius: 10px;
-    border-width: 2px;
-    border-color: #7285a5;
     color: inherit;
     font-family: inherit;
 }
 
-.menu-status:hover {
-    background-color: var(--d-input-bg-hover-color);
-}
 
 body .btn-saveStatus {
     font-size: 16px;
