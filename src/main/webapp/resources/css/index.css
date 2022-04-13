@@ -109,6 +109,7 @@
 }
 .input-location {
     width: 160px;
+    height: inherit;
     margin: 7px 4px 4px;
     padding: 10px 12px;
     float: left;
@@ -205,6 +206,8 @@ body .btn-newOffer:hover {
 
 
 .select-pref {
+    height: inherit;
+    width: 270px;
     color: whitesmoke;
     display: inline-block;
     font-size: 16px;
@@ -230,6 +233,7 @@ body .btn-newOffer:hover {
 
 
 .select-fav {
+    height: inherit;
     color: whitesmoke;
     display: inline-block;
     padding: 10px 16px;
@@ -243,19 +247,28 @@ body .btn-newOffer:hover {
     height: 22px;
     width: 22px;
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    bottom: -3px;
+    bottom: -5px;
     position: relative;
+    background-color: whitesmoke;
 }
-.check-fav label:before {
-    border-color: #007FFF;
+input[type="checkbox"] {
+    -webkit-appearance: none;
+}
+/*input[type="checkbox"]+.check-fav::before {
     background-color: #7285A5;
+    border: none;
 }
-.check-fav:hover {
+input[type="checkbox"]:hover+.check-fav::before {
     background-color: #a59272;
 }
+input[type="checkbox"]:checked+.check-fav::before {
+    background-color: #B98B0E;
+}*/
+.check-fav:active {
+    background-color: #7285A5;
+}
 .check-fav:checked {
-    content: none;
-    color: #007FFF;
+    background-color: #B98B0E;
 }
 
 

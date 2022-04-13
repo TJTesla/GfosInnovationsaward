@@ -94,6 +94,11 @@ public class SuperUserController implements Serializable {
         return "/00-loginRegistration/login.xhtml";
     }
 
+    public String logout() {
+        cu.logout();
+        return "/00-loginRegistration/login.xhtml?faces-redirect=true";
+    }
+
     public ArrayList<Employee> getAllEmployees() {
         return edbs.getAllEmployees();
     }

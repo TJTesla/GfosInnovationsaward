@@ -1,3 +1,19 @@
+body .btn-logout {
+    float: right;
+    font-size: 18px;
+    padding: 5px 10px 5px 20px;
+    position: relative;
+    height: 50px;
+    width: 150px;
+    top: 20px;
+    right: 20px;
+}
+.pi-sign-out::before {
+    bottom: 5px;
+    position: relative;
+    font-size: 20px;
+    left: 10px;
+}
 @media (prefers-color-scheme: dark) {
     .empl {
         border-bottom: solid 2px #7285A5;
@@ -83,7 +99,7 @@ fieldset {
 
 .input-empl {
     height: 25px;
-    width: 225px;
+    width: 60%;
 }
 
 .errMsg-newUser {
@@ -98,6 +114,12 @@ fieldset {
 .text-key {
     margin: 0;
     padding: 0;
+}
+
+.pi-user-plus::before {
+    position: relative;
+    left: 1px;
+    bottom: 3px;
 }
 
 .empl .btn-delete {
@@ -121,9 +143,12 @@ fieldset {
     border-color: #c70808;
 }
 
-body .ui-button.ui-button-text-icon-left .ui-icon {
-
+.pi-trash::before {
+    position: relative;
+    left: 1px;
+    bottom: 3px;
 }
+
 body .ui-button.ui-button-icon-only {
     width: 40px;
     height: 40px;
@@ -141,6 +166,7 @@ body .ui-button.ui-button-icon-only {
     border-color: black;
     width: 45px;
     height: 45px;
+    margin: 0;
 }
 
 .fieldset .btn-new-empl:hover {
