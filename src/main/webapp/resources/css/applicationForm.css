@@ -18,10 +18,8 @@
 }
 
 .applForm {
-    margin-left: 30%;
-    margin-right: 30%;
-    padding-left: 5%;
-    padding-right: 5%;
+    width: 650px;
+    margin: 0 auto 0 auto;
 }
 
 .label-applForm {

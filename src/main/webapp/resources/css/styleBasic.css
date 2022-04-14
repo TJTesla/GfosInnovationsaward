@@ -52,6 +52,7 @@ body {
     }
     hr  {
         color: #cfd8e1;
+        border-color: #cfd8e1;
     }
     .head {
         background: rgb(114, 133, 165);
@@ -97,6 +98,7 @@ body {
     }
     hr {
         color: #7285A5;
+        border-color: #7285A5;
     }
     .head {
         background: rgb(19,39,79);

@@ -1,5 +1,5 @@
 function openNav() {
-    document.getElementById("sideNav").style.width = "20%";
+    document.getElementById("sideNav").style.width = "350px";
     $("#sideNav").show(500, "linear");
 }
 

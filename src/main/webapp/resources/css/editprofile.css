@@ -48,12 +48,11 @@
     font-style: italic;
 }
 .edit {
-    margin-right: 35%;
-    margin-left: 35%;
+    margin: 20px auto 0 auto;
+    width: 560px;
     border-radius: 10px;
     padding: 20px 30px;
     line-height: 200%;
-    margin-top: 20px;
 }
 
 .label-edit {
@@ -82,8 +81,7 @@ body .pi {
     align-content: center;
 }
 
-.btn-saveEdit {
+body .btn-saveEdit {
     font-size: 18px;
-    margin-left: 30%;
-    margin-right: 30%;
+    margin: 0 auto 0 auto;
 }

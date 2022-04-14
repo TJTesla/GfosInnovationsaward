@@ -25,7 +25,8 @@
     }
 }
 .applications {
-    margin: 20px 30%;
+    width: 700px;
+    margin: 20px auto;
 }
 
 .application {
@@ -35,7 +36,7 @@
 .left {
     float:left;
     height: 100px;
-    transform: translate(0, 50%);
+    transform: translate(0);
 }
 
 .text-apl {
@@ -91,11 +92,6 @@ body .btn-delete:hover {
     border-color: #c70808;
 }
 
-body .ui-button.ui-button-text-icon-left .ui-icon {
-    top: 41%;
-    left: 8px;
-}
-
 body .btn-retract {
     background-color: darkred;
     margin-top: 20px;
@@ -130,4 +126,10 @@ body .btn-retract:hover {
 body .btn-filter {
     padding: 7px 10px;
     font-size: inherit;
+}
+
+.pi-trash::before {
+    position: relative;
+    bottom: 4px;
+    left: 1px;
 }

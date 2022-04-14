@@ -30,12 +30,9 @@ h1 {
     line-height: 150%;
 }
 .offer-form {
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-bottom: 50px;
-    padding-top: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
+    width: 1000px;
+    margin: 0 auto 50px auto;
+    padding: 20px 30px 0 30px;
 }
 
 .offer-data {
@@ -91,7 +88,7 @@ body .pi {
 .area-descr {
     font-family: inherit;
     color: #13274F;
-    width: 60%;
+    width: 600px;
     height: 300px;
     display: block;
     margin-left: auto;
@@ -106,7 +103,7 @@ body .pi {
 }
 
 body .btn-save {
-    font-weight: bold;
+    font-weight: normal;
     float: left;
     font-size: 18px;
     padding: 10px;
@@ -115,7 +112,7 @@ body .btn-save {
 body .btn-upload {
     float: right;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: normal;
     padding: 10px;
     background-color: darkgreen;
 }
@@ -178,7 +175,8 @@ body .btn-fav1 {
 }
 
 .offer {
-    margin: 20px 30% 40px;
+    margin: 20px auto 40px;
+    width: 700px;
 }
 
 .offer-data1 {
@@ -237,7 +235,7 @@ body .btn-seeAppl {
 
 body .btn-deleteOffer {
     font-size: 18px;
-    font-weight: bold;
+    font-weight: normal;
     background-color: darkred;
     float: left;
 }
@@ -306,13 +304,9 @@ body .btn-deleteOffer:hover {
     float: right;
 }
 
-.btn-editDraft {
+body .btn-editDraft {
     font-size: 18px;
-    font-weight: bold;
-}
-
-body .ui-button.ui-button-text-icon-left .ui-icon {
-    top:  41%;
+    font-weight: normal;
 }
 
 body .btn-delete {
@@ -322,7 +316,6 @@ body .btn-delete {
     background-color: darkred;
     border-color: black;
     border-radius: 10px;
-    transform: translate(0, 50%);
     margin: 0 20px 0 0;
 }
 
@@ -346,7 +339,9 @@ body .btn-delete:hover {
 }
 
 .pi-trash::before {
-    margin-left: 3.5px;
+    position: relative;
+    top: 5px;
+    left: 2px;
 }
 
 .pi-plus::before {

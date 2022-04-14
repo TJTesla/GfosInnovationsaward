@@ -41,7 +41,7 @@ public class OfferConverter implements Converter {
             int id = ((Offer) o).getId();
             return String.valueOf(id);
         } else {
-            throw new ConverterException("The given type could't be converted to Offer type");
+            throw new ConverterException("The given type couldn't be converted to Offer type");
         }
     }
 }

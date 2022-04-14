@@ -106,14 +106,14 @@
                                 </div>
                             </div>
                             <div class="offer-btn">
-                                    <h:commandButton action="#{indexController.editFavorite(offer.id)}" rendered="#{indexController.loggedInAsApplicant()}"
-                                                     styleClass="#{indexController.isFavorite(offer.id) ? 'body btn-fav1' : 'body btn-fav' }"
-                                                     style="clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);">
-                                        <f:ajax execute="@form" render="@this" />
-                                    </h:commandButton>
-                                    <p:button outcome="/02-offer/offer" styleClass="btn-toOffer" value="" icon="pi pi-angle-right">
-                                        <f:param name="id" value="#{offer.id}" />
-                                    </p:button>
+                                <p:button outcome="/02-offer/offer" styleClass="btn-toOffer" value="" icon="pi pi-angle-right">
+                                    <f:param name="id" value="#{offer.id}" />
+                                </p:button>
+                                <h:commandButton action="#{indexController.editFavorite(offer.id)}" rendered="#{indexController.loggedInAsApplicant()}"
+                                                 styleClass="#{indexController.isFavorite(offer.id) ? 'body btn-fav1' : 'body btn-fav' }"
+                                                 style="clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);">
+                                    <f:ajax execute="@form" render="@this" />
+                                </h:commandButton>
                             </div>
                         </h:form>
                     </div>

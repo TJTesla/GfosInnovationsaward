@@ -101,6 +101,11 @@ body .sidenav .ui-button.ui-button-text-icon-left .ui-icon {
     font-family: "Times New Roman", serif;
 }
 
+.pi-align-right::before {
+    position: relative;
+    top: 1px;
+}
+
 body .sidenav .pi {
     font-size: 22px;
     font-weight: normal;

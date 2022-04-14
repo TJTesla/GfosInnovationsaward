@@ -4,9 +4,7 @@
 .data {
     width: var(--profile-width);
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-
+    margin: 0 auto 0 auto;
     padding-bottom: 50px;
 }
 .image-profile {

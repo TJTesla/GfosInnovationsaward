@@ -33,8 +33,8 @@ h1 {
     padding-top: 20px;
 }
 .allEmpl {
-    margin-left: 35%;
-    margin-right: 35%;
+    width: 600px;
+    margin: 0 auto 0 auto;
 }
 .oldEmpl {
 
@@ -42,7 +42,7 @@ h1 {
 
 .legend-oldEmpl {
     font-size: 23px;
-    font-style: oblique;
+    font-style: italic;
     font-weight: lighter;
     margin-bottom: -5px;
     margin-top: 50px;
