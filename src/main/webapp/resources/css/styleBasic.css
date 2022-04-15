@@ -22,8 +22,6 @@ body {
     width: auto;
     font-family: "Rubik", sans-serif;
     margin: 0 auto;
-    background-color: #13274F;
-    font-size: 15px;
 }
 .content {
     height: auto;
@@ -136,9 +134,68 @@ body {
         background-color: #B98B0E;
     }
 }
-.head {
-    height: 120px;
+@media only screen and (max-width: 481px) {
+
 }
+
+@media only screen and (max-width: 640px) {
+    .head {
+        height: 70px;
+    }
+    body .btn-openMenu {
+        width: 35px;
+        height: 35px;
+        margin: 10px;
+    }
+    body {
+        font-size: 11px;
+    }
+    #menu-icon {
+        width: 25px;
+        height: 20px;
+        margin: 0;
+        font-size: 19px;
+    }
+}
+@media only screen and (min-width: 641px) {
+    .head {
+        height: 100px;
+    }
+    body .btn-openMenu {
+        width: 40px;
+        height: 40px;
+        margin: 15px;
+    }
+    body {
+        font-size: 13px;
+    }
+    #menu-icon {
+        width: 25px;
+        height: 25px;
+        margin: 0;
+        font-size: 22px;
+    }
+}
+@media only screen and (min-width: 961px) {
+    .head {
+        height: 120px;
+    }
+    body .btn-openMenu {
+        width: 47px;
+        height: 47px;
+        margin: 20px;
+    }
+    body {
+        font-size: 15px;
+    }
+    #menu-icon {
+        width: 25px;
+        height: 25px;
+        margin: 0;
+        font-size: 25px;
+    }
+}
+
 .foot {
     padding-top: 20px;
     height: 300px;
@@ -245,11 +302,7 @@ body .ui-button.ui-state-focus {
 
 /* header */
 body .btn-openMenu {
-    width: 47px;
-    height: 47px;
     float: left;
-
-    margin: 20px;
     background-color: #7285a5;
     padding: 0;
 }
@@ -258,9 +311,3 @@ body .pi {
     font-weight: normal;
 }
 
-#menu-icon {
-    width: 25px;
-    height: 25px;
-    margin: 0;
-    font-size: 25px;
-}

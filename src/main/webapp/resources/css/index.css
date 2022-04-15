@@ -103,24 +103,297 @@
         border-color: #cfd8e1;
     }
 }
+@media only screen and (max-width: 640px) {
+    .wrapper {
+        margin: 0 5px 0 5px;
+    }
+    .filter {
+        margin: 15px 0 10px;
+    }
+    .offer-left {
+        width: 200px;
+    }
+    .offer-btn {
+        padding: 20px 0;
+    }
+    body .btn-toOffer {
+        width: 30px;
+        height: 30px;
+    }
+    .offer-label {
+        font-size: 15px;
+    }
+    .allOffers {
+        padding: 15px 5px 15px 20px;
+    }
+    body .pi {
+        font-size: 15px;
+    }
+    .pi-angle-right::before {
+        margin-left: 0;
+        font-size: 23px;
+    }
+    .dropdown .dropbtn {
+        font-size: 14px;
+        padding: 10px 10px;
+    }
+    .navContent {
+        height: 160px;
+        min-width: 120px;
+    }
+    .navBtn {
+        font-size: 14px;
+        font-weight: bolder;
+        border-radius: 5px;
+        height: 24px;
+        width: 75px;
+    }
+    .border-line {
+        margin-top: 10px;
+    }
+    .input-location {
+        width: 120px;
+        margin: 2px 2px 2px;
+        padding: 8px 8px;
+        font-size: 14px;
+    }
+    .input-location::placeholder {
+        font-size: 14px;
+    }
+    .select-pref {
+        width: 220px;
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+    .label-pref {
+        padding-right: 6px;
+    }
+
+    .menu-pref {
+        width: 125px;
+        height: 20px;
+        font-size: 13px;
+    }
+    .select-fav {
+        padding: 3px 10px;
+        font-size: 14px;
+    }
+    .check-fav {
+        height: 20px;
+        width: 20px;
+        bottom: -4px;
+    }
+    body .btn-fav {
+        width: 30px;
+        height: 30px;
+        margin-right: 20px;
+    }
+
+    body .btn-fav1 {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+    }
+}
+
+@media only screen and (min-width: 641px) {
+    .wrapper {
+        margin: 0 10px 0 10px;
+    }
+    .filter {
+        margin: 30px 0 15px;
+    }
+    .offer-btn {
+        padding: 15px;
+    }
+    .allOffers {
+        padding: 15px 5px 15px 20px;
+    }
+    body .btn-toOffer {
+        width: 35px;
+        height: 35px;
+    }
+    .offer-label {
+        font-size: 17px;
+    }
+    body .pi {
+        font-size: 17px;
+    }
+    .pi-angle-right::before {
+        margin-left: 0;
+        font-size: 27px;
+    }
+    .dropdown .dropbtn {
+        font-size: 14px;
+        padding: 12px 12px
+    }
+    .navContent {
+        height: 300px;
+        min-width: 130px;
+    }
+    .navBtn {
+        font-size: 14px;
+        font-weight: bolder;
+        border-radius: 5px;
+        height: 28px;
+        width: 85px;
+    }
+    .border-line {
+        margin-top: 20px;
+    }
+    .input-location {
+        width: 120px;
+        margin: 4px;
+        padding: 9px 9px;
+        font-size: 14px;
+    }
+    .input-location::placeholder {
+        font-size: 14px;
+    }
+    .select-pref {
+        width: 230px;
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+    .label-pref {
+        padding-right: 10px;
+    }
+
+    .menu-pref {
+        width: 130px;
+        height: 22px;
+        font-size: 13px;
+    }
+    .select-fav {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+    .check-fav {
+        height: 21px;
+        width: 21px;
+        bottom: -4px;
+    }
+    body .btn-fav {
+        width: 35px;
+        height: 35px;
+        margin-right: 15px;
+    }
+
+    body .btn-fav1 {
+        width: 40px;
+        height: 40px;
+        margin-right: 20px;
+    }
+}
+@media only screen and (min-width: 961px) {
+    .wrapper {
+        margin: 0 10% 0 10%;
+    }
+    .filter {
+        margin: 50px 0 20px;
+    }
+    .offer-btn {
+        height: 70px;
+        padding: 15px;
+    }
+    .allOffers {
+        padding: 15px 20px 15px;
+    }
+    body .btn-toOffer {
+        width: 40px;
+        height: 40px;
+    }
+    .offer-label {
+        font-size: 18px;
+    }
+    body .pi {
+        font-size: 19px;
+    }
+    .pi-angle-right::before {
+        margin-left: 0;
+        font-size: 30px;
+    }
+    .dropdown .dropbtn {
+        font-size: 16px;
+        padding: 14px 16px;
+
+    }
+    .navContent {
+        height: 400px;
+        min-width: 160px;
+    }
+    .navBtn {
+        font-size: 16px;
+        font-weight: bolder;
+        border-radius: 5px;
+        height: 30px;
+        width: 100px;
+    }
+    .border-line {
+        margin-top: 30px;
+    }
+    .input-location {
+        width: 160px;
+        margin: 7px 4px 4px;
+        padding: 10px 12px;
+        font-size: 16px;
+    }
+    .input-location::placeholder {
+        font-size: 16px;
+    }
+    .select-pref {
+        width: 270px;
+        font-size: 16px;
+        padding: 10px 16px;
+    }
+    .label-pref {
+        padding-right: 10px;
+    }
+
+    .menu-pref {
+        width: 150px;
+        height: 25px;
+        font-size: 15px;
+    }
+    .select-fav {
+        padding: 10px 16px;
+        font-size: 16px;
+    }
+    .check-fav {
+        height: 22px;
+        width: 22px;
+        bottom: -5px;
+    }
+    body .btn-fav {
+        width: 40px;
+        height: 40px;
+        margin-right: 20px;
+    }
+
+    body .btn-fav1 {
+        width: 40px;
+        height: 40px;
+        margin-right: 20px;
+    }
+}
+
+.wrapper {
+    display: block;
+}
 
 .filter {
-    margin: 50px 10% 20px;
+    width: 100%;
 }
 .input-location {
-    width: 160px;
     height: inherit;
-    margin: 7px 4px 4px;
-    padding: 10px 12px;
     float: left;
     display: inline-block;
     border-width: 0;
-    font-size: 16px;
+    color: inherit;
 }
 .input-location::placeholder {
     color: whitesmoke;
     font-family: inherit;
-    font-size: 16px;
 }
 
 .dropdown {
@@ -130,24 +403,21 @@
 }
 .dropdown .dropbtn {
     cursor: pointer;
-    font-size: 16px;
     border: none;
     outline: none;
     color: whitesmoke;
-    padding: 14px 16px;
     background-color: inherit;
     font-family: inherit;
     margin: 0;
 }
 
 body .pi {
-    font-size: 19px;
     margin-left: 5px;
 }
 .navContent {
     display: none;
     position: absolute;
-    min-width: 160px;
+    overflow-y: scroll;
 }
 .navContent .a {
     float: none;
@@ -169,19 +439,13 @@ body .pi {
     padding: 8px;
 }
 .applyBtn {
-    margin-left: 10%;
-    margin-right: 10%;
+    margin: 0;
 }
 .navBtn {
-    font-size: 16px;
     font-family: inherit;
     color: whitesmoke;
-    font-weight: bolder;
     border-width: 0;
-    border-radius: 5px;
     margin: 0;
-    height: 30px;
-    width: 100px;
 }
 
 body .btn-newOffer {
@@ -207,26 +471,17 @@ body .btn-newOffer:hover {
 
 .select-pref {
     height: inherit;
-    width: 270px;
     color: whitesmoke;
     display: inline-block;
-    font-size: 16px;
-    padding: 10px 16px;
-}
-.label-pref {
-    padding-right: 10px;
 }
 
 .menu-pref {
-    width: 150px;
-    height: 25px;
     background-color: inherit;
     color: inherit;
     border-radius: 5px;
     border-width: 1px;
     border-style: solid;
     border-color: inherit;
-    font-size: 15px;
     font-style: italic;
 }
 
@@ -236,18 +491,13 @@ body .btn-newOffer:hover {
     height: inherit;
     color: whitesmoke;
     display: inline-block;
-    padding: 10px 16px;
-    font-size: 16px;
 }
 .label-fav {
     padding-right: 10px;
 }
 
 .check-fav {
-    height: 22px;
-    width: 22px;
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    bottom: -5px;
     position: relative;
     background-color: whitesmoke;
 }
@@ -278,17 +528,15 @@ input[type="checkbox"]:checked+.check-fav::before {
 
 /* Offers */
 .offers {
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 0;
+    margin-right: 0;
     margin-bottom: 50px;
     background-color: inherit;
+    width: 100%;
 }
-.border-line {
-    margin-top: 30px;
-}
+
 .allOffers {
     margin-top: -2px;
-    padding: 15px 20px 15px;
     height: auto;
 }
 
@@ -305,7 +553,6 @@ input[type="checkbox"]:checked+.check-fav::before {
     font-weight: bolder;
     line-height: 200%;
     margin-bottom: 25px;
-    font-size: 18px;
 }
 .offer-location {
     float: bottom;
@@ -317,39 +564,23 @@ input[type="checkbox"]:checked+.check-fav::before {
 }
 
 body .btn-fav {
-    width: 40px;
-    height: 40px;
-    margin-right: 20px;
     float: right;
 }
 
 body .btn-fav1 {
     float: right;
-    width: 40px;
-    height: 40px;
-    margin-right: 20px;
-    /*transform: translate(0, 50%);*/
 }
 
 .offer-btn {
     float: right;
     position: relative;
-    height: 70px;
-    padding: 15px;
 }
 
 body .btn-toOffer {
     float: right;
     background-color: #7285a5;
     border: none;
-    width: 40px;
-    height: 40px;
     /*transform: translate(0, 50%);*/
-}
-
-.pi-angle-right::before {
-    margin-left: 0;
-    font-size: 30px;
 }
 
 body .ui-button.ui-button-text-icon-left .ui-icon {

@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/01-company/companyEditProfile.xhtml" value="file://$PROJECT_DIR$/src/main/webapp/01-company" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/03-applicationList/applicationsEmpl.xhtml" value="file://$PROJECT_DIR$/src/main/webapp/03-applicationList" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/index.xhtml" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/tjtesla-tests/uploadTest.xhtml" value="file://$PROJECT_DIR$/src/main/webapp/tjtesla-tests" />
       </map>
     </option>
