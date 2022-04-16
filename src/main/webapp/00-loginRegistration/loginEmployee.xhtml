@@ -34,8 +34,8 @@
                             <i class="pi pi-exclamation-circle" />
                             <h:outputText value="#{employeeRegistrationController.getErrorMessage('name')}" />
                         </p>
+                        <br />
                     </c:if>
-                    <br />
                     <h:outputLabel for="pswd" styleClass="label-loginE" value="Passwort:" /> <br />
                     <h:inputSecret id="pswd" value="#{employeeRegistrationController.password}" styleClass="input-loginE" />
                     <h:outputText value="" rendered="#{employeeRegistrationController.registerError}" />
@@ -45,8 +45,8 @@
                             <i class="pi pi-exclamation-circle" />
                             <h:outputText value="#{employeeRegistrationController.getErrorMessage('password')}" />
                         </p>
+                        <br />
                     </c:if>
-                    <br />
                     <h:outputLabel for="pswdRepeat" value="Passwort wiederholen: " styleClass="label-loginE" /> <br />
                     <h:inputSecret id="pswdRepeat" value="#{employeeRegistrationController.passwordRepeat}" styleClass="input-loginE" />
                     <h:outputText value="#{employeeRegistrationController.getErrorMessage('passwordRepeat')}" rendered="#{employeeRegistrationController.registerError}" />

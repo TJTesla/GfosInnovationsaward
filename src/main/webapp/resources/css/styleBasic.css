@@ -16,6 +16,7 @@
 }
 html {
     overflow-y: scroll;
+    overflow-x: scroll;
 }
 body {
     height: 100%;
@@ -134,9 +135,6 @@ body {
         background-color: #B98B0E;
     }
 }
-@media only screen and (max-width: 481px) {
-
-}
 
 @media only screen and (max-width: 640px) {
     .head {
@@ -148,13 +146,16 @@ body {
         margin: 10px;
     }
     body {
-        font-size: 11px;
+        font-size: 13px;
     }
     #menu-icon {
         width: 25px;
         height: 20px;
         margin: 0;
         font-size: 19px;
+    }
+    h1 {
+        font-size: 30px;
     }
 }
 @media only screen and (min-width: 641px) {
@@ -167,13 +168,16 @@ body {
         margin: 15px;
     }
     body {
-        font-size: 13px;
+        font-size: 14px;
     }
     #menu-icon {
         width: 25px;
         height: 25px;
         margin: 0;
         font-size: 22px;
+    }
+    h1 {
+        font-size: 35px;
     }
 }
 @media only screen and (min-width: 961px) {
@@ -194,6 +198,9 @@ body {
         margin: 0;
         font-size: 25px;
     }
+    h1 {
+        font-size: 35px;
+    }
 }
 
 .foot {
@@ -205,7 +212,6 @@ body {
 }
 
 h1 {
-    font-size: 35px;
     font-weight: bold;
     line-height: normal;
     text-align: center;

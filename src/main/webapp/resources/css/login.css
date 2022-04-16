@@ -1,11 +1,8 @@
 :root {
-    --reg-width: 500px;
     --log-width: 300px;
     --regL1-width: 140px;
     --regL2-width: 200px;
     --regL3-width: 140px;
-    --regCo-width: 600px;
-    --regLCo-width: 200px;
 }
 
 /* Colour related */
@@ -48,6 +45,40 @@
     }
     [class*= "buttons-"] {
         background-color: var(--l-body-bg-color);
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    :root {
+        --reg-width: 350px;
+    }
+    .heading {
+        font-size: 25px;
+    }
+    [class*="input-"] {
+        width: 100%;
+    }
+}
+@media only screen and (min-width: 641px) {
+    :root {
+        --reg-width: 500px;
+    }
+    .heading {
+        font-size: 26px;
+    }
+    [class*="input-"] {
+        width: var(--input-width);
+    }
+}
+@media only screen and (min-width: 961px) {
+    :root {
+        --reg-width: 500px;
+    }
+    .heading {
+        font-size: 28px;
+    }
+    [class*="input-"] {
+        width: var(--input-width);
     }
 }
 
@@ -100,6 +131,7 @@ fieldset {
 .headingF {
     margin: auto;
     width: var(--reg-width);
+    height: auto;
     padding: 0;
     border: none;
 }
@@ -111,7 +143,6 @@ fieldset {
 /**/
 .heading {
     font-weight: bold;
-    font-size: 28px;
     margin-top: 20px;
     font-style: italic;
 }
@@ -150,6 +181,7 @@ fieldset {
 .upload {
     font-family: inherit;
     color: inherit;
+    width: var(--input-width);
 }
 .radioUser label {
     margin-left: 5px;
@@ -206,8 +238,19 @@ body .pi {
 
 /**/
 /* employee first login */
+@media only screen and (max-width: 480px) {
+    .emplLogin {
+        width: auto;
+        margin: auto 10px;
+    }
+}
+@media only screen and (min-width: 481px) {
+    .emplLogin {
+        width: 350px;
+    }
+}
+
 .emplLogin {
-    width: 350px;
     padding: 20px 30px;
 }
 
@@ -220,14 +263,13 @@ body .pi {
 .input-loginE {
     line-height: 20px;
     width: 100%;
+    margin: 0 0 20px 0;
 }
 
 .emplLogin-btns {
-    margin-left: 40%;
-    margin-right: 40%;
+    margin: 0 0 20px 0;
     align-content: center;
     display: grid;
-    margin-bottom: 20px;
 }
 
 body .btn-loginE {

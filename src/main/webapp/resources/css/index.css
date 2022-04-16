@@ -429,7 +429,6 @@ body .pi {
     height: auto;
 }
 
-
 .checkBox {
     display: inline-block;
     padding: 3px;
@@ -485,8 +484,6 @@ body .btn-newOffer:hover {
     font-style: italic;
 }
 
-
-
 .select-fav {
     height: inherit;
     color: whitesmoke;
@@ -504,16 +501,7 @@ body .btn-newOffer:hover {
 input[type="checkbox"].check-fav {
     -webkit-appearance: none;
 }
-/*input[type="checkbox"]+.check-fav::before {
-    background-color: #7285A5;
-    border: none;
-}
-input[type="checkbox"]:hover+.check-fav::before {
-    background-color: #a59272;
-}
-input[type="checkbox"]:checked+.check-fav::before {
-    background-color: #B98B0E;
-}*/
+
 .check-fav:active {
     background-color: #7285A5;
 }
@@ -580,7 +568,6 @@ body .btn-toOffer {
     float: right;
     background-color: #7285a5;
     border: none;
-    /*transform: translate(0, 50%);*/
 }
 
 body .ui-button.ui-button-text-icon-left .ui-icon {
