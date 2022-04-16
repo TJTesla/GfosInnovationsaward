@@ -22,6 +22,9 @@ import java.util.HashMap;
 @ViewScoped
 public class CreateOfferController implements Serializable {
     // Alle Felder
+    private int id = -1;
+    private boolean hasCoordinates = false;
+
     private String title;
     private String tasks, qualifications, extras;
     private String field;
@@ -31,6 +34,27 @@ public class CreateOfferController implements Serializable {
     private String street;
     private String postalCode;
     private String city;
+
+    public void setFromDraft(Offer o) {
+        if (o == null) {
+            return;
+        }
+        this.id = o.getId();
+        this.hasCoordinates = o.getLat() != -1;
+
+        this.title = o.getTitle();
+        this.tasks = o.getTasks();
+        this.qualifications = o.getQualifications();
+        this.extras = o.getExtras();
+        this.field = String.valueOf(o.getField());
+        this.level = String.valueOf(o.getLevel());
+        this.time = String.valueOf(o.getTime());
+        this.city = o.getCity();
+    }
+
+    public Offer getFromDraft() {
+        return new Offer();
+    }
 
     @Inject
     CurrentUser cu;
@@ -52,13 +76,20 @@ public class CreateOfferController implements Serializable {
     public String save(boolean draft) {
         creationError = false;
         errorMsgs.clear();
-        checkCreation();
+        checkCreation(draft);
         if (creationError) {
             return "";
         }
 
-        String location = street + " " + postalCode + " " + city;
-        double[] coordinates = GeoCalculator.getCoordinates(location);
+        if (id != -1) {
+            return update(draft);
+        }
+
+        double[] coordinates = { -1, -1 };
+        if (!(street.isEmpty() || postalCode.isEmpty() || city.isEmpty())) {
+            String location = street + " " + postalCode + " " + city;
+            coordinates = GeoCalculator.getCoordinates(location);
+        }
 
         int oId = odbs.createOne(new Offer(
                 -1,
@@ -78,11 +109,43 @@ public class CreateOfferController implements Serializable {
         return "/02-offer/offer.xhtml?faces-redirect=true&id=" + oId;
     }
 
-    private void checkCreation() {
-        // Titel leer
-        if (title.isEmpty()) {
-            creationError = true;
-            errorMsgs.put("title", "Es muss ein Titel eingegeben werden.");
+    private String update(boolean draft) {
+        double[] coordinates = { -1, -1 };
+        if (!hasCoordinates) {
+            if (!(street.isEmpty() || postalCode.isEmpty() || city.isEmpty())) {
+                String location = street + " " + postalCode + " " + city;
+                coordinates = GeoCalculator.getCoordinates(location);
+            }
+        }
+
+        Offer o = new Offer(
+                id,
+                title,
+                tasks,
+                qualifications,
+                extras,
+                toInt(field),
+                toInt(level),
+                toInt(time),
+                coordinates[0],
+                coordinates[1],
+                draft,
+                city
+        );
+
+        odbs.update(o);
+
+        return "/02-offer/offer.xhtml?faces-redirect=true&id=" + o.getId();
+    }
+
+    private void checkCreation(boolean draft) {
+        if (draft) {
+            // Titel leer
+            if (title.isEmpty()) {
+                creationError = true;
+                errorMsgs.put("title", "Es muss ein Titel eingegeben werden.");
+            }
+            return;
         }
         // Aufgaben leer
         if (tasks.isEmpty()) {
@@ -94,10 +157,13 @@ public class CreateOfferController implements Serializable {
             creationError = true;
             errorMsgs.put("qualifications", "Es müssen Qualifikationen angegeben werden.");
         }
-        // Keine Adresse
-        if (street.isEmpty() || postalCode.isEmpty() || city.isEmpty()) {
-            creationError = true;
-            errorMsgs.put("address", "Es müssen alle Bestandteile der Adresse eingegeben werden.");
+        // Nur wichtig, falls noch keine hat
+        if (!hasCoordinates) {
+            // Keine Adresse
+            if (street.isEmpty() || postalCode.isEmpty() || city.isEmpty()) {
+                creationError = true;
+                errorMsgs.put("address", "Es müssen alle Bestandteile der Adresse eingegeben werden.");
+            }
         }
         // Keine Filter ausgewählt
         if (field.equals("-1") || level.equals("-1") || time.equals("-1")) {

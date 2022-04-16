@@ -1,5 +1,6 @@
 package gfos.controller;
 
+import gfos.database.EmployeeDatabaseService;
 import gfos.pojos.Regexes;
 import gfos.pojos.Applicant;
 import gfos.pojos.Employee;
@@ -19,6 +20,8 @@ import java.util.regex.Pattern;
 public class PasswordChange implements Serializable {
     @Inject
     ApplicantDatabaseService adbs;
+    @Inject
+    EmployeeDatabaseService edbs;
     @Inject
     CurrentUser cu;
 
@@ -44,10 +47,17 @@ public class PasswordChange implements Serializable {
             return "";
         }
 
-        if (!adbs.changePwd((Applicant)(cu.getCurrentUser()), newPwd)) {
+        if (!adbs.changePwd(cu.getCurrentUser(), newPwd)) {
             return "";
         }
-        return "/01-user/userProfile.xhtml?faces-redirect=true";
+
+        if (cu.getCurrentUser() instanceof Applicant) {
+            return "/01-user/userProfile.xhtml?faces-redirect=true";
+        } else if (cu.getCurrentUser() instanceof Employee) {
+            return "/index.xhtml?faces-redirect=true";
+        }
+
+        return null;
     }
 
     private void checkData() {
@@ -70,10 +80,18 @@ public class PasswordChange implements Serializable {
             errorMsgs.put("newPwd", "Das Passwort muss mindestens einen Großbuchstaben, einen Kleinbuchstaben, ein Sonderzeichen und eine Zahl beinhalten.");
         }
 
-        User u = adbs.loginAttempt(cu.getCurrentUser().getName(), oldPwd);
-        if (u == null || u instanceof Employee) {
-            success = false;
-            errorMsgs.put("oldPwd", "Das angegebene Passwort ist nicht korrekt.");
+        if (cu.getCurrentUser() instanceof Applicant) {
+            User u = adbs.loginAttempt(cu.getCurrentUser().getName(), oldPwd);
+            if (u == null || u instanceof Employee) {
+                success = false;
+                errorMsgs.put("oldPwd", "Das angegebene Passwort ist nicht korrekt.");
+            }
+        } else if (cu.getCurrentUser() instanceof Employee) {
+            User u = adbs.loginAttempt(cu.getCurrentUser().getName(), oldPwd);
+            if (u == null || u instanceof Applicant) {
+                success = false;
+                errorMsgs.put("oldPwd", "Das angegebene Passwort ist nicht korrekt.");
+            }
         }
     }
 

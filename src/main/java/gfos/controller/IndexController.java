@@ -49,6 +49,9 @@ public class IndexController implements Serializable {
     }
 
     public ArrayList<Offer> getAllOffers() {
+        if (cu.getCurrentUser() instanceof Employee) {
+            return odbs.fetchAll();
+        }
         if (cu.getCurrentUser() instanceof Applicant) {
             favoritesSet = adbs.getFavorites( ((Applicant)cu.getCurrentUser()).getId() );
         }
@@ -122,6 +125,10 @@ public class IndexController implements Serializable {
             System.out.println("Cannot change string: " + str + " to Integer: " + nfe.getMessage());
             return -1;
         }
+    }
+
+    public boolean isDraft(Offer o) {
+        return o.getDraft();
     }
 
     public boolean isFavorite(int id) {

@@ -96,6 +96,7 @@
                             <h:form>
                                 <div class="offer-left">
                                     <h:outputLabel id="title" value="#{offer.title}" styleClass="offer-label" />
+                                    <h:outputLabel value="Entwurf" rendered="#{indexController.isDraft(offer)}" />
                                     <br />
                                     <div class="offer-attr">
                                         <i class="pi pi-map-marker">&nbsp;</i>

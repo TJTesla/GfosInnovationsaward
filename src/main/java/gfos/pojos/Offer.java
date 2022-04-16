@@ -41,8 +41,8 @@ public class Offer {
         this.field = 0;
         this.level = 0;
         this.time = 0;
-        this.lat = 0.0;
-        this.lon = 0.0;
+        this.lat = -1;
+        this.lon = -1;
         this.draft = true;
         this.city = "";
     }

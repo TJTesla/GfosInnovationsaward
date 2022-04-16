@@ -10,6 +10,7 @@
       xml:lang="en" lang="en">
 <f:metadata>
     <f:viewAction action="#{createOfferController.isEmployee()}" />
+    <f:viewParam name="id" value="#{createOfferController.fromDraft}" converter="#{offerConverter}" />
 </f:metadata>
 <head>
     <title>Angebot</title>

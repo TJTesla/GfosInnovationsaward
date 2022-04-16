@@ -51,10 +51,10 @@
                     <h:outputLabel for="pswdRepeat" value="Passwort wiederholen:" styleClass="label-pswd" /> <br />
                     <h:inputSecret id="pswdRepeat" value="#{passwordChange.newRepeat}" styleClass="input-pswd" />
                     <br />
-                    <c:if test="#{not (passwordChange.errorMsg('newRepeat').equals('')) }">
+                    <c:if test="#{not (passwordChange.errorMsg('pwdRepeat').equals('')) }">
                         <p class="errMsg-newPswd">
                             <i class="pi pi-exclamation-circle">&nbsp;</i>
-                            <h:outputText value="#{passwordChange.errorMsg('newRepeat')}" rendered="#{not passwordChange.success}" />
+                            <h:outputText value="#{passwordChange.errorMsg('pwdRepeat')}" rendered="#{not passwordChange.success}" />
                         </p>
                     </c:if>
                 </fieldset>

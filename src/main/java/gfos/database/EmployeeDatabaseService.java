@@ -1,5 +1,6 @@
 package gfos.database;
 
+import gfos.pojos.Applicant;
 import gfos.pojos.Application;
 import gfos.pojos.Employee;
 import gfos.pojos.PasswordManager;

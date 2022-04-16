@@ -163,19 +163,30 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         }
     }
 
-    public boolean changePwd(Applicant a, String newPwd) {
+    public boolean changePwd(User u, String newPwd) {
+        if (!(u instanceof Applicant || u instanceof Employee)) {
+            return false;
+        }
         String salt = PasswordManager.generateSalt();
         String hashPwd = PasswordManager.getHash(newPwd, salt);
 
         try {
-            stmt = con.prepareStatement("UPDATE applicant SET password=?, salt=? WHERE id=?");
+            if (u instanceof Applicant) {
+                stmt = con.prepareStatement("UPDATE applicant SET password=?, salt=? WHERE id=?");
+            } else { // instanceof Employee
+                stmt = con.prepareStatement("UPDATE employees SET password=?, salt=? WHERE name=?");
+            }
             stmt.setString(1, hashPwd);
             stmt.setString(2, salt);
-            stmt.setInt(3, a.getId());
+            if (u instanceof Applicant) {
+                stmt.setInt(3, ((Applicant)u).getId());
+            } else { // instanceof Employee
+                stmt.setString(3, u.getName());
+            }
 
             return stmt.executeUpdate() == 1;
         } catch (SQLException sqlException) {
-            System.out.println("Could not change pwd of user " + a.getId() + ": "+ sqlException.getMessage());
+            System.out.println("Could not change pwd of user " + u.getName() + ": "+ sqlException.getMessage());
             return false;
         }
     }

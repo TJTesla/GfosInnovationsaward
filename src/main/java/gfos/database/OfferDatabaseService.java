@@ -21,9 +21,13 @@ public class OfferDatabaseService extends DatabaseService {
 
     public int createOne(Offer o) {
         try {
+            String fieldString = o.getField() == -1 ? "null" : "?";
+            String levelString = o.getLevel() == -1 ? "null" : "?";
+            String timeString = o.getTime() == -1 ? "null" : "?";
+
             stmt = con.prepareStatement("" +
                     "INSERT INTO offer(id, title, tasks, qualifications, extras, field, level, time, lat, lon, draft, city) VALUES " +
-                    "(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+                    "(null, ?, ?, ?, ?, " + fieldString + ", " + levelString + ", " + timeString + ", ?, ?, ?, ?);"
             );
             setStmtParameters(stmt, o);
 
@@ -39,44 +43,48 @@ public class OfferDatabaseService extends DatabaseService {
         }
     }
 
-    private void setStmtParameters(PreparedStatement statement, Offer o) {
+    private static int setStmtParameters(PreparedStatement statement, Offer o) {
         try {
             statement.setString(1, o.getTitle());
             statement.setString(2, o.getTasks());
             statement.setString(3, o.getQualifications());
             statement.setString(4, o.getExtras());
-            statement.setInt(5, o.getField());
-            statement.setInt(6, o.getLevel());
-            statement.setInt(7, o.getTime());
-            statement.setDouble(8, o.getLat());
-            statement.setDouble(9, o.getLon());
-            statement.setBoolean(10, o.getDraft());
-            statement.setString(11, o.getCity());
+            int add = 0;
+            if (o.getField() != -1) {
+                statement.setInt(5, o.getField());
+                add += 1;
+            }
+            if (o.getLevel() != -1) {
+                statement.setInt(5+add, o.getLevel());
+                add += 1;
+            }
+            if (o.getTime() != -1) {
+                statement.setInt(5+add, o.getTime());
+                add += 1;
+            }
+            statement.setDouble(5+add, o.getLat());
+            statement.setDouble(6+add, o.getLon());
+            statement.setBoolean(7+add, o.getDraft());
+            statement.setString(8+add, o.getCity());
+
+            return add;
         } catch (SQLException sqlException) {
             System.out.println("Couldn't set parameters for insertion or update of company: " + sqlException.getMessage());
+            return 0;
         }
     }
 
-    public ArrayList<Offer> fetchAll(FilterObject filter, Applicant a) {
+    public ArrayList<Offer> fetchAll() {
         ArrayList<Offer> result = new ArrayList<>();
         try {
-            String query = getQuery(filter, false, a);
-            stmt = con.prepareStatement(query);
+            stmt = con.prepareStatement("SELECT * FROM offer");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 result.add(createOffer(rs));
             }
-
-            // TODO: Uncomment and filter by distance
-            /*result.removeIf(o ->
-                    GeoCalculator.distance(
-                            new double[]{o.getLat(), o.getLon()},
-                            new double[]{a.getLat(), a.getLon()}
-                    ) > filter.getMaxDistance()
-            );*/
         } catch (SQLException sqlException) {
-            System.out.println("There was an error while fetching all companies: " + sqlException.getMessage());
+            System.out.println("There was an error while fetching all offers: " + sqlException.getMessage());
         }
         return result;
     }
@@ -250,12 +258,16 @@ public class OfferDatabaseService extends DatabaseService {
 
     public String getType(String table, int id) {
         String query = "";
-        if (table.equals("field")) {
-            query = "SELECT tag FROM fields WHERE id=?";
-        } else if (table.equals("level")) {
-            query = "SELECT term FROM level WHERE id=?";
-        } else if (table.equals("time")) {
-            query = "SELECT term FROM time WHERE id=?";
+        switch (table) {
+            case "field":
+                query = "SELECT tag FROM fields WHERE id=?";
+                break;
+            case "level":
+                query = "SELECT term FROM level WHERE id=?";
+                break;
+            case "time":
+                query = "SELECT term FROM time WHERE id=?";
+                break;
         }
 
         try {
@@ -284,6 +296,26 @@ public class OfferDatabaseService extends DatabaseService {
             stmt.executeUpdate();
         } catch (SQLException sqlException) {
             System.out.println("Could not publish offer " + o.getId() + ": " + sqlException.getMessage());
+        }
+    }
+
+    public void update(Offer o) {
+        try {
+            String fieldString = o.getField() == -1 ? "" : " field=?,";
+            String levelString = o.getLevel() == -1 ? "" : " level=?,";
+            String timeString = o.getTime() == -1 ? "" : " time=?,";
+
+            stmt = con.prepareStatement(
+                    "UPDATE offer " +
+                            "SET title=?, tasks=?, qualifications=?, extras=?," + fieldString + levelString + timeString + " lat=?, lon=?, draft=?, city=? " +
+                            "WHERE id=?"
+            );
+            int offset = setStmtParameters(stmt, o);
+            stmt.setInt(9+offset, o.getId());
+
+            stmt.executeUpdate();
+        } catch (SQLException sqlException) {
+            System.out.println("Could not update offer " + o.getId() + ": " + sqlException.getMessage());
         }
     }
 
