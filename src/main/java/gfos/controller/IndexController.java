@@ -99,6 +99,11 @@ public class IndexController implements Serializable {
         return null;
     }
 
+    public String delete(Offer o) {
+        odbs.delete(o);
+        return "";
+    }
+
     private static ArrayList<Integer> createFilterArray(HashMap<Integer, Boolean> arr) {
         if (arr == null) {
             return new ArrayList<>();

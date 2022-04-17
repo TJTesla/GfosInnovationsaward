@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="offer-btn">
-                                <p:commandButton id="deleteDraft"  styleClass="btn-delete" value="" icon="pi pi-trash" action="fds" />
+                                <p:commandButton id="deleteDraft"  styleClass="btn-delete" value="" icon="pi pi-trash" action="#{indexController.delete(offer)}" />
                                 <p:button outcome="/02-offer/offer" styleClass="btn-toOffer" value="" icon="pi pi-angle-right">
                                     <f:param name="id" value="#{offer.id}" />
                                 </p:button>
