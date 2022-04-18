@@ -103,7 +103,7 @@
         border-color: #cfd8e1;
     }
 }
-@media only screen and (max-width: 640px) {
+@media only screen and (min-width: 320px) {
     .wrapper {
         margin: 0 5px 0 5px;
     }
@@ -122,6 +122,7 @@
     }
     .offer-label {
         font-size: 15px;
+        line-height: 150%;
     }
     .allOffers {
         padding: 15px 5px 15px 20px;
@@ -147,6 +148,12 @@
         border-radius: 5px;
         height: 24px;
         width: 75px;
+    }
+    body .btn-newOffer {
+        height: 24px;
+        width: 200px;
+        font-size: 14px;
+        line-height: 5px;
     }
     .border-line {
         margin-top: 10px;
@@ -186,7 +193,7 @@
     body .btn-fav {
         width: 30px;
         height: 30px;
-        margin-right: 20px;
+        margin-right: 10px;
     }
 
     body .btn-fav1 {
@@ -195,7 +202,14 @@
         margin-right: 10px;
     }
 }
-
+@media only screen and (min-width: 481px) {
+    .offer-left {
+        width: 370px;
+    }
+    .offer-label {
+        line-height: 200%;
+    }
+}
 @media only screen and (min-width: 641px) {
     .wrapper {
         margin: 0 10px 0 10px;
@@ -237,6 +251,12 @@
         border-radius: 5px;
         height: 28px;
         width: 85px;
+    }
+    body .btn-newOffer {
+        height: 28px;
+        width: 200px;
+        font-size: 14px;
+        line-height: 10px;
     }
     .border-line {
         margin-top: 20px;
@@ -282,7 +302,7 @@
     body .btn-fav1 {
         width: 40px;
         height: 40px;
-        margin-right: 20px;
+        margin-right: 15px;
     }
 }
 @media only screen and (min-width: 961px) {
@@ -328,6 +348,12 @@
         border-radius: 5px;
         height: 30px;
         width: 100px;
+    }
+    body .btn-newOffer {
+        height: 30px;
+        width: 220px;
+        font-size: 16px;
+        line-height: 12px;
     }
     .border-line {
         margin-top: 30px;
@@ -375,6 +401,7 @@
         height: 40px;
         margin-right: 20px;
     }
+
 }
 
 .wrapper {
@@ -449,9 +476,6 @@ body .pi {
 
 body .btn-newOffer {
     float: right;
-    height: 30px;
-    width: 220px;
-    font-size: 16px;
     font-family: inherit;
     color: whitesmoke;
     font-weight: bolder;
@@ -460,7 +484,6 @@ body .btn-newOffer {
     margin: 0;
     background-color: darkgreen;
     text-align: center;
-    line-height: 12px;
 }
 body .btn-newOffer:hover {
     background-color: #0fa852;
@@ -537,9 +560,12 @@ input[type="checkbox"].check-fav {
     float: left;
     width: 250px;
 }
+.draft-sign {
+    font-style: italic;
+    display: block;
+}
 .offer-label {
     font-weight: bolder;
-    line-height: 200%;
     margin-bottom: 25px;
 }
 .offer-location {

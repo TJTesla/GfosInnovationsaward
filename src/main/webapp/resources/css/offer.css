@@ -26,19 +26,101 @@
         border-color: #a7b6c7;
     }
 }
+
+@media only screen and (min-width: 320px) {
+    .offer-form {
+        width: auto;
+        margin: 0 5px auto;
+        padding: 20px 10px 0 10px;
+    }
+    .input-plain {
+        width: 100%;
+    }
+    .offer-attr {
+        display: inline-block;
+        width: 100%;
+        padding: 0 2px 2px 2px;
+    }
+    .input-title {
+        width: 100%;
+    }
+    .label-offAttr {
+        width: 60px;
+    }
+    .offer-data {
+        padding: 20px;
+    }
+    .area-descr {
+        width: 100%;
+        height: 300px;
+    }
+    .offer-descr {
+        padding: 20px;
+    }
+}
+@media only screen and (min-width: 481px) {
+    .input-plain {
+        width: var(--input-width);
+    }
+    .offer-attr {
+        display: inline-block;
+        width: 210px;
+        padding: 0 2px 2px 2px;
+    }
+    .offer-data {
+        padding: 10px;
+    }
+}
+@media only screen and (min-width: 641px) {
+    .offer-form {
+        width: auto;
+        margin: 0 10px auto;
+        padding: 20px 30px 0 30px;
+    }
+    .input-title {
+        width: 80%;
+    }
+    .offer-attr {
+        display: inline-block;
+        width: 230px;
+        padding: 0 2px 2px 2px;
+    }
+    .offer-data {
+        padding: 20px;
+    }
+    .area-descr {
+        width: 100%;
+        height: 300px;
+    }
+}
+@media only screen and (min-width: 961px) {
+    .offer-form {
+        width: 1000px;
+        margin: 0 auto 50px auto;
+        padding: 20px 30px 0 30px;
+    }
+    .input-title {
+        width: 70%;
+    }
+    .label-offAttr {
+        width: 140px;
+    }
+    .offer-attr {
+        display: inline-block;
+        width: 210px;
+        padding: 0 2px 2px 2px;
+    }
+    .area-descr {
+        width: 600px;
+        height: 300px;
+    }
+}
+
 h1 {
     line-height: 150%;
 }
-.offer-form {
-    width: 1000px;
-    margin: 0 auto 50px auto;
-    padding: 20px 30px 0 30px;
-}
 
-.offer-data {
-    padding-bottom: 20px;
-    padding-left: 20px;
-}
+
 .label-title {
     font-size: 17px;
     font-style: italic;
@@ -49,17 +131,9 @@ h1 {
     margin-bottom: 20px;
 }
 .label-offAttr {
-    width: 140px;
     display: inline-block;
 }
 
-.input-plain {
-
-}
-
-body .pi {
-    font-size: 20px;
-}
 
 .errMsg-createO {
     margin: 0;
@@ -68,14 +142,10 @@ body .pi {
 
 .offer-attr {
     display: inline-block;
-    width: 210px;
     padding: 0 2px 2px 2px;
 }
 
-.offer-descr {
-    padding-left: 20px;
-    padding-bottom: 20px;
-}
+
 
 .label-offDescr {
     margin-top: 20px;
@@ -88,8 +158,6 @@ body .pi {
 .area-descr {
     font-family: inherit;
     color: #13274F;
-    width: 600px;
-    height: 300px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -112,8 +180,8 @@ body .btn-save {
 body .btn-upload {
     float: right;
     font-size: 18px;
-    font-weight: normal;
     padding: 10px;
+    font-weight: normal;
     background-color: darkgreen;
 }
 body .btn-upload:hover {
@@ -150,6 +218,125 @@ body .btn-deleteDraft:hover {
     }
 }
 
+@media only screen and (min-width: 320px) {
+    .offer {
+        margin: 20px 10px 40px;
+        width: auto;
+    }
+    .field-offer-description {
+        padding: 0 15px 20px;
+    }
+    .offer-title {
+        font-size: 20px;
+    }
+    .label-offer {
+        width: 100%;
+        font-size: 15px;
+    }
+    .label-offer-description {
+        font-size: 17px;
+    }
+    body .btn-appl {
+        font-size: 15px;
+    }
+    body .btn-seeAppl {
+        font-size: 15px;
+    }
+    body .btn-deleteOffer {
+        font-size: 15px;
+    }
+    body .btn-editDraft {
+        font-size: 15px;
+        margin-bottom: 10px;
+        display: block;
+    }
+    body .btn-upload1 {
+        margin-bottom: 10px;
+        font-size: 15px;
+        display: block;
+    }
+}
+@media only screen and (min-width: 481px) {
+    .field-offer-description {
+        padding: 0 20px 20px;
+    }
+    .offer-title {
+        font-size: 23px;
+    }
+    .label-offer {
+        width: 225px;
+        font-size: 17px;
+    }
+    body .btn-appl {
+        font-size: 16px;
+    }
+    body .btn-seeAppl {
+        font-size: 16px;
+    }
+    body .btn-deleteOffer {
+        font-size: 16px;
+    }
+    body .btn-editDraft {
+        font-size: 16px;
+        margin-bottom: 0;
+        display: inline;
+    }
+    body .btn-upload1 {
+        float: right;
+        font-size: 16px;
+    }
+}
+@media only screen and (min-width: 641px) {
+    .label-offer-description {
+        font-size: 20px;
+    }
+    body .btn-appl {
+        font-size: 17px;
+    }
+    body .btn-seeAppl {
+        font-size: 17px;
+    }
+    body .btn-deleteOffer {
+        font-size: 17px;
+    }
+    body .btn-upload1 {
+        float: right;
+        font-size: 17px;
+    }
+    body .btn-editDraft {
+        float: none;
+        font-size: 17px;
+    }
+}
+@media only screen and (min-width: 961px) {
+    .offer {
+        margin: 20px auto 40px;
+        width: 700px;
+    }
+    .offer-title {
+        font-size: 25px;
+    }
+    .label-offer-description {
+        font-size: 20px;
+    }
+    body .btn-appl {
+        font-size: 18px;
+    }
+    body .btn-seeAppl {
+        font-size: 18px;
+    }
+    body .btn-deleteOffer {
+        font-size: 18px;
+    }
+    body .btn-upload1 {
+        float: right;
+        font-size: 18px;
+    }
+    body .btn-editDraft {
+        float: none;
+        font-size: 18px;
+    }
+}
 body .btn-fav {
     float: right;
     width: 35px;
@@ -170,23 +357,16 @@ body .btn-fav1 {
 
 .offer-title {
     text-align: center;
-    font-size: 25px;
     margin-top: 15px
 }
 
-.offer {
-    margin: 20px auto 40px;
-    width: 700px;
-}
 
 .offer-data1 {
-    margin: 20px 10px 10px;
+    margin: 20px 0px 10px;
 }
 
 .label-offer {
-    width: 225px;
-    margin-bottom: 20px;
-    font-size: 17px;
+    margin: 20px 0 5px 5px;
     font-style: italic;
     font-weight: bold;
 }
@@ -195,14 +375,18 @@ body .btn-fav1 {
 
 }
 
+.wrap-textOffer {
+    display: inline-block;
+    padding: 0 0 0 10px;
+}
+
 .field-offer-description {
-    padding: 0 20px 20px;
     border-radius: 10px;
+    margin: 20px 0 0 0;
 }
 
 .label-offer-description {
     margin-bottom: 10px;
-    font-size: 20px;
     font-weight: bolder;
     margin-top: 20px;
     font-style: italic;
@@ -223,18 +407,24 @@ body .btn-fav1 {
 }
 
 body .btn-appl {
-    font-size: 18px;
     font-weight: bold;
 }
 
 body .btn-seeAppl {
-    font-size: 18px;
-    font-weight: bold;
+    font-weight: normal;
     float: right;
+}
+body .btn-upload1 {
+    padding: 10px;
+    font-weight: normal;
+    background-color: darkgreen;
+}
+body .btn-upload1:hover {
+    background-color: #0fa852;
+    border-color: #0fa852;
 }
 
 body .btn-deleteOffer {
-    font-size: 18px;
     font-weight: normal;
     background-color: darkred;
     float: left;
@@ -256,6 +446,42 @@ body .btn-deleteOffer:hover {
 }
 
 /* Offer Drafts */
+@media only screen and (min-width: 320px) {
+    body .btn-delete {
+        height: 30px;
+        width: 30px;
+        margin: 0 10px 0 0;
+    }
+    .pi-trash::before {
+        top: 5px;
+        left: 0px;
+    }
+}
+@media only screen and (min-width: 481px) {
+
+}
+@media only screen and (min-width: 641px) {
+    body .btn-delete {
+        height: 36px;
+        width: 36px;
+        margin: 0 15px 0 0;
+    }
+    .pi-trash::before {
+        top: 5px;
+        left: 2px;
+    }
+}
+@media only screen and (min-width: 961px) {
+    body .btn-delete {
+        height: 40px;
+        width: 40px;
+        margin: 0 20px 0 0;
+    }
+    .pi-trash::before {
+        top: 5px;
+        left: 2px;
+    }
+}
 .drafts-title {
     font-size: 25px;
     margin-top: 15px;
@@ -305,18 +531,14 @@ body .btn-deleteOffer:hover {
 }
 
 body .btn-editDraft {
-    font-size: 18px;
     font-weight: normal;
 }
 
 body .btn-delete {
-    height: 40px;
-    width: 40px;
     font-weight: lighter;
     background-color: darkred;
     border-color: black;
     border-radius: 10px;
-    margin: 0 20px 0 0;
 }
 
 body .btn-delete:hover {
@@ -340,8 +562,6 @@ body .btn-delete:hover {
 
 .pi-trash::before {
     position: relative;
-    top: 5px;
-    left: 2px;
 }
 
 .pi-plus::before {

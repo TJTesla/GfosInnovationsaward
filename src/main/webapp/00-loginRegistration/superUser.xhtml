@@ -19,7 +19,7 @@
 <h:body>
     <h:outputStylesheet library="css" name="styleBasic.css" />
     <h:outputStylesheet library="css" name="superuser.css" />
-    <div style="height: 100px; float: top" class="head">
+    <div class="head">
         <ui:insert name="header">
             <ui:include src="../resources/templates/common/header.xhtml" />
             <p:commandButton id="logout" value="Abmelden" icon="pi pi-sign-out" action="#{superUserController.logout()}" styleClass="btn-logout" />

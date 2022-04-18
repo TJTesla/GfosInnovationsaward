@@ -25,81 +25,84 @@
                 <h2>Entwürfe</h2>
                 <hr />
             </div>
-            <h:form>
-                <div class="filter">
-                    <!--h:inputText id="place" k:placeholder="Standort" styleClass="input-location" /-->
-                    <div class="dropdown">
-                        <button class="dropbtn" id="dropbtnField" type="button">Berufsfeld <i class="pi pi-caret-down" /></button>
-                        <div class="navContent" id="dropdownField">
-                            <ui:repeat id="field" var="f" value="#{indexController.allFields}">
-                                <div class="a">
-                                    <h:selectBooleanCheckbox styleClass="checkBox" value="#{indexController.field[f.first()]}" />
-                                    <h:outputLabel styleClass="checkLabel" value="#{f.second()}" />
-                                </div>
-                            </ui:repeat>
-                        </div>
-                    </div>
-
-                    <div class="dropdown">
-                        <button class="dropbtn" id="dropbtnLevel" type="button">Einstieglevel <i class="pi pi-caret-down" /></button>
-                        <div class="navContent" id="dropdownLevel">
-                            <ui:repeat id="level" var="l" value="#{indexController.allLevels}" varStatus="">
-                                <div class="a">
-                                    <h:selectBooleanCheckbox styleClass="checkBox" value="#{indexController.level[l.first()]}" />
-                                    <h:outputLabel styleClass="checkLabel" value="#{l.second()}" />
-                                </div>
-                            </ui:repeat>
-                        </div>
-                    </div>
-
-                    <div class="dropdown">
-                        <button class="dropbtn" id="dropbtnTime" type="button">Arbeitszeit <i class="pi pi-caret-down" /></button>
-                        <div class="navContent" id="dropdownTime">
-                            <ui:repeat id="time" var="t" value="#{indexController.allTimes}" varStatus="">
-                                <div class="a">
-                                    <h:selectBooleanCheckbox styleClass="checkBox" value="#{indexController.time[t.first()]}" />
-                                    <h:outputLabel styleClass="checkLabel" value="#{t.second()}" />
-                                </div>
-                            </ui:repeat>
-                        </div>
-                    </div>
-                </div>
-                <div class="applyBtn">
-                    <h:commandButton value="Anwenden" action="#{indexController.reload()}" styleClass="navBtn" />
-                    <c:if test="#{indexController.loggedInAsEmployee()}" >
-                        <h:button value="Neues Angebot erstellen" outcome="/02-offer/createOffer.xhtml" styleClass="btn-newOffer" />
-                    </c:if>
-                </div>
-            </h:form>
-
-
-            <div class="offers" id="offers">
-                <div class="border-line"> </div>
-                <ui:repeat id="offers" var="offer" value="#{indexController.allOfferDrafts}" varStatus="">
-                    <div class="allOffers">
-                        <h:form>
-                            <div class="offer-left">
-                                <h:outputLabel id="title" value="#{offer.title}" styleClass="offer-label" />
-                                <br />
-                                <div class="offer-attr">
-                                    <i class="pi pi-map-marker">&nbsp;</i>
-                                    <h:outputText id="location" value="#{offer.city}" styleClass="offer-location" />
-                                </div>
-                                <div class="offer-attr">
-                                    <i class="pi pi-briefcase">&nbsp;</i>
-                                    <h:outputText id="field" value="#{indexController.fieldString(offer.field)}" styleClass="offer-field" />
-                                </div>
+            <div class="wrapper">
+                <h:form>
+                    <div class="filter">
+                        <!--h:inputText id="place" k:placeholder="Standort" styleClass="input-location" /-->
+                        <div class="dropdown">
+                            <button class="dropbtn" id="dropbtnField" type="button">Berufsfeld <i class="pi pi-caret-down" /></button>
+                            <div class="navContent" id="dropdownField">
+                                <ui:repeat id="field" var="f" value="#{indexController.allFields}">
+                                    <div class="a">
+                                        <h:selectBooleanCheckbox styleClass="checkBox" value="#{indexController.field[f.first()]}" />
+                                        <h:outputLabel styleClass="checkLabel" value="#{f.second()}" />
+                                    </div>
+                                </ui:repeat>
                             </div>
-                            <div class="offer-btn">
-                                <p:commandButton id="deleteDraft"  styleClass="btn-delete" value="" icon="pi pi-trash" action="#{indexController.delete(offer)}" />
-                                <p:button outcome="/02-offer/offer" styleClass="btn-toOffer" value="" icon="pi pi-angle-right">
-                                    <f:param name="id" value="#{offer.id}" />
-                                </p:button>
+                        </div>
+
+                        <div class="dropdown">
+                            <button class="dropbtn" id="dropbtnLevel" type="button">Einstieglevel <i class="pi pi-caret-down" /></button>
+                            <div class="navContent" id="dropdownLevel">
+                                <ui:repeat id="level" var="l" value="#{indexController.allLevels}" varStatus="">
+                                    <div class="a">
+                                        <h:selectBooleanCheckbox styleClass="checkBox" value="#{indexController.level[l.first()]}" />
+                                        <h:outputLabel styleClass="checkLabel" value="#{l.second()}" />
+                                    </div>
+                                </ui:repeat>
                             </div>
-                        </h:form>
+                        </div>
+
+                        <div class="dropdown">
+                            <button class="dropbtn" id="dropbtnTime" type="button">Arbeitszeit <i class="pi pi-caret-down" /></button>
+                            <div class="navContent" id="dropdownTime">
+                                <ui:repeat id="time" var="t" value="#{indexController.allTimes}" varStatus="">
+                                    <div class="a">
+                                        <h:selectBooleanCheckbox styleClass="checkBox" value="#{indexController.time[t.first()]}" />
+                                        <h:outputLabel styleClass="checkLabel" value="#{t.second()}" />
+                                    </div>
+                                </ui:repeat>
+                            </div>
+                        </div>
                     </div>
-                </ui:repeat>
+                    <div class="applyBtn">
+                        <h:commandButton value="Anwenden" action="#{indexController.reload()}" styleClass="navBtn" />
+                        <c:if test="#{indexController.loggedInAsEmployee()}" >
+                            <h:button value="Neues Angebot erstellen" outcome="/02-offer/createOffer.xhtml" styleClass="btn-newOffer" />
+                        </c:if>
+                    </div>
+                </h:form>
+
+
+                <div class="offers" id="offers">
+                    <div class="border-line"> </div>
+                    <ui:repeat id="offers" var="offer" value="#{indexController.allOfferDrafts}" varStatus="">
+                        <div class="allOffers">
+                            <h:form>
+                                <div class="offer-left">
+                                    <h:outputLabel id="title" value="#{offer.title}" styleClass="offer-label" />
+                                    <br />
+                                    <div class="offer-attr">
+                                        <i class="pi pi-map-marker">&nbsp;</i>
+                                        <h:outputText id="location" value="#{offer.city}" styleClass="offer-location" />
+                                    </div>
+                                    <div class="offer-attr">
+                                        <i class="pi pi-briefcase">&nbsp;</i>
+                                        <h:outputText id="field" value="#{indexController.fieldString(offer.field)}" styleClass="offer-field" />
+                                    </div>
+                                </div>
+                                <div class="offer-btn">
+                                    <p:commandButton id="deleteDraft"  styleClass="btn-delete" value="" icon="pi pi-trash" action="#{indexController.delete(offer)}" />
+                                    <p:button outcome="/02-offer/offer" styleClass="btn-toOffer" value="" icon="pi pi-angle-right">
+                                        <f:param name="id" value="#{offer.id}" />
+                                    </p:button>
+                                </div>
+                            </h:form>
+                        </div>
+                    </ui:repeat>
+                </div>
             </div>
+
             <!--h:outputStylesheet library="css" name="offer.css" />
             <div align="center" class="drafts-title">
                 <h2>Entwürfe</h2>

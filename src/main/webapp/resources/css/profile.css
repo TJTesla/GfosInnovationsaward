@@ -1,17 +1,81 @@
 :root {
     --profile-width: 700px;
 }
+@media (prefers-color-scheme: dark) {
+    .wrapper-text {
+        border-bottom: solid;
+        border-width: 2px;
+        font-size: 16px;
+        border-color:#7285A5;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .wrapper-text {
+        border-bottom: solid;
+        border-width: 2px;
+        font-size: 16px;
+        border-color:#cfd8e1;
+    }
+}
+
+@media only screen and (min-width: 320px) {
+    .data {
+        width: 100%;
+        margin: 0;
+    }
+    .wrapper-text {
+        width: auto;
+        margin: 0 10px;
+    }
+    body .btn-edit {
+        width: auto;
+        margin: 20px 7px;
+    }
+    body .btn-delete {
+        margin: 20px 7px;
+    }
+}
+@media only screen and (min-width: 481px) {
+    .wrapper-text {
+        width: 90%;
+        margin: 0 auto;
+    }
+    body .btn-edit {
+        width: auto;
+        margin: 20px;
+    }
+    body .btn-delete {
+        margin: 20px;
+    }
+}
+@media only screen and (min-width: 641px) {
+    .data {
+        width: 550px;
+        margin: auto;
+    }
+    .wrapper-text {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+@media only screen and (min-width: 961px) {
+    .data {
+        width: var(--profile-width);
+        margin: auto;
+    }
+    .wrapper-text {
+        width: calc( var(--profile-width) * 0.7 );
+        margin: 0 calc( (var(--profile-width) - var(--profile-width) * 0.7) / 2);
+    }
+}
+
 .data {
-    width: var(--profile-width);
     display: block;
-    margin: 0 auto 0 auto;
     padding-bottom: 50px;
 }
 .image-profile {
     margin-top: 20px;
-}
-.image-profile:hover {
-
 }
 
 .label-profile {
@@ -21,25 +85,14 @@
     margin-bottom: 15px;
     color: #7285A5;
 }
-.wrapper-text {
-    width: calc( var(--profile-width) * 0.7 );
-    margin-left: calc( (var(--profile-width) - var(--profile-width) * 0.7) / 2);
-    border-bottom: solid;
-    border-width: 2px;
-    font-size: 16px;
-    border-color:#7285A5;
-}
+
 .text-data {
     margin-left: 30px;
     margin-top: 10px;
 }
-.btn-edit {
-    width: auto;
-    margin: 20px;
-}
+
 
 body .btn-delete {
-    margin: 20px;
     background-color: darkred;
     border-width: 1px;
     border-color: black;

@@ -1,5 +1,5 @@
 /* New Password */
-@media only screen and (max-width: 481px) {
+@media only screen and (min-width: 320px) {
     .newPswd {
         padding: 20px 10px 30px;
         width: auto;
@@ -13,8 +13,28 @@
         margin-right: 5px;
         width: auto;
     }
+    .edit {
+        margin: 20px 5px 0 ;
+        width: auto;
+        line-height: 200%;
+    }
+    body .btn-saveEdit {
+        font-size: 17px;
+        padding: 5px;
+    }
+    .edit-btn {
+        margin: 20px auto;
+    }
+    .input-edit {
+        width: 100%;
+        height: 25px;
+        margin: 0 0 5px 0;
+    }
+    .upload {
+        width: 100%;
+    }
 }
-@media only screen and (min-width: 482px) {
+@media only screen and (min-width: 481px) {
     .newPswd {
         padding: 20px calc(var(--newPswd-width) * 0.1) 30px;
         width: var(--newPswd-width);
@@ -28,10 +48,29 @@
         margin-right: auto;
         width: var(--newPswd-width);
     }
+    .edit {
+        margin: 20px 5px 0 ;
+        width: auto;
+        line-height: 200%;
+    }
+    .input-edit {
+        width: 200px;
+    }
+    .upload {
+        width: 200px;
+    }
 }
 @media only screen and (min-width: 641px) {
-    :root {
-
+    .edit {
+        margin: 20px auto 0 auto;
+        width: 560px;
+        line-height: 200%;
+    }
+    body .btn-saveEdit {
+        font-size: 18px;
+    }
+    .edit-btn {
+        margin: 20px 35%;
     }
 }
 @media only screen and (min-width: 961px) {
@@ -82,8 +121,6 @@
     font-style: italic;
 }
 .edit {
-    margin: 20px auto 0 auto;
-    width: 560px;
     border-radius: 10px;
     padding: 20px 30px;
     line-height: 200%;
@@ -94,9 +131,7 @@
     font-size: 17px;
 }
 
-.input-edit {
-    width: 200px;
-}
+
 
 .errMsg-edit{
     margin-left: var(--label-edit-width);
@@ -110,12 +145,10 @@ body .pi {
 }
 
 .edit-btn {
-    margin: 20px 35%;
     display: grid;
     align-content: center;
 }
 
 body .btn-saveEdit {
-    font-size: 18px;
-    margin: 0 auto 0 auto;
+    margin: 0 auto;
 }

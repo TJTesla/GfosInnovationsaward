@@ -94,9 +94,9 @@
                     <ui:repeat id="offers" var="offer" value="#{indexController.allOffers}" varStatus="">
                         <div class="allOffers">
                             <h:form>
-                                <div class="offer-left">
-                                    <h:outputLabel id="title" value="#{offer.title}" styleClass="offer-label" />
-                                    <h:outputLabel value="Entwurf" rendered="#{indexController.isDraft(offer)}" />
+                                <div class="offer-left" id="offer">
+                                    <h:outputLabel for="title" value="Entwurf" rendered="#{indexController.isDraft(offer)}" styleClass="draft-sign" />
+                                    <h:outputLabel for="offer" id="title" value="#{offer.title}" styleClass="offer-label" />
                                     <br />
                                     <div class="offer-attr">
                                         <i class="pi pi-map-marker">&nbsp;</i>

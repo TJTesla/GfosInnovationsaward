@@ -1,28 +1,97 @@
 /* Template */
+@media only screen and (min-width: 320px) {
+    .applDetailView {
+        width: auto;
+        margin: 0 5px;
+        padding: 0 10px;
+    }
+    .text-applDetail {
+        display: block;
+        padding: 0 0 0 10px;
+    }
+    h1 {
+        font-size: 25px;
+    }
+    .label-applDetail {
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    .label-status {
+        font-size: 16px;
+    }
+    .text-status {
+        display: block;
+    }
+    body .btn-saveStatus {
+        float: left;
+    }
+}
+@media only screen and (min-width: 481px) {
+    .applDetailView {
+        width: auto;
+        margin: 0 5px;
+        padding: 0 15px;
+    }
+    .text-applDetail {
+        display: inline;
+    }
+    .label-applDetail {
+        font-size: 17px;
+        margin-top: 15px;
+    }
+    .label-status {
+        font-size: 17px;
+    }
+    .text-status {
+        display: inline;
+    }
+    body .btn-saveStatus {
+        float: right;
+    }
+}
+@media only screen and (min-width: 641px) {
+    .applDetailView {
+        width: auto;
+        margin: 0 10px;
+        padding: 0 20px;
+    }
+    h1 {
+        font-size: 23px;
+    }
+
+}
+@media only screen and (min-width: 961px) {
+    .applDetailView {
+        width: 700px;
+        margin: 0 auto 0 auto;
+        padding: 0 30px;
+    }
+    h1 {
+        font-size: 30px;
+    }
+    .label-applDetail {
+        font-size: 18px;
+        margin-top: 20px;
+    }
+    .label-status {
+        font-size: 18px;
+    }
+}
 h1 {
-    font-size: 30px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 .applDetailView {
-    width: 700px;
-    margin: 0 auto 0 auto;
-    padding-left: 30px;
-    padding-right: 30px;
     border-radius: 10px;
 }
 
 .label-applDetail {
     width: 200px;
-    font-size: 18px;
     font-style: italic;
-    margin-top: 20px;
 }
 
-.text-applDetail {
 
-}
 
 .textArea-applDetail {
     margin-top: 6px;
@@ -71,6 +140,9 @@ body .btn-editDraft {
     margin: 0 0 20px 0;
     font-size: 17px;
 }
+.border-line {
+    margin-top: 20px;
+}
 
 
 /* Employer */
@@ -108,8 +180,6 @@ body .btn-editDraft {
 }
 
 .label-status {
-    font-size: 18px;
-    margin-bottom: 20px;
     font-style: italic;
     width: 240px;
 }
@@ -127,7 +197,6 @@ body .btn-editDraft {
 body .btn-saveStatus {
     font-size: 16px;
     margin-bottom: 30px;
-    float: right;
 }
 
 .text-status {

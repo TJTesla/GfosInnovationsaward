@@ -242,6 +242,7 @@ body [class*="btn-"] {
     border-width: 1px;
     border-color: black;
     padding: 10px;
+    white-space: normal;
 }
 body [class*="btn-"]:hover {
     background-color: #75b4ff;

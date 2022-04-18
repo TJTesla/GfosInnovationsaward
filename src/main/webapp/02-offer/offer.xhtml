@@ -33,17 +33,25 @@
                 <div class="offer-data1">
                     <!-- Daten des Angebots -->
                     <h:outputLabel for="field" value="Berufsfeld: " styleClass="label-offer" />
-                    <h:outputText id="field" value="#{detailOffer.fieldString()}" styleClass="text-offer" />
+                    <div class="wrap-textOffer">
+                        <h:outputText id="field" value="#{detailOffer.fieldString()}" styleClass="text-offer" />
+                    </div>
                     <br />
                     <h:outputLabel for="level" value="Einstiegsniveau: " styleClass="label-offer" />
-                    <h:outputText id="level" value="#{detailOffer.levelString()}" styleClass="text-offer" />
+                    <div class="wrap-textOffer">
+                        <h:outputText id="level" value="#{detailOffer.levelString()}" styleClass="text-offer" />
+                    </div>
                     <br />
                     <h:outputLabel for="time" value="Arbeitszeit: " styleClass="label-offer" />
-                    <h:outputText id="time" value="#{detailOffer.timeString()}" styleClass="text-offer" />
+                    <div class="wrap-textOffer">
+                        <h:outputText id="time" value="#{detailOffer.timeString()}" styleClass="text-offer" />
+                    </div>
                     <br />
                     <h:outputLabel for="location" value="Ort: " styleClass="label-offer" />
-                    <h:outputText id="location" value="#{detailOffer.detailOffer.city}" styleClass="text-offer" />
-
+                    <div class="wrap-textOffer">
+                        <h:outputText id="location" value="#{detailOffer.detailOffer.city}" styleClass="text-offer" />
+                    </div>
+                    <br />
                     <div class="field-offer-description">
                         <h:outputLabel for="tasks" value="Aufgaben:" styleClass="label-offer-description" />
                         <div class="box-description">
@@ -92,7 +100,7 @@
                                         </h:button>
                                     </c:when>
                                     <c:otherwise>
-                                        <h:commandButton value="Veröffentlichen" action="#{detailOffer.publish()}" styleClass="btn-upload" />
+                                        <h:commandButton value="Veröffentlichen" action="#{detailOffer.publish()}" styleClass="btn-upload1" />
                                         <h:button value="Bearbeiten" outcome="createOffer" styleClass="btn-editDraft">
                                             <f:param name="id" value="#{detailOffer.detailOffer.id}" />
                                         </h:button>
