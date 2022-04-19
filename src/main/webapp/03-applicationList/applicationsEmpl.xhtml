@@ -25,13 +25,14 @@
                     <div class="application">
                         <h:form>
                             <div class="left">
-                                <h:outputText id="name" value="#{companyIndexController.getApplicantName(a.userId)}" styleClass="text-apl" /> <!-- Last Name of Applicant -->
+                                <h:outputText id="name" value="#{companyIndexController.getApplicantName(a.userId)}" styleClass="text-apl moveText" /> <!-- Last Name of Applicant -->
                             </div>
                             <div class="right">
                                 <div class="status">
-                                    <h:outputLabel for="status" value="Berarbeitungsstatus:" styleClass="label-status" />
+                                    <h:outputLabel for="status" value="Berarbeitungsstatus:" styleClass="label-status" /> <br />
                                     <h:outputText id="status" value="#{detailApplication.statusString(a)}" styleClass="text-status" /> <!-- current status of application -->
                                 </div>
+                                <br />
                                 <h:button outcome="/03-application/applDetailEmpl" value="Einsehen" styleClass="btn-seeAppl">
                                     <f:param name="oId" value="#{a.offerId}" />
                                     <f:param name="aId" value="#{a.userId}" />
@@ -44,5 +45,4 @@
         </ui:define>
     </ui:composition>
 </h:body>
-<!-- TODO:Site works but NullPointerExceptions from the methods, probably due to missing contents -->
 </html>
