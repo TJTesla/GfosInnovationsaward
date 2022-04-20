@@ -14,6 +14,7 @@
 <ui:composition template="../resources/templates/common.xhtml">
     <ui:define name="content">
         <h:outputStylesheet library="css" name="tests.css" />
+        <h:outputScript library="javascript" name="jqueryChangeCss.js" />
         <style type="text/css">
 
         </style>
@@ -33,6 +34,22 @@
                 <f:selectItem itemLabel="Hello" />
                 <f:selectItem itemLabel="Bye" />
             </h:selectManyCheckbox>
+            <button onclick="showPopUp()">
+                Popup
+            </button>
+            <div class="cover" id="popup">
+                <div class="popup">
+                    <p>
+                        Sind Sie sicher, dass Sie ihre Bewerbung zurückziehen wollen?
+                    </p>
+                    <button onclick="hidePopUp()">
+                        Abbrechen
+                    </button>
+                    <button>
+                        Löschen
+                    </button>
+                </div>
+            </div>
         </h:body>
     </ui:define>
 </ui:composition>

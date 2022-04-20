@@ -10,4 +10,13 @@ function ChangeCss(){
 color = $('#elem').css('color'); //gets the color of the id elem
 color = $('elem').css('color'); //same with element selector
 color = $('.elem').css('color'); //same with class selector
-$('hi', '.bye', '#cu').css('color', 'blue'); //combining selectors 
+$('hi', '.bye', '#cu').css('color', 'blue'); //combining selectors
+
+function showPopUp() {
+    document.getElementById("popup").style.display = "block";
+    $('#popup').show();
+}
+function cancel() {
+    document.getElementById("popup").style.display = "none";
+    $('#popup').hide();
+}

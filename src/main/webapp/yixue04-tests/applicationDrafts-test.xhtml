@@ -35,7 +35,7 @@
                                     <f:param name="edit" value="true" />
                                 </h:button>
                                 <br />
-                                <p:commandButton id="deleteAppl" action="#{applicationListController.delete(aDraft.application)}"  value="" styleClass="btn-delete" icon="pi pi-trash" ajax="false" />
+                                <p:commandButton id="deleteAppl" onclick="showPopUp()" value="" styleClass="btn-delete" icon="pi pi-trash" ajax="true" />
                             </h:form>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                         <div class="popup">
                             <h:outputText id="question" value="Sind Sie sich sicher, dass Sie den Entwurf löschen möchten?" />
                             <h:button value="Abbrechen" id="cancel" styleClass="btn-cancel" onclick="hidePopUp()" />
-                            <h:commandButton value="löschen" id="delete" styleClass="btn-deleteFinal" onclick="hidePopUp()" action="#{applicationListController.delete(aDraft.application)}" />
+                            <h:commandButton value="Löschen" id="delete" styleClass="btn-deleteFinal" action="#{applicationListController.delete(aDraft.application)}" ajax="false" />
                         </div>
                     </div>
                 </ui:repeat>
