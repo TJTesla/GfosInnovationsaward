@@ -31,13 +31,45 @@
                             <h:outputText id="status" value="#{detailApplication.statusString()}" styleClass="text-status" />
                             <hr class="border-line" />
                             <br />
-                            <h:commandButton id="retract" value="Zurückziehen" action="#{detailApplication.retract()}" styleClass="btn-retract" />
+                            <h:commandButton id="retract" value="Zurückziehen" styleClass="btn-retract" onclick="showPopUp('NotDraft')">
+                                <f:ajax render="@none" />
+                            </h:commandButton>
+                            <div class="cover" id="popupNotDraft">
+                                <div class="popup">
+                                    <h:form>
+                                        <h:outputText id="question" value="Sind Sie sich sicher, dass Sie diese Bewerbung zurückziehen möchten?" style="display: block;" />
+                                        <h:outputText id="questionTitle" value="#{detailApplication.offer.title}" style="display: block; font-style: italic" />
+                                        <div class="wrap-btns">
+                                            <h:commandButton value="Abbrechen" id="cancel" styleClass="btn-cancel" onclick="hidePopUp('NotDraft')" >
+                                                <f:ajax render="@none" />
+                                            </h:commandButton>
+                                            <h:commandButton value="Zurückziehen" id="deleteBtn" styleClass="btn-deleteFinal" onclick="hidePopUp('NotDraft')" action="#{detailApplication.retract()}" ajax="false" />
+                                        </div>
+                                    </h:form>
+                                </div>
+                            </div>
                         </c:when>
                         <c:otherwise>
                             <div style="text-align: center">
                                 <hr class="border-line" />
                                 <br />
-                                <h:commandButton id="delete" value="Löschen" action="#{detailApplication.delete()}" styleClass="btn-retract" />
+                                <h:commandButton id="delete" value="Löschen" onclick="showPopUp('Draft')" styleClass="btn-retract">
+                                    <f:ajax render="@none" />
+                                </h:commandButton>
+                                <div class="cover" id="popupDraft">
+                                    <div class="popup">
+                                        <h:form>
+                                            <h:outputText id="question1" value="Sind Sie sich sicher, dass Sie diese Bewerbung löschen möchten?" style="display: block;" />
+                                            <h:outputText id="questionTitle1" value="#{detailApplication.offer.title}" style="display: block; font-style: italic" />
+                                            <div class="wrap-btns">
+                                                <h:commandButton value="Abbrechen" id="cancel1" styleClass="btn-cancel" onclick="hidePopUp('Draft')" >
+                                                    <f:ajax render="@none" />
+                                                </h:commandButton>
+                                                <h:commandButton value="Löschen" id="deleteBtn1" styleClass="btn-deleteFinal" onclick="hidePopUp('Draft')" action="#{detailApplication.delete()}" ajax="false" />
+                                            </div>
+                                        </h:form>
+                                    </div>
+                                </div>
                                 <h:button value="Bearbeiten" styleClass="btn-editDraft" outcome="/03-application/application.xhtml" >
                                     <f:param name="id" value="#{detailApplication.application.offerId}" />
                                     <f:param name="edit" value="true" />

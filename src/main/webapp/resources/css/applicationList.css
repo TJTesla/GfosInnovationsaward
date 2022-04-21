@@ -106,7 +106,8 @@
         margin-top: 20px;
     }
     .label-status {
-        float: right;
+        text-align: right;
+        display: block;
     }
     .moveText {
         transform: translate(0, 200%);
@@ -140,6 +141,11 @@
     }
     .text-status {
         font-size: 17px;
+    }
+    .label-status {
+        text-align: left;
+        float: none;
+        display: inline;
     }
 }
 @media only screen and (min-width: 961px) {
@@ -194,6 +200,7 @@
 
 .label-status {
     font-size: 15px;
+    padding-right: 10px;
 }
 
 .text-status {

@@ -106,7 +106,23 @@
                                         </h:button>
                                     </c:otherwise>
                                 </c:choose>
-                                <h:commandButton id="delete" value="Löschen" styleClass="btn-deleteOffer" action="#{detailOffer.delete()}" />
+                                <h:commandButton id="delete" value="Löschen" styleClass="btn-deleteOffer" onclick="showPopUp('')">
+                                    <f:ajax render="@none" />
+                                </h:commandButton>
+                                <div class="cover" id="popup">
+                                    <div class="popup">
+                                        <h:form>
+                                            <h:outputText id="question" value="Sind Sie sich sicher, dass Sie dieses Angebot löschen möchten?" style="display: block;" />
+                                            <h:outputText id="questionTitle" value="#{detailOffer.detailOffer.title}" style="display: block; font-style: italic" />
+                                            <div class="wrap-btns">
+                                                <h:commandButton value="Abbrechen" id="cancel" styleClass="btn-cancel" onclick="hidePopUp('')">
+                                                    <f:ajax render="@none" />
+                                                </h:commandButton>
+                                                <h:commandButton value="Löschen" id="deleteBtn" styleClass="btn-deleteFinal" onclick="hidePopUp('')" action="#{detailOffer.delete()}" ajax="false" />
+                                            </div>
+                                        </h:form>
+                                    </div>
+                                </div>
                             </c:when>
                             <c:otherwise> <!-- not logged in -->
                                 <h:link outcome="/00-loginRegistration/login" value="Melden Sie sich hier an, um sich zu bewerben." styleClass="link-login" />

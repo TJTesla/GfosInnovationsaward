@@ -23,7 +23,7 @@
                 <hr />
             </div>
             <div class="applications">
-                <ui:repeat var="aDraft" value="#{applicationListController.drafts}">
+                <ui:repeat var="aDraft" value="#{applicationListController.drafts}" varStatus="statusCount">
                     <div class="application">
                         <div class="left">
                             <h:outputLabel id="offerTitle" value="#{aDraft.offer.title}" styleClass="text-apl label-apl"  />
@@ -35,15 +35,22 @@
                                     <f:param name="edit" value="true" />
                                 </h:button>
                                 <br />
-                                <p:commandButton id="deleteAppl" action="#{applicationListController.delete(aDraft.application)}"  value="" styleClass="btn-delete" icon="pi pi-trash" ajax="false" />
+                                <p:commandButton id="deleteAppl" onclick="showPopUp(#{statusCount.index})" value="" styleClass="btn-delete" icon="pi pi-trash" ajax="true" />
+                                <div class="cover" id="popup#{statusCount.index}">
+                                    <div class="popup">
+                                        <h:form>
+                                            <h:outputText id="question" value="Sind Sie sich sicher, dass Sie diesen Entwurf löschen möchten?" style="display: block;" />
+                                            <h:outputText id="questionTitle" value="#{aDraft.offer.title}" style="display: block; font-style: italic" />
+                                            <div class="wrap-btns">
+                                                <h:commandButton value="Abbrechen" id="cancel" styleClass="btn-cancel" onclick="hidePopUp(#{statusCount.index})">
+                                                    <f:ajax render="@none" />
+                                                </h:commandButton>
+                                                <h:commandButton value="Löschen" id="delete" styleClass="btn-deleteFinal" onclick="hidePopUp(#{statusCount.index})" action="#{applicationListController.delete(aDraft.application)}" ajax="false" />
+                                            </div>
+                                        </h:form>
+                                    </div>
+                                </div>
                             </h:form>
-                        </div>
-                    </div>
-                    <div class="cover" id="popup">
-                        <div class="popup">
-                            <h:outputText id="question" value="Sind Sie sich sicher, dass Sie den Entwurf löschen möchten?" />
-                            <h:button value="Abbrechen" id="cancel" styleClass="btn-cancel" onclick="hidePopUp()" />
-                            <h:commandButton value="löschen" id="delete" styleClass="btn-deleteFinal" onclick="hidePopUp()" action="#{applicationListController.delete(aDraft.application)}" />
                         </div>
                     </div>
                 </ui:repeat>

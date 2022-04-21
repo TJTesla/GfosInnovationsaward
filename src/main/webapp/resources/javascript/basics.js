@@ -7,11 +7,11 @@ function closeNav() {
     $("#sideNav").hide(500, "swing");
     document.getElementById("sideNav").style.width = "0";
 }
-function showPopUp() {
-    document.getElementById("popup").style.display = "block";
+function showPopUp(i) {
+    document.getElementById("popup" + i).style.display = "block";
     $('#popup').show();
 }
-function hidePopUp() {
-    document.getElementById("popup").style.display = "none";
+function hidePopUp(i) {
+    document.getElementById("popup" + i).style.display = "none";
     $('#popup').hide();
 }

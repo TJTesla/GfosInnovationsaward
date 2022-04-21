@@ -19,6 +19,7 @@
 <h:body>
     <h:outputStylesheet library="css" name="styleBasic.css" />
     <h:outputStylesheet library="css" name="superuser.css" />
+    <h:outputScript library="javascript" name="basics.js" />
     <div class="head">
         <ui:insert name="header">
             <ui:include src="../resources/templates/common/header.xhtml" />
@@ -56,14 +57,28 @@
             </div>
             <div class="oldEmpl">
                 <h3 class="legend-oldEmpl">Liste aller Mitarbeiter:</h3>
-                <ui:repeat var="x" value="#{superUserController.allEmployees}">
+                <ui:repeat var="x" value="#{superUserController.allEmployees}" varStatus="statusCount">
                     <div class="empl">
                         <h:form>
                             <h:outputText id="name" value="#{x.name}" styleClass="text-empl" />
-                            <p:commandButton id="delete" action="#{superUserController.delete(x)}" styleClass="btn-delete" value="" icon="pi pi-trash" ajax="false" />
+                            <p:commandButton id="delete" onclick="showPopUp(#{statusCount.index})" styleClass="btn-delete" value="" icon="pi pi-trash" ajax="true" />
                             <br />
                             <h:outputText value="#{superUserController.activationStatus(x)}" styleClass="text-emplStatus" />
                         </h:form>
+                    </div>
+                    <div class="cover" id="popup#{statusCount.index}">
+                        <div class="popup">
+                            <h:form>
+                                <h:outputText id="question" value="Sind Sie sich sicher, dass Sie diesen Mitarbeiter löschen möchten?" style="display: block;" />
+                                <h:outputText id="questionTitle" value="#{x.name}" style="display: block; font-style: italic" />
+                                <div class="wrap-btns">
+                                    <h:commandButton value="Abbrechen" id="cancel" styleClass="btn-cancel" onclick="hidePopUp(#{statusCount.index})">
+                                        <f:ajax render="@none" />
+                                    </h:commandButton>
+                                    <h:commandButton value="Löschen" id="deleteBtn" styleClass="btn-deleteFinal" onclick="hidePopUp(#{statusCount.index})" action="#{superUserController.delete(x)}" ajax="false" />
+                                </div>
+                            </h:form>
+                        </div>
                     </div>
                 </ui:repeat>
             </div>
