@@ -97,7 +97,7 @@ public class DetailApplication implements Serializable {
 
     public String delete() {
         adbs.delete(this.application);
-        return "/03-applicationList/applicationsDraft?faces-redirect=true";
+        return "/03-applicationList/applicationDrafts?faces-redirect=true";
     }
 
     public boolean isDraft() {
