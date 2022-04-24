@@ -157,6 +157,8 @@ body {
     h1 {
         font-size: 30px;
     }
+
+
 }
 @media only screen and (min-width: 641px) {
     .head {
@@ -200,6 +202,26 @@ body {
     }
     h1 {
         font-size: 35px;
+    }
+}
+@media only screen and (min-height: 320px) {
+    .popup {
+        transform: translate(0, 25%);
+    }
+}
+@media only screen and (min-height: 500px) {
+    .popup {
+        transform: translate(0, 75%);
+    }
+}
+@media only screen and (min-height: 700px) {
+    .popup {
+        transform: translate(0, 100%);
+    }
+}
+@media only screen and (min-height: 750px) {
+    .popup {
+        transform: translate(0, 150%);
     }
 }
 
@@ -334,7 +356,6 @@ body .pi {
     text-align: center;
     height: 200px;
     padding: 30px;
-    transform: translate(0, 150%);
     margin: auto;
     background-color: whitesmoke;
     color: #13274F;
