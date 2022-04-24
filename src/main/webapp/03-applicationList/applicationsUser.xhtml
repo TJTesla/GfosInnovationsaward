@@ -30,7 +30,7 @@
                         <f:selectItem itemValue="10" itemLabel="Angenommen" />
                         <f:selectItem itemValue="11" itemLabel="Abgelehnt" />
                     </h:selectOneMenu>
-                    <h:commandButton id="filterBtn" value="Anwenden" action="#{applicationListController.filter()}" styleClass="btn-filter" />
+                    <h:commandButton id="filterBtn" value="Anwenden" action="#{applicationListController.filter()}" styleClass="btn-filter ui-button" />
                 </h:form>
             </div>
             <div class="applications">
@@ -45,7 +45,7 @@
                             </div>
                             <br />
                             <div style="display: block; width: 100%">
-                                <h:commandButton id="retract" value="Zurückziehen" styleClass="btn-retract" onclick="showPopUp(#{statusCount.index})">
+                                <h:commandButton id="retract" value="Zurückziehen" styleClass="btn-retract ui-button" onclick="showPopUp(#{statusCount.index})">
                                     <f:ajax render="@none" />
                                 </h:commandButton>
                                 <p:button value="Einsehen" outcome="/03-application/applDetailUser" styleClass="btn-seeAppl" style="padding: 0;" >
@@ -60,10 +60,10 @@
                                 <h:outputText id="question" value="Sind Sie sich sicher, dass Sie diese Bewerbung zurückziehen möchten?" style="display: block;" />
                                 <h:outputText id="questionTitle" value="#{apl.offer.title}" style="display: block; font-style: italic" />
                                 <div class="wrap-btns">
-                                    <h:commandButton value="Abbrechen" id="cancel" styleClass="btn-cancel" onclick="hidePopUp(#{statusCount.index})">
+                                    <h:commandButton value="Abbrechen" id="cancel" styleClass="btn-cancel ui-button" onclick="hidePopUp(#{statusCount.index})">
                                         <f:ajax render="@none" />
                                     </h:commandButton>
-                                    <h:commandButton value="Zurückziehen" id="delete" styleClass="btn-deleteFinal" onclick="hidePopUp(#{statusCount.index})" action="#{apl.retract()}" ajax="false" />
+                                    <h:commandButton value="Zurückziehen" id="delete" styleClass="btn-deleteFinal ui-button" onclick="hidePopUp(#{statusCount.index})" action="#{apl.retract()}" ajax="false" />
                                 </div>
                             </h:form>
                         </div>

@@ -30,7 +30,7 @@
                     <div class="filter">
                         <!--h:inputText id="place" k:placeholder="Standort" styleClass="input-location" /-->
                         <div class="dropdown">
-                            <button class="dropbtn" id="dropbtnField" type="button">Berufsfeld <i class="pi pi-caret-down" /></button>
+                            <button class="dropbtn ui-button" id="dropbtnField" type="button">Berufsfeld <i class="pi pi-caret-down" /></button>
                             <div class="navContent" id="dropdownField">
                                 <ui:repeat id="field" var="f" value="#{indexController.allFields}">
                                     <div class="a">
@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="dropdown">
-                            <button class="dropbtn" id="dropbtnLevel" type="button">Einstieglevel <i class="pi pi-caret-down" /></button>
+                            <button class="dropbtn ui-button" id="dropbtnLevel" type="button">Einstieglevel <i class="pi pi-caret-down" /></button>
                             <div class="navContent" id="dropdownLevel">
                                 <ui:repeat id="level" var="l" value="#{indexController.allLevels}" varStatus="">
                                     <div class="a">
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="dropdown">
-                            <button class="dropbtn" id="dropbtnTime" type="button">Arbeitszeit <i class="pi pi-caret-down" /></button>
+                            <button class="dropbtn ui-button" id="dropbtnTime" type="button">Arbeitszeit <i class="pi pi-caret-down" /></button>
                             <div class="navContent" id="dropdownTime">
                                 <ui:repeat id="time" var="t" value="#{indexController.allTimes}" varStatus="">
                                     <div class="a">
@@ -66,9 +66,9 @@
                         </div>
                     </div>
                     <div class="applyBtn">
-                        <h:commandButton value="Anwenden" action="#{indexController.reload()}" styleClass="navBtn" />
+                        <h:commandButton value="Anwenden" action="#{indexController.reload()}" styleClass="navBtn ui-button" />
                         <c:if test="#{indexController.loggedInAsEmployee()}" >
-                            <h:button value="Neues Angebot erstellen" outcome="/02-offer/createOffer.xhtml" styleClass="btn-newOffer" />
+                            <h:button value="Neues Angebot erstellen" outcome="/02-offer/createOffer.xhtml" styleClass="btn-newOffer ui-button" />
                         </c:if>
                     </div>
                 </h:form>
@@ -105,10 +105,10 @@
                                     <h:outputText id="question" value="Sind Sie sich sicher, dass Sie diesen Entwurf löschen möchten?" style="display: block;" />
                                     <h:outputText id="questionTitle" value="#{offer.title}" style="display: block; font-style: italic" />
                                     <div class="wrap-btns">
-                                        <h:commandButton value="Abbrechen" id="cancel" styleClass="btn-cancel" onclick="hidePopUp(#{statusCount.index})">
+                                        <h:commandButton value="Abbrechen" id="cancel" styleClass="btn-cancel ui-button" onclick="hidePopUp(#{statusCount.index})">
                                             <f:ajax render="@none" />
                                         </h:commandButton>
-                                        <h:commandButton value="Löschen" id="delete" styleClass="btn-deleteFinal" onclick="hidePopUp(#{statusCount.index})" action="#{indexController.delete(offer)}" ajax="false" />
+                                        <h:commandButton value="Löschen" id="delete" styleClass="btn-deleteFinal ui-button" onclick="hidePopUp(#{statusCount.index})" action="#{indexController.delete(offer)}" ajax="false" />
                                     </div>
                                 </h:form>
                             </div>

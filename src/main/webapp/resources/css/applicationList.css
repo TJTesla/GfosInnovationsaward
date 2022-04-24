@@ -213,7 +213,6 @@ body .btn-seeAppl {
     right: 0;
     bottom: 0;
     background-color: #7285a5;
-    border: none;
     font-weight: bold;
     /*padding: 0;*/
 }
@@ -233,7 +232,6 @@ body .btn-retract {
     padding: 0 10px;
     font-weight: normal;
     color: whitesmoke;
-    border: none;
 }
 
 body .btn-retract:hover {

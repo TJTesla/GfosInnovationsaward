@@ -59,11 +59,11 @@
                 <br />
                 <h:form>
                     <div class="wrapper">
-                        <h:commandButton onclick="showPopUp('')" styleClass="btn-delete" value="Profil löschen">
+                        <h:commandButton onclick="showPopUp('')" styleClass="btn-delete ui-button" value="Profil löschen">
                             <f:ajax render="@none" />
                         </h:commandButton>
-                        <h:button outcome="editProfile" value="Profil bearbeiten" styleClass="btn-edit" />
-                        <h:button outcome="/00-loginRegistration/newPswd" value="Passwort ändern" styleClass="btn-edit" />
+                        <h:button outcome="editProfile" value="Profil bearbeiten" styleClass="btn-edit ui-button" />
+                        <h:button outcome="/00-loginRegistration/newPswd" value="Passwort ändern" styleClass="btn-edit ui-button" />
                     </div>
                 </h:form>
             </div>
@@ -72,10 +72,10 @@
                     <h:form>
                         <h:outputText id="question" value="Sind Sie sich sicher, dass Sie Ihr Profil löschen möchten?" style="display: block;" />
                         <div class="wrap-btns">
-                            <h:commandButton value="Abbrechen" id="cancel" styleClass="btn-cancel" onclick="hidePopUp('')">
+                            <h:commandButton value="Abbrechen" id="cancel" styleClass="btn-cancel ui-button" onclick="hidePopUp('')">
                                 <f:ajax render="@none" />
                             </h:commandButton>
-                            <h:commandButton value="Löschen" id="deleteBtn" styleClass="btn-deleteFinal" onclick="hidePopUp('')" action="#{detailApplicant.delete()}" ajax="false" />
+                            <h:commandButton value="Löschen" id="deleteBtn" styleClass="btn-deleteFinal ui-button" onclick="hidePopUp('')" action="#{detailApplicant.delete()}" ajax="false" />
                         </div>
                     </h:form>
                 </div>

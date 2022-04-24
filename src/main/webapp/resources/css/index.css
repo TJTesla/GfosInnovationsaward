@@ -21,10 +21,10 @@
     .navContent .a:hover {
         background-color: #a59272;
     }
-    .navBtn {
+    body .navBtn {
         background-color: var(--filter-d-bg-color);
     }
-    .navBtn:hover {
+    body .navBtn:hover {
         background-color: #7b5138;
     }
     .input-location {
@@ -68,10 +68,10 @@
     .navContent .a:hover {
         background-color: #e1d8cf;
     }
-    .navBtn {
+    body .navBtn {
         background-color: var(--filter-l-bg-color);
     }
-    .navBtn:hover {
+    body .navBtn:hover {
         background-color: #a59272;
     }
     .input-location {
@@ -452,6 +452,7 @@
     background-color: inherit;
     font-family: inherit;
     margin: 0;
+    border-radius: 0;
 }
 
 body .pi {
@@ -483,7 +484,7 @@ body .pi {
 .applyBtn {
     margin: 0;
 }
-.navBtn {
+body .navBtn {
     font-family: inherit;
     color: whitesmoke;
     border-width: 0;

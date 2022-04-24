@@ -20,10 +20,10 @@
             <ui:include src="common/header.xhtml" />
             <h:outputStylesheet library="css" name="sideNavbar.css" />
             <h:outputScript library="javascript" name="basics.js" />
-            <button class="btn-openMenu" id="menubtn" onclick="openNav()"> <i class="pi pi-align-right" id="menu-icon" /> </button>
+            <button class="btn-openMenu  ui-button" id="menubtn" onclick="openNav()"> <i class="pi pi-align-right" id="menu-icon" /> </button>
             <div id="sideNav" class="sidenav">
                 <h:form>
-                    <button class="closebtn" type="button" onclick="closeNav()">&times;</button>
+                    <button class="closebtn ui-button" type="button" onclick="closeNav()">&times;</button>
                     <c:if test="#{controllerTest.checkApplicant()}">
                         <p:button styleClass="sideNavLinks-plain" outcome="/01-user/userProfile" value="Profil" icon="pi pi-user" />
                         <hr class="border" />

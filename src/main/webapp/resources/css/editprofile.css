@@ -105,7 +105,7 @@
     border: none;
     background-color: inherit;
 }
-.btn-newPswd {
+body .btn-newPswd {
     float: right;
     font-weight: bolder;
     font-size: 16px;

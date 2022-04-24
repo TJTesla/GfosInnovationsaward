@@ -72,10 +72,10 @@
                                 <h:outputText id="question" value="Sind Sie sich sicher, dass Sie diesen Mitarbeiter löschen möchten?" style="display: block;" />
                                 <h:outputText id="questionTitle" value="#{x.name}" style="display: block; font-style: italic" />
                                 <div class="wrap-btns">
-                                    <h:commandButton value="Abbrechen" id="cancel" styleClass="btn-cancel" onclick="hidePopUp(#{statusCount.index})">
+                                    <h:commandButton value="Abbrechen" id="cancel" styleClass="btn-cancel ui-button" onclick="hidePopUp(#{statusCount.index})">
                                         <f:ajax render="@none" />
                                     </h:commandButton>
-                                    <h:commandButton value="Löschen" id="deleteBtn" styleClass="btn-deleteFinal" onclick="hidePopUp(#{statusCount.index})" action="#{superUserController.delete(x)}" ajax="false" />
+                                    <h:commandButton value="Löschen" id="deleteBtn" styleClass="btn-deleteFinal ui-button" onclick="hidePopUp(#{statusCount.index})" action="#{superUserController.delete(x)}" ajax="false" />
                                 </div>
                             </h:form>
                         </div>

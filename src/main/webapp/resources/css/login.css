@@ -284,7 +284,7 @@ body .btn-loginE {
 
 /**/
 /* Buttons */
-.btn-login {
+body .btn-login {
     float: right;
     top: 0; right: 0;
     margin-top: 10px;
@@ -292,13 +292,11 @@ body .btn-loginE {
     margin-left: 5px;
     color: whitesmoke;
     font-size: 18px;
-    background-color: #007FFF;
-    /*background-color: #ff1493;*/
     border-width: 0;
     border-radius: 5px;
 }
 
-.btn-login:hover {
+body .btn-login:hover {
     background-color: #6495ED;
     /*background-color: #fc95e6;*/
 }

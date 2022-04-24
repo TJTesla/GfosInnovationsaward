@@ -80,13 +80,13 @@
                             <c:when test="#{detailOffer.loggedInAsApplicant()}"> <!-- if applicant -->
                                 <c:choose>
                                     <c:when test="#{not detailOffer.alreadyApplied()}"> <!-- if not applied -->
-                                        <h:button value="Bewerben" styleClass="btn-appl" outcome="/03-application/application">
+                                        <h:button value="Bewerben" styleClass="btn-appl ui-button" outcome="/03-application/application">
                                             <f:param name="id" value="#{detailOffer.detailOffer.id}" />
                                             <f:param name="edit" value="false" />
                                         </h:button>
                                     </c:when>
                                     <c:otherwise> <!-- already applied -->
-                                        <h:button value="Bewerbung einsehen" styleClass="btn-appl" outcome="/03-application/applDetailUser">
+                                        <h:button value="Bewerbung einsehen" styleClass="btn-appl ui-button" outcome="/03-application/applDetailUser">
                                             <f:param name="id" value="#{detailOffer.detailOffer.id}" />
                                         </h:button>
                                     </c:otherwise>
@@ -95,18 +95,18 @@
                             <c:when test="#{detailOffer.loggedInAsEmployee()}"> <!-- if employee -->
                                 <c:choose>
                                     <c:when test="#{detailOffer.finalOffer}">
-                                        <h:button value="Bewerbungen einsehen" styleClass="btn-seeAppl" outcome="/03-applicationList/applicationsEmpl">
+                                        <h:button value="Bewerbungen einsehen" styleClass="btn-seeAppl ui-button" outcome="/03-applicationList/applicationsEmpl">
                                             <f:param name="id" value="#{detailOffer.detailOffer.id}" />
                                         </h:button>
                                     </c:when>
                                     <c:otherwise>
-                                        <h:commandButton value="Veröffentlichen" action="#{detailOffer.publish()}" styleClass="btn-upload1" />
-                                        <h:button value="Bearbeiten" outcome="createOffer" styleClass="btn-editDraft">
+                                        <h:commandButton value="Veröffentlichen" action="#{detailOffer.publish()}" styleClass="btn-upload1 ui-button" />
+                                        <h:button value="Bearbeiten" outcome="createOffer" styleClass="btn-editDraft ui-button">
                                             <f:param name="id" value="#{detailOffer.detailOffer.id}" />
                                         </h:button>
                                     </c:otherwise>
                                 </c:choose>
-                                <h:commandButton id="delete" value="Löschen" styleClass="btn-deleteOffer" onclick="showPopUp('')">
+                                <h:commandButton id="delete" value="Löschen" styleClass="btn-deleteOffer ui-button" onclick="showPopUp('')">
                                     <f:ajax render="@none" />
                                 </h:commandButton>
                                 <div class="cover" id="popup">
@@ -115,10 +115,10 @@
                                             <h:outputText id="question" value="Sind Sie sich sicher, dass Sie dieses Angebot löschen möchten?" style="display: block;" />
                                             <h:outputText id="questionTitle" value="#{detailOffer.detailOffer.title}" style="display: block; font-style: italic" />
                                             <div class="wrap-btns">
-                                                <h:commandButton value="Abbrechen" id="cancel" styleClass="btn-cancel" onclick="hidePopUp('')">
+                                                <h:commandButton value="Abbrechen" id="cancel" styleClass="btn-cancel ui-button" onclick="hidePopUp('')">
                                                     <f:ajax render="@none" />
                                                 </h:commandButton>
-                                                <h:commandButton value="Löschen" id="deleteBtn" styleClass="btn-deleteFinal" onclick="hidePopUp('')" action="#{detailOffer.delete()}" ajax="false" />
+                                                <h:commandButton value="Löschen" id="deleteBtn" styleClass="btn-deleteFinal ui-button" onclick="hidePopUp('')" action="#{detailOffer.delete()}" ajax="false" />
                                             </div>
                                         </h:form>
                                     </div>
