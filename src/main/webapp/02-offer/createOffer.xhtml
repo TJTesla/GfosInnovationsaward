@@ -23,8 +23,11 @@
 
             <div class="offer-form">
                 <h:form>
+                    <!-- General Data -->
                     <legend>Allgemeines:</legend>
                     <div class="offer-data">
+
+                        <!-- Title -->
                         <h:outputLabel for="title" value="Titel:" styleClass="label-offAttr" />
                         <h:inputText id="title" value="#{createOfferController.title}" styleClass="input-title" />
                         <br />
@@ -36,6 +39,7 @@
                         </c:if>
                         <br />
 
+                        <!-- Address -->
                         <h:outputLabel for="address" value="Adresse:" styleClass="label-title" />
                         <div id="address">
                             <div class="offer-attr">
@@ -62,6 +66,7 @@
                         </div>
 
 
+                        <!-- Eigenschaften -->
                         <div class="offer-attr">
                             <h:outputLabel for="field" value="Berufsfeld:" styleClass="label-offAttr" />
                             <br />
@@ -100,8 +105,11 @@
                         </c:if>
                     </div>
 
+                    <!-- Beschreibung -->
                     <legend>Beschreibung:</legend>
                     <div class="offer-descr">
+
+                        <!-- Aufgaben -->
                         <h:outputLabel for="tasks" value="Aufgaben:" styleClass="label-offDescr" />
                         <c:if test="#{not createOfferController.getErrorMsg('tasks').equals('')}">
                             <div class="errMsg-createO">
@@ -113,7 +121,7 @@
                         <h:inputTextarea id="tasks" value="#{createOfferController.tasks}" styleClass="area-descr" />
                         <br />
 
-
+                        <!-- Qualifikationen -->
                         <h:outputLabel for="quali" value="Qualifikationen:" styleClass="label-offDescr" />
                         <c:if test="#{not createOfferController.getErrorMsg('qualifications').equals('')}">
                             <div class="errMsg-createO">
@@ -125,6 +133,7 @@
                         <h:inputTextarea id="quali" value="#{createOfferController.qualifications}" styleClass="area-descr" />
                         <br />
 
+                        <!-- Zusätzliche Daten -->
                         <h:outputLabel for="extra" value="Zusätzliche Daten:" styleClass="label-offDescr" />
                         <br />
                         <h:inputTextarea id="extra" value="#{createOfferController.extras}" styleClass="area-descr" />

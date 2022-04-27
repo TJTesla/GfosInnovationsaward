@@ -24,12 +24,17 @@
                 <h1>Willkommen!</h1>
                 <hr />
             </div>
+
+            <!-- Registrierung -->
             <h:form id="registrationForm"
                     rendered="#{applicantRegistrationController.showRegistration}"
                     enctype="multipart/form-data">
                 <fieldset class="headingF"><p class="heading">Neues Profil erstellen</p></fieldset>
+
+                <!-- Persönliche Daten -->
                 <fieldset class="user">
                     <legend>Persönliche Daten</legend>
+                    <!-- Anrede -->
                     <h:outputLabel for="salutation" styleClass="label-reg1" value="Anrede:"><span class="obligatory">&nbsp;*</span> </h:outputLabel>
                     <h:selectOneMenu id="salutation" name="salutation"
                                      styleClass="#{applicantRegistrationController.getErrorMessage('salutation').equals('') ? 'input-plain' : 'input-error'}"
@@ -49,12 +54,14 @@
                     </c:if>
                     <br/>
 
+                    <!-- Titel -->
                     <h:outputLabel for="title" styleClass="label-reg1" value="Titel:" />
                     <h:selectManyCheckbox id="title" name="title" styleClass="checkTitel" value="#{applicantRegistrationController.title}" >
                         <f:selectItems value="#{applicantRegistrationController.allTitles}" var="t" itemValue="#{t}" itemLabel="#{t}" />
                     </h:selectManyCheckbox>
                     <br />
 
+                    <!-- Vorname -->
                     <h:outputLabel for="fname" styleClass="label-reg1" value="Vorname:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputText id="fname" name="vorname" type="text"
                                  styleClass="#{applicantRegistrationController.getErrorMessage('firstname').equals('') ? 'input-plain' : 'input-error'}"
@@ -68,6 +75,7 @@
                     </c:if>
                     <br/>
 
+                    <!-- Nachname -->
                     <h:outputLabel for="lname" styleClass="label-reg1" value="Nachname:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputText id="lname" name="nachname" type="text"
                                  styleClass="#{applicantRegistrationController.getErrorMessage('lastname').equals('') ? 'input-plain' : 'input-error'}"
@@ -81,6 +89,7 @@
                     </c:if>
                     <br/>
 
+                    <!-- Geburtstag -->
                     <h:outputLabel for="birthdate" styleClass="label-reg1" value="Geburtstag:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputText id="birthdate" name="birthdate" type="text"
                                  styleClass="#{applicantRegistrationController.getErrorMessage('birthdate').equals('') ? 'input-plain' : 'input-error'}"
@@ -95,8 +104,10 @@
                     <br />
                 </fieldset>
 
+                <!-- Anmeldedaten -->
                 <fieldset class="data">
                     <legend>Profil-Daten</legend>
+                    <!-- Benutzername -->
                     <h:outputLabel for="username" styleClass="label-reg2" value="Benutzername:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputText id="username" value="#{applicantRegistrationController.username}"
                                  styleClass="#{applicantRegistrationController.getErrorMessage('username').equals('') ? 'input-plain' : 'input-error'}"/>
@@ -109,6 +120,7 @@
                     </c:if>
                     <br />
 
+                    <!-- E-Mail -->
                     <!-- Email regex: ^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$ -->
                     <h:outputLabel for="email" styleClass="label-reg2" value="E-Mail:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputText id="email" name="email" type="text" k:placeholder="example@email.com"
@@ -123,6 +135,7 @@
                     </c:if>
                     <br />
 
+                    <!-- E-Mail wiederholen -->
                     <h:outputLabel for="emailRepeat" styleClass="label-reg2" value="E-Mail wiederholen:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputText id="emailRepeat" name="emailWiederholen" type="text"
                                  styleClass="#{applicantRegistrationController.getErrorMessage('emailRepeat').equals('') ? 'input-plain' : 'input-error'}"
@@ -136,6 +149,7 @@
                     </c:if>
                     <br />
 
+                    <!-- Passwort -->
                     <!-- Password regex: ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&amp;()–[{}]:;',?/*~$^+=&lt;>]).{8,20}$ -->
                     <h:outputLabel for="password" styleClass="label-reg2" value="Passwort:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputSecret id="password" name="passwort" type="password"
@@ -150,6 +164,7 @@
                     </c:if>
                     <br />
 
+                    <!-- Passwort wiederholen -->
                     <h:outputLabel for="passwordRepeat" styleClass="label-reg2" value="Passwort wiederholen:"><span class="obligatory">&nbsp;*</span></h:outputLabel>
                     <h:inputSecret id="passwordRepeat" name="passwortWiederholen" type="password"
                                    styleClass="#{applicantRegistrationController.getErrorMessage('passwordRepeat').equals('') ? 'input-plain' : 'input-error'}"
@@ -163,6 +178,7 @@
                     </c:if>
                     <br />
 
+                    <!-- Profilbild -->
                     <h:outputLabel for="photo" styleClass="label-reg2" value="Profilbild hochladen:" />
                     <p:fileUpload id="photo" mode="simple" update="@form" styleClass="upload" value="#{applicantRegistrationController.pbFile}"/>
                     <c:if test="#{not applicantRegistrationController.getErrorMessage('photo').equals('')}">
@@ -174,6 +190,8 @@
                     </c:if>
                     <br />
                 </fieldset>
+
+                <!-- Adresse -->
                 <fieldset class="address">
                     <legend>Addresse:</legend>
                     <h:outputLabel for="street" value="Straße:" styleClass="label-add"><span class="obligatory">&nbsp;*</span></h:outputLabel>
@@ -197,11 +215,14 @@
                     </c:if>
                 </fieldset>
 
+                <!-- Button -->
                 <fieldset class="buttons-reg">
                     <p id="footnote"><span class="obligatory">&nbsp;*</span> Angabepflichtig</p>
                     <h:commandButton id="register" action="#{applicantRegistrationController.register()}" type="submit" value="Registrieren" styleClass="btn-login ui-button"/>
                     <br />
                 </fieldset>
+
+                <!-- Link zum Wechseln -->
                 <div class="linkAlign">
                     Schon ein Profil? &nbsp;
                     <h:commandLink value="Hier anmelden."
@@ -213,14 +234,17 @@
             </h:form>
 
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- Login -->
             <h:form id="loginForm" rendered="#{not applicantRegistrationController.showRegistration}">
                 <fieldset class="login" style="margin-top: 30px">
                     <legend>Login</legend>
 
+                    <!-- Benutzername -->
                     <h:outputLabel for="user" styleClass="label-login" value="Benutzername:" /> <br />
                     <h:inputText id="user" type="text" name="user" value="#{loginController.username}"
                                  styleClass="input-login" />
                     <br />
+                    <!-- Passwort -->
                     <h:outputLabel for="passwordL" styleClass="label-login" value="Passwort:" /> <br />
                     <h:inputSecret id="passwordL" type="password" name="password" value="#{loginController.password}"
                                    styleClass="input-login" />
@@ -234,10 +258,13 @@
                     </c:if>
 
                 </fieldset>
+                <!-- Button -->
                 <fieldset class="buttons-login">
                     <h:commandButton id="login" action="#{loginController.login()}" value="Einloggen" styleClass="btn-login ui-button"/>
                     <br />
                 </fieldset>
+
+                <!-- Link zum Wechseln -->
                 <div class="linkAlign">
                     Noch kein Profil? &nbsp;
                     <h:commandLink value="Hier erstellen."

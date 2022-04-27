@@ -462,6 +462,7 @@ body .pi {
     display: none;
     position: absolute;
     overflow-y: scroll;
+    z-index: 1;
 }
 .navContent .a {
     float: none;
@@ -489,6 +490,7 @@ body .navBtn {
     color: whitesmoke;
     border-width: 0;
     margin: 0;
+    z-index: 0;
 }
 
 body .btn-newOffer {
