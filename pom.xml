@@ -6,7 +6,7 @@
 
     <groupId>gfos</groupId>
     <artifactId>GfosWettbewerb</artifactId>
-    <version>2.0</version>
+    <version>2.1</version>
     <name>GfosWettbewerb</name>
     <packaging>war</packaging>
 

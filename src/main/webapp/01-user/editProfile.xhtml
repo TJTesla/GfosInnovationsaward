@@ -33,6 +33,12 @@
                     <br />
                     <h:outputLabel for="photo" value="Profilbild:" styleClass="label-edit"/>
                     <p:fileUpload id="photo" mode="simple" update="@form" styleClass="upload" value="#{detailApplicant.cv}" />
+                    <c:if test="#{not detailApplicant.getErrorMessage('photo').equals('')}">
+                        <p class="errMsg-edit">
+                            <i class="pi pi-exclamation-circle">&nbsp;</i>
+                            <h:outputText value="#{detailApplicant.getErrorMessage('photo')}" />
+                        </p>
+                    </c:if>
                     <br />
                     <h:outputLabel for="username" value="Benutzername:" styleClass="label-edit"/>
                     <h:inputText id="username" value="#{detailApplicant.detailApplicant.name}" styleClass="input-edit" />

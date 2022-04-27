@@ -50,13 +50,18 @@ public class ResourceIO {
             throw new UploadException("The uploaded file must be an allowed file type and mustn't contain a '/' character");
         }
 
+        Applicant applicant = (Applicant)user;
+        if (applicant.getPb() != null && !applicant.getPb().isEmpty()) {
+            new File(applicant.getPb()).delete();
+        }
+
         String folder = "";
         folder = "applicants";
         String path = "uploads/profilepics/" + folder + "/" + user.getName() + file.getFileName();
         File f = new File(System.getProperty("user.dir"), path);
 
         File parent = f.getParentFile();
-        f.mkdirs();
+        parent.mkdirs();
 
         save(file, f);
 
