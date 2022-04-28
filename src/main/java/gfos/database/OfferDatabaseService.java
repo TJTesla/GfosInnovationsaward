@@ -38,7 +38,7 @@ public class OfferDatabaseService extends DatabaseService {
             rs.next();
             return rs.getInt("LAST_INSERT_ID()");
         } catch (SQLException sqlException) {
-            System.out.println("There was an error while creating an applicant: " + sqlException.getMessage());
+            System.out.println("There was an error while creating an offer: " + sqlException.getMessage());
             return -1;
         }
     }
