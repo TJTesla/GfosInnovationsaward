@@ -67,7 +67,7 @@ public class EmployeeDatabaseService extends DatabaseService {
     public ArrayList<Application> getAllApplications(int oId) {
         ArrayList<Application> result = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM application WHERE offerId=?");
+            stmt = con.prepareStatement("SELECT * FROM application WHERE offerId=? AND draft=FALSE");
             stmt.setInt(1, oId);
             rs = stmt.executeQuery();
 
