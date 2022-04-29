@@ -90,15 +90,22 @@ public class OfferDatabaseService extends DatabaseService {
     }
 
     private String getQuery(FilterObject f, Boolean drafts, Applicant a) {
-        String query = "SELECT * FROM offer";
+        String query = "SELECT DISTINCT * FROM offer";
         if (f.getOnlyApplied() != null && f.getOnlyApplied().equals(true) && a != null) {
             query += " JOIN application ON offer.id=application.offerId AND application.userId=" + a.getId();
         }
-        if (f.getOnlyApplied() != null && f.getOnlyApplied().equals(false) && a != null) {
-            query += ", (SELECT offer.id FROM offer JOIN application ON offer.id = application.offerId AND application.userID=" + a.getId() + ") AS applied";
-        }
-        if (f.getFavorites() != null && f.getFavorites().equals(true) && a != null) {
-            query += " JOIN favorites ON offer.id=favorites.offerId AND favorites.applicantId=" + a.getId();
+        if (f.getFavorites() != null && f.getFavorites().equals(true) && a != null
+                && f.getOnlyApplied() != null && f.getOnlyApplied().equals(false)) {
+            query += ",(SELECT DISTINCT offer.id FROM offer JOIN favorites ON offer.id=favorites.offerId AND favorites.applicantId=4,\n" +
+                    "                       (SELECT offer.id FROM offer JOIN application ON offer.id = application.offerId AND application.userID=4) AS applied\n" +
+                    "WHERE offer.id <> applied.id AND offer.draft = false) AS doubles";
+        } else {
+            if (f.getFavorites() != null && f.getFavorites().equals(true) && a != null) {
+                query += " JOIN favorites ON offer.id=favorites.offerId AND favorites.applicantId=" + a.getId();
+            }
+            if (f.getOnlyApplied() != null && f.getOnlyApplied().equals(false) && a != null) {
+                query += ", (SELECT offer.id FROM offer JOIN application ON offer.id = application.offerId AND application.userID=" + a.getId() + ") AS applied";
+            }
         }
 
         boolean alreadyExtended = false;
@@ -124,7 +131,16 @@ public class OfferDatabaseService extends DatabaseService {
             query += " time IN " + getBraceSyntax(f.getTime());
             alreadyExtended = true;
         }
-        if (f.getOnlyApplied() != null && f.getOnlyApplied().equals(false) && a != null) {
+        if (f.getFavorites() != null && f.getFavorites().equals(true) && a != null
+                && f.getOnlyApplied() != null && f.getOnlyApplied().equals(false)) {
+            if (alreadyExtended) {
+                query += " AND";
+            } else {
+                query += " WHERE";
+            }
+            query += " offer.id = doubles.id";
+            alreadyExtended = true;
+        } else if (f.getOnlyApplied() != null && f.getOnlyApplied().equals(false) && a != null) {
             if (alreadyExtended) {
                 query += " AND";
             } else {
