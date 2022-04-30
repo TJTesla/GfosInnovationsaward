@@ -139,7 +139,7 @@
         padding: 10px 10px;
     }
     .navContent {
-        height: 160px;
+        max-height: 160px;
         min-width: 120px;
     }
     .navBtn {
@@ -245,7 +245,7 @@
         padding: 12px 12px
     }
     .navContent {
-        height: 300px;
+        max-height: 300px;
         min-width: 130px;
     }
     .navBtn {
@@ -349,7 +349,7 @@
 
     }
     .navContent {
-        height: 400px;
+        max-height: 400px;
         min-width: 160px;
     }
     .navBtn {
