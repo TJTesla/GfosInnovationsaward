@@ -96,8 +96,8 @@ public class OfferDatabaseService extends DatabaseService {
         }
         if (f.getFavorites() != null && f.getFavorites().equals(true) && a != null
                 && f.getOnlyApplied() != null && f.getOnlyApplied().equals(false)) {
-            query += ",(SELECT DISTINCT offer.id FROM offer JOIN favorites ON offer.id=favorites.offerId AND favorites.applicantId=4,\n" +
-                    "                       (SELECT offer.id FROM offer JOIN application ON offer.id = application.offerId AND application.userID=4) AS applied\n" +
+            query += ",(SELECT DISTINCT offer.id FROM offer JOIN favorites ON offer.id=favorites.offerId AND favorites.applicantId=" + a.getId() +  ",\n" +
+                    "                       (SELECT offer.id FROM offer JOIN application ON offer.id = application.offerId AND application.userID=" + a.getId() + ") AS applied\n" +
                     "WHERE offer.id <> applied.id AND offer.draft = false) AS doubles";
         } else {
             if (f.getFavorites() != null && f.getFavorites().equals(true) && a != null) {
