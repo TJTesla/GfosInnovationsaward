@@ -1,13 +1,17 @@
 .head {
     float: top;
 }
+
+/*Logout button*/
 body .btn-logout {
-    float: left;
+    float: left; /* top left */
     position: relative;
 }
 .pi-sign-out::before {
     position: relative;
 }
+
+/* Color schemes */
 @media (prefers-color-scheme: dark) {
     .empl {
         border-bottom: solid 2px #7285A5;
@@ -22,6 +26,8 @@ body .btn-logout {
     }
 }
 
+
+/* Mobile view */
 @media only screen and (min-width: 320px) {
     .allEmpl {
         width: auto;
@@ -215,6 +221,7 @@ h1 {
     padding-top: 20px;
 }
 
+/* List of old employees */
 .oldEmpl {
 
 }
@@ -227,7 +234,7 @@ h1 {
 }
 
 .text-empl {
-    height: inherit;
+    height: inherit; /* same height as this part of the list */
     display: inline-block;
 }
 
@@ -244,15 +251,7 @@ h1 {
     font-weight: inherit;
 }
 
-.dropdown-empl {
-
-}
-
-.new-empl {
-    margin-bottom: 30px;
-    padding-left: 30px;
-    padding-right: 30px;
-}
+/* New Employee */
 fieldset {
     margin-left: 10%;
     margin-right: 10%;
@@ -262,13 +261,13 @@ fieldset {
 }
 
 .legend-empl {
-    font-style: oblique;
+    font-style: oblique; /* same as italic */
     font-weight: lighter;
 }
 
 .input-empl {
     height: 25px;
-    width: 60%;
+    width: 60%; /* 60% of fieldset */
 }
 
 .errMsg-newUser {
@@ -276,7 +275,7 @@ fieldset {
 }
 
 .label-key {
-    margin: 0 20px 0 0;
+    margin: 0 20px 0 0; /* margin right */
     font-size: larger;
 }
 
@@ -289,6 +288,8 @@ fieldset {
     position: relative;
 }
 
+
+/* Deletion within list */
 .empl .btn-delete {
     display: block;
     float: right;
@@ -315,6 +316,8 @@ body .ui-button.ui-button-icon-only {
     height: 40px;
 }
 
+
+/* Button create new employee */
 .fieldset .btn-new-empl {
     float: right;
     display: inline-block;

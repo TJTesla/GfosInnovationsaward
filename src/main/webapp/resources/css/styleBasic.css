@@ -1,9 +1,11 @@
-/*complementary color source: https://hexcolor.co  https://www.colorhexa.com*/
+/* Own font family with font files --> Font for all pages */
 @font-face {
     font-family: Rubik;
     src: url("#{resource['fonts/Rubik-Regular.ttf']}") format("truetype"),
          url("#{resource['fonts/Rubik-Regular.woff2']}") format("woff2");
 }
+
+/* Various variables of colors and width, function according to names */
 :root {
     --d-body-bg-color: #002147;
     --d-input-bg-color: #13274F;
@@ -14,10 +16,14 @@
     --l-input-bg-hover-color: #bcc5e1;
     --input-width: 200px;
 }
+
+/* Pages scrollable in y and x direction */
 html {
     overflow-y: scroll;
     overflow-x: scroll;
 }
+
+/* basic attributes: set font */
 body {
     height: 100%;
     width: auto;
@@ -28,6 +34,7 @@ body {
     height: auto;
 }
 
+/* notes on hex codes for different colors */
 .something {
     /*Light: */
     color: whitesmoke; color: #F0F8FF; color: #a7b6c7; color: #7285A5; color: #073980;
@@ -41,9 +48,7 @@ body {
     color: #001b3b;/*hover*/ color: #384e7b; .sidenav hover color: #123d6d; .button color: #001d3b;
 }
 
-
-
-
+/* Basic difference between light and dark mode */
 @media (prefers-color-scheme: light) {
     body {
         background-color: #7285A5;
@@ -53,6 +58,7 @@ body {
         color: #cfd8e1;
         border-color: #cfd8e1;
     }
+    /* Color gradients for head and foot */
     .head {
         background: rgb(114, 133, 165);
         background: linear-gradient(0deg, rgba(245,245,245,1) 0%, rgb(114, 133, 165) 100%);
@@ -61,6 +67,7 @@ body {
         background: rgb(114, 133, 165);
         background: linear-gradient(0deg, rgb(114, 133, 165) 0%, rgba(245,245,245,1) 100%);
     }
+    /*set light background color */
     .content {
         background-color: var(--l-body-bg-color);
     }
@@ -70,6 +77,7 @@ body {
         border-width: 3px;
         border-style: solid;
     }
+    /* all inputs background color and border color */
     [class*="input-"] {
         background-color: var(--l-input-bg-color);
         border-color: #a7b6c7;
@@ -99,6 +107,7 @@ body {
         color: #7285A5;
         border-color: #7285A5;
     }
+    /* Color gradient for head and foot */
     .head {
         background: rgb(19,39,79);
         background: linear-gradient(0deg, rgb(0, 33, 71) 0%, rgb(23, 46, 93) 35%, rgb(29, 59, 121) 65%, rgb(54, 83, 147) 100%);
@@ -107,6 +116,7 @@ body {
         background: #13274F;
         background: linear-gradient(0deg, rgb(54, 83, 147) 0%, rgb(29, 59, 121) 35%, rgb(23, 46, 93) 65%, rgb(0, 33, 71) 100%);
     }
+    /* dark background */
     .content {
         background-color: var(--d-body-bg-color);
     }
@@ -116,6 +126,7 @@ body {
         border-style: solid;
         border-color: #001b3b;
     }
+    /* background and border color for all inputs */
     [class*="input-"] {
         color: whitesmoke;
         background-color: var(--d-input-bg-color);
@@ -136,6 +147,7 @@ body {
     }
 }
 
+/* mobile view that apply to all pages */
 @media only screen and (max-width: 640px) {
     .head {
         height: 70px;
@@ -145,6 +157,7 @@ body {
         height: 35px;
         margin: 10px;
     }
+    /* smaller font size */
     body {
         font-size: 13px;
     }
@@ -169,6 +182,7 @@ body {
         height: 40px;
         margin: 15px;
     }
+    /* slightly smaller font size */
     body {
         font-size: 14px;
     }
@@ -191,6 +205,7 @@ body {
         height: 47px;
         margin: 20px;
     }
+    /* standard font size */
     body {
         font-size: 15px;
     }
@@ -204,6 +219,9 @@ body {
         font-size: 35px;
     }
 }
+
+/* mobile view for popups */
+/* change vertical position of popup */
 @media only screen and (min-height: 320px) {
     .popup {
         transform: translate(0, 25%);
@@ -238,6 +256,7 @@ h1 {
     line-height: normal;
     text-align: center;
 }
+
 legend {
     font-weight: bolder;
     font-size:23px;
@@ -246,6 +265,7 @@ legend {
     padding-bottom: 10px;
 }
 
+/* basic attributes of inputs fields */
 [class*="input-"] {
     font-family: inherit;
     border-radius: 5px;
@@ -257,6 +277,8 @@ legend {
 [class*="input-"]:focus {
     outline: 2px #7285A5 solid;
 }
+
+/* basic attributes of buttons */
 body [class*="btn-"] {
     border-radius: 5px;
     background-color: #7285A5;
@@ -270,11 +292,15 @@ body [class*="btn-"]:hover {
     background-color: #75b4ff;
     border-color: #75b4ff;
 }
+
+/* basic attributes of labels */
 [class*="label-"] {
     display: inline-block;
     margin-top: 4px;
     margin-bottom: 4px;
 }
+
+/* basic attributes of error Messages */
 [class*="errMsg-"] {
     display: inline-block;
     font-size: 13px;
@@ -308,6 +334,8 @@ body [class*="btn-"]:hover {
     display: flex;
     justify-content: center;
 }
+
+/* star shape for favorites button */
 body .btn-fav {
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
@@ -315,6 +343,7 @@ body .btn-fav1 {
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
 
+/* resize profile pic and make it round */
 .image-profile {
     display: block;
     margin-left: auto;
@@ -343,20 +372,21 @@ body .pi {
 
 .cover {
     display: none;
-    position: fixed;
-    width: 100%;
+    position: fixed; /* does not change with scroll */
+    width: 100%; /* covers whole page */
     height: 100%;
     top: 0;
     left: 0;
     z-index: 99;
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, .5); /* make background darker */
 }
+
 .popup {
     width: 300px;
     text-align: center;
     height: 200px;
     padding: 30px;
-    margin: auto;
+    margin: auto; /* center popup */
     background-color: whitesmoke;
     color: #13274F;
     border-radius: 10px;

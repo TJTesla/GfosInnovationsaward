@@ -19,53 +19,61 @@
 </h:head>
 
 <h:body>
-    <!-- TODO: Still needs to be implemented and tested properly -->
+    <!-- Index site and overview of all offers -->
     <ui:composition template="resources/templates/common.xhtml">
         <ui:define name="content">
             <h:outputStylesheet library="css" name="index.css" />
             <h:outputScript library="javascript" name="index.js" />
             <div class="wrapper">
                 <h:form>
+                    <!-- Filter bar -->
                     <div class="filter">
-                        <!--h:inputText id="place" k:placeholder="Standort" styleClass="input-location" /-->
-                        <h:inputText value="#{indexController.maxDistance}" k:placeholder="Umfeld (in km)" styleClass="input-location" rendered="#{indexController.loggedInAsApplicant()}" />
+                        <!-- Only for users: Circumference of locality -->
+                        <h:inputText id="locality" value="#{indexController.maxDistance}" k:placeholder="Umfeld (in km)" styleClass="input-location" rendered="#{indexController.loggedInAsApplicant()}" />
+
+                        <!-- Dropdown: Field of profession -->
                         <div class="dropdown">
                             <button class="dropbtn ui-button" id="dropbtnField" type="button">Berufsfeld <i class="pi pi-caret-down" /></button>
                             <div class="navContent" id="dropdownField">
-                                <ui:repeat id="field" var="f" value="#{indexController.allFields}">
+                                <ui:repeat id="field" var="f" value="#{indexController.allFields}" varStatus="count">
                                     <div class="a">
-                                        <h:selectBooleanCheckbox for="fCheck" styleClass="checkBox" value="#{indexController.field[f.first()]}" />
-                                        <h:outputLabel id="fCheck" styleClass="checkLabel" value="#{f.second()}" />
+                                        <h:selectBooleanCheckbox for="fCheck#{count.index}" styleClass="checkBox" value="#{indexController.field[f.first()]}" />
+                                        <h:outputLabel id="fCheck#{count.index}" styleClass="checkLabel" value="#{f.second()}" />
                                     </div>
                                 </ui:repeat>
                             </div>
                         </div>
 
+                        <!-- Dropdown: Level of education -->
                         <div class="dropdown">
-                            <button class="dropbtn ui-button" id="dropbtnLevel" type="button">Einstieglevel <i class="pi pi-caret-down" /></button>
+                            <button class="dropbtn ui-button" id="dropbtnLevel" type="button">Einstiegsniveau <i class="pi pi-caret-down" /></button>
                             <div class="navContent" id="dropdownLevel">
-                                <ui:repeat id="level" var="l" value="#{indexController.allLevels}" varStatus="">
+                                <ui:repeat id="level" var="l" value="#{indexController.allLevels}" varStatus="count">
                                     <div class="a">
-                                        <h:selectBooleanCheckbox for="lCheck" styleClass="checkBox" value="#{indexController.level[l.first()]}" />
-                                        <h:outputLabel id="lCheck" styleClass="checkLabel" value="#{l.second()}" />
+                                        <h:selectBooleanCheckbox for="lCheck#{count.index}" styleClass="checkBox" value="#{indexController.level[l.first()]}" />
+                                        <h:outputLabel id="lCheck#{count.index}" styleClass="checkLabel" value="#{l.second()}" />
                                     </div>
                                 </ui:repeat>
                             </div>
                         </div>
 
+                        <!-- Dropdown: Working Time -->
                         <div class="dropdown">
                             <button class="dropbtn ui-button" id="dropbtnTime" type="button">Arbeitszeit <i class="pi pi-caret-down" /></button>
                             <div class="navContent" id="dropdownTime">
-                                <ui:repeat id="time" var="t" value="#{indexController.allTimes}" varStatus="">
+                                <ui:repeat id="time" var="t" value="#{indexController.allTimes}" varStatus="count">
                                     <div class="a">
-                                        <h:selectBooleanCheckbox for="tCheck" styleClass="checkBox" value="#{indexController.time[t.first()]}" />
-                                        <h:outputLabel id="tCheck" styleClass="checkLabel" value="#{t.second()}" />
+                                        <h:selectBooleanCheckbox for="tCheck#{count.index}" styleClass="checkBox" value="#{indexController.time[t.first()]}" />
+                                        <h:outputLabel id="tCheck#{count.index}" styleClass="checkLabel" value="#{t.second()}" />
                                     </div>
                                 </ui:repeat>
                             </div>
                         </div>
 
+                        <!-- Only for applicants -->
                         <c:if test="#{indexController.loggedInAsApplicant()}">
+
+                            <!-- Already applied or not yet applied -->
                             <div class="select-pref">
                                 <h:outputLabel for="otherPrefs" value="Sonstiges" styleClass="label-pref" />
                                 <h:selectOneMenu id="otherPrefs" styleClass="menu-pref" value="#{indexController.appliedChoose}">
@@ -74,14 +82,19 @@
                                     <f:selectItem itemValue="2" itemLabel="Noch nicht beworben" styleClass="a" />
                                 </h:selectOneMenu>
                             </div>
+
+                            <!-- Checkbox for favorites -->
                             <div class="select-fav">
                                 <h:outputLabel for="check-fav" value="Favoriten" styleClass="label-fav" />
                                 <h:selectBooleanCheckbox id="check-fav" value="#{indexController.favorites}" styleClass="check-fav" />
                             </div>
                         </c:if>
                     </div>
+                    <!-- apply filters -->
                     <div class="applyBtn">
                         <h:commandButton value="Anwenden" action="#{indexController.reload()}" styleClass="navBtn ui-button" />
+
+                        <!-- Create new offer, only for employee -->
                         <c:if test="#{indexController.loggedInAsEmployee()}" >
                             <h:button value="Neues Angebot erstellen" outcome="/02-offer/createOffer.xhtml" styleClass="btn-newOffer ui-button" />
                         </c:if>
@@ -89,28 +102,34 @@
                 </h:form>
                 <br />
 
+                <!-- List of offers -->
                 <div class="offers" id="offers">
                     <div class="border-line"> </div>
                     <ui:repeat id="offers" var="offer" value="#{indexController.allOffers}" varStatus="">
                         <div class="allOffers">
                             <h:form>
                                 <div class="offer-left" id="offer">
+                                    <!-- Offer: title -->
                                     <h:outputLabel for="title" value="Entwurf" rendered="#{indexController.isDraft(offer)}" styleClass="draft-sign" />
                                     <h:outputLabel for="offer" id="title" value="#{offer.title}" styleClass="offer-label" />
                                     <br />
+                                    <!-- Offer: Location -->
                                     <div class="offer-attr">
                                         <i class="pi pi-map-marker">&nbsp;</i>
                                         <h:outputText id="location" value="#{offer.city}" styleClass="offer-location" />
                                     </div>
+                                    <!-- Offer: Field of profession -->
                                     <div class="offer-attr">
                                         <i class="pi pi-briefcase">&nbsp;</i>
                                         <h:outputText id="field" value="#{indexController.fieldString(offer.field)}" styleClass="offer-field" />
                                     </div>
                                 </div>
                                 <div class="offer-btn">
+                                    <!-- Button: See Details of Offer -->
                                     <p:button outcome="/02-offer/offer" styleClass="btn-toOffer" value="" icon="pi pi-angle-right">
                                         <f:param name="id" value="#{offer.id}" />
                                     </p:button>
+                                    <!-- Button: Favorite, only for applicants -->
                                     <h:commandButton action="#{indexController.editFavorite(offer.id)}" rendered="#{indexController.loggedInAsApplicant()}"
                                                      styleClass="#{indexController.isFavorite(offer.id) ? 'body btn-fav1' : 'body btn-fav' }"
                                                      style="clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);">
@@ -125,6 +144,7 @@
             </div>
         </ui:define>
     </ui:composition>
+    <!-- JavaScript file for this site -->
     <h:outputScript library="javascript" name="index.js" />
 </h:body>
 

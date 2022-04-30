@@ -1,3 +1,4 @@
+/* Set widths */
 :root {
     --log-width: 300px;
     --regL1-width: 140px;
@@ -6,7 +7,6 @@
 }
 
 /* Colour related */
-/* TODO: Change box-shadow when focused */
 @media (prefers-color-scheme: dark) {
     @keyframes reg-err-anim {
         0% {
@@ -48,6 +48,7 @@
     }
 }
 
+/* mobile view */
 @media only screen and (max-width: 640px) {
     :root {
         --reg-width: 350px;
@@ -98,11 +99,15 @@ fieldset {
     overflow: hidden;
     border-radius: 10px;
 }
+
+/* applies to all classes beginning with label- */
 [class*="label-"] {
     display: inline-block;
     margin-top: 4px;
     margin-bottom: 4px;
 }
+
+/* applies to all classes beginning with errMsg-- */
 [class*="errMsg-"] {
     display: inline-block;
     font-size: 13px;
@@ -154,7 +159,7 @@ fieldset {
     animation-duration: 2s;
 }
 
-/* Persönliche Daten */
+/* Personal Data */
 .label-reg1{
     width: var(--regL1-width);
 }
@@ -171,7 +176,7 @@ fieldset {
     margin-right: 20px;
 }
 
-/* Profil-Daten */
+/* Profile Data */
 .label-reg2 {
     width: var(--regL2-width);
 }
@@ -187,7 +192,7 @@ fieldset {
     margin-left: 5px;
     margin-right: 20px;
 }
-/* Adresse */
+/* Adress */
 .label-add {
     width: var(--regL3-width);
 }
@@ -237,7 +242,8 @@ body .pi {
 
 
 /**/
-/* employee first login */
+/* Employee first login */
+/* mobile view */
 @media only screen and (max-width: 480px) {
     .emplLogin {
         width: auto;
@@ -250,6 +256,7 @@ body .pi {
     }
 }
 
+/* Fieldset */
 .emplLogin {
     padding: 20px 30px;
 }
@@ -266,6 +273,7 @@ body .pi {
     margin: 0 0 20px 0;
 }
 
+/* wrapper for button */
 .emplLogin-btns {
     margin: 0 0 20px 0;
     align-content: center;
@@ -300,9 +308,13 @@ body .btn-login:hover {
     background-color: #6495ED;
     /*background-color: #fc95e6;*/
 }
+
+/* Center link */
 .linkAlign {
     text-align: center;
 }
+
+/* Position and color of link */
 .link {
     padding-top: 50px;
     float: bottom;

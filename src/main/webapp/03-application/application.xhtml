@@ -18,6 +18,7 @@
     <title>#{applicationFormController.offer.title} - Bewerben</title>
 </h:head>
 <h:body>
+    <!-- Application Formular -->
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
             <h:outputStylesheet library="css" name="applicationForm.css" />
@@ -25,6 +26,8 @@
                 <h1>Bewerbungsformular: #{applicationFormController.offer.title}</h1>
             </div>
             <h:form enctype="multipart/form-data" class="applForm" >
+
+                <!-- Upload CV -->
                 <h:outputLabel value="Lebenslauf hochladen:" styleClass="label-applForm" />
                 <p:fileUpload value="#{applicationFormController.cv}" mode="simple" styleClass="upload-cv" />
                 <br />
@@ -36,6 +39,7 @@
                 </c:if>
                 <br />
 
+                <!-- Letter of Motivation -->
                 <h:outputLabel for="lom" value="Motivationsschreiben:" styleClass="label-applForm" />
                 <br />
                 <h:inputTextarea id="lom" styleClass="text-area-appl" value="#{applicationFormController.text}" />
@@ -46,12 +50,13 @@
                         <h:outputText value="#{applicationFormController.getErrorMsg('text')}" />
                     </div>
                 </c:if>
+
+                <!--Save or publish application -->
                 <div>
                     <h:commandButton value="Speichern" action="#{applicationFormController.apply(true)}" styleClass="btn-applForm ui-button"
                                      style="float: left; margin-left: 5px;" ajax="false" />
                     <h:commandButton value="Abschicken" action="#{applicationFormController.apply(false)}" styleClass="btn-applForm ui-button"
                                      style="float: right; margin-right: 5px;" ajax="false" />
-                    <!-- h:commandButton id="deleteAppl" value="Löschen" action="." styleClass="btn-delete" / -->
                 </div>
             </h:form>
         </ui:define>

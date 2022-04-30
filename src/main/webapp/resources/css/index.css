@@ -1,8 +1,10 @@
+/* Set color variables */
 :root {
     --filter-d-bg-color: #384e7b;
     --filter-l-bg-color: #7285a5;
 }
 
+/* Color Schemes*/
 @media (prefers-color-scheme: dark) {
     .allOffers {
         border-top: solid;
@@ -103,6 +105,8 @@
         border-color: #cfd8e1;
     }
 }
+
+/* Mobile View */
 @media only screen and (min-width: 320px) {
     .wrapper {
         margin: 0 5px 0 5px;
@@ -420,13 +424,17 @@
     }
 }
 
+/* wrapper of site's contents for margin and width */
 .wrapper {
     display: block;
 }
 
+/* Filter bar */
 .filter {
     width: 100%;
 }
+
+/* location circumference input */
 .input-location {
     height: inherit;
     float: left;
@@ -439,11 +447,14 @@
     font-family: inherit;
 }
 
+/* whole dropdown including button */
 .dropdown {
     float: left;
     display: inline-block;
 
 }
+
+/* Button for dropdown */
 .dropdown .dropbtn {
     cursor: pointer;
     border: none;
@@ -455,15 +466,19 @@
     border-radius: 0;
 }
 
+/*icon size */
 body .pi {
     margin-left: 5px;
 }
+
+/* Dropdown content */
 .navContent {
     display: none;
     position: absolute;
     overflow-y: scroll;
     z-index: 1;
 }
+/* Single elements of dropdown content */
 .navContent .a {
     float: none;
     width: auto;
@@ -474,22 +489,29 @@ body .pi {
     height: auto;
 }
 
+/* Dropdown element checkboxes */
 .checkBox {
     display: inline-block;
     padding: 3px;
 }
 
+/* Dropdown element label */
 .checkLabel {
     padding: 8px;
 }
+
+/* wrapper for button */
 .applyBtn {
     margin: 0;
 }
+
+/* button to apply filter */
 body .navBtn {
     font-family: inherit;
     color: whitesmoke;
     border-width: 0;
     margin: 0;
+    /* not overlapping with dropdown */
     z-index: 0;
 }
 
@@ -509,8 +531,9 @@ body .btn-newOffer:hover {
     border-color: #0fa852;
 }
 
-
+/* wrapper for select menu */
 .select-pref {
+    /* same height as filter bar */
     height: inherit;
     color: whitesmoke;
     display: inline-block;
@@ -531,11 +554,14 @@ body .btn-newOffer:hover {
     color: whitesmoke;
     display: inline-block;
 }
+
 .label-fav {
     padding-right: 10px;
 }
 
+/* checkbox for favorite filter */
 .check-fav {
+    /* star shape */
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
     position: relative;
     background-color: whitesmoke;
@@ -549,11 +575,6 @@ input[type="checkbox"].check-fav {
 }
 .check-fav:checked {
     background-color: #B98B0E;
-}
-
-
-.check-fav:active {
-    background-color: #7285A5;
 }
 
 /* Offers */
@@ -573,7 +594,6 @@ input[type="checkbox"].check-fav {
 .offer-left {
     float: left;
 }
-
 
 .draft-sign {
     font-style: italic;
@@ -611,6 +631,7 @@ body .btn-toOffer {
     border: none;
 }
 
+/* set icon position */
 body .ui-button.ui-button-text-icon-left .ui-icon {
     left: 6%;
     top: 35%;

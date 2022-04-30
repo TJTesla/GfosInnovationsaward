@@ -22,18 +22,23 @@
             <h:outputStylesheet library="css" name="applicationDetail.css" />
             <div class="applDetailView">
                 <h1>Bewerbungsformular</h1>
+
+                <!-- Details of Application -->
                 <ui:include src="applicationDetailTemplate.xhtml" />
-                 <!-- Given value needed -->
                 <h:form>
                     <c:choose>
+                        <!-- When it is not a draft -->
                         <c:when test="#{not detailApplication.draft}">
+                            <!-- Revision Status -->
                             <h:outputLabel for="status" value="Bearbeitungsstatus:" styleClass="label-status" />
                             <h:outputText id="status" value="#{detailApplication.statusString()}" styleClass="text-status" />
                             <hr class="border-line" />
                             <br />
+                            <!-- Button for Retraction -->
                             <h:commandButton id="retract" value="Zurückziehen" styleClass="btn-retract ui-button" onclick="showPopUp('NotDraft')">
                                 <f:ajax render="@none" />
                             </h:commandButton>
+                            <!-- Popup for Retraction -->
                             <div class="cover" id="popupNotDraft">
                                 <div class="popup">
                                     <h:form>
@@ -49,13 +54,16 @@
                                 </div>
                             </div>
                         </c:when>
+                        <!-- When still draft -->
                         <c:otherwise>
                             <div style="text-align: center">
                                 <hr class="border-line" />
                                 <br />
+                                <!-- Button for deletion -->
                                 <h:commandButton id="delete" value="Löschen" onclick="showPopUp('Draft')" styleClass="btn-retract">
                                     <f:ajax render="@none" />
                                 </h:commandButton>
+                                <!-- Popup for deletion -->
                                 <div class="cover" id="popupDraft">
                                     <div class="popup">
                                         <h:form>
@@ -70,6 +78,7 @@
                                         </h:form>
                                     </div>
                                 </div>
+                                <!-- Edit Applicaton -->
                                 <h:button value="Bearbeiten" styleClass="btn-editDraft" outcome="/03-application/application.xhtml" >
                                     <f:param name="id" value="#{detailApplication.application.offerId}" />
                                     <f:param name="edit" value="true" />

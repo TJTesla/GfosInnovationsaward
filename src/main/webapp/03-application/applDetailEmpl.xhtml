@@ -24,13 +24,18 @@
         <ui:define name="content">
             <div class="applDetailView">
                 <h1>Bewerbungsformular:</h1>
+                <!-- Profile pic of applicant -->
                 <p:graphicImage value="#{pbLoader.loadWithContext()}" styleClass="image-profile" cache="false">
                     <f:param name="id" value="#{profilePicHolder.id}" />
                 </p:graphicImage>
                 <br />
+
+                <!-- Details of Application -->
                 <ui:include src="applicationDetailTemplate.xhtml" />
                 <h:outputStylesheet library="css" name="applicationDetail.css" />
                 <h:form class="applDetailEmpl">
+
+                    <!-- Change Revision Status -->
                     <h:outputLabel for="checksStatus" value="Bearbeitungsstatus setzen:" styleClass="label-status" /> <br />
                     <h:selectOneMenu value="#{detailApplication.status}" id="checksStatus" styleClass="menu-status">
                         <f:selectItem itemValue="0" itemLabel="Noch nicht bearbeitet" />

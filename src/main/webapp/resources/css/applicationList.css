@@ -1,3 +1,4 @@
+/* Color schemes */
 @media (prefers-color-scheme: dark) {
     .application {
         border-bottom: solid 2px #7285a5;
@@ -24,6 +25,8 @@
         background-color: var(--l-input-bg-hover-color);
     }
 }
+
+/* Mobile View */
 @media only screen and (min-width: 320px) {
     .applications {
         width: auto;
@@ -34,10 +37,12 @@
         display: block;
         white-space: normal;
     }
+    /* left part of one element in the list */
     .left {
         height: auto;
         transform: translate(0);
     }
+    /* right part of one element in the list */
     .right {
         display: block;
     }
@@ -56,9 +61,11 @@
         font-size: 15px;
         height: 36px;
     }
+    /* icon size */
     body .pi {
         font-size: 20px;
     }
+    /* position of icon on button */
     .pi-trash::before {
         bottom: 2px;
         left: -1px;
@@ -99,8 +106,6 @@
     }
     body .btn-retract {
         float: left;
-    }
-    body .btn-retract {
         font-size: 15px;
         height: 36px;
         margin-top: 20px;
@@ -109,6 +114,7 @@
         text-align: right;
         display: block;
     }
+    /* Moves offer title or applicant user name */
     .moveText {
         transform: translate(0, 200%);
     }
@@ -183,6 +189,7 @@
     }
 }
 
+/* Text parts */
 .application {
     padding: 20px;
 }
@@ -196,8 +203,6 @@
     color: #7285a5;
 }
 
-
-
 .label-status {
     font-size: 15px;
     padding-right: 10px;
@@ -207,6 +212,7 @@
     font-style: normal;
 }
 
+/* Buttons */
 body .btn-seeAppl {
     float: right;
     position: relative;
@@ -239,6 +245,7 @@ body .btn-retract:hover {
     border-color: #c70808;
 }
 
+/* Filter for send applications */
 .form-filter {
     margin: 20px 0 0 0;
 }

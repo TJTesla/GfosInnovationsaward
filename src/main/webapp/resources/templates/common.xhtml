@@ -16,48 +16,67 @@
 </h:head>
 <h:body style="height: 100%">
     <div class="head">
+        <!-- Header -->
         <ui:insert name="header">
             <ui:include src="common/header.xhtml" />
             <h:outputStylesheet library="css" name="sideNavbar.css" />
             <h:outputScript library="javascript" name="basics.js" />
+            <!-- Button: open side navbar -->
             <button class="btn-openMenu  ui-button" id="menubtn" onclick="openNav()"> <i class="pi pi-align-right" id="menu-icon" /> </button>
+            <!-- Side Navbar -->
             <div id="sideNav" class="sidenav">
                 <h:form>
+                    <!-- Button: close navbar -->
                     <button class="closebtn ui-button" type="button" onclick="closeNav()">&times;</button>
+                    <!-- if applicant -->
                     <c:if test="#{controllerTest.checkApplicant()}">
+                        <!-- Button: profile -->
                         <p:button styleClass="sideNavLinks-plain" outcome="/01-user/userProfile" value="Profil" icon="pi pi-user" />
                         <hr class="border" />
                     </c:if>
+                    <!-- not logged in -->
                     <c:if test="#{not controllerTest.checkUserRights()}">
+                        <!-- Button: Login -->
                         <p:button styleClass="sideNavLinks-plain" outcome="/00-loginRegistration/login" value="Login" icon="pi pi-sign-in" />
                         <hr class="border" />
                     </c:if>
+                    <!-- Button: Overview of all offers -->
                     <p:button outcome="/index.xhtml" value="Angebotsübersicht" styleClass="sideNavLinks-plain" icon="pi pi-list" />
+                    <!-- if applicant -->
                     <c:if test="#{controllerTest.checkApplicant()}">
                         <hr class="border" />
+                        <!-- Button: Sent applications -->
                         <p:button outcome="/03-applicationList/applicationsUser" value="Gesendet" styleClass="sideNavLinks-plain" icon="pi pi-envelope" />
                         <hr class="border" />
+                        <!-- Button: Application drafts -->
                         <p:button outcome="/03-applicationList/applicationDrafts" value="Entwürfe" styleClass="sideNavLinks-plain" icon="pi pi-pencil" />
                     </c:if>
+                    <!-- if employee -->
                     <c:if test="#{controllerTest.checkEmployee()}">
                         <hr class="border" />
+                        <!-- Button: Offer Drafts -->
                         <p:button outcome="/02-offer/offerDrafts" value="Entwürfe" styleClass="sideNavLinks-plain" icon="pi pi-pencil" />
                         <hr class="border" />
+                        <!-- Button: Change password -->
                         <p:button outcome="/00-loginRegistration/newPswd" value="Passwort ändern" styleClass="sideNavLinks-plain" icon="pi pi-key" />
                     </c:if>
+                    <!-- if logged in -->
                     <c:if test="#{controllerTest.checkUserRights()}">
                         <hr class="border" />
+                        <!-- Button: Logout -->
                         <p:commandButton styleClass="sideNavLinks-plain" action="#{controllerTest.logout()}" value="Abmelden" icon="pi pi-sign-out" />
                     </c:if>
                 </h:form>
             </div>
         </ui:insert>
     </div>
+    <!-- Main Part -->
     <div class="content" >
         <ui:insert name="content">
             <ui:include src="common/content.xhtml" />
         </ui:insert>
     </div>
+    <!-- Footer -->
     <div class="foot">
         <ui:insert name="footer">
             <ui:include src="common/footer.xhtml" />

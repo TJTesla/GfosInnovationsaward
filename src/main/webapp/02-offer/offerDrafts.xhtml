@@ -27,8 +27,9 @@
             </div>
             <div class="wrapper">
                 <h:form>
+                    <!-- Filter bar -->
                     <div class="filter">
-                        <!--h:inputText id="place" k:placeholder="Standort" styleClass="input-location" /-->
+                        <!-- Dropdown: Field of Profession -->
                         <div class="dropdown">
                             <button class="dropbtn ui-button" id="dropbtnField" type="button">Berufsfeld <i class="pi pi-caret-down" /></button>
                             <div class="navContent" id="dropdownField">
@@ -41,8 +42,9 @@
                             </div>
                         </div>
 
+                        <!-- Dropdown: Level of Education -->
                         <div class="dropdown">
-                            <button class="dropbtn ui-button" id="dropbtnLevel" type="button">Einstieglevel <i class="pi pi-caret-down" /></button>
+                            <button class="dropbtn ui-button" id="dropbtnLevel" type="button">Einstiegniveau <i class="pi pi-caret-down" /></button>
                             <div class="navContent" id="dropdownLevel">
                                 <ui:repeat id="level" var="l" value="#{indexController.allLevels}" varStatus="">
                                     <div class="a">
@@ -53,6 +55,7 @@
                             </div>
                         </div>
 
+                        <!-- Dropdown: Working Time -->
                         <div class="dropdown">
                             <button class="dropbtn ui-button" id="dropbtnTime" type="button">Arbeitszeit <i class="pi pi-caret-down" /></button>
                             <div class="navContent" id="dropdownTime">
@@ -65,6 +68,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Button for application -->
                     <div class="applyBtn">
                         <h:commandButton value="Anwenden" action="#{indexController.reload()}" styleClass="navBtn ui-button" />
                         <c:if test="#{indexController.loggedInAsEmployee()}" >
@@ -74,23 +79,28 @@
                 </h:form>
 
 
+                <!-- List of Drafts -->
                 <div class="offers" id="offers">
                     <div class="border-line"> </div>
                     <ui:repeat id="offers" var="offer" value="#{indexController.allOfferDrafts}" varStatus="statusCount">
                         <div class="allOffers">
                             <h:form>
                                 <div class="offer-left">
+                                    <!-- Offer: Title -->
                                     <h:outputLabel id="title" value="#{offer.title}" styleClass="offer-label" />
                                     <br />
+                                    <!-- Offer: Location -->
                                     <div class="offer-attr">
                                         <i class="pi pi-map-marker">&nbsp;</i>
                                         <h:outputText id="location" value="#{offer.city}" styleClass="offer-location" />
                                     </div>
+                                    <!-- Offer: Field of profession -->
                                     <div class="offer-attr">
                                         <i class="pi pi-briefcase">&nbsp;</i>
                                         <h:outputText id="field" value="#{indexController.fieldString(offer.field)}" styleClass="offer-field" />
                                     </div>
                                 </div>
+                                <!-- Button for Deletion -->
                                 <div class="offer-btn">
                                     <p:commandButton id="deleteDraft"  styleClass="btn-delete" value="" icon="pi pi-trash" ajax="true" onclick="showPopUp(#{statusCount.index})" />
                                     <p:button outcome="/02-offer/offer" styleClass="btn-toOffer" value="" icon="pi pi-angle-right">
@@ -99,6 +109,7 @@
                                 </div>
                             </h:form>
                         </div>
+                        <!-- Popup for deletion -->
                         <div class="cover" id="popup#{statusCount.index}">
                             <div class="popup">
                                 <h:form>
@@ -116,39 +127,6 @@
                     </ui:repeat>
                 </div>
             </div>
-
-            <!--h:outputStylesheet library="css" name="offer.css" />
-            <div align="center" class="drafts-title">
-                <h2>Entwürfe</h2>
-                <hr />
-            </div>
-            <div class="allOfferDrafts">
-                <ui:repeat var="oDraft" value="">
-                    <div class="oDraft">
-                        <div class="draft-text">
-                            <h:outputText id="offerTitle" value="An offer that has no name" styleClass="text-draftTitle" />
-                            <div class="draft-time">
-                                <h:outputLabel for="lastEdit" value="Zuletzt bearbeitet: " styleClass="label-time" />
-                                <h:outputText id="lastEdit" value="02.04.2022 13:10" styleClass="text-date" />
-                            </div>
-                        </div>
-                        <div class="drafts-btns">
-                            <h:form>
-                                <h:button id="editOffer" value="Bearbeiten" styleClass="btn-editDraft" outcome="createOffer">
-                                    <f:param name="" value="" />
-                                </h:button>
-                                <br />
-                                <p:commandButton id="deleteDraft"  styleClass="btn-delete" value="" icon="pi pi-trash" action="fds" />
-                            </h:form>
-                        </div>
-                    </div>
-                </ui:repeat>
-                <div>
-                    <h:form class="add">
-                        <p:button value="" styleClass="btn-newOffer" icon="pi pi-plus" outcome="createOffer" />
-                    </h:form>
-                </div>
-            </div-->
         </ui:define>
     </ui:composition>
 </h:body>

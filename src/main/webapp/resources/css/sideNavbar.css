@@ -1,7 +1,3 @@
-/*body {
-    height: 200px;
-    margin: 0;
-}*/
 .sidenav {
     height: 100%; /* 100% Full-height */
     width: 20%;
@@ -15,6 +11,7 @@
     display: none;
 }
 
+/* Color schemes */
 @media (prefers-color-scheme: light) {
     .sidenav {
         background-color: #cfd8e1;;
@@ -54,34 +51,36 @@
 
 .sidenav [class*="sideNavLinks-"] {
     text-align: left;
-    width: 100%;
-    padding: 8px 8px 8px 10%;
-    background-color: transparent;
+    width: 100%; /* whole sidenav width */
+    padding: 8px 8px 8px 10%; /* space left for icon */
+    background-color: transparent; /* no own background color */
     color: inherit;
     font-size: 20px;
     transition: 0.3s;
 }
 
 .sidenav .sideNavLinks-plain {
-    background-color: inherit;
+    background-color: inherit; /* same color as sidenav */
     border: none;
 }
 
+/* border separating single buttons */
 .border {
-    color: #7285A5;
+    color: #7285A5; /* slight color difference */
     height: 2px;
     margin-left: 5%;
     margin-right: 5%;
 }
 
+/* icon position */
 body .sidenav .ui-button.ui-button-text-icon-left .ui-icon {
     left: 7%;
     top: 45%;
 }
 
 .sidenav .closebtn {
-    background-color: transparent;
-    border: none;
+    background-color: transparent; /* no background color */
+    border: none; /* no border */
     color: inherit;
     float: right;
     padding-top: 10px;
@@ -92,13 +91,10 @@ body .sidenav .ui-button.ui-button-text-icon-left .ui-icon {
     font-size: 36px;
 }
 
+/* hover change color */
 .sidenav .closebtn:hover {
     background-color: transparent;
     color: #7285A5;
-}
-
-#menubtn {
-    font-family: "Times New Roman", serif;
 }
 
 .pi-align-right::before {
@@ -106,6 +102,7 @@ body .sidenav .ui-button.ui-button-text-icon-left .ui-icon {
     top: 1px;
 }
 
+/* icons sizes */
 body .sidenav .pi {
     font-size: 22px;
     font-weight: normal;

@@ -26,6 +26,7 @@
             </div>
             <h:form>
                 <fieldset class="newPswd">
+                    <!-- Old Password -->
                     <h:outputLabel for="oldPswd" value="Altes Passwort:" styleClass="label-pswd" /> <br />
                     <h:inputSecret id="oldPswd" value="#{passwordChange.oldPwd}" styleClass="input-pswd" />
                     <br />
@@ -37,6 +38,7 @@
                     </c:if>
                     <br />
 
+                    <!-- New Password -->
                     <h:outputLabel for="newPswd" value="Neues Passwort:" styleClass="label-pswd" /> <br />
                     <h:inputSecret id="newPswd" value="#{passwordChange.newPwd}" styleClass="input-pswd" />
                     <br />
@@ -48,6 +50,7 @@
                     </c:if>
                     <br />
 
+                    <!-- Repeat Password -->
                     <h:outputLabel for="pswdRepeat" value="Passwort wiederholen:" styleClass="label-pswd" /> <br />
                     <h:inputSecret id="pswdRepeat" value="#{passwordChange.newRepeat}" styleClass="input-pswd" />
                     <br />

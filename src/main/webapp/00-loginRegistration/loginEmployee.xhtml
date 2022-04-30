@@ -23,9 +23,11 @@
             <hr />
             <h:form>
                 <fieldset class="emplLogin">
+                    <!-- User name -->
                     <h:outputLabel for="user" styleClass="label-loginE" value="Benutzername:" /> <br />
                     <h:inputText id="user" type="text" name="user" value="#{employeeRegistrationController.name}" styleClass="input-loginE" />
                     <br />
+                    <!-- User key -->
                     <h:outputLabel for="key" styleClass="label-loginE" value="Schlüssel:" /> <br />
                     <h:inputText id="key"  value="#{employeeRegistrationController.key}" styleClass="input-loginE" />
                     <br />
@@ -36,6 +38,8 @@
                         </p>
                         <br />
                     </c:if>
+
+                    <!-- Password -->
                     <h:outputLabel for="pswd" styleClass="label-loginE" value="Passwort:" /> <br />
                     <h:inputSecret id="pswd" value="#{employeeRegistrationController.password}" styleClass="input-loginE" />
                     <h:outputText value="" rendered="#{employeeRegistrationController.registerError}" />
@@ -47,6 +51,8 @@
                         </p>
                         <br />
                     </c:if>
+
+                    <!-- Repeat Password -->
                     <h:outputLabel for="pswdRepeat" value="Passwort wiederholen: " styleClass="label-loginE" /> <br />
                     <h:inputSecret id="pswdRepeat" value="#{employeeRegistrationController.passwordRepeat}" styleClass="input-loginE" />
                     <h:outputText value="#{employeeRegistrationController.getErrorMessage('passwordRepeat')}" rendered="#{employeeRegistrationController.registerError}" />

@@ -17,11 +17,13 @@
     <title>Alle Bewerbungen</title>
 </h:head>
 <h:body>
+    <!-- All send applications -->
     <ui:composition template="../resources/templates/common.xhtml">
         <ui:define name="content">
             <h:outputStylesheet library="css" name="applicationList.css" />
             <div align="center">
                 <h1 align="center">Alle Bewerbungen</h1>
+                <!-- Filter for revision status -->
                 <h:form styleClass="form-filter">
                     <h:selectOneMenu id="filterMenu" value="#{applicationListController.filter}" styleClass="menu-filter" >
                         <f:selectItem itemValue="-1" itemLabel="Alle" />
@@ -33,11 +35,13 @@
                     <h:commandButton id="filterBtn" value="Anwenden" action="#{applicationListController.filter()}" styleClass="btn-filter ui-button" />
                 </h:form>
             </div>
+            <!-- List of applications -->
             <div class="applications">
                 <ui:repeat value="#{applicationListController.appliedOffers()}" var="apl" varStatus="statusCount">
                     <div class="application">
                         <h:form>
 
+                            <!-- Offer: title -->
                             <h:outputText id="offer" value="#{apl.offer.title}" styleClass="text-apl" />
                             <div class="status">
                                 <h:outputLabel for="status" value="Status:" styleClass="label-status" />
@@ -45,6 +49,7 @@
                             </div>
                             <br />
                             <div style="display: block; width: 100%">
+                                <!-- Button: Retraction -->
                                 <h:commandButton id="retract" value="Zurückziehen" styleClass="btn-retract ui-button" onclick="showPopUp(#{statusCount.index})">
                                     <f:ajax render="@none" />
                                 </h:commandButton>
@@ -54,6 +59,7 @@
                             </div>
                         </h:form>
                     </div>
+                    <!-- Popup: Retraction -->
                     <div class="cover" id="popup#{statusCount.index}">
                         <div class="popup">
                             <h:form>

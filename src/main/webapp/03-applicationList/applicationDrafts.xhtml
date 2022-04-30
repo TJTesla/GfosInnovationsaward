@@ -22,20 +22,25 @@
                 <h2 style="font-size: 25px;">Entwürfe</h2>
                 <hr />
             </div>
+            <!-- List of Application Drafts -->
             <div class="applications">
                 <ui:repeat var="aDraft" value="#{applicationListController.drafts}" varStatus="statusCount">
                     <div class="application">
                         <div class="left">
+                            <!-- Offer: Title -->
                             <h:outputLabel id="offerTitle" value="#{aDraft.offer.title}" styleClass="text-apl label-apl"  />
                         </div>
                         <div class="right">
                             <h:form>
+                                <!-- Button: Edit Draft -->
                                 <h:button id="editAppl" value="Bearbeiten" styleClass="btn-seeAppl ui-button" outcome="/03-application/application" style="margin-top: 20px;">
                                     <f:param name="id" value="#{aDraft.application.offerId}" />
                                     <f:param name="edit" value="true" />
                                 </h:button>
                                 <br />
+                                <!-- Button: Deletion -->
                                 <p:commandButton id="deleteAppl" onclick="showPopUp(#{statusCount.index})" value="" styleClass="btn-delete" icon="pi pi-trash" ajax="true" />
+                                <!-- Popup for deletion -->
                                 <div class="cover" id="popup#{statusCount.index}">
                                     <div class="popup">
                                         <h:form>

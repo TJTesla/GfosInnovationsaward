@@ -29,8 +29,11 @@
                 <h1 align="center">Profil Bearbeiten</h1>
                 <hr />
                 <fieldset class="edit">
+                    <!-- current profile pic -->
                     <p:graphicImage value="#{pbLoader.load()}" styleClass="image-profile" cache="false" />
                     <br />
+
+                    <!-- new Profile pic upload -->
                     <h:outputLabel for="photo" value="Profilbild:" styleClass="label-edit"/>
                     <p:fileUpload id="photo" mode="simple" update="@form" styleClass="upload" value="#{detailApplicant.cv}" />
                     <c:if test="#{not detailApplicant.getErrorMessage('photo').equals('')}">
@@ -40,6 +43,8 @@
                         </p>
                     </c:if>
                     <br />
+
+                    <!-- User name -->
                     <h:outputLabel for="username" value="Benutzername:" styleClass="label-edit"/>
                     <h:inputText id="username" value="#{detailApplicant.detailApplicant.name}" styleClass="input-edit" />
                     <c:if test="#{not detailApplicant.getErrorMessage('name').equals('')}">
@@ -49,6 +54,8 @@
                         </p>
                     </c:if>
                     <br />
+
+                    <!-- First Name -->
                     <h:outputLabel for="fname" value="Vorname:" styleClass="label-edit"/>
                     <h:inputText id="fname" value="#{detailApplicant.detailApplicant.firstname}" styleClass="input-edit" />
                     <c:if test="#{not detailApplicant.getErrorMessage('firstname').equals('')}">
@@ -58,6 +65,8 @@
                         </p>
                     </c:if>
                     <br />
+
+                    <!-- Last Name -->
                     <h:outputLabel for="lname" value="Nachname:" styleClass="label-edit" />
                     <h:inputText id="lname" value="#{detailApplicant.detailApplicant.lastname}" rendered="true" styleClass="input-edit" />
                     <c:if test="#{not detailApplicant.getErrorMessage('lastname').equals('')}">
@@ -67,6 +76,8 @@
                         </p>
                     </c:if>
                     <br />
+
+                    <!-- Email -->
                     <h:outputLabel for="email" value="E-Mail:" styleClass="label-edit" />
                     <h:inputText id="email" value="#{detailApplicant.detailApplicant.email}" rendered="true" styleClass="input-edit" />
                     <c:if test="#{not detailApplicant.getErrorMessage('email').equals('')}">
@@ -76,6 +87,8 @@
                         </p>
                     </c:if>
                     <br />
+
+                    <!-- Repeat Email -->
                     <h:outputLabel for="emailRepeat" value="E-Mail wiederholen:" styleClass="label-edit" />
                     <h:inputText id="emailRepeat" name="emailWiederholen" type="text" styleClass="input-edit" value="#{detailApplicant.emailRepeat}" />
                     <c:if test="#{not detailApplicant.getErrorMessage('emailRepeat').equals('')}">
@@ -86,6 +99,8 @@
                     </c:if>
                     <br />
                     <hr />
+
+                    <!-- Address -->
                     <h:outputLabel for="street" value="Straße:" styleClass="label-edit" />
                     <h:inputText id="street" styleClass="input-edit" value="#{detailApplicant.street}" />
                     <br />
@@ -102,6 +117,8 @@
                     </c:if>
                     <br />
                 </fieldset>
+
+                <!-- Button to save changes -->
                 <div class="edit-btn">
                     <h:commandButton action="#{detailApplicant.updateProfile()}" value="Änderungen speichern" styleClass="btn-saveEdit ui-button" />
                 </div>

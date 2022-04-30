@@ -20,6 +20,7 @@
     <h:outputStylesheet library="css" name="styleBasic.css" />
     <h:outputStylesheet library="css" name="superuser.css" />
     <h:outputScript library="javascript" name="basics.js" />
+    <!-- header -->
     <div class="head">
         <ui:insert name="header">
             <ui:include src="../resources/templates/common/header.xhtml" />
@@ -33,19 +34,26 @@
             <hr />
         </div>
         <div class="allEmpl">
+            <!-- New Employee -->
             <div class="newEmpl">
                 <h:form>
                     <fieldset class="fieldset">
+                        <!-- Input for User Name -->
                         <legend class="legend-empl">Neuer Mitarbeiter:</legend>
                         <h:outputLabel for="newName" value="Name: " styleClass="label-empl" />
                         <h:inputText id="newName" value="#{superUserController.name}" styleClass="input-empl" />
+
+                        <!-- Button for adding -->
                         <p:commandButton id="add" action="#{superUserController.createEmployee()}" styleClass="btn-new-empl" value="" icon="pi pi-user-plus" ajax="false" />
+
                         <c:if test="#{not superUserController.getErrorMessage('name').equals('')}">
                             <div class="errMsg-newUser">
                                 <i class="pi pi-exclamation-circle">&nbsp;</i>
                                 <h:outputText value="#{superUserController.getErrorMessage('name')}" />
                             </div>
                         </c:if>
+
+                        <!-- Key -->
                         <c:if test="#{superUserController.renderKey}">
                             <div style="margin: 15px 0 0 0;">
                                 <h:outputLabel for="key" value="Schlüssel:" styleClass="label-key" />
@@ -55,6 +63,8 @@
                     </fieldset>
                 </h:form>
             </div>
+
+            <!-- List of old Employees -->
             <div class="oldEmpl">
                 <h3 class="legend-oldEmpl">Liste aller Mitarbeiter:</h3>
                 <ui:repeat var="x" value="#{superUserController.allEmployees}" varStatus="statusCount">
@@ -66,6 +76,8 @@
                             <h:outputText value="#{superUserController.activationStatus(x)}" styleClass="text-emplStatus" />
                         </h:form>
                     </div>
+
+                    <!-- Popup for deletion -->
                     <div class="cover" id="popup#{statusCount.index}">
                         <div class="popup">
                             <h:form>
@@ -85,6 +97,7 @@
         </div>
     </div>
 
+    <!-- Footer -->
     <div style="height: 100px; overflow: hidden; margin-bottom: 0; text-align: center" class="foot">
         <ui:include src="../resources/templates/common/footer.xhtml" />
     </div>

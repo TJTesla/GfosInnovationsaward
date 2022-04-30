@@ -22,48 +22,64 @@
         <ui:define name="content">
             <h:outputStylesheet library="css" name="offer.css" />
             <div class="offer" id="offer">
+                <!-- Favorite Button -->
                 <h:commandButton action="#{detailOffer.editFavorite()}" rendered="#{detailOffer.loggedInAsApplicant()}"
                                  styleClass="#{detailOffer.isFavorite() ? 'body btn-fav1' : 'body btn-fav' }"
                                  style="clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);">
                     <f:ajax execute="@form" render="@this" />
                 </h:commandButton>
+
+                <!-- Offer Title -->
                 <h2 class="offer-title">
                     <h:outputText value="#{detailOffer.detailOffer.title}" />
                 </h2>
                 <div class="offer-data1">
-                    <!-- Daten des Angebots -->
+                    <!-- Data -->
+                    <!-- Field of profession -->
                     <h:outputLabel for="field" value="Berufsfeld: " styleClass="label-offer" />
                     <div class="wrap-textOffer">
                         <h:outputText id="field" value="#{detailOffer.fieldString()}" styleClass="text-offer" />
                     </div>
                     <br />
+
+                    <!-- Level of Education -->
                     <h:outputLabel for="level" value="Einstiegsniveau: " styleClass="label-offer" />
                     <div class="wrap-textOffer">
                         <h:outputText id="level" value="#{detailOffer.levelString()}" styleClass="text-offer" />
                     </div>
                     <br />
+
+                    <!-- Working Time -->
                     <h:outputLabel for="time" value="Arbeitszeit: " styleClass="label-offer" />
                     <div class="wrap-textOffer">
                         <h:outputText id="time" value="#{detailOffer.timeString()}" styleClass="text-offer" />
                     </div>
                     <br />
+
+                    <!-- Location -->
                     <h:outputLabel for="location" value="Ort: " styleClass="label-offer" />
                     <div class="wrap-textOffer">
                         <h:outputText id="location" value="#{detailOffer.detailOffer.city}" styleClass="text-offer" />
                     </div>
                     <br />
+
+                    <!-- Description -->
                     <div class="field-offer-description">
+
+                        <!-- Tasks -->
                         <h:outputLabel for="tasks" value="Aufgaben:" styleClass="label-offer-description" />
                         <div class="box-description">
                             <h:outputText id="tasks" value="#{detailOffer.detailOffer.tasks}" styleClass="text-offer-description" />
                         </div>
 
+                        <!-- Qualification -->
                         <h:outputLabel for="quali" value="Qualifikationen:" styleClass="label-offer-description" />
                         <div class="box-description">
                             <h:outputText id="quali" value="#{detailOffer.detailOffer.qualifications}"
                                           styleClass="text-offer-description" />
                         </div>
 
+                        <!-- Additional Data -->
                         <c:if test="#{detailOffer.hasExtraInfos()}">
                             <h:outputLabel for="extra" value="Zusätzliche Daten:" styleClass="label-offer-description" />
                             <div class="box-description">
@@ -77,28 +93,34 @@
                 <h:form>
                     <div class="div-btn">
                         <c:choose>
-                            <c:when test="#{detailOffer.loggedInAsApplicant()}"> <!-- if applicant -->
+                            <!-- if applicant -->
+                            <c:when test="#{detailOffer.loggedInAsApplicant()}">
                                 <c:choose>
-                                    <c:when test="#{not detailOffer.alreadyApplied()}"> <!-- if not applied -->
+                                    <!-- if not applied -->
+                                    <c:when test="#{not detailOffer.alreadyApplied()}">
                                         <h:button value="Bewerben" styleClass="btn-appl ui-button" outcome="/03-application/application">
                                             <f:param name="id" value="#{detailOffer.detailOffer.id}" />
                                             <f:param name="edit" value="false" />
                                         </h:button>
                                     </c:when>
-                                    <c:otherwise> <!-- already applied -->
+                                    <!-- already applied -->
+                                    <c:otherwise>
                                         <h:button value="Bewerbung einsehen" styleClass="btn-appl ui-button" outcome="/03-application/applDetailUser">
                                             <f:param name="id" value="#{detailOffer.detailOffer.id}" />
                                         </h:button>
                                     </c:otherwise>
                                 </c:choose>
                             </c:when>
-                            <c:when test="#{detailOffer.loggedInAsEmployee()}"> <!-- if employee -->
+                            <!-- if employee -->
+                            <c:when test="#{detailOffer.loggedInAsEmployee()}">
                                 <c:choose>
+                                    <!-- if published -->
                                     <c:when test="#{detailOffer.finalOffer}">
                                         <h:button value="Bewerbungen einsehen" styleClass="btn-seeAppl ui-button" outcome="/03-applicationList/applicationsEmpl">
                                             <f:param name="id" value="#{detailOffer.detailOffer.id}" />
                                         </h:button>
                                     </c:when>
+                                    <!-- if only draft -->
                                     <c:otherwise>
                                         <h:commandButton value="Veröffentlichen" action="#{detailOffer.publish()}" styleClass="btn-upload1 ui-button" />
                                         <h:button value="Bearbeiten" outcome="createOffer" styleClass="btn-editDraft ui-button">
@@ -106,9 +128,13 @@
                                         </h:button>
                                     </c:otherwise>
                                 </c:choose>
+
+                                <!-- Button for Deletion -->
                                 <h:commandButton id="delete" value="Löschen" styleClass="btn-deleteOffer ui-button" onclick="showPopUp('')">
                                     <f:ajax render="@none" />
                                 </h:commandButton>
+
+                                <!-- Popup for deletion -->
                                 <div class="cover" id="popup">
                                     <div class="popup">
                                         <h:form>
@@ -124,7 +150,9 @@
                                     </div>
                                 </div>
                             </c:when>
-                            <c:otherwise> <!-- not logged in -->
+
+                            <!-- not logged in -->
+                            <c:otherwise>
                                 <h:link outcome="/00-loginRegistration/login" value="Melden Sie sich hier an, um sich zu bewerben." styleClass="link-login" />
                             </c:otherwise>
                         </c:choose>

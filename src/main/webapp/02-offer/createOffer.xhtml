@@ -66,7 +66,8 @@
                         </div>
 
 
-                        <!-- Eigenschaften -->
+                        <!-- Attributes -->
+                        <!-- Field of profession -->
                         <div class="offer-attr">
                             <h:outputLabel for="field" value="Berufsfeld:" styleClass="label-offAttr" />
                             <br />
@@ -77,8 +78,9 @@
                             </h:selectOneMenu>
                         </div>
 
+                        <!-- Level of education -->
                         <div class="offer-attr">
-                            <h:outputLabel for="level" value="Einstiegslevel:" styleClass="label-offAttr" />
+                            <h:outputLabel for="level" value="Einstiegsniveau:" styleClass="label-offAttr" />
                             <br />
                             <h:selectOneMenu id="level" value="#{createOfferController.level}" styleClass="input-plain" >
                                 <f:selectItem itemValue="-1" itemLabel="/nicht ausgewählt" />
@@ -87,8 +89,9 @@
                             </h:selectOneMenu>
                         </div>
 
+                        <!-- Working Time: -->
                         <div class="offer-attr">
-                            <h:outputLabel for="time" value="Praktikum:" styleClass="label-offAttr" />
+                            <h:outputLabel for="time" value="Arbeitszeit:" styleClass="label-offAttr" />
                             <br />
                             <h:selectOneMenu id="time" value="#{createOfferController.time}" styleClass="input-plain">
                                 <f:selectItem itemValue="-1" itemLabel="/nicht ausgewählt" />
@@ -105,11 +108,11 @@
                         </c:if>
                     </div>
 
-                    <!-- Beschreibung -->
+                    <!-- Description -->
                     <legend>Beschreibung:</legend>
                     <div class="offer-descr">
 
-                        <!-- Aufgaben -->
+                        <!-- Tasks -->
                         <h:outputLabel for="tasks" value="Aufgaben:" styleClass="label-offDescr" />
                         <c:if test="#{not createOfferController.getErrorMsg('tasks').equals('')}">
                             <div class="errMsg-createO">
@@ -121,7 +124,7 @@
                         <h:inputTextarea id="tasks" value="#{createOfferController.tasks}" styleClass="area-descr" />
                         <br />
 
-                        <!-- Qualifikationen -->
+                        <!-- Qualifications -->
                         <h:outputLabel for="quali" value="Qualifikationen:" styleClass="label-offDescr" />
                         <c:if test="#{not createOfferController.getErrorMsg('qualifications').equals('')}">
                             <div class="errMsg-createO">
@@ -133,13 +136,14 @@
                         <h:inputTextarea id="quali" value="#{createOfferController.qualifications}" styleClass="area-descr" />
                         <br />
 
-                        <!-- Zusätzliche Daten -->
+                        <!-- Additional Data -->
                         <h:outputLabel for="extra" value="Zusätzliche Daten:" styleClass="label-offDescr" />
                         <br />
                         <h:inputTextarea id="extra" value="#{createOfferController.extras}" styleClass="area-descr" />
                     </div>
                     <br />
 
+                    <!-- Buttons to save or publish -->
                     <div class="btns">
                         <h:commandButton value="Speichern" action="#{createOfferController.save(true)}" styleClass="btn-save ui-button" />
                         <h:commandButton value="Veröffentlichen" action="#{createOfferController.save(false)}" styleClass="btn-upload ui-button" />

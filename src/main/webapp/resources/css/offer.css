@@ -1,4 +1,5 @@
-/* create Offer */
+/* create Offer formular */
+/* Color Schemes */
 @media (prefers-color-scheme: dark) {
     .offer-form {
         background-color: #13274F;
@@ -27,7 +28,9 @@
     }
 }
 
+/* Mobile view */
 @media only screen and (min-width: 320px) {
+    /* Always same margin, width dependent */
     .offer-form {
         width: auto;
         margin: 0 5px auto;
@@ -72,6 +75,7 @@
     }
 }
 @media only screen and (min-width: 641px) {
+    /* Always same margin, width dependant */
     .offer-form {
         width: auto;
         margin: 0 10px auto;
@@ -94,6 +98,7 @@
     }
 }
 @media only screen and (min-width: 961px) {
+    /* always same width, margin dependent */
     .offer-form {
         width: 1000px;
         margin: 0 auto 50px auto;
@@ -120,7 +125,6 @@ h1 {
     line-height: 150%;
 }
 
-
 .label-title {
     font-size: 17px;
     font-style: italic;
@@ -130,11 +134,12 @@ h1 {
 #address {
     margin-bottom: 20px;
 }
+
 .label-offAttr {
     display: inline-block;
 }
 
-
+/* Error message */
 .errMsg-createO {
     margin: 0;
     padding: 0;
@@ -145,8 +150,6 @@ h1 {
     padding: 0 2px 2px 2px;
 }
 
-
-
 .label-offDescr {
     margin-top: 20px;
     margin-bottom: 10px;
@@ -155,6 +158,7 @@ h1 {
     width: 150px;
 }
 
+/* Same color, not mode dependent */
 .area-descr {
     font-family: inherit;
     color: #13274F;
@@ -165,6 +169,8 @@ h1 {
     background-color: whitesmoke;
     white-space: pre-line;
 }
+
+/*wrapper for buttons */
 .btns {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -205,7 +211,8 @@ body .btn-deleteDraft:hover {
 
 
 
-/* offer */
+/* offer Detail View */
+/* Color schemes */
 @media (prefers-color-scheme: dark) {
 
     .field-offer-description {
@@ -218,7 +225,9 @@ body .btn-deleteDraft:hover {
     }
 }
 
+/* Mobile View */
 @media only screen and (min-width: 320px) {
+    /* margin fixed, width relative */
     .offer {
         margin: 20px 10px 40px;
         width: auto;
@@ -309,6 +318,7 @@ body .btn-deleteDraft:hover {
     }
 }
 @media only screen and (min-width: 961px) {
+    /* width fixed, margin relative */
     .offer {
         margin: 20px auto 40px;
         width: 700px;
@@ -337,6 +347,8 @@ body .btn-deleteDraft:hover {
         font-size: 18px;
     }
 }
+
+/* Button to favorite offer, right site of title */
 body .btn-fav {
     float: right;
     width: 35px;
@@ -360,7 +372,7 @@ body .btn-fav1 {
     margin-top: 15px
 }
 
-
+/* wrapper */
 .offer-data1 {
     margin: 20px 0px 10px;
 }
@@ -380,6 +392,7 @@ body .btn-fav1 {
     padding: 0 0 0 10px;
 }
 
+/* all description parts */
 .field-offer-description {
     border-radius: 10px;
     margin: 20px 0 0 0;
@@ -392,11 +405,13 @@ body .btn-fav1 {
     font-style: italic;
 }
 
+/* text box around description */
 .box-description {
     padding-left: 15px;
     padding-right: 15px;
 }
 
+/* makes sure that line breaks are displayed */
 .text-offer-description {
     white-space: pre-line;
 }
@@ -445,7 +460,9 @@ body .btn-deleteOffer:hover {
     color: #007FFF;
 }
 
-/* Offer Drafts */
+/* Offer Drafts (Only additional to classes from index.css) */
+/* Mobile view */
+/* Change size of buttons and their icons + positions */
 @media only screen and (min-width: 320px) {
     body .btn-delete {
         height: 30px;
@@ -485,53 +502,6 @@ body .btn-deleteOffer:hover {
 .drafts-title {
     font-size: 25px;
     margin-top: 15px;
-}
-
-.allOfferDrafts {
-    margin: 20px 30%;
-}
-
-.oDraft {
-    border-bottom-style: solid;
-    border-color: #7285a5;
-    border-width: 2px;
-    height: 100px;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-.draft-text {
-    float: left;
-    height: 100%;
-}
-
-.text-draftTitle {
-    font-size: 20px;
-    position: relative;
-    top: 25px;
-}
-
-.draft-time {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #7285a5;
-}
-
-.label-time {
-    width: 150px;
-    font-style: italic;
-}
-
-.text-date {
-
-}
-
-.drafts-btns {
-    float: right;
-}
-
-body .btn-editDraft {
-    font-weight: normal;
 }
 
 body .btn-delete {

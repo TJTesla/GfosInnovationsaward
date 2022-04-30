@@ -12,33 +12,42 @@
       xml:lang="en" lang="en">
 
 <body>
+<!-- Details of the application -->
     <ui:composition>
         <h:outputStylesheet library="css" name="applicationDetail.css" />
         <div style="padding-bottom: 20px;">
+
+            <!-- Offer Title -->
             <h:outputLabel for="offer" value="Jobangebot:" styleClass="label-applDetail" />
             <h:outputText id="offer" value="#{detailApplication.offer.title}" styleClass="text-applDetail" />
             <div>
+
+                <!-- Applicant: Salutation -->
                 <h:outputLabel for="salutation" value="Anrede:" rendered="false" styleClass="label-applDetail" />
                 <h:outputText id="salutation" value="#{detailApplication.salutationString()}" rendered="false" styleClass="text-applDetail" />
                 <br />
 
+                <!-- Applicant: Titles -->
                 <h:outputLabel for="title" value="Titel:" styleClass="label-applDetail" rendered="true"/>
                 <ui:repeat id="title" var="title" value="#{detailApplication.titles()}" varStatus="" rendered="true">
                     <h:outputText value="#{title}, " styleClass="text-applDetail" />
                 </ui:repeat>
                 <br />
 
+                <!-- Applicant: Whole Name -->
                 <h:outputLabel for="name" styleClass="label-applDetail" value="Name:" />
                 <h:outputText id="name" value="#{detailApplication.applicant.lastname}, #{detailApplication.applicant.firstname}"
                               styleClass="text-applDetail" />
                 <br />
 
+                <!-- Applicant: E-Mail -->
                 <h:outputLabel for="email" styleClass="label-applDetail" value="E-Mail:" />
                 <h:outputText id="email" value="#{detailApplication.applicant.email}" styleClass="text-applDetail" />
                 <br />
 
             </div>
             <div>
+                <!-- Letter of Motivation -->
                 <h:outputLabel for="lom" value="Bewerbungsschreiben:" styleClass="label-applDetail"/> <br />
                 <div class="textArea-applDetail">
                     <h:outputText id="lom" value="#{detailApplication.application.text}" styleClass="text-applDetail" style="font-size: 13px;" />
@@ -46,8 +55,8 @@
 
                 <br />
 
+                <!-- Download CV -->
                 <h:form enctype="multipart/form-data">
-                    <!-- Way to depict the pdf directly? -->
                     <h:outputLabel for="cv" value="Lebenslauf:" styleClass="label-applDetail"/>
                     <p:commandButton id="cv" ajax="false" value="Herunterladen" styleClass="btn-cv-download" action="missing">
                         <p:fileDownload value="#{detailApplication.resume()}" />
