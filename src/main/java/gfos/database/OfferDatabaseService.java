@@ -104,7 +104,8 @@ public class OfferDatabaseService extends DatabaseService {
                 query += " JOIN favorites ON offer.id=favorites.offerId AND favorites.applicantId=" + a.getId();
             }
             if (f.getOnlyApplied() != null && f.getOnlyApplied().equals(false) && a != null) {
-                query += ", (SELECT offer.id FROM offer JOIN application ON offer.id = application.offerId AND application.userID=" + a.getId() + ") AS applied";
+                query += " LEFT JOIN (SELECT offer.id FROM offer JOIN application ON offer.id = application.offerId AND application.userID=" + a.getId() + ") AS applied\n" +
+                        "        ON offer.id <> applied.id";
             }
         }
 
@@ -146,7 +147,7 @@ public class OfferDatabaseService extends DatabaseService {
             } else {
                 query += " WHERE";
             }
-            query += " offer.id <> applied.id";
+            query += " offer.draft = false AND applied.id IS NOT NULL";
             alreadyExtended = true;
         }
         if (drafts != null) {
