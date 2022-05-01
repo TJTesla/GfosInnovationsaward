@@ -12,6 +12,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 
+// Controller zum Anzeigen eines Angebots
+
 @Named
 @ViewScoped
 public class DetailOffer implements Serializable {
@@ -41,6 +43,7 @@ public class DetailOffer implements Serializable {
         return "/index.xhtml?faces-redirect=true";
     }
 
+    // bearbeiten des Status als Favorit (siehe IndexController für weitere Erklärung)
     public void editFavorite() {
         int id = detailOffer.getId();
         if (isFavorite()) {
@@ -50,6 +53,7 @@ public class DetailOffer implements Serializable {
         }
     }
 
+    // Methode zum verstecken eines Feldes für optionale Werte
     public boolean hasExtraInfos() {
         return detailOffer.getExtras() != null && !detailOffer.getExtras().isEmpty();
     }
@@ -66,6 +70,7 @@ public class DetailOffer implements Serializable {
         return !detailOffer.getDraft();
     }
 
+    // veröffentlichen
     public void publish() {
         detailOffer.setDraft(false);
         odbs.publish(detailOffer);

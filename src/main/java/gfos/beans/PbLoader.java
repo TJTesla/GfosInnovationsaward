@@ -16,7 +16,7 @@ import java.io.FileNotFoundException;
 
 // Lädt Profilbild
 // Überladungen der Methode: Verschiedene Methoden zum Übergeben des Applicants,
-// Profilbild gezeigt werden soll
+// dessen Profilbild gezeigt werden soll
 
 @Named
 @RequestScoped

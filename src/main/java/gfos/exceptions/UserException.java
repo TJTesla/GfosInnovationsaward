@@ -1,5 +1,7 @@
 package gfos.exceptions;
 
+// Nicht mehr benutzt
+
 public class UserException extends Exception {
     private final String message;
 

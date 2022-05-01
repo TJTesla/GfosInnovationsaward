@@ -19,6 +19,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+// Controller für die Index Seite
+// Verantwortlich für das Anzeigen von Angeboten
+// und Weiterleiten der Filter an die Datenbankverantwortlichen Klassen
+
 @Named
 @ViewScoped
 public class IndexController implements Serializable {
@@ -31,12 +35,12 @@ public class IndexController implements Serializable {
     @Inject
     CurrentUser cu;
 
+    // Variablen zum Speichern der Filter-Angaben
     private HashMap<Integer, Boolean> field = new HashMap<>();
     private HashMap<Integer, Boolean> level = new HashMap<>();
     private HashMap<Integer, Boolean> time = new HashMap<>();
     private String appliedChoose;
     private boolean favorites;
-
 
     private String maxDistance;
     private HashSet<Integer> favoritesSet = new HashSet<>();
@@ -48,10 +52,16 @@ public class IndexController implements Serializable {
         return null;
     }
 
+    // Hauptmethode
+    // Aufgerufen bei jeder Seitenladung
     public ArrayList<Offer> getAllOffers() {
+        // Falls angemeldet als Angestellter einfach alle Angebote (auch Entwürfe) anzeigen
         if (cu.getCurrentUser() instanceof Employee) {
             return odbs.fetchAll();
         }
+
+        // Zum Markieren der Favoriten, falls angemeldet als Bewerber
+        // Speichern der ID der favorisierten Angebote in HashSet -> Schnelles Abfragen möglich
         if (cu.getCurrentUser() instanceof Applicant) {
             favoritesSet = adbs.getFavorites( ((Applicant)cu.getCurrentUser()).getId() );
         }
@@ -69,6 +79,7 @@ public class IndexController implements Serializable {
         );
     }
 
+    // Für andere HTML-Seite -> Anzeigen der Entwürfe (Angebote)
     public ArrayList<Offer> getAllOfferDrafts() {
         return odbs.getAllDrafts(
                 new FilterObject(
@@ -83,6 +94,8 @@ public class IndexController implements Serializable {
         );
     }
 
+    // Verschiedene Integer Werte für Boolean Werte für Auswahl ob bspw. nur Angebote für die schon beworben wurde
+    // Umwandlung nötig
     private Boolean toApplyFilter(String appliedChoose) {
         if (appliedChoose == null) {
             return null;
@@ -104,6 +117,8 @@ public class IndexController implements Serializable {
         return "";
     }
 
+    // Wegen JSF -> Speichern der Filter von Berufsfeld, Einstiegslevel etc. in HashMap
+    // Umwandlung zu ArrayList nötig (Nur Speichern der id benötigt)
     private static ArrayList<Integer> createFilterArray(HashMap<Integer, Boolean> arr) {
         if (arr == null) {
             return new ArrayList<>();
@@ -136,10 +151,12 @@ public class IndexController implements Serializable {
         return o.getDraft();
     }
 
+    // Einfacheres Abfragen durch HashSet
     public boolean isFavorite(int id) {
         return favoritesSet.contains(id);
     }
 
+    // Aufgerufene Methode
     public void editFavorite(int id) {
         if (isFavorite(id)) {
             removeFromFavorites(id);
@@ -148,20 +165,24 @@ public class IndexController implements Serializable {
         }
     }
 
+    // Private Methode zum Hinzufügen zu Favoriten
     private void setAsFavorite(int id) {
         favoritesSet.add(id);
         adbs.addToFavorites( ((Applicant)cu.getCurrentUser()).getId(), id);
     }
 
+    // Private Methode zum Entfernen aus Favoriten
     private void removeFromFavorites(int id) {
         favoritesSet.remove(id);
         adbs.removeFromFavorites( ((Applicant)cu.getCurrentUser()).getId(), id);
     }
 
+    // Wahrscheinlich nicht benutzt, aber aus Sicherheit noch nicht gelöscht
     public String offerDetailPage(int offerId) {
         return "/02-offer/offer.xhtml?id=" + offerId;
     }
 
+    // Wahrscheinlich nicht benutzt, aber aus Sicherheit noch nicht gelöscht
     public String checkLogIn() {
         if (cu.getCurrentUser() == null) {
             return "/00-loginRegistration/login.xhtml";
@@ -177,6 +198,7 @@ public class IndexController implements Serializable {
         return "/00-loginRegistration/login.xhtml";
     }
 
+    // ID des Berufsfeldes in einen String umwandeln
     public String fieldString(int fieldId) {
         return odbs.getField(fieldId);
     }
@@ -205,6 +227,7 @@ public class IndexController implements Serializable {
         return "";
     }
 
+    // Getter und Setter //
 
     public ArrayList<Pair<Integer, String>> getAllFields() {
         return mdbs.getAllFields();

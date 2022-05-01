@@ -2,10 +2,9 @@ package gfos.pojos;
 
 import java.util.ArrayList;
 
+// Struktur zum gebündelten Speichern der Daten für einen Bewerber
+// Beinhaltet nur Variablen; 2 Konstruktoren (Einer ohne Parameter, einer mit komplettem); Getter und Setter für alle Variablen
 
-//TODO: Test whether classes in gfos.beans package need to be CDI beans or POJOs would be sufficient
-//@Named
-//@RequestScoped
 public class Applicant extends User {
     private int id;
     private String email;

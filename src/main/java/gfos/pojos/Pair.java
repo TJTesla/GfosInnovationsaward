@@ -1,5 +1,8 @@
 package gfos.pojos;
 
+// Eigene generische Klasse, die ein Paar mit zwei verschiedene Datentypen darstellt
+// Wird anstatt einer HashMap verwendet, da JSF bei HashMaps ein Verhalten benutzt, dass nicht Zielführend war
+
 public class Pair <Type1, Type2>{
     Type1 t1;
     Type2 t2;

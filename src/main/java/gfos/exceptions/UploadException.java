@@ -1,5 +1,7 @@
 package gfos.exceptions;
 
+// Fehlermeldung bei Problemen beim Hochladen von Dateien
+
 public class UploadException extends Exception {
     private final String msg;
 

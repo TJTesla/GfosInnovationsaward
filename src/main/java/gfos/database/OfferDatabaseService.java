@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+// Klasse für Datenbank-Befehle mit Zusammenhang mit Angeboten
+
 @Named
 @ApplicationScoped
 public class OfferDatabaseService extends DatabaseService {
@@ -19,8 +21,11 @@ public class OfferDatabaseService extends DatabaseService {
         super();
     }
 
+    // Erstellung eines Angebots
     public int createOne(Offer o) {
         try {
+            // Da auch Speicherung als Entwurf hierüber funktioniert und dafür nicht alle Angaben getätigt werden müssen
+            // Optionale Attribute
             String fieldString = o.getField() == -1 ? "null" : "?";
             String levelString = o.getLevel() == -1 ? "null" : "?";
             String timeString = o.getTime() == -1 ? "null" : "?";
@@ -31,7 +36,7 @@ public class OfferDatabaseService extends DatabaseService {
             );
             setStmtParameters(stmt, o);
 
-            int affectedRows = stmt.executeUpdate();
+            stmt.executeUpdate();
 
             stmt = con.prepareStatement("SELECT LAST_INSERT_ID()");
             rs = stmt.executeQuery();
@@ -43,12 +48,17 @@ public class OfferDatabaseService extends DatabaseService {
         }
     }
 
+    // Setzen der Parameter für SQL Anfrage
+    // Umgeht SQL-Injection (Siehe Dokumentation)
     private static int setStmtParameters(PreparedStatement statement, Offer o) {
         try {
             statement.setString(1, o.getTitle());
             statement.setString(2, o.getTasks());
             statement.setString(3, o.getQualifications());
             statement.setString(4, o.getExtras());
+            // Nicht klar, wie viele Werte angegeben werden
+            // Optionale Parameter; add Variable zählt wie viele eingetragen sind -> Addiert zu Standard-Position
+            // => Genauesa Hochzählen für Positionsparametert für Datenbank set Methoden
             int add = 0;
             if (o.getField() != -1) {
                 statement.setInt(5, o.getField());
@@ -74,6 +84,7 @@ public class OfferDatabaseService extends DatabaseService {
         }
     }
 
+    // Rückgabe von allen Angeboten
     public ArrayList<Offer> fetchAll() {
         ArrayList<Offer> result = new ArrayList<>();
         try {
@@ -89,25 +100,36 @@ public class OfferDatabaseService extends DatabaseService {
         return result;
     }
 
+    // Erstellung einer Anfrage für Angebote durch einen Filter
     private String getQuery(FilterObject f, Boolean drafts, Applicant a) {
+        // SELECT Teil
         String query = "SELECT DISTINCT * FROM offer";
+
+        // FROM Teil
         if (f.getOnlyApplied() != null && f.getOnlyApplied().equals(true) && a != null) {
+            // Wenn nur Angebote gefunden werden sollen, für die sich bereits beworden wurde
             query += " JOIN application ON offer.id=application.offerId AND application.userId=" + a.getId();
         }
         if (f.getFavorites() != null && f.getFavorites().equals(true) && a != null
                 && f.getOnlyApplied() != null && f.getOnlyApplied().equals(false)) {
+            // Wenn nur Angebote gefunden werden sollen, die Favorite sind und für die sioch noch nicht beworben wurde
             query += ",(SELECT DISTINCT offer.id FROM offer JOIN favorites ON offer.id=favorites.offerId AND favorites.applicantId=" + a.getId() +  ",\n" +
                     "                       (SELECT offer.id FROM offer JOIN application ON offer.id = application.offerId AND application.userID=" + a.getId() + ") AS applied\n" +
                     "WHERE offer.id <> applied.id AND offer.draft = false) AS doubles";
         } else {
             if (f.getFavorites() != null && f.getFavorites().equals(true) && a != null) {
+                // Wenn nur Angebote gefunden werden sollen, die Favoriten sind
                 query += " JOIN favorites ON offer.id=favorites.offerId AND favorites.applicantId=" + a.getId();
             }
             if (f.getOnlyApplied() != null && f.getOnlyApplied().equals(false) && a != null) {
+                // Wenn nur Agebote gefunden werden sollen, für die sich noch nicht beworben wurde
                 query += " LEFT JOIN (SELECT offer.id FROM offer JOIN application ON offer.id = application.offerId AND application.userID=" + a.getId() + ") AS applied\n" +
                         "        ON offer.id <> applied.id";
             }
         }
+
+        // WHERE Teil
+        // Für verschiedene Filter (bspw. 'field IN (3,5)' oder 'offer.draft = FALSE')
 
         boolean alreadyExtended = false;
         if (f.getField() != null && f.getField().size() != 0) {
@@ -115,6 +137,9 @@ public class OfferDatabaseService extends DatabaseService {
             alreadyExtended = true;
         }
         if (f.getLevel() != null && f.getLevel().size() != 0) {
+            // Nicht klar, welche oder ob etwas angehangen wird:
+            // Überprüfung falls etwas angehangen wird:
+            // Wenn nicht 'AND' ansonsten 'WHERE'
             if (alreadyExtended) {
                 query += " AND";
             } else {
@@ -164,6 +189,7 @@ public class OfferDatabaseService extends DatabaseService {
         return query;
     }
 
+    // Gibt zurück, ob Bewerber userId sich schon für Angebot offerId beworben hat
     public boolean alreadyApplied(int userId, int offerId) {
         try {
             stmt = con.prepareStatement(
@@ -183,6 +209,9 @@ public class OfferDatabaseService extends DatabaseService {
         }
     }
 
+    // Erzeugt String aus Liste:
+    // Bsp.: {1, 3, 5, 7} -> '(1,3,5,7)'
+    // benötigt für Datenbank Abfrage, wo mehrere Fälle zuutreffen dürfen (bspw. Berufsfeld)
     public static String getBraceSyntax(ArrayList<Integer> list) {
         StringBuilder result = new StringBuilder("(");
 
@@ -195,6 +224,7 @@ public class OfferDatabaseService extends DatabaseService {
         return result.toString();
     }
 
+    // Gibt Offer mit übergebener ID zurück
     public Offer getById(int id) {
         try {
             stmt = con.prepareStatement("SELECT * FROM offer WHERE id=?");
@@ -212,17 +242,19 @@ public class OfferDatabaseService extends DatabaseService {
         }
     }
 
+    // Publike Methoden zum Anfragen von Listen von Angeboten
     public ArrayList<Offer> getAllFinalOffers(FilterObject f, Applicant a) {
         return this.getDraftType(f, a, false);
     }
-
     public ArrayList<Offer> getAllDrafts(FilterObject f, Applicant a) {
         return this.getDraftType(f, a, true);
     }
 
+    // Private Hilfsmethode
     private ArrayList<Offer> getDraftType(FilterObject f, Applicant a, boolean draft) {
         ArrayList<Offer> result = new ArrayList<>();
         try {
+            // Erstellt Query mit Parametern
             stmt = con.prepareStatement(getQuery(f, draft, a));
             rs = stmt.executeQuery();
 
@@ -230,6 +262,7 @@ public class OfferDatabaseService extends DatabaseService {
                 result.add(createOffer(rs));
             }
 
+            // Falls Filter nach Distanz ausgewählt -> Danach filtern
             if (a != null && f.getMaxDistance() != null) {
                 result.removeIf(o ->
                         GeoCalculator.distance(
@@ -244,6 +277,7 @@ public class OfferDatabaseService extends DatabaseService {
         return result;
     }
 
+    // Aus parameter rs ein offer Objekt erstellen
     public static Offer createOffer(ResultSet resultSet) throws SQLException {
         return new Offer(
                 resultSet.getInt("id"),
@@ -261,19 +295,20 @@ public class OfferDatabaseService extends DatabaseService {
         );
     }
 
+    // Methoden um von ID für Eigenschaften zu Namen zu kommen
     public String getField(int id) {
         return getType("field", id);
     }
-
     public String getLevel(int id) {
         return getType("level", id);
     }
-
     public String getTime(int id) {
         return getType("time", id);
     }
 
+    // Algorithmus zum Zurückgeben von Strings für IDs von Berufsfeld, Einstiegslevel etc.
     public String getType(String table, int id) {
+        // Einziger Unterschied
         String query = "";
         switch (table) {
             case "field":
@@ -306,6 +341,7 @@ public class OfferDatabaseService extends DatabaseService {
         return null;
     }
 
+    // Veröffentlichen von Angebot
     public void publish(Offer o) {
         try {
             stmt = con.prepareStatement("UPDATE offer SET draft=FALSE WHERE id=?");
@@ -316,8 +352,10 @@ public class OfferDatabaseService extends DatabaseService {
         }
     }
 
+    // Aktualisieren von Angebot
     public void update(Offer o) {
         try {
+            // Gleicher Vorgang wie bei Erzeugung (Siehe 2. Methode der Klasse)
             String fieldString = o.getField() == -1 ? "" : " field=?,";
             String levelString = o.getLevel() == -1 ? "" : " level=?,";
             String timeString = o.getTime() == -1 ? "" : " time=?,";
@@ -336,16 +374,20 @@ public class OfferDatabaseService extends DatabaseService {
         }
     }
 
+    // Löschen von Angebot
     public void delete(Offer o) {
         try {
+            // Alle bewerbungen für das Angebot löschen
             stmt = con.prepareStatement("DELETE FROM application WHERE offerId=?");
             stmt.setInt(1, o.getId());
             stmt.executeUpdate();
 
+            // Alle Favoriten-Einträge mit dem Angebot löschen
             stmt = con.prepareStatement("DELETE FROM favorites WHERE offerId=?");
             stmt.setInt(1, o.getId());
             stmt.executeUpdate();
 
+            // Angebot löschen
             stmt = con.prepareStatement("DELETE FROM offer WHERE id=?");
             stmt.setInt(1, o.getId());
             stmt.executeUpdate();

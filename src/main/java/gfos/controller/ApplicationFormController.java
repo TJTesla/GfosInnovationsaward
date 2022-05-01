@@ -32,9 +32,10 @@ public class ApplicationFormController implements Serializable {
         return errMsgs.get(name) == null ? "" : errMsgs.get(name);
     }
 
+    // Hauptmethode -> Aufgerufen durch Knopfdruck auf der HTML-Seite
     public String apply(boolean draft) {
         applicationError = false;
-        // Falls schon application existiert, bearbeiten, nicht erstellen
+        // Falls schon application existiert: bearbeiten, nicht erstellen
         if (adbs.getById(offer.getId(), ((Applicant)cu.getCurrentUser()).getId()) != null) {
             return editAction(draft);
         }
@@ -80,8 +81,10 @@ public class ApplicationFormController implements Serializable {
         return "/03-application/applDetailUser.xhtml?id=" + applicationId + "&faces-redirect=true";
     }
 
+    // Updaten, falls nur bearbeitet werden
     private String editAction(boolean draft) {
         Resume r = null;
+        // Nur Lebenslauf hochladen, falls einer angegeben wurde -> Sonst müsste immer neu angegeben werden
         if (cv != null) {
             try {
                 r = ResourceIO.uploadResume(cv, offer, cu.getCurrentUser());
@@ -95,12 +98,15 @@ public class ApplicationFormController implements Serializable {
         return "/03-application/applDetailUser.xhtml?id=" + applicationId + "&faces-redirect=true";
     }
 
+    // Nur bewerben erlauben, falls angemeldet als Bewerber
     public String checkUserRights() {
         if (cu.getCurrentUser() instanceof Applicant) {
             return "";
         }
         return "/00-loginRegistration/login.xhtml";
     }
+
+    // Getter und Setter //
 
     public String getText() {
         return text;

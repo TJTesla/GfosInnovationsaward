@@ -14,7 +14,8 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-// Controller zum bekommen der Listen an Bewerbungen
+// Controller zum ausgeben der Listen an Bewerbungen
+// Entweder alle Entwürfe oder alle Veröffentlichten
 
 @Named
 @ViewScoped
@@ -40,14 +41,17 @@ public class ApplicationListController implements Serializable {
         return "";
     }
 
+    // Rufen Hilfmethode auf
     public ArrayList<DetailApplication> appliedOffers() {
         return offerList(false);
     }
-
     public ArrayList<DetailApplication> getDrafts() {
         return offerList(true);
     }
 
+    // Hilsmethode:
+    // Für Veröffentlichte oder Entwürfe unterscheidet sich Algorithmu nur an einer Stelle
+    // Gleiche Methode -> Wird abhängig von Parameter gemacht
     private ArrayList<DetailApplication> offerList(boolean draft) {
         ArrayList<DetailApplication> result = new ArrayList<>();
         ArrayList<Application> applications = adbs.getAllApplications( ((Applicant)cu.getCurrentUser()).getId(), draft, toInt(filter) );
@@ -68,12 +72,15 @@ public class ApplicationListController implements Serializable {
         }
     }
 
+    // Nur bewerben erlauben, falls angemeldet als Bewerber
     public String checkUserRights(){
         if(cu.getCurrentUser() instanceof Applicant) {
             return "";
         }
         return "/00-loginRegistration/login.xhtml";
     }
+
+    // Getter und Setter //
 
     public String getFilter() {
         return filter;

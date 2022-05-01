@@ -15,6 +15,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
+// Controller zum Ändern des Passworts
+
 @Named
 @ViewScoped
 public class PasswordChange implements Serializable {
@@ -25,6 +27,7 @@ public class PasswordChange implements Serializable {
     @Inject
     CurrentUser cu;
 
+    // Variablen zum Speichern der Eingabefelder
     private String oldPwd;
     private String newPwd;
     private String newRepeat;
@@ -32,6 +35,7 @@ public class PasswordChange implements Serializable {
     boolean success;
     HashMap<String, String> errorMsgs = new HashMap<>();
 
+    // Zugriff nur Erlauben falls als Applicant oder Employee angemeldet
     public String checkUserRights() {
         if (cu.getCurrentUser() instanceof Applicant || cu.getCurrentUser() instanceof Employee) {
             return "";
@@ -40,6 +44,7 @@ public class PasswordChange implements Serializable {
     }
 
     public String changePwd() {
+        // Auf Fehler bei Eingabe Achten
         errorMsgs.clear();
         success = true;
         checkData();
@@ -51,6 +56,7 @@ public class PasswordChange implements Serializable {
             return "";
         }
 
+        // Abhängig von Benutzer-Typ zu verschiedenen Seiten zurücknavigieren
         if (cu.getCurrentUser() instanceof Applicant) {
             return "/01-user/userProfile.xhtml?faces-redirect=true";
         } else if (cu.getCurrentUser() instanceof Employee) {
@@ -80,6 +86,7 @@ public class PasswordChange implements Serializable {
             errorMsgs.put("newPwd", "Das Passwort muss mindestens einen Großbuchstaben, einen Kleinbuchstaben, ein Sonderzeichen und eine Zahl beinhalten.");
         }
 
+        // Überprüfen ob altes Passwort dem korrekten entspricht
         if (cu.getCurrentUser() instanceof Applicant) {
             User u = adbs.loginAttempt(cu.getCurrentUser().getName(), oldPwd);
             if (u == null || u instanceof Employee) {
@@ -98,6 +105,8 @@ public class PasswordChange implements Serializable {
     public String errorMsg(String name) {
         return errorMsgs.get(name) == null ? "" : errorMsgs.get(name);
     }
+
+    // Getter und Setter //
 
     public String getOldPwd() {
         return oldPwd;

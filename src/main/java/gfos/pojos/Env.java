@@ -1,5 +1,7 @@
 package gfos.pojos;
 
+// Speichert Zugangsdaten zu Datenbanken und der API
+
 public class Env {
     public static String user = "root";
     public static String password = "rootuser";

@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// Klasse für Datenbank-Befehle mit Zusammenhang zu Bewerbungen
+
 @Named
 @ApplicationScoped
 public class ApplicationDatabaseService extends DatabaseService {
@@ -17,8 +19,10 @@ public class ApplicationDatabaseService extends DatabaseService {
         super();
     }
 
+    // Bewerbung erzeugen -> Bewerben
     public int apply(Application a, Resume r) {
         try {
+            // Lebenslauf erstellen -> Gibt id zu diesem zurück
             int resumeId = this.createResume(r);
 
             stmt = con.prepareStatement("INSERT INTO application(userId, offerId, text, status, resumeId, draft) VALUES (?, ?, ?, 0, ?, ?)");
@@ -39,12 +43,14 @@ public class ApplicationDatabaseService extends DatabaseService {
         return -1;
     }
 
+    // Speichert Werte von Lebenslauf in Datenbank
     private int createResume(Resume r) throws SQLException {
         stmt = con.prepareStatement("INSERT INTO resumes(id, path, name) VALUES (null, ?, ?);");
         stmt.setString(1, r.getPath());
         stmt.setString(2, r.getName());
         stmt.executeUpdate();
 
+        // LAST_INSERT_ID() gibt Wert der zuletzt generierten ID zurück
         rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
         rs.next();
         return rs.getInt("LAST_INSERT_ID()");
@@ -54,6 +60,7 @@ public class ApplicationDatabaseService extends DatabaseService {
         return false;
     }
 
+    // Gibt bewerbung von Bewerber aId fpr Angebot oId zurück
     public Application getById(int oId, int aId) {
         try {
             stmt = con.prepareStatement("SELECT * FROM application WHERE offerId=? AND userId=?;");
@@ -71,6 +78,7 @@ public class ApplicationDatabaseService extends DatabaseService {
         }
     }
 
+    // Gibt Objekt vom Typ Resume fpr ID von Lebenslauf zurück
     public Resume getResume(int id) {
         try {
             stmt = con.prepareStatement("SELECT * FROM resumes WHERE id=?");
@@ -87,6 +95,7 @@ public class ApplicationDatabaseService extends DatabaseService {
         }
     }
 
+    // Wechsel von Entwurf zu veröffentlicht bzw. andersherum
     public void changeVisibility(Application a) {
         a.setDraft(!a.getDraft());
 
@@ -101,6 +110,7 @@ public class ApplicationDatabaseService extends DatabaseService {
         }
     }
 
+    // Resume Objekt aus Attribut rs erzeugen
     private static Resume createResume(ResultSet rs) throws SQLException {
         return new Resume(
                 rs.getInt("id"),
@@ -109,6 +119,7 @@ public class ApplicationDatabaseService extends DatabaseService {
         );
     }
 
+    // String von Status der Bewerbung mit id
     public String getStatusString(int id) {
         final HashMap<Integer, String> status = new HashMap<>();
         status.put(0, "Noch nicht bearbeitet");
@@ -119,10 +130,12 @@ public class ApplicationDatabaseService extends DatabaseService {
         return status.get(id);
     }
 
+    // Alle Bewerbungen mit Filter zurückbekommen
     public ArrayList<Application> getAllApplications(int id, boolean draft, int filter) {
         ArrayList<Application> result = new ArrayList<>();
         try {
             String query = "SELECT * FROM application WHERE userId=? AND draft=?";
+            // Mit Parameter _> ANgabe ob Entwürfe, keien Entwürfe oder alle angezeigt werden sollen
             if (filter != -1) {
                 query += " AND status=?";
             }
@@ -144,6 +157,7 @@ public class ApplicationDatabaseService extends DatabaseService {
         return result;
     }
 
+    // Eine Bewerbung und den Lebenslauf-Datenbankeintrag löschen
     public void delete(Application a) {
         System.out.println("DELETE APPLICATION");
         try {
@@ -160,13 +174,16 @@ public class ApplicationDatabaseService extends DatabaseService {
         }
     }
 
+    // Eine Bewerbung aktualisieren
     public int update(int uId, int oId, String text, Resume r, boolean draft) {
         try {
+            // Falls Lebenslauf aktualisiert werden muss:
+            // Speichern der Id des alten Lebenslaufs
+            // Hinzufügen zu der DB-Anfrage
             int oldResumeId = -1;
             if (r != null) {
                 oldResumeId = this.getResumeId(uId, oId);
             }
-
             String resumeExtension = "";
             if (r != null) {
                 resumeExtension = "resumeID=null,";
@@ -182,10 +199,13 @@ public class ApplicationDatabaseService extends DatabaseService {
                 return -1;
             }
 
+            // Wenn Lebenslauf aktualisiert wird
             if (r != null) {
+                // Altes löschen und neues speichern
                 this.deleteResume(oldResumeId);
                 r.setId(this.createResume(r));
 
+                // Id von neu gespeichertem in DB speichern
                 stmt = con.prepareStatement("UPDATE application SET resumeId=? WHERE userId=? AND offerId=?");
                 stmt.setInt(1, r.getId());
                 stmt.setInt(2, uId);
@@ -203,6 +223,7 @@ public class ApplicationDatabaseService extends DatabaseService {
         }
     }
 
+    // Id von Lebenslauf für Bewerbung oId von Bewerber uId
     private int getResumeId(int uId, int oId) {
         try {
             stmt = con.prepareStatement("SELECT resumeId FROM application WHERE userId=? AND offerId=?");
@@ -218,6 +239,7 @@ public class ApplicationDatabaseService extends DatabaseService {
         }
     }
 
+    // Löschen von Lebenslauf
     private boolean deleteResume(int id) {
         try {
             stmt = con.prepareStatement("DELETE FROM resumes WHERE id=?");
@@ -229,6 +251,7 @@ public class ApplicationDatabaseService extends DatabaseService {
         }
     }
 
+    // Status (bspw. 'Angenommen') speichern
     public void changeStatus(Application a) {
         // Status of a is already changed
         try {
@@ -243,6 +266,7 @@ public class ApplicationDatabaseService extends DatabaseService {
         }
     }
 
+    // Application Objekt aus rs Attribut erstellen
     public static Application createApplication(ResultSet rs) throws SQLException {
         return new Application(
                 rs.getInt("userId"),

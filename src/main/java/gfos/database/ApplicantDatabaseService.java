@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+// Klasse für Datenbank Befehle mit Zusammenhang zu Bewerbern
+
 @Named
 @ApplicationScoped
 public class ApplicantDatabaseService extends DatabaseService implements UserDatabaseInterface {
@@ -18,6 +20,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         super();
     }
 
+    // Speichern eines Bewerbers in der Datenbank
     public int createOne(Applicant a) {
         try {
             // Salt and hash password
@@ -41,11 +44,13 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
             stmt.setString(11, a.getBday());
             int affectedRows = stmt.executeUpdate();
 
+            // Gibt Wert für die grade erzugte ID des neu gespeicherten Applicants zurück
             rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
             rs.next();
 
             a.setId(rs.getInt("LAST_INSERT_ID()"));
             if (a.getTitles().size() > 0) {
+                // Titel müssen gesondert gespeichert werden (da n:m Beziehung)
                 affectedRows += insertTitles(a);
             }
 
@@ -60,16 +65,23 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         stmt = con.prepareStatement("SELECT * FROM title");
         rs = stmt.executeQuery();
 
+        // Speichern aller Verfügbaren Titel in HashMap
+        // Key -> Bezeichnung (bspw. Prof.)
+        // Value -> Dazugehörige Id in Datenbank
         HashMap<String, Integer> possibleTitles = new HashMap<>();
         while (rs.next()) {
             possibleTitles.put(rs.getString("term"), rs.getInt("id"));
         }
 
+        // Erstellen eines String für Datenbankabfrage
+        // Beispielhaftes Ergebnis: Applicant.id=10
+        // INSERT [...] VALUES (10, 2),(10,4)
         StringBuilder sqlBuilder = new StringBuilder("INSERT INTO titleRelation(applicantId, titleId) VALUES ");
         for (String title : applicant.getTitles()) {
             sqlBuilder.append("(").append(applicant.getId()).append(", ").append(possibleTitles.get(title)).append("),");
         }
         String sql = sqlBuilder.toString();
+        // Löschen des letzten Kommas
         sql = sql.substring(0, sql.length()-1);
 
         stmt = con.prepareStatement(sql);
@@ -77,6 +89,8 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         return stmt.executeUpdate();
     }
 
+    // Alle Bewerber zurückbekommen
+    // Nicht benutzt, da keine Funktionalität -> Dennoch nicht gelöscht
     public ArrayList<Applicant> fetchAll() {
         ArrayList<Applicant> list = new ArrayList<>();
         try {
@@ -109,6 +123,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         return list;
     }
 
+    // Applicant Objekt mit dazugehöriger ID finden
     public Applicant getById(int id) {
         try {
             stmt = con.prepareStatement("SELECT * FROM applicant WHERE id=?;");
@@ -125,7 +140,10 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         }
     }
 
+    // Liste an Titeln von Applicant mit gegebener ID bekommen
     private ArrayList<String> getTitles(int userId) {
+        // Benutzung während Auslesen von Werten des Attributs rs
+        // Diese Methode würde dies überschreiben -> Zweites Objekt vom Typ ResultSet nötig
         ResultSet secondRs;
         ArrayList<String> titles = new ArrayList<>();
         try {
@@ -146,6 +164,9 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         return titles;
     }
 
+    // Methode zum überprüfen von korrektem einloggen
+    // Wenn kein Ergebnis -> null
+    // Ansonsten Objekt von Subtyp von Klasse User zu dem Anmeldedaten passen
     public User loginAttempt(String user, String password) {
         try {
             Applicant a = (Applicant)findUser("applicant", user, password);
@@ -163,6 +184,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         }
     }
 
+    // Methode zum Ändern des Passworts
     public boolean changePwd(User u, String newPwd) {
         if (!(u instanceof Applicant || u instanceof Employee)) {
             return false;
@@ -191,6 +213,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         }
     }
 
+    // salt Wert für einen bestimmten Nutzer finden
     private String getSalt(String table, String name) throws SQLException {
         String activeQuery = "";
         if (table.equals("applicant")) {
@@ -208,7 +231,10 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         return rs.getString("salt");
     }
 
+    // Private Methode zum Überprüfen ob korrekt angemeldet wurde
+    // Einmal aufgerufen zum Finden eines Bewerbers, falls nichts gefunden wurde noch einmal für Angestellte
     private User findUser(String table, String name, String password) throws SQLException, NoSuchAlgorithmException {
+        // Übergebens Passwort hashen (mit Salt aus Datenbank für Nutzernamen)
         String hashPwd = PasswordManager.getHash(password, getSalt(table, name));
 
         String activeQuery = "";
@@ -227,6 +253,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
             return null;
         }
 
+        // Methoden zum erzeugen eines Objektes aus ResultSet Werten
         if (table.equals("applicant")) {
             return parseApplicant();
         } else if (table.equals("employee")) {
@@ -236,6 +263,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         return null;
     }
 
+    // Überprüfen ob angegebener Name schon in Datenbank als Name vorkommt
     public boolean nameExists(String name) {
         try {
             stmt = con.prepareStatement("SELECT username FROM applicant WHERE username=?;");
@@ -256,6 +284,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         }
     }
 
+    // Überprüft ob Angebot mit ID oId ein Favorit von Bewerber mit ID aId ist
     public boolean isFavorite(int aId, int oId) {
         try {
             stmt = con.prepareStatement("SELECT offerId FROM favorites WHERE applicantId=? AND offerId=?");
@@ -271,6 +300,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         }
     }
 
+    // Rückgabe von HashSet mit ID von Favoriten Angeboten für übergebenen Bewerber
     public HashSet<Integer> getFavorites(int id) {
         HashSet<Integer> result = new HashSet<>();
         try {
@@ -287,6 +317,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         return result;
     }
 
+    // Zu Favoriten hinzufügen
     public void addToFavorites(int userId, int offerId) {
         try {
             stmt = con.prepareStatement("INSERT INTO favorites(applicantId, offerId) VALUES (?, ?)");
@@ -298,6 +329,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         }
     }
 
+    // Von Favoriten entfernen
     public void removeFromFavorites(int userId, int offerId) {
         try {
             stmt = con.prepareStatement("DELETE FROM favorites WHERE applicantId=? AND offerId=?");
@@ -309,6 +341,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         }
     }
 
+    // Überprüfen ob angegebene E-Mail schon benutzt wird
     public boolean emailExists(String email) {
         try {
             stmt = con.prepareStatement("SELECT email FROM applicant WHERE email=?;");
@@ -337,6 +370,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         }
     }
 
+    // Rückgabe von Titeln in String in Liste von Bewerber
     public ArrayList<String> titles(int id) {
         ArrayList<String> result = new ArrayList<>();
         try {
@@ -353,6 +387,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         return result;
     }
 
+    // Aktualisieren der Werte von Bewerber
     public boolean update(Applicant a) {
         try {
             stmt = con.prepareStatement("UPDATE applicant SET username=?, firstname=?, lastname=?, email=?, pb=?, lat=?, lon=? WHERE id=?");
@@ -372,30 +407,23 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         }
     }
 
+    // Löschen eines Bewerbers und allen dazugehörigen Daten
     public void delete(Applicant a) {
         try {
-            // Favorites
-            // DELETE FROM favorites WHERE applicantId = a.getId()
+            // Alle Favoriten löschen
             stmt = con.prepareStatement("DELETE FROM favorites WHERE applicantId=?");
             stmt.setInt(1, a.getId());
             stmt.executeUpdate();
 
             // Applications from applicant + Resumes (also in files)
-            // SELECT resumeId FROM applications WHERE userId = a.getId() // ==> rIds
-            // DELETE FROM application WHERE userId = a.getId()
-            // SELECT path FROM resumes WHERE id IN rIds // ==> paths
-            // DELETE FROM resumes WHERE id in rIds
-            // ResourceIO.delete(paths)
             deleteApplications(a.getId());
 
-            // Title relation
-            // DELETE FROM titleRelation WHERE applicantId = a.getId()
+            // Titel löschen
             stmt = con.prepareStatement("DELETE FROM titleRelation WHERE applicantId=?");
             stmt.setInt(1, a.getId());
             stmt.executeUpdate();
 
             // Delete applicant
-            // DELETE FROM applicant WHERE id = a.getId()
             stmt = con.prepareStatement("DELETE FROM applicant WHERE id=?");
             stmt.setInt(1, a.getId());
             stmt.executeUpdate();
@@ -404,7 +432,9 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         }
     }
 
+    // Hilfsmethode zum Löschen aller Bewerbungen eines Nutzers
     private void deleteApplications(int applicantId) throws SQLException {
+        // Speichern aller IDs von Lebensläufen der Bewerbungen
         stmt = con.prepareStatement("SELECT resumeId FROM application WHERE userId=?");
         stmt.setInt(1, applicantId);
         rs = stmt.executeQuery();
@@ -414,6 +444,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
             rIds.add(rs.getInt("resumeId"));
         }
 
+        // Löschen des Profilbilds
         stmt = con.prepareStatement("SELECT pb FROM applicant WHERE id=?");
         stmt.setInt(1, applicantId);
         rs = stmt.executeQuery();
@@ -421,26 +452,33 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
         String pbPath = rs.getString("pb");
         ResourceIO.deleteFile(pbPath);
 
+        // Alle Bewerbungen löschen
         stmt = con.prepareStatement("DELETE FROM application WHERE userId=?");
         stmt.setInt(1, applicantId);
         stmt.executeUpdate();
 
+        // Falls es Lebensläufe gibt
         if (rIds.size() > 0) {
+            // Generieren eines String im Format '(<id1>,<id2>,<id3>,...)'
             String braceIds = OfferDatabaseService.getBraceSyntax(rIds);
             stmt = con.prepareStatement("SELECT path FROM resumes WHERE id IN " + braceIds);
             rs = stmt.executeQuery();
 
+            // Speichern aller Pfade für die Lebensläufe
             ArrayList<String> paths = new ArrayList<>();
             while (rs.next()) {
                 paths.add(rs.getString("path"));
             }
 
+            // Löschen der Lebensläufe aus der Datenbank
             stmt = con.prepareStatement("DELETE FROM resumes WHERE id IN " + braceIds);
             stmt.executeUpdate();
 
+            // Löschen der Lebensläufe aus dem Dateiensystem
             for (String path : paths) {
                 ResourceIO.deleteFile(path);
             }
+            // Für den Nutzer angelegten Ordner löschen, sobald keine Lebensläufe mehr in diesem vorliegen
             if (paths.size() > 0) {
                 ResourceIO.deleteUserDir(paths.get(0));
             }
@@ -448,6 +486,7 @@ public class ApplicantDatabaseService extends DatabaseService implements UserDat
 
     }
 
+    // Aus Attribut rs (ResultSet) ein Applicant-Obejtk erstellen
     private Applicant parseApplicant() throws SQLException {
         return new Applicant(
                 rs.getInt("id"),

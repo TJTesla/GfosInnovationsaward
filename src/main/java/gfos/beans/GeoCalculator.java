@@ -23,14 +23,15 @@ public class GeoCalculator {
                 .get("http://api.geoapify.com/v1/geocode/search?text=" + location + "&lang=de&limit=1&type=street&format=json&apiKey=" + Env.geoapifyKey)
                 .asJson();
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         JsonParser parser = new JsonParser();
         JsonElement element = parser.parse(response.getBody().getObject().toString());
 
         JsonObject street = element.getAsJsonObject().get("results").getAsJsonArray().get(0).getAsJsonObject();
 
         double[] result = new double[2];
+        // Latitude
         result[0] = street.get("lat").getAsBigDecimal().doubleValue();
+        // Longitude
         result[1] = street.get("lon").getAsBigDecimal().doubleValue();
 
         return result;

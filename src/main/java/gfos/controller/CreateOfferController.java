@@ -35,6 +35,8 @@ public class CreateOfferController implements Serializable {
     private String postalCode;
     private String city;
 
+    // Used when updating a draft
+    // Since there are already values -> Need to be saves in appropriate variables
     public void setFromDraft(Offer o) {
         if (o == null) {
             return;
@@ -73,6 +75,7 @@ public class CreateOfferController implements Serializable {
         return "/00-loginRegistration/login.xhtml";
     }
 
+    // Main Method calles from HTML-Page
     public String save(boolean draft) {
         creationError = false;
         errorMsgs.clear();
@@ -81,6 +84,8 @@ public class CreateOfferController implements Serializable {
             return "";
         }
 
+        // If updating in above Method -> Set id value
+        // Wouldn't be -1 anymore (default value)
         if (id != -1) {
             return update(draft);
         }
@@ -109,6 +114,7 @@ public class CreateOfferController implements Serializable {
         return "/02-offer/offer.xhtml?faces-redirect=true&id=" + oId;
     }
 
+    // Falls nur geupdated wird
     private String update(boolean draft) {
         double[] coordinates = { -1, -1 };
         if (!hasCoordinates) {
@@ -138,6 +144,7 @@ public class CreateOfferController implements Serializable {
         return "/02-offer/offer.xhtml?faces-redirect=true&id=" + o.getId();
     }
 
+    // Überprüfung ob Fehler beim Eintragen gemacht wurden
     private void checkCreation(boolean draft) {
         if (draft) {
             // Titel leer
@@ -208,6 +215,8 @@ public class CreateOfferController implements Serializable {
             return "/index.xhtml"; // *Main page* for normal user OR maybe login page?
         }
     }
+
+    // Getter und Setter //
 
     public String getTitle() {
         return title;

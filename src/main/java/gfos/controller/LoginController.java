@@ -14,6 +14,8 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+// Controller zum Einloggen als Bewerber, Angestellter oder Admin
+
 @Named
 @ViewScoped
 public class LoginController implements Serializable {
@@ -34,6 +36,9 @@ public class LoginController implements Serializable {
             return "/00-loginRegistration/superUser.xhtml?faces-redirect=true";
         }
 
+        // Methode gibt null zurück falls keine passenden Anmeldedaten gefunden wurden
+        // Ansonsten ein Objekt für den passenden Nutzer
+        // Employee und Applicant erben beide von User -> Polymorphie
         User u = adbs.loginAttempt(username, password);
 
         if (u == null) {
@@ -46,6 +51,7 @@ public class LoginController implements Serializable {
     }
 
     private boolean isSuperUser() {
+        // Hash durch SHA-256 Hash für neues Passwort von Admin ersetzen
         String passwordHash = "24e5e1c2bbef565360c392851175f46821fc21d6725503a600353625b4c9209c";
         return username.equals("sudo") && createHash(password).equals(passwordHash);
     }
@@ -68,6 +74,8 @@ public class LoginController implements Serializable {
         }
         return hexString.toString();
     }
+
+    // Getter und Setter //
 
     public String getUsername() {
         return username;

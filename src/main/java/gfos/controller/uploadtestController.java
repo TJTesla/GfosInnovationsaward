@@ -13,6 +13,10 @@ import javax.inject.Named;
 import java.io.*;
 import java.nio.file.Paths;
 
+// Alte Klasse zum Ausprobieren vom Hoch und Runterladen von Dateien
+// sowie Anzeigen von Profilbildern
+// Manchmal noch als Referenz benutzt -> Noch nicht gelöscht
+
 @Named
 @RequestScoped
 public class uploadtestController implements Serializable {

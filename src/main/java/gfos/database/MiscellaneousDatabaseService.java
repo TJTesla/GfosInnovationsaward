@@ -7,6 +7,8 @@ import javax.inject.Named;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+// Klasse mit Datenbank-Befehlen ohne richtigen Zusammenhang
+
 @Named
 @ApplicationScoped
 public class MiscellaneousDatabaseService extends DatabaseService {
@@ -15,6 +17,7 @@ public class MiscellaneousDatabaseService extends DatabaseService {
         super();
     }
 
+    // Methodenm zum holen der Einträge für das Filtern von Angeboten
     public ArrayList<Pair<Integer, String>> getAllTitles() {
         return getStringArr("SELECT id, term FROM title ORDER BY id ASC", "term");
     }
@@ -31,6 +34,7 @@ public class MiscellaneousDatabaseService extends DatabaseService {
         return getStringArr("SELECT id, term FROM time", "term");
     }
 
+    // Private Methode die immer aufgerufen wird
     private ArrayList<Pair<Integer, String>> getStringArr(String query, String column) {
         ArrayList<Pair<Integer, String>> arr = new ArrayList<>();
 

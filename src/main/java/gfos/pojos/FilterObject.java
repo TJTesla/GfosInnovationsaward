@@ -2,6 +2,9 @@ package gfos.pojos;
 
 import java.util.ArrayList;
 
+// Struktur zum gebündelten Speichern der Daten für den Filter
+// Beinhaltet nur Variablen; 2 Konstruktoren (Einer ohne Parameter, einer mit komplettem); Getter und Setter für alle Variablen
+
 public class FilterObject {
     private final ArrayList<Integer> field, level, time;
     private final Integer maxDistance;

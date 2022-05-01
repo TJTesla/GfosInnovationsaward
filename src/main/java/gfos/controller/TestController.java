@@ -9,6 +9,9 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+// Eigentlich eine Test-Klasse für BooleanCheckBoxes
+// Unklar ob noch benutzt -> Noch nicht gelöscht
+
 @Named
 @RequestScoped
 public class TestController implements Serializable {

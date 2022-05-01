@@ -11,6 +11,8 @@ import javax.faces.convert.ConverterException;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+// Converter zum Umwandeln einer ID als URL-parameter in ein Angebot
+
 @Named
 @RequestScoped
 public class OfferConverter implements Converter {
@@ -25,6 +27,8 @@ public class OfferConverter implements Converter {
 
         try {
             int id = Integer.parseInt(s);
+
+            // Finden des Angebots mit der ID
             return odbs.getById(id);
         } catch (Exception e) {
             throw new ConverterException("Could not convert with Offer id: " + s);

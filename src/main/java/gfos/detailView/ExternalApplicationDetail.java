@@ -8,6 +8,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 
+// Controller für weitere Bewerbungen
+// Kaum bis gar nicht benutzt
+
 @Named
 @ViewScoped
 public class ExternalApplicationDetail implements Serializable {

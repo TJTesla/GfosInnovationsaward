@@ -3,6 +3,8 @@ package gfos;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
 
+// Datei muss existieren, damit JSF2.3 benutzt werden kann
+
 @ApplicationScoped
 @FacesConfig(version = FacesConfig.Version.JSF_2_3)
 public class Jsf23Activator {

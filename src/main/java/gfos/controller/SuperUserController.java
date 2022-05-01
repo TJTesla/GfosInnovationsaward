@@ -14,6 +14,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// Controller für die Admin-Seite des Super Users
+
 @Named
 @ViewScoped
 public class SuperUserController implements Serializable {
@@ -42,6 +44,7 @@ public class SuperUserController implements Serializable {
             return "";
         }
 
+        // Zufälligen Key erzeugen
         key = PasswordManager.generateKey();
 
         edbs.createOne(new Employee(
@@ -62,6 +65,7 @@ public class SuperUserController implements Serializable {
         return errorMsgs.get(name) == null ? "" : errorMsgs.get(name);
     }
 
+    // Auf Fehler bei Eingabe überprüfen
     private void check() {
         if (name.isEmpty()) {
             registrationError = true;
@@ -78,6 +82,7 @@ public class SuperUserController implements Serializable {
         edbs.deleteEmployee(e);
     }
 
+    // Rückgabe, ob sich ein Nutzer e bereits mit eigenem Passwort "aktiviert" hat
     public String activationStatus(Employee e) {
         if (e.isRegistered()) {
             return "Aktiviert";
@@ -98,6 +103,8 @@ public class SuperUserController implements Serializable {
         cu.logout();
         return "/00-loginRegistration/login.xhtml?faces-redirect=true";
     }
+
+    // Getter und Setter //
 
     public ArrayList<Employee> getAllEmployees() {
         return edbs.getAllEmployees();

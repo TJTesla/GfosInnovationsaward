@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.regex.Pattern;
 import java.io.*;
 
+// Controller Klasse zum Anzeigen eines Bewerbers
+
 @Named
 @ViewScoped
 public class DetailApplicant implements Serializable {
@@ -25,8 +27,8 @@ public class DetailApplicant implements Serializable {
     ApplicantDatabaseService adbs;
     @Inject
     CurrentUser cu;
-    // <p:graphicImage value="#{detailApplicant.pb}" styleClass="image-profile" />
 
+    // Nur Zugriff erlauben wenn angemeldet als Bewerber
     public String isApplicant() {
         if (cu.getCurrentUser() instanceof Applicant) {
             return "";
@@ -46,6 +48,7 @@ public class DetailApplicant implements Serializable {
         return adbs.getSalutation(detailApplicant.getGender());
     }
 
+    // Methode für Zugriff über JSF auf gespeicherten Bewerber
     public Applicant getDetailApplicant() {
         return detailApplicant;
     }
@@ -54,6 +57,7 @@ public class DetailApplicant implements Serializable {
         this.detailApplicant = detailApplicant;
     }
 
+    // Variablen zum Speichern von Einträgen bim bearbeiten des Profils
     private String formerName, formerEmail;
 
     private String emailRepeat;
@@ -68,10 +72,12 @@ public class DetailApplicant implements Serializable {
         return errorMsgs.get(name) == null ? "" : errorMsgs.get(name);
     }
 
+    // Methode um Werte des Bewerbers zu speichern
     public String updateProfile() {
         errorMsgs.clear();
         System.out.println("UPDATE");
         changingError = false;
+        // Auf Fehler bei Eingabe überprüfen
         //Kein Vorname
         if (detailApplicant.getFirstname().isEmpty()) {
             changingError = true;
@@ -142,6 +148,7 @@ public class DetailApplicant implements Serializable {
         return "/01-user/userProfile.xhtml?faces-redirect=true";
     }
 
+    // Aktualisieren von Profilbild
     private void updatePb(Applicant a) {
         try {
             String pbDir = ResourceIO.uploadPb(cv, a);
@@ -153,11 +160,14 @@ public class DetailApplicant implements Serializable {
         }
     }
 
+    // Löschen von Bewerber
     public String delete() {
         adbs.delete(detailApplicant);
         cu.setCurrentUser(null);
         return "/00-loginRegistration/login.xhtml?faces-redirect=true";
     }
+
+    // Getter und Setter //
 
     public String getEmailRepeat() {
         return emailRepeat;

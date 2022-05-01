@@ -7,6 +7,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Random;
 
+// Statische Klasse zum erzeugen von Keys, Salts und hashen
+
 public class PasswordManager {
     private static final Random RANDOM = new SecureRandom();
 

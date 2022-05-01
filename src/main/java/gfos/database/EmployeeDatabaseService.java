@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+// Klasse mit Datenbank-Befehlen im Zusammenhang mit Angestellten
+
 @Named
 @ApplicationScoped
 public class EmployeeDatabaseService extends DatabaseService {
@@ -18,6 +20,7 @@ public class EmployeeDatabaseService extends DatabaseService {
         super();
     }
 
+    // Speicherung von neuem Angestellten
     public void createOne(Employee e) {
         try {
             // Salt and hash
@@ -38,6 +41,7 @@ public class EmployeeDatabaseService extends DatabaseService {
         }
     }
 
+    // Nicht benutzt -> Dennoch noch nicht gelöscht
     public Employee getByName(String name) {
         try {
             stmt = con.prepareStatement("SELECT * FROM employees WHERE name=?");
@@ -55,6 +59,7 @@ public class EmployeeDatabaseService extends DatabaseService {
         }
     }
 
+    // Erstellung eines Employee Objektes aus rs als Parameter
     public static Employee createEmployee(ResultSet rs) throws SQLException {
         return new Employee(
                 rs.getString("name"),
@@ -64,6 +69,7 @@ public class EmployeeDatabaseService extends DatabaseService {
         );
     }
 
+    // Rückgabe von allen Angeboten
     public ArrayList<Application> getAllApplications(int oId) {
         ArrayList<Application> result = new ArrayList<>();
         try {
@@ -80,6 +86,7 @@ public class EmployeeDatabaseService extends DatabaseService {
         return result;
     }
 
+    // Rückgabe von allen Angestellten
     public ArrayList<Employee> getAllEmployees() {
         ArrayList<Employee> result = new ArrayList<>();
         try {
@@ -95,6 +102,7 @@ public class EmployeeDatabaseService extends DatabaseService {
         return result;
     }
 
+    // Löschen von einem Angestellten
     public void deleteEmployee(Employee e) {
         try {
             stmt = con.prepareStatement("DELETE FROM employees WHERE name=?");
@@ -105,11 +113,14 @@ public class EmployeeDatabaseService extends DatabaseService {
         }
     }
 
+    // Registrieren/Aktivieren eines Angestellten
     public boolean registerEmployee(Employee e) {
         try {
+            // Setzt neues Passwort anstatt generierten key
             String salt = PasswordManager.generateSalt();
             String hashPwd = PasswordManager.getHash(e.getPassword(), salt);
 
+            // Aktualisieren der Daten
             stmt = con.prepareStatement("UPDATE employees SET registered=true, password=?, salt=? WHERE name=?");
             stmt.setString(1, hashPwd);
             stmt.setString(2, salt);
@@ -122,6 +133,7 @@ public class EmployeeDatabaseService extends DatabaseService {
         }
     }
 
+    // Gibt salt für Zeile zurück mit Namen als Parameter
     public String getSalt(String name) throws SQLException {
         stmt = con.prepareStatement("SELECT salt FROM employees WHERE name=?");
         stmt.setString(1, name);
@@ -133,6 +145,8 @@ public class EmployeeDatabaseService extends DatabaseService {
         return rs.getString("salt");
     }
 
+    // Überprüft ob ein Angestellter erzeugt wurde / Ob eine Aktivierung möglich ist
+    // => Name erstellt; Noch nicht aktiviert
     public boolean employeeCreated(String name, String key) {
         try {
             String hashKey = PasswordManager.getHash(key, getSalt(name));

@@ -1,5 +1,8 @@
 package gfos.pojos;
 
+// Abstakte Klasse zum gebündelten Speichern aller Daten, die jeder Nutzer benötigt
+// Erbende Klassen: Applicant, Employee, SuperUser
+
 public abstract class User {
 
     protected String name;

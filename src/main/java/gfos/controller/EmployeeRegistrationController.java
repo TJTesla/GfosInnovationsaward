@@ -13,6 +13,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
+// Controller zum Steuern der Registrierung eines Employees
+
 @Named
 @ViewScoped
 public class EmployeeRegistrationController implements Serializable {
@@ -78,6 +80,8 @@ public class EmployeeRegistrationController implements Serializable {
             errorMsgs.put("passwordRepeat", "Passwörter stimmen nicht überein.");
         }
     }
+
+    // Getter und Setter //
 
     public String getName() {
         return name;

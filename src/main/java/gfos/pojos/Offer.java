@@ -1,10 +1,8 @@
 package gfos.pojos;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
+// Struktur zum gebündelten Speichern der Daten für ein Angebot
+// Beinhaltet nur Variablen; 2 Konstruktoren (Einer ohne Parameter, einer mit komplettem); Getter und Setter für alle Variablen
 
-//@Named
-//@RequestScoped
 public class Offer {
     private int id;
     private String title;

@@ -10,6 +10,8 @@ import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+// Converter zum Umwandeln von ID als URL-Parameter zu Bewerbern
+
 @Named
 @RequestScoped
 public class ApplicantConverter implements Converter {
@@ -25,6 +27,7 @@ public class ApplicantConverter implements Converter {
         try {
             int id = Integer.parseInt(s);
 
+            // Finden des Bewerbers mit der Id
             return adbs.getById(id);
         } catch (Exception e) {
             System.out.println("Could not convert '" + s + "' into Applicant");

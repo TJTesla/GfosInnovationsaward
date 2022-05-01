@@ -9,12 +9,17 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
 
+// Umwandeln von Id als URL-Parameter zu Bewerbung
+// Abstrakte Klasse -> ApplicationObjectConverter und ApplicationtextConverter erben
+// Beide Klassen teilen sich alles, bis auf Rückgabe -> Alles bis auf Rückgabe wird in Superklasse implementiert
+
 public abstract class ApplicationConverter implements Converter {
     @Inject
     ApplicationDatabaseService adbs;
     @Inject
     CurrentUser cu;
 
+    // Attribut wid in Konstruktor der Sub-Klasen gesetzt
     protected boolean object;
 
     @Override
@@ -25,6 +30,8 @@ public abstract class ApplicationConverter implements Converter {
 
         try {
             int id = Integer.parseInt(s);
+            // Für verschiedene Fälle:
+            // Entweder die ganze Bewerbung oder nur der Text Teil (Motivation)
             if (object) {
                 return adbs.getById(id, ((Applicant) cu.getCurrentUser()).getId());
             } else {

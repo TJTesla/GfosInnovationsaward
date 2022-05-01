@@ -229,6 +229,7 @@ public class ApplicantRegistrationController implements Serializable {
         }
         // Profilbild Datei ist zu groß
         if(pbFile != null) {
+            // Maximal 2 Megabyte -> 2 mio. Bytes
             if (pbFile.getSize() > 2000000) {
                 registerError = true;
                 errorMsgs.put("photo", "Die Datei darf maximal 2MB groß sein.");

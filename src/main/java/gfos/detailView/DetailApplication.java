@@ -17,6 +17,8 @@ import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+// Controller zum anzeigen von einer Bewerbung
+
 @Named
 @ViewScoped
 public class DetailApplication implements Serializable {
@@ -33,6 +35,7 @@ public class DetailApplication implements Serializable {
     private int oId = -1;
     private boolean initialized = false;
 
+    // Benötigt, da Beans einen Parameterlosen Konstruktor benötigen
     public DetailApplication() {
     }
 
@@ -66,6 +69,7 @@ public class DetailApplication implements Serializable {
         return udbs.titles(applicant.getId());
     }
 
+    // Zurückgeben des Lebenslaufs
     public StreamedContent resume() {
         Resume resume = adbs.getResume(application.getResumeId());
         if (resume == null) {
@@ -86,7 +90,9 @@ public class DetailApplication implements Serializable {
         }
     }
 
+    // Zurückziehen (Von veröffentlicht zu Entwurf)
     public String retract() {
+        // Nur erlauben falls kein Entwurf und noch nicht bearbeitet
         if (isDraft() || application.getStatus() != 0) {
             return null;
         }
@@ -95,6 +101,7 @@ public class DetailApplication implements Serializable {
         return "";
     }
 
+    // Löschen von der Bewerbung
     public String delete() {
         adbs.delete(this.application);
         return "/03-applicationList/applicationDrafts?faces-redirect=true";
@@ -138,6 +145,8 @@ public class DetailApplication implements Serializable {
             return -1;
         }
     }
+
+    // Getter und Seter //
 
     public Application getApplication() {
         return application;

@@ -6,6 +6,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Named;
 
+// Umwandeln einer ID als URL-parameter (übergeben als String) in einen int
+
 @Named
 @RequestScoped
 public class IntConverter implements Converter {
